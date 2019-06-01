@@ -1,6 +1,7 @@
 bin/Camera.o: src/Camera.cpp src/../include/Camera.hpp \
-  include/GameObject.hpp include/Component.hpp include/Rect.hpp \
-  include/Vec2.hpp src/../include/InputManager.hpp include/SDL_include.h \
+  include/Engine_include.hpp include/GameObject.hpp \
+  include/Component.hpp include/Rect.hpp include/Vec2.hpp \
+  src/../include/InputManager.hpp include/SDL_include.h \
   /usr/local/include/SDL2/SDL.h /usr/local/include/SDL2/SDL_main.h \
   /usr/local/include/SDL2/SDL_stdinc.h \
   /usr/local/include/SDL2/SDL_config.h \
@@ -46,6 +47,8 @@ bin/Camera.o: src/Camera.cpp src/../include/Camera.hpp \
   /usr/local/include/SDL2/SDL_version.h
 
 src/../include/Camera.hpp:
+
+include/Engine_include.hpp:
 
 include/GameObject.hpp:
 

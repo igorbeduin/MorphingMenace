@@ -49,9 +49,9 @@ bin/TitleState.o: src/TitleState.cpp src/../include/TitleState.hpp \
   include/StageState.hpp include/Music.hpp \
   /usr/local/include/SDL2/SDL_mixer.h include/Sound.hpp \
   include/TileMap.hpp include/TileSet.hpp include/CameraFollower.hpp \
-  include/Camera.hpp include/Collider.hpp include/Collision.hpp \
-  include/EndState.hpp include/TitleState.hpp include/Text.hpp \
-  /usr/local/include/SDL2/SDL_ttf.h include/Game.hpp \
+  include/Camera.hpp include/Engine_include.hpp include/Collider.hpp \
+  include/Collision.hpp include/EndState.hpp include/TitleState.hpp \
+  include/Text.hpp /usr/local/include/SDL2/SDL_ttf.h include/Game.hpp \
   src/../include/InputManager.hpp src/../include/Game.hpp
 
 src/../include/TitleState.hpp:
@@ -179,6 +179,8 @@ include/TileSet.hpp:
 include/CameraFollower.hpp:
 
 include/Camera.hpp:
+
+include/Engine_include.hpp:
 
 include/Collider.hpp:
 

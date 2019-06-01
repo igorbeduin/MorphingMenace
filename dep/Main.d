@@ -49,9 +49,9 @@ bin/Main.o: src/Main.cpp src/../include/Game.hpp include/SDL_include.h \
   include/StageState.hpp include/Music.hpp \
   /usr/local/include/SDL2/SDL_mixer.h include/Sound.hpp \
   include/TileMap.hpp include/TileSet.hpp include/CameraFollower.hpp \
-  include/Camera.hpp include/Collider.hpp include/Collision.hpp \
-  include/EndState.hpp include/TitleState.hpp include/Text.hpp \
-  include/Game.hpp
+  include/Camera.hpp include/Engine_include.hpp include/Collider.hpp \
+  include/Collision.hpp include/EndState.hpp include/TitleState.hpp \
+  include/Text.hpp include/Game.hpp
 
 src/../include/Game.hpp:
 
@@ -182,6 +182,8 @@ include/TileSet.hpp:
 include/CameraFollower.hpp:
 
 include/Camera.hpp:
+
+include/Engine_include.hpp:
 
 include/Collider.hpp:
 

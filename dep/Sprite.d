@@ -48,7 +48,8 @@ bin/Sprite.o: src/Sprite.cpp src/../include/Game.hpp \
   include/Vec2.hpp src/../include/Resources.hpp \
   /usr/local/include/SDL2/SDL_image.h \
   /usr/local/include/SDL2/SDL_mixer.h include/Game.hpp \
-  src/../include/Camera.hpp src/../include/Sprite.hpp include/Timer.hpp
+  src/../include/Camera.hpp include/Engine_include.hpp \
+  src/../include/Sprite.hpp include/Timer.hpp
 
 src/../include/Game.hpp:
 
@@ -165,6 +166,8 @@ src/../include/Resources.hpp:
 include/Game.hpp:
 
 src/../include/Camera.hpp:
+
+include/Engine_include.hpp:
 
 src/../include/Sprite.hpp:
 

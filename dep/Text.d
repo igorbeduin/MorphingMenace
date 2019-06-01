@@ -44,8 +44,8 @@ bin/Text.o: src/Text.cpp src/../include/Text.hpp include/SDL_include.h \
   /usr/local/include/SDL2/SDL_version.h \
   /usr/local/include/SDL2/SDL_ttf.h include/Component.hpp \
   include/GameObject.hpp include/Rect.hpp include/Vec2.hpp \
-  include/Timer.hpp src/../include/Camera.hpp src/../include/Game.hpp \
-  include/State.hpp src/../include/Resources.hpp \
+  include/Timer.hpp src/../include/Camera.hpp include/Engine_include.hpp \
+  src/../include/Game.hpp include/State.hpp src/../include/Resources.hpp \
   /usr/local/include/SDL2/SDL_image.h \
   /usr/local/include/SDL2/SDL_mixer.h include/Game.hpp
 
@@ -156,6 +156,8 @@ include/Vec2.hpp:
 include/Timer.hpp:
 
 src/../include/Camera.hpp:
+
+include/Engine_include.hpp:
 
 src/../include/Game.hpp:
 

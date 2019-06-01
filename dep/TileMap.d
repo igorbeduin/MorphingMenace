@@ -45,7 +45,7 @@ bin/TileMap.o: src/TileMap.cpp src/../include/TileMap.hpp \
   /usr/local/include/SDL2/SDL_version.h \
   /usr/local/include/SDL2/SDL_image.h include/GameObject.hpp \
   include/Component.hpp include/Rect.hpp include/Vec2.hpp \
-  include/Timer.hpp src/../include/Camera.hpp
+  include/Timer.hpp src/../include/Camera.hpp include/Engine_include.hpp
 
 src/../include/TileMap.hpp:
 
@@ -158,3 +158,5 @@ include/Vec2.hpp:
 include/Timer.hpp:
 
 src/../include/Camera.hpp:
+
+include/Engine_include.hpp:

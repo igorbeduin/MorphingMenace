@@ -1,8 +1,9 @@
 bin/State.o: src/State.cpp src/../include/State.hpp \
   include/GameObject.hpp include/Component.hpp include/Rect.hpp \
-  include/Vec2.hpp src/../include/Camera.hpp src/../include/TileMap.hpp \
-  include/TileSet.hpp include/Sprite.hpp include/SDL_include.h \
-  /usr/local/include/SDL2/SDL.h /usr/local/include/SDL2/SDL_main.h \
+  include/Vec2.hpp src/../include/Camera.hpp include/Engine_include.hpp \
+  src/../include/TileMap.hpp include/TileSet.hpp include/Sprite.hpp \
+  include/SDL_include.h /usr/local/include/SDL2/SDL.h \
+  /usr/local/include/SDL2/SDL_main.h \
   /usr/local/include/SDL2/SDL_stdinc.h \
   /usr/local/include/SDL2/SDL_config.h \
   /usr/local/include/SDL2/SDL_platform.h \
@@ -58,6 +59,8 @@ include/Rect.hpp:
 include/Vec2.hpp:
 
 src/../include/Camera.hpp:
+
+include/Engine_include.hpp:
 
 src/../include/TileMap.hpp:
 

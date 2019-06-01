@@ -48,9 +48,10 @@ bin/EndState.o: src/EndState.cpp src/../include/EndState.hpp \
   /usr/local/include/SDL2/SDL_mixer.h include/Sound.hpp \
   include/Sprite.hpp /usr/local/include/SDL2/SDL_image.h \
   include/Timer.hpp include/TileMap.hpp include/TileSet.hpp \
-  include/CameraFollower.hpp include/Camera.hpp include/Collider.hpp \
-  include/Collision.hpp include/EndState.hpp include/TitleState.hpp \
-  include/Text.hpp /usr/local/include/SDL2/SDL_ttf.h include/Game.hpp \
+  include/CameraFollower.hpp include/Camera.hpp \
+  include/Engine_include.hpp include/Collider.hpp include/Collision.hpp \
+  include/EndState.hpp include/TitleState.hpp include/Text.hpp \
+  /usr/local/include/SDL2/SDL_ttf.h include/Game.hpp \
   src/../include/InputManager.hpp src/../include/GameData.hpp
 
 src/../include/EndState.hpp:
@@ -178,6 +179,8 @@ include/TileSet.hpp:
 include/CameraFollower.hpp:
 
 include/Camera.hpp:
+
+include/Engine_include.hpp:
 
 include/Collider.hpp:
 
