@@ -141,6 +141,11 @@ void Game::Run(){//loop principal do jogo, será implementado em 4 etapas, poré
 
   while(stateStack.top()->QuitRequested() != true && !stateStack.empty()){//enquanto um estado não pediu pra sair e a pilha não estiver vazia
 
+    if (InputManager::GetInstance().KeyPress(ESCAPE_KEY) || InputManager::GetInstance().QuitRequested())
+    {
+        break;
+    }
+
     if (stateStack.top()->PopRequested()) {//
       stateStack.pop();//se um estado pediu pra sair da pilha, pop nele
       Resources::ClearImages();
