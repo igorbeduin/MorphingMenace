@@ -1,8 +1,7 @@
 #pragma once
 
-#include "GameObject.hpp"
+#include "GameObject.h"
 #include <iostream>
-
 
 class GameObject;
 

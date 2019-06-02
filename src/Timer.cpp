@@ -1,4 +1,4 @@
-#include "../include/Timer.hpp"
+#include "../include/Timer.h"
 
 Timer::Timer(){
   time = 0;

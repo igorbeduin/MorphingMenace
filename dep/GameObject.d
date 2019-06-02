@@ -1,6 +1,6 @@
-bin/GameObject.o: src/GameObject.cpp src/../include/GameObject.hpp \
-  include/Component.hpp include/GameObject.hpp include/Rect.hpp \
-  include/Vec2.hpp include/Sound.hpp include/SDL_include.h \
+bin/GameObject.o: src/GameObject.cpp src/../include/GameObject.h \
+  include/Component.h include/GameObject.h include/Rect.h include/Vec2.h \
+  src/../include/Sound.h include/Engine_include.h include/SDL_include.h \
   /usr/local/include/SDL2/SDL_mixer.h \
   /usr/local/include/SDL2/SDL_stdinc.h \
   /usr/local/include/SDL2/SDL_config.h \
@@ -16,17 +16,19 @@ bin/GameObject.o: src/GameObject.cpp src/../include/GameObject.hpp \
   /usr/local/include/SDL2/SDL_atomic.h \
   /usr/local/include/SDL2/SDL_version.h
 
-src/../include/GameObject.hpp:
+src/../include/GameObject.h:
 
-include/Component.hpp:
+include/Component.h:
 
-include/GameObject.hpp:
+include/GameObject.h:
 
-include/Rect.hpp:
+include/Rect.h:
 
-include/Vec2.hpp:
+include/Vec2.h:
 
-include/Sound.hpp:
+src/../include/Sound.h:
+
+include/Engine_include.h:
 
 include/SDL_include.h:
 

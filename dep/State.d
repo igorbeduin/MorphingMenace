@@ -1,8 +1,9 @@
-bin/State.o: src/State.cpp src/../include/State.hpp \
-  include/GameObject.hpp include/Component.hpp include/Rect.hpp \
-  include/Vec2.hpp src/../include/Camera.hpp src/../include/TileMap.hpp \
-  include/TileSet.hpp include/Sprite.hpp include/SDL_include.h \
-  /usr/local/include/SDL2/SDL.h /usr/local/include/SDL2/SDL_main.h \
+bin/State.o: src/State.cpp src/../include/State.h include/GameObject.h \
+  include/Component.h include/Rect.h include/Vec2.h \
+  src/../include/Camera.h include/Engine_include.h \
+  src/../include/TileMap.h include/TileSet.h include/Sprite.h \
+  include/SDL_include.h /usr/local/include/SDL2/SDL.h \
+  /usr/local/include/SDL2/SDL_main.h \
   /usr/local/include/SDL2/SDL_stdinc.h \
   /usr/local/include/SDL2/SDL_config.h \
   /usr/local/include/SDL2/SDL_platform.h \
@@ -45,25 +46,27 @@ bin/State.o: src/State.cpp src/../include/State.hpp \
   /usr/local/include/SDL2/SDL_system.h \
   /usr/local/include/SDL2/SDL_timer.h \
   /usr/local/include/SDL2/SDL_version.h \
-  /usr/local/include/SDL2/SDL_image.h include/Timer.hpp
+  /usr/local/include/SDL2/SDL_image.h include/Timer.h
 
-src/../include/State.hpp:
+src/../include/State.h:
 
-include/GameObject.hpp:
+include/GameObject.h:
 
-include/Component.hpp:
+include/Component.h:
 
-include/Rect.hpp:
+include/Rect.h:
 
-include/Vec2.hpp:
+include/Vec2.h:
 
-src/../include/Camera.hpp:
+src/../include/Camera.h:
 
-src/../include/TileMap.hpp:
+include/Engine_include.h:
 
-include/TileSet.hpp:
+src/../include/TileMap.h:
 
-include/Sprite.hpp:
+include/TileSet.h:
+
+include/Sprite.h:
 
 include/SDL_include.h:
 
@@ -159,4 +162,4 @@ include/SDL_include.h:
 
 /usr/local/include/SDL2/SDL_image.h:
 
-include/Timer.hpp:
+include/Timer.h:

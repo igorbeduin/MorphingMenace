@@ -1,6 +1,6 @@
-#include "../include/State.hpp"
-#include "../include/Camera.hpp"
-#include "../include/TileMap.hpp"
+#include "../include/State.h"
+#include "../include/Camera.h"
+#include "../include/TileMap.h"
 
 State::State(){
   quitRequested = false;
@@ -104,7 +104,3 @@ void State::RenderArray(){
     // }
   }
 }
-
-// Camera::ParallaxUpdate(tile_map->GetWidth()-1, false);
-// tile_map->RenderLayer(tile_map->GetWidth()-1, Camera::pos.x*( 1 +tile_map->GetWidth()-1 ), Camera::pos.y*(1 +tile_map->GetWidth()-1 ) );
-// Camera::ParallaxUpdate(tile_map->GetWidth()-1, true);

@@ -1,3 +1,3 @@
-#include "../include/GameData.hpp"
+#include "../include/GameData.h"
 
 bool GameData::playerVictory;

@@ -1,4 +1,4 @@
-#include "../include/CameraFollower.hpp"
+#include "../include/CameraFollower.h"
 
 CameraFollower::CameraFollower(GameObject& associated)
                                               :Component(associated){

@@ -1,14 +1,4 @@
-#include "../include/Collider.hpp"
-
-// #define DEbu
-#ifdef DEBUG
-#include "Camera.hpp"
-#include "Game.hpp"
-
-#include <SDL2/SDL.h>
-#endif // DEBUG
-
-#define PI 3.14159265359
+#include "../include/Collider.h"
 
 Collider::Collider(GameObject& associated, Vec2 scale, Vec2 offset):Component(associated){
   this->scale = scale;

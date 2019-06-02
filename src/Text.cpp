@@ -1,7 +1,7 @@
-#include "../include/Text.hpp"
-#include "../include/Camera.hpp"
-#include "../include/Game.hpp"
-#include "../include/Resources.hpp"
+#include "../include/Text.h"
+#include "../include/Camera.h"
+#include "../include/Game.h"
+#include "../include/Resources.h"
 
 Text::Text(GameObject& associated, std::string fontFile, int fontSize, TextStyle style, std::string text, SDL_Color color, float screenTime, SDL_Color bgcolor):Component(associated){
 
@@ -26,15 +26,6 @@ Text::~Text(){
 }
 
 void Text::Update(float dt){
-
-  // if (screenTime > 0) {
-  //   OnOff.Update(dt);
-  //   if (OnOff.Get() > screenTime) {
-  //     SDL_SetTextureAlphaMod(texture, 255*onScreen);
-  //     (onScreen%2 == 0 ) ? (onScreen++) : (onScreen--);
-  //     OnOff.Restart();
-  //   }
-  // }
   if (screenTime > 0) {
     if (OnOff.Get() > screenTime) {
       OnOff.Restart();

@@ -1,5 +1,5 @@
-#include "../include/Camera.hpp"
-#include "../include/InputManager.hpp"
+#include "../include/Camera.h"
+#include "../include/InputManager.h"
 
 GameObject* Camera::focus;
 Vec2 Camera::pos;
@@ -30,32 +30,32 @@ void Camera::Update(float dt){
 
   } else {
 
-    if (input.IsKeyDown(LEFT_ARROW_KEY) && (speed.x <= MAX_SPEED_X)) {//é definido uma velocidade máxima à qual a câmera pode acelerar
-      speed.x+=DELTA_SPEED;
+    if (input.IsKeyDown(LEFT_ARROW_KEY) && (speed.x <= MAX_CAM_SPEED_X)) {//é definido uma velocidade máxima à qual a câmera pode acelerar
+      speed.x+=CAMERA_SPEED;
     }
-     else if (input.IsKeyDown(RIGHT_ARROW_KEY) && (speed.x >= MIN_SPEED_X)) {
-      speed.x-=DELTA_SPEED;
+     else if (input.IsKeyDown(RIGHT_ARROW_KEY) && (speed.x >= -MAX_CAM_SPEED_X)) {
+      speed.x-=CAMERA_SPEED;
     } else {
 
       if (speed.x > 0)//com essa lógica a movimentação nao para instantâneamente, mas a velocidade diminui gradativamente até 0
-        speed.x -= DELTA_SPEED;
+        speed.x -= CAMERA_SPEED;
       else if (speed.x < 0)
-        speed.x+= DELTA_SPEED;
+        speed.x+= CAMERA_SPEED;
       else
         speed.x = 0;
     }
 
-    if (input.IsKeyDown(DOWN_ARROW_KEY) && (speed.y >= MIN_SPEED_Y) ) {
-      speed.y-=DELTA_SPEED;
+    if (input.IsKeyDown(DOWN_ARROW_KEY) && (speed.y >= -MAX_CAM_SPEED_Y) ) {
+      speed.y-=CAMERA_SPEED;
     }
-     else if (input.IsKeyDown(UP_ARROW_KEY) && (speed.y <= MAX_SPEED_Y)) {
-      speed.y+=DELTA_SPEED;
+     else if (input.IsKeyDown(UP_ARROW_KEY) && (speed.y <= MAX_CAM_SPEED_Y)) {
+      speed.y+=CAMERA_SPEED;
     } else {
 
       if (speed.y > 0)//com essa lógica a movimentação n~ao para instantâneamente, mas a velocidade diminui até 0
-        speed.y -= DELTA_SPEED;
+        speed.y -= CAMERA_SPEED;
       else if (speed.y < 0)
-        speed.y+= DELTA_SPEED;
+        speed.y+= CAMERA_SPEED;
       else
         speed.y = 0;
     }

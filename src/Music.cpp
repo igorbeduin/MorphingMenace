@@ -1,6 +1,5 @@
-#include <iostream>
-#include "../include/Music.hpp"
-#include "Resources.hpp"
+#include "../include/Music.h"
+#include "../include/Resources.h"
 
 Music::Music(){//seta music como nullptr (música não carregada)
   music = nullptr;

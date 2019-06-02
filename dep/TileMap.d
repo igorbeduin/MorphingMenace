@@ -1,6 +1,6 @@
-bin/TileMap.o: src/TileMap.cpp src/../include/TileMap.hpp \
-  include/TileSet.hpp include/Sprite.hpp include/SDL_include.h \
-  /usr/local/include/SDL2/SDL.h /usr/local/include/SDL2/SDL_main.h \
+bin/TileMap.o: src/TileMap.cpp src/../include/TileMap.h include/TileSet.h \
+  include/Sprite.h include/SDL_include.h /usr/local/include/SDL2/SDL.h \
+  /usr/local/include/SDL2/SDL_main.h \
   /usr/local/include/SDL2/SDL_stdinc.h \
   /usr/local/include/SDL2/SDL_config.h \
   /usr/local/include/SDL2/SDL_platform.h \
@@ -43,15 +43,15 @@ bin/TileMap.o: src/TileMap.cpp src/../include/TileMap.hpp \
   /usr/local/include/SDL2/SDL_system.h \
   /usr/local/include/SDL2/SDL_timer.h \
   /usr/local/include/SDL2/SDL_version.h \
-  /usr/local/include/SDL2/SDL_image.h include/GameObject.hpp \
-  include/Component.hpp include/Rect.hpp include/Vec2.hpp \
-  include/Timer.hpp src/../include/Camera.hpp
+  /usr/local/include/SDL2/SDL_image.h include/GameObject.h \
+  include/Component.h include/Rect.h include/Vec2.h include/Timer.h \
+  src/../include/Camera.h include/Engine_include.h
 
-src/../include/TileMap.hpp:
+src/../include/TileMap.h:
 
-include/TileSet.hpp:
+include/TileSet.h:
 
-include/Sprite.hpp:
+include/Sprite.h:
 
 include/SDL_include.h:
 
@@ -147,14 +147,16 @@ include/SDL_include.h:
 
 /usr/local/include/SDL2/SDL_image.h:
 
-include/GameObject.hpp:
+include/GameObject.h:
 
-include/Component.hpp:
+include/Component.h:
 
-include/Rect.hpp:
+include/Rect.h:
 
-include/Vec2.hpp:
+include/Vec2.h:
 
-include/Timer.hpp:
+include/Timer.h:
 
-src/../include/Camera.hpp:
+src/../include/Camera.h:
+
+include/Engine_include.h:

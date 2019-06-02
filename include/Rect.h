@@ -1,8 +1,7 @@
 #pragma once
 
 #include <iostream>
-// #include <SDL2/SDL.h>
-#include "Vec2.hpp"
+#include "Vec2.h"
 
 class Rect{
 private:

@@ -1,4 +1,4 @@
-bin/Resources.o: src/Resources.cpp src/../include/Resources.hpp \
+bin/Resources.o: src/Resources.cpp src/../include/Resources.h \
   include/SDL_include.h /usr/local/include/SDL2/SDL.h \
   /usr/local/include/SDL2/SDL_main.h \
   /usr/local/include/SDL2/SDL_stdinc.h \
@@ -44,12 +44,12 @@ bin/Resources.o: src/Resources.cpp src/../include/Resources.hpp \
   /usr/local/include/SDL2/SDL_timer.h \
   /usr/local/include/SDL2/SDL_version.h \
   /usr/local/include/SDL2/SDL_image.h \
-  /usr/local/include/SDL2/SDL_mixer.h include/Game.hpp \
-  /usr/local/include/SDL2/SDL_ttf.h include/State.hpp \
-  include/GameObject.hpp include/Component.hpp include/Rect.hpp \
-  include/Vec2.hpp
+  /usr/local/include/SDL2/SDL_mixer.h include/Game.h \
+  /usr/local/include/SDL2/SDL_ttf.h include/Engine_include.h \
+  include/MorphingMenace_include.h include/State.h include/GameObject.h \
+  include/Component.h include/Rect.h include/Vec2.h
 
-src/../include/Resources.hpp:
+src/../include/Resources.h:
 
 include/SDL_include.h:
 
@@ -147,16 +147,20 @@ include/SDL_include.h:
 
 /usr/local/include/SDL2/SDL_mixer.h:
 
-include/Game.hpp:
+include/Game.h:
 
 /usr/local/include/SDL2/SDL_ttf.h:
 
-include/State.hpp:
+include/Engine_include.h:
 
-include/GameObject.hpp:
+include/MorphingMenace_include.h:
 
-include/Component.hpp:
+include/State.h:
 
-include/Rect.hpp:
+include/GameObject.h:
 
-include/Vec2.hpp:
+include/Component.h:
+
+include/Rect.h:
+
+include/Vec2.h:

@@ -1,4 +1,5 @@
-#include "TileSet.hpp"
+#include "TileSet.h"
+
 #include <fstream>
 
 class TileMap: public Component{

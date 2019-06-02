@@ -2,24 +2,19 @@
 
 #define INCLUDE_SDL
 #define INCLUDE_SDL_TTF
-// #include <SDL2/SDL.h>
-// #include <SDL_include.h>
-// #include <SDL2/SDL_ttf.h>
+#define INCLUDE_SDL_IMAGE
+
+#include "SDL_include.h"
+#include "Engine_include.h"
+#include "MorphingMenace_include.h"
+
 #include <stack>
 #include <iostream>
 #include <string>
 #include <memory>
 
-#include "SDL_include.h"
-#include "State.hpp"
-// #include "StageState.hpp"
-// #include "Resources.hpp"
-// #include "TitleState.hpp"
+#include "State.h"
 
-#define WINDOW_WIDTH 1024
-#define WINDOW_HEIGHT 600
-#define MIX_CHUNKSIZE 1024
-#define AUDIO_CHANNELS 32
 
 class State;
 class Resources;

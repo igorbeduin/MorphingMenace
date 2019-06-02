@@ -1,14 +1,12 @@
 #pragma once
 
-// #include <algorithm>
 #include <memory>
 #include <string>
 #include <vector>
 #include <iostream>
 
-#include "Component.hpp"
-#include "Rect.hpp"
-// #include "Vec2.hpp"
+#include "Component.h"
+#include "Rect.h"
 
 class Component;
 

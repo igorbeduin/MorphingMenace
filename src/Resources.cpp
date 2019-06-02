@@ -1,6 +1,4 @@
-#include "../include/Resources.hpp"
-#include <iostream>
-// #include "Game.hpp"
+#include "../include/Resources.h"
 
 // Inicializa as variáveis estáticas da classe
 std::unordered_map<std::string, std::shared_ptr<SDL_Texture> > Resources::imageTable;

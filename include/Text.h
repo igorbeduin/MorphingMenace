@@ -3,14 +3,12 @@
 #define INCLUDE_SDL
 #define INCLUDE_SDL_TTF
 
-#include <iostream>
-// #include <SDL2/SDL.h>
-// #include <SDL2/SDL_ttf.h>
-// #include <SDL2/SDL_image.h>
 #include "SDL_include.h"
-#include "Component.hpp"
-#include "Timer.hpp"
-// #include "Sprite.hpp"
+
+#include <iostream>
+
+#include "Component.h"
+#include "Timer.h"
 
 class Text: public Component{//implementar update, is e render da classe mãe (component)
 

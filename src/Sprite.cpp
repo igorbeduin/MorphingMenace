@@ -1,10 +1,9 @@
-#include "../include/Game.hpp"
-#include "../include/Resources.hpp"
-#include "../include/Camera.hpp"
-#include "../include/Sprite.hpp"
+#include "../include/Game.h"
+#include "../include/Resources.h"
+#include "../include/Camera.h"
+#include "../include/Sprite.h"
 
-Sprite::Sprite(GameObject& associated)
-                                      :Component(associated){//seta texture como nullptr (imagem não carregada)
+Sprite::Sprite(GameObject& associated) : Component(associated){//seta texture como nullptr (imagem não carregada)
   texture = nullptr;
   currentFrame = 0;
   timeElapsed = 0;

@@ -1,4 +1,4 @@
-bin/InputManager.o: src/InputManager.cpp src/../include/InputManager.hpp \
+bin/InputManager.o: src/InputManager.cpp src/../include/InputManager.h \
   include/SDL_include.h /usr/local/include/SDL2/SDL.h \
   /usr/local/include/SDL2/SDL_main.h \
   /usr/local/include/SDL2/SDL_stdinc.h \
@@ -42,9 +42,9 @@ bin/InputManager.o: src/InputManager.cpp src/../include/InputManager.hpp \
   /usr/local/include/SDL2/SDL_shape.h \
   /usr/local/include/SDL2/SDL_system.h \
   /usr/local/include/SDL2/SDL_timer.h \
-  /usr/local/include/SDL2/SDL_version.h
+  /usr/local/include/SDL2/SDL_version.h include/Engine_include.h
 
-src/../include/InputManager.hpp:
+src/../include/InputManager.h:
 
 include/SDL_include.h:
 
@@ -137,3 +137,5 @@ include/SDL_include.h:
 /usr/local/include/SDL2/SDL_timer.h:
 
 /usr/local/include/SDL2/SDL_version.h:
+
+include/Engine_include.h:
