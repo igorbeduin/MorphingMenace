@@ -1,8 +1,8 @@
-bin/Camera.o: src/Camera.cpp src/../include/Camera.hpp \
-  include/Engine_include.hpp include/GameObject.hpp \
-  include/Component.hpp include/Rect.hpp include/Vec2.hpp \
-  src/../include/InputManager.hpp include/SDL_include.h \
-  /usr/local/include/SDL2/SDL.h /usr/local/include/SDL2/SDL_main.h \
+bin/Camera.o: src/Camera.cpp src/../include/Camera.h \
+  include/Engine_include.h include/GameObject.h include/Component.h \
+  include/Rect.h include/Vec2.h src/../include/InputManager.h \
+  include/SDL_include.h /usr/local/include/SDL2/SDL.h \
+  /usr/local/include/SDL2/SDL_main.h \
   /usr/local/include/SDL2/SDL_stdinc.h \
   /usr/local/include/SDL2/SDL_config.h \
   /usr/local/include/SDL2/SDL_platform.h \
@@ -46,19 +46,19 @@ bin/Camera.o: src/Camera.cpp src/../include/Camera.hpp \
   /usr/local/include/SDL2/SDL_timer.h \
   /usr/local/include/SDL2/SDL_version.h
 
-src/../include/Camera.hpp:
+src/../include/Camera.h:
 
-include/Engine_include.hpp:
+include/Engine_include.h:
 
-include/GameObject.hpp:
+include/GameObject.h:
 
-include/Component.hpp:
+include/Component.h:
 
-include/Rect.hpp:
+include/Rect.h:
 
-include/Vec2.hpp:
+include/Vec2.h:
 
-src/../include/InputManager.hpp:
+src/../include/InputManager.h:
 
 include/SDL_include.h:
 

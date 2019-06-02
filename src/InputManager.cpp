@@ -1,7 +1,5 @@
-#include "../include/InputManager.hpp"
+#include "../include/InputManager.h"
 
-
-// InputManager *InputManager::instance = nullptr;
 InputManager::InputManager(){//inicializando todas a as variáveis
 
   for (int i = 0; i < 6; i++) {

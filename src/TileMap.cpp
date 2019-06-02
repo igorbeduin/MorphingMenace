@@ -1,5 +1,5 @@
-#include "../include/TileMap.hpp"
-#include "../include/Camera.hpp"
+#include "../include/TileMap.h"
+#include "../include/Camera.h"
 
 TileMap::TileMap(GameObject& associated, std::string file, TileSet* tileSet):Component(associated){
 

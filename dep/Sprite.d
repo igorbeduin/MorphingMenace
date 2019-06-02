@@ -1,6 +1,5 @@
-bin/Sprite.o: src/Sprite.cpp src/../include/Game.hpp \
-  include/SDL_include.h /usr/local/include/SDL2/SDL.h \
-  /usr/local/include/SDL2/SDL_main.h \
+bin/Sprite.o: src/Sprite.cpp src/../include/Game.h include/SDL_include.h \
+  /usr/local/include/SDL2/SDL.h /usr/local/include/SDL2/SDL_main.h \
   /usr/local/include/SDL2/SDL_stdinc.h \
   /usr/local/include/SDL2/SDL_config.h \
   /usr/local/include/SDL2/SDL_platform.h \
@@ -43,15 +42,14 @@ bin/Sprite.o: src/Sprite.cpp src/../include/Game.hpp \
   /usr/local/include/SDL2/SDL_system.h \
   /usr/local/include/SDL2/SDL_timer.h \
   /usr/local/include/SDL2/SDL_version.h \
-  /usr/local/include/SDL2/SDL_ttf.h include/State.hpp \
-  include/GameObject.hpp include/Component.hpp include/Rect.hpp \
-  include/Vec2.hpp src/../include/Resources.hpp \
-  /usr/local/include/SDL2/SDL_image.h \
-  /usr/local/include/SDL2/SDL_mixer.h include/Game.hpp \
-  src/../include/Camera.hpp include/Engine_include.hpp \
-  src/../include/Sprite.hpp include/Timer.hpp
+  /usr/local/include/SDL2/SDL_image.h /usr/local/include/SDL2/SDL_ttf.h \
+  include/Engine_include.h include/MorphingMenace_include.h \
+  include/State.h include/GameObject.h include/Component.h \
+  include/Rect.h include/Vec2.h src/../include/Resources.h \
+  /usr/local/include/SDL2/SDL_mixer.h include/Game.h \
+  src/../include/Camera.h src/../include/Sprite.h include/Timer.h
 
-src/../include/Game.hpp:
+src/../include/Game.h:
 
 include/SDL_include.h:
 
@@ -145,30 +143,32 @@ include/SDL_include.h:
 
 /usr/local/include/SDL2/SDL_version.h:
 
+/usr/local/include/SDL2/SDL_image.h:
+
 /usr/local/include/SDL2/SDL_ttf.h:
 
-include/State.hpp:
+include/Engine_include.h:
 
-include/GameObject.hpp:
+include/MorphingMenace_include.h:
 
-include/Component.hpp:
+include/State.h:
 
-include/Rect.hpp:
+include/GameObject.h:
 
-include/Vec2.hpp:
+include/Component.h:
 
-src/../include/Resources.hpp:
+include/Rect.h:
 
-/usr/local/include/SDL2/SDL_image.h:
+include/Vec2.h:
+
+src/../include/Resources.h:
 
 /usr/local/include/SDL2/SDL_mixer.h:
 
-include/Game.hpp:
+include/Game.h:
 
-src/../include/Camera.hpp:
+src/../include/Camera.h:
 
-include/Engine_include.hpp:
+src/../include/Sprite.h:
 
-src/../include/Sprite.hpp:
-
-include/Timer.hpp:
+include/Timer.h:

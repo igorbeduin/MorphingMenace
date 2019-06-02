@@ -1,7 +1,4 @@
-#include "../include/TileSet.hpp"
-// #include "../include/Sprite.hpp"
-// TileSet::TileSet():tileSet{
-// }
+#include "../include/TileSet.h"
 
 TileSet::TileSet(GameObject& associated, int tileWidth, int tileHeight, std::string file, Vec2 scale)
                                                                                          : tileSet(associated, file),

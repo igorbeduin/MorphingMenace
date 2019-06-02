@@ -3,10 +3,10 @@
 #define CAMERA
 #define WINDOW
 
-#include "Engine_include.hpp"
+#include "Engine_include.h"
 
-#include "GameObject.hpp"
-#include "Vec2.hpp"
+#include "GameObject.h"
+#include "Vec2.h"
 
 class Camera{
 

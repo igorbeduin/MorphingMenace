@@ -3,11 +3,10 @@
 #define INCLUDE_SDL
 #define INCLUDE_SDL_MIXER
 
+#include "SDL_include.h"
+
 #include <iostream>
 #include <memory>
-// #include <SDL2/SDL.h>
-// #include <SDL2/SDL_mixer.h>
-#include "SDL_include.h"
 
 class Music{
 

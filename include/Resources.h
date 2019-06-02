@@ -4,16 +4,14 @@
 #define INCLUDE_SDL_IMAGE
 #define INCLUDE_SDL_MIXER
 
+#include "SDL_include.h"
+
 #include <unordered_map>
 #include <string>
+#include <iostream>
 #include <memory>
 
-#include "SDL_include.h"
-#include "Game.hpp"
-// #include "Sprite.hpp"
-// #include "Music.hpp"
-// #include "Sound.hpp"
-// #include "Text.hpp"
+#include "Game.h"
 
 class Game;
 class Resources{

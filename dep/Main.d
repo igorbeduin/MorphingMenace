@@ -1,4 +1,4 @@
-bin/Main.o: src/Main.cpp src/../include/Game.hpp include/SDL_include.h \
+bin/Main.o: src/Main.cpp src/../include/Game.h include/SDL_include.h \
   /usr/local/include/SDL2/SDL.h /usr/local/include/SDL2/SDL_main.h \
   /usr/local/include/SDL2/SDL_stdinc.h \
   /usr/local/include/SDL2/SDL_config.h \
@@ -42,18 +42,14 @@ bin/Main.o: src/Main.cpp src/../include/Game.hpp include/SDL_include.h \
   /usr/local/include/SDL2/SDL_system.h \
   /usr/local/include/SDL2/SDL_timer.h \
   /usr/local/include/SDL2/SDL_version.h \
-  /usr/local/include/SDL2/SDL_ttf.h include/State.hpp \
-  include/GameObject.hpp include/Component.hpp include/Rect.hpp \
-  include/Vec2.hpp src/../include/TitleState.hpp include/Sprite.hpp \
-  /usr/local/include/SDL2/SDL_image.h include/Timer.hpp \
-  include/StageState.hpp include/Music.hpp \
-  /usr/local/include/SDL2/SDL_mixer.h include/Sound.hpp \
-  include/TileMap.hpp include/TileSet.hpp include/CameraFollower.hpp \
-  include/Camera.hpp include/Engine_include.hpp include/Collider.hpp \
-  include/Collision.hpp include/EndState.hpp include/TitleState.hpp \
-  include/Text.hpp include/Game.hpp
+  /usr/local/include/SDL2/SDL_image.h /usr/local/include/SDL2/SDL_ttf.h \
+  include/Engine_include.h include/MorphingMenace_include.h \
+  include/State.h include/GameObject.h include/Component.h \
+  include/Rect.h include/Vec2.h src/../include/TitleState.h \
+  include/Sprite.h include/Timer.h include/StageState.h include/Music.h \
+  /usr/local/include/SDL2/SDL_mixer.h include/TileSet.h include/Text.h
 
-src/../include/Game.hpp:
+src/../include/Game.h:
 
 include/SDL_include.h:
 
@@ -147,52 +143,36 @@ include/SDL_include.h:
 
 /usr/local/include/SDL2/SDL_version.h:
 
-/usr/local/include/SDL2/SDL_ttf.h:
-
-include/State.hpp:
-
-include/GameObject.hpp:
-
-include/Component.hpp:
-
-include/Rect.hpp:
-
-include/Vec2.hpp:
-
-src/../include/TitleState.hpp:
-
-include/Sprite.hpp:
-
 /usr/local/include/SDL2/SDL_image.h:
 
-include/Timer.hpp:
+/usr/local/include/SDL2/SDL_ttf.h:
 
-include/StageState.hpp:
+include/Engine_include.h:
 
-include/Music.hpp:
+include/MorphingMenace_include.h:
+
+include/State.h:
+
+include/GameObject.h:
+
+include/Component.h:
+
+include/Rect.h:
+
+include/Vec2.h:
+
+src/../include/TitleState.h:
+
+include/Sprite.h:
+
+include/Timer.h:
+
+include/StageState.h:
+
+include/Music.h:
 
 /usr/local/include/SDL2/SDL_mixer.h:
 
-include/Sound.hpp:
+include/TileSet.h:
 
-include/TileMap.hpp:
-
-include/TileSet.hpp:
-
-include/CameraFollower.hpp:
-
-include/Camera.hpp:
-
-include/Engine_include.hpp:
-
-include/Collider.hpp:
-
-include/Collision.hpp:
-
-include/EndState.hpp:
-
-include/TitleState.hpp:
-
-include/Text.hpp:
-
-include/Game.hpp:
+include/Text.h:

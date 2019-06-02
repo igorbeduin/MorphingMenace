@@ -1,5 +1,5 @@
-bin/TileSet.o: src/TileSet.cpp src/../include/TileSet.hpp \
-  include/Sprite.hpp include/SDL_include.h /usr/local/include/SDL2/SDL.h \
+bin/TileSet.o: src/TileSet.cpp src/../include/TileSet.h include/Sprite.h \
+  include/SDL_include.h /usr/local/include/SDL2/SDL.h \
   /usr/local/include/SDL2/SDL_main.h \
   /usr/local/include/SDL2/SDL_stdinc.h \
   /usr/local/include/SDL2/SDL_config.h \
@@ -43,13 +43,12 @@ bin/TileSet.o: src/TileSet.cpp src/../include/TileSet.hpp \
   /usr/local/include/SDL2/SDL_system.h \
   /usr/local/include/SDL2/SDL_timer.h \
   /usr/local/include/SDL2/SDL_version.h \
-  /usr/local/include/SDL2/SDL_image.h include/GameObject.hpp \
-  include/Component.hpp include/Rect.hpp include/Vec2.hpp \
-  include/Timer.hpp
+  /usr/local/include/SDL2/SDL_image.h include/GameObject.h \
+  include/Component.h include/Rect.h include/Vec2.h include/Timer.h
 
-src/../include/TileSet.hpp:
+src/../include/TileSet.h:
 
-include/Sprite.hpp:
+include/Sprite.h:
 
 include/SDL_include.h:
 
@@ -145,12 +144,12 @@ include/SDL_include.h:
 
 /usr/local/include/SDL2/SDL_image.h:
 
-include/GameObject.hpp:
+include/GameObject.h:
 
-include/Component.hpp:
+include/Component.h:
 
-include/Rect.hpp:
+include/Rect.h:
 
-include/Vec2.hpp:
+include/Vec2.h:
 
-include/Timer.hpp:
+include/Timer.h:

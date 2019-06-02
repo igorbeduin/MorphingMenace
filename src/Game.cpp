@@ -1,6 +1,6 @@
-#include "../include/Game.hpp"
-#include "../include/Resources.hpp"
-#include "../include/InputManager.hpp"
+#include "../include/Game.h"
+#include "../include/Resources.h"
+#include "../include/InputManager.h"
 
 //inicialização de membro estático da classe
 Game *Game::instance = nullptr;
@@ -68,7 +68,7 @@ Game::Game (std::string title, int width, int height){
 }
 
 Game& Game::GetInstance(){//cria a instância do jogo
-  std::string title = "Raphael_R_C_Barbosa_14/0160281 ";
+  std::string title = GAME_NAME;
   int width = WINDOW_WIDTH;
   int height = WINDOW_HEIGHT;
 

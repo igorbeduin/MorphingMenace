@@ -1,18 +1,18 @@
 bin/CameraFollower.o: src/CameraFollower.cpp \
-  src/../include/CameraFollower.hpp include/Component.hpp \
-  include/GameObject.hpp include/Rect.hpp include/Vec2.hpp \
-  include/Camera.hpp include/Engine_include.hpp
+  src/../include/CameraFollower.h include/Component.h \
+  include/GameObject.h include/Rect.h include/Vec2.h include/Camera.h \
+  include/Engine_include.h
 
-src/../include/CameraFollower.hpp:
+src/../include/CameraFollower.h:
 
-include/Component.hpp:
+include/Component.h:
 
-include/GameObject.hpp:
+include/GameObject.h:
 
-include/Rect.hpp:
+include/Rect.h:
 
-include/Vec2.hpp:
+include/Vec2.h:
 
-include/Camera.hpp:
+include/Camera.h:
 
-include/Engine_include.hpp:
+include/Engine_include.h:

@@ -1,7 +1,5 @@
-bin/EndState.o: src/EndState.cpp src/../include/EndState.hpp \
-  include/State.hpp include/GameObject.hpp include/Component.hpp \
-  include/Rect.hpp include/Vec2.hpp include/StageState.hpp \
-  include/Music.hpp include/SDL_include.h /usr/local/include/SDL2/SDL.h \
+bin/EndState.o: src/EndState.cpp src/../include/EndState.h \
+  include/Music.h include/SDL_include.h /usr/local/include/SDL2/SDL.h \
   /usr/local/include/SDL2/SDL_main.h \
   /usr/local/include/SDL2/SDL_stdinc.h \
   /usr/local/include/SDL2/SDL_config.h \
@@ -45,30 +43,12 @@ bin/EndState.o: src/EndState.cpp src/../include/EndState.hpp \
   /usr/local/include/SDL2/SDL_system.h \
   /usr/local/include/SDL2/SDL_timer.h \
   /usr/local/include/SDL2/SDL_version.h \
-  /usr/local/include/SDL2/SDL_mixer.h include/Sound.hpp \
-  include/Sprite.hpp /usr/local/include/SDL2/SDL_image.h \
-  include/Timer.hpp include/TileMap.hpp include/TileSet.hpp \
-  include/CameraFollower.hpp include/Camera.hpp \
-  include/Engine_include.hpp include/Collider.hpp include/Collision.hpp \
-  include/EndState.hpp include/TitleState.hpp include/Text.hpp \
-  /usr/local/include/SDL2/SDL_ttf.h include/Game.hpp \
-  src/../include/InputManager.hpp src/../include/GameData.hpp
+  /usr/local/include/SDL2/SDL_mixer.h include/State.h \
+  include/GameObject.h include/Component.h include/Rect.h include/Vec2.h
 
-src/../include/EndState.hpp:
+src/../include/EndState.h:
 
-include/State.hpp:
-
-include/GameObject.hpp:
-
-include/Component.hpp:
-
-include/Rect.hpp:
-
-include/Vec2.hpp:
-
-include/StageState.hpp:
-
-include/Music.hpp:
+include/Music.h:
 
 include/SDL_include.h:
 
@@ -164,38 +144,12 @@ include/SDL_include.h:
 
 /usr/local/include/SDL2/SDL_mixer.h:
 
-include/Sound.hpp:
+include/State.h:
 
-include/Sprite.hpp:
+include/GameObject.h:
 
-/usr/local/include/SDL2/SDL_image.h:
+include/Component.h:
 
-include/Timer.hpp:
+include/Rect.h:
 
-include/TileMap.hpp:
-
-include/TileSet.hpp:
-
-include/CameraFollower.hpp:
-
-include/Camera.hpp:
-
-include/Engine_include.hpp:
-
-include/Collider.hpp:
-
-include/Collision.hpp:
-
-include/EndState.hpp:
-
-include/TitleState.hpp:
-
-include/Text.hpp:
-
-/usr/local/include/SDL2/SDL_ttf.h:
-
-include/Game.hpp:
-
-src/../include/InputManager.hpp:
-
-src/../include/GameData.hpp:
+include/Vec2.h:

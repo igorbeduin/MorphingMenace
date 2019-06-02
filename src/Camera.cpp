@@ -1,5 +1,5 @@
-#include "../include/Camera.hpp"
-#include "../include/InputManager.hpp"
+#include "../include/Camera.h"
+#include "../include/InputManager.h"
 
 GameObject* Camera::focus;
 Vec2 Camera::pos;

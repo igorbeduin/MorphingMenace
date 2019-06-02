@@ -1,6 +1,5 @@
-#include <iostream>
-#include <SDL2/SDL.h>
-#include "../include/Rect.hpp"
+#include "../include/Rect.h"
+
 Rect::Rect(){//inicializa o box como valores nulos
   this->x = 0;
   this->y = 0;
