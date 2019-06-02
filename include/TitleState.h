@@ -1,9 +1,9 @@
 #pragma once
 
-#include "State.hpp"
-#include "Sprite.hpp"
-#include "StageState.hpp"
-#include "Text.hpp"
+#include "State.h"
+#include "Sprite.h"
+#include "StageState.h"
+#include "Text.h"
 
 #define TITLE_PATH "assets/img/title.jpg"
 #define FONT_PATH "assets/font/Call me maybe.ttf"

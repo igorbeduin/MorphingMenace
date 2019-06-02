@@ -1,14 +1,12 @@
 #pragma once
 
-#include "GameObject.hpp"
+#define CAMERA
+#define WINDOW
 
-#define WINDOW_WIDTH 1024
-#define WINDOW_HEIGHT 600
-#define DELTA_SPEED 100 //valor da variação de velocidade dado ao objeto caso ele se movimente
-#define MAX_SPEED_X 300
-#define MIN_SPEED_X -300
-#define MAX_SPEED_Y 300
-#define MIN_SPEED_Y -300
+#include "Engine_include.h"
+
+#include "GameObject.h"
+#include "Vec2.h"
 
 class Camera{
 

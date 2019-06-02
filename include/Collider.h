@@ -1,7 +1,18 @@
 #pragma once
 
-#include "Component.hpp"
-#include "Collision.hpp"
+#define INCLUDE_SDL
+#define MATH
+
+#include "SDL_include.h"
+#include "Engine_include.h"
+
+#ifdef DEBUG
+#include "Camera.h"
+#include "Game.h"
+#endif // DEBUG
+
+#include "Component.h"
+#include "Collision.h"
 
 class Collider : public Component {
 

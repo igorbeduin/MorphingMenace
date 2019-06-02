@@ -1,7 +1,6 @@
 #pragma once
 
-// #include <string>
-#include "Sprite.hpp"
+#include "Sprite.h"
 
 class TileSet{
 

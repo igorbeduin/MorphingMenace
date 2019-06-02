@@ -1,4 +1,4 @@
-bin/Text.o: src/Text.cpp src/../include/Text.hpp include/SDL_include.h \
+bin/Text.o: src/Text.cpp src/../include/Text.h include/SDL_include.h \
   /usr/local/include/SDL2/SDL.h /usr/local/include/SDL2/SDL_main.h \
   /usr/local/include/SDL2/SDL_stdinc.h \
   /usr/local/include/SDL2/SDL_config.h \
@@ -42,14 +42,14 @@ bin/Text.o: src/Text.cpp src/../include/Text.hpp include/SDL_include.h \
   /usr/local/include/SDL2/SDL_system.h \
   /usr/local/include/SDL2/SDL_timer.h \
   /usr/local/include/SDL2/SDL_version.h \
-  /usr/local/include/SDL2/SDL_ttf.h include/Component.hpp \
-  include/GameObject.hpp include/Rect.hpp include/Vec2.hpp \
-  include/Timer.hpp src/../include/Camera.hpp src/../include/Game.hpp \
-  include/State.hpp src/../include/Resources.hpp \
-  /usr/local/include/SDL2/SDL_image.h \
-  /usr/local/include/SDL2/SDL_mixer.h include/Game.hpp
+  /usr/local/include/SDL2/SDL_ttf.h include/Component.h \
+  include/GameObject.h include/Rect.h include/Vec2.h include/Timer.h \
+  src/../include/Camera.h include/Engine_include.h src/../include/Game.h \
+  /usr/local/include/SDL2/SDL_image.h include/MorphingMenace_include.h \
+  include/State.h src/../include/Resources.h \
+  /usr/local/include/SDL2/SDL_mixer.h include/Game.h
 
-src/../include/Text.hpp:
+src/../include/Text.h:
 
 include/SDL_include.h:
 
@@ -145,26 +145,30 @@ include/SDL_include.h:
 
 /usr/local/include/SDL2/SDL_ttf.h:
 
-include/Component.hpp:
+include/Component.h:
 
-include/GameObject.hpp:
+include/GameObject.h:
 
-include/Rect.hpp:
+include/Rect.h:
 
-include/Vec2.hpp:
+include/Vec2.h:
 
-include/Timer.hpp:
+include/Timer.h:
 
-src/../include/Camera.hpp:
+src/../include/Camera.h:
 
-src/../include/Game.hpp:
+include/Engine_include.h:
 
-include/State.hpp:
-
-src/../include/Resources.hpp:
+src/../include/Game.h:
 
 /usr/local/include/SDL2/SDL_image.h:
 
+include/MorphingMenace_include.h:
+
+include/State.h:
+
+src/../include/Resources.h:
+
 /usr/local/include/SDL2/SDL_mixer.h:
 
-include/Game.hpp:
+include/Game.h:

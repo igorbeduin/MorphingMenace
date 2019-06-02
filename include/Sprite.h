@@ -3,12 +3,10 @@
 #define INCLUDE_SDL
 #define INCLUDE_SDL_IMAGE
 
-// #include <iostream>
-// #include <SDL2/SDL.h>
-// #include <SDL2/SDL_image.h>
-#include <SDL_include.h>
-#include "GameObject.hpp"
-#include "Timer.hpp"
+#include "SDL_include.h"
+
+#include "GameObject.h"
+#include "Timer.h"
 
 class Sprite: public Component{//implementar update, is e render da classe mãe (component)
 

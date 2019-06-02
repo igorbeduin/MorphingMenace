@@ -1,5 +1,5 @@
-#include "Rect.hpp"
-#include "Vec2.hpp"
+#include "Rect.h"
+#include "Vec2.h"
 
 #include <algorithm>
 #include <cmath>

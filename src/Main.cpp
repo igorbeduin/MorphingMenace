@@ -1,5 +1,5 @@
-#include "../include/Game.hpp"
-#include "../include/TitleState.hpp"
+#include "../include/Game.h"
+#include "../include/TitleState.h"
 
 int main(int argc, char *argv[]) {
 

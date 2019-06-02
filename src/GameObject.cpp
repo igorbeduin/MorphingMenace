@@ -1,5 +1,5 @@
-#include "../include/GameObject.hpp"
-#include "Sound.hpp"
+#include "../include/GameObject.h"
+#include "../include/Sound.h"
 
 GameObject::GameObject(){//inicializa IsDead como falso
   isDead = false;

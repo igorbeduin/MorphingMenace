@@ -1,10 +1,6 @@
 #pragma once
 
-// #include <ctime>
-// #include <cstdlib>
-// #include <stdbool.h>
-
-#include "GameObject.hpp"
+#include "GameObject.h"
 
 class State {
 

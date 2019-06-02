@@ -1,4 +1,4 @@
-#include "../include/Vec2.hpp"
+#include "../include/Vec2.h"
 
 Vec2::Vec2(){
   this->x = 0;

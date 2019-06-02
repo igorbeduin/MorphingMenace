@@ -1,13 +1,12 @@
-bin/Component.o: src/Component.cpp src/../include/Component.hpp \
-  include/GameObject.hpp include/Component.hpp include/Rect.hpp \
-  include/Vec2.hpp
+bin/Component.o: src/Component.cpp src/../include/Component.h \
+  include/GameObject.h include/Component.h include/Rect.h include/Vec2.h
 
-src/../include/Component.hpp:
+src/../include/Component.h:
 
-include/GameObject.hpp:
+include/GameObject.h:
 
-include/Component.hpp:
+include/Component.h:
 
-include/Rect.hpp:
+include/Rect.h:
 
-include/Vec2.hpp:
+include/Vec2.h:

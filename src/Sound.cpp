@@ -1,7 +1,5 @@
-#include "../include/Sound.hpp"
-#include "Resources.hpp"
-
-#define empty_channel -1 //
+#include "../include/Sound.h"
+#include "../include/Resources.h"
 
 Sound::Sound(GameObject& associated):Component(associated){
   Component::associated = associated;
@@ -17,7 +15,7 @@ Sound::~Sound(){
 
 void Sound::Play(int times){
   if (chunk != nullptr) {
-    channel = Mix_PlayChannel(empty_channel, chunk.get(), times -1); //empty_channel = -1 a função escolherá o primeiro canal vazio e retornará o número dele
+    channel = Mix_PlayChannel(EMPTY_CHANNEL, chunk.get(), times -1); //empty_channel = -1 a função escolherá o primeiro canal vazio e retornará o número dele
                                                               // loops indica quantas vezes o som deve ser repetido, ou seja, loops = 1 faz tocar duas vezes.
   } else {
     std::cout << "Chunk null, can't play sound, Error code: "<< SDL_GetError() << std::endl;

@@ -1,21 +1,20 @@
 #pragma once
 
 #define INCLUDE_SDL_MIXER
+
+#include "Engine_include.h"
 #include "SDL_include.h"
 
 #include <iostream>
 #include <string>
 
-#include "Component.hpp"
-#include "GameObject.hpp"
-// #include <SDL2/SDL.h>
-// #include <SDL2/SDL_mixer.h>
+#include "Component.h"
+#include "GameObject.h"
 
 
 class Sound : public Component {
 
 private:
-  // Mix_Chunk* chunk;
   std::shared_ptr<Mix_Chunk> chunk;
   int channel;
 
