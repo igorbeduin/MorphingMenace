@@ -40,3 +40,24 @@
 #define D_KEY SDLK_d
 #define ENTER_KEY SDLK_KP_ENTER
 #define TAB_KEY SDLK_TAB
+
+/************************************************
+*				 Sprite					*
+*************************************************/
+#ifdef SPRITE
+#include "GameObject.h"
+#include "Timer.h"
+#endif
+
+/************************************************
+*				 Character					*
+*************************************************/
+#ifdef CHARACTER
+#include <string>
+#include <iostream>
+
+#include "Sprite.h"
+#include "Component.h"
+#include "GameObject.h"
+#include "Vec2.h"
+#endif

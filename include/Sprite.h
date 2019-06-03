@@ -1,12 +1,11 @@
 #pragma once
 
+#define SPRITE
+#include "Engine_include.h"
+
 #define INCLUDE_SDL
 #define INCLUDE_SDL_IMAGE
-
 #include "SDL_include.h"
-
-#include "GameObject.h"
-#include "Timer.h"
 
 class Sprite: public Component{//implementar update, is e render da classe mãe (component)
 
@@ -40,10 +39,11 @@ class Sprite: public Component{//implementar update, is e render da classe mãe 
     bool IsOpen();
     bool Is(std::string type);
     void Update(float dt);
-    void SetScaleX(float scaleX, float scaleY);
+    void SetScale(float scaleX, float scaleY);
     Vec2 GetScale();
 
     void SetFrame(int frame);
     void SetFrameCount(int frameCount);
     void SetFrameTime(float frameTime);
+    int GetCurrentFrame();
 };

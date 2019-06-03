@@ -22,7 +22,7 @@ TileSet::TileSet(GameObject& associated, int tileWidth, int tileHeight, std::str
   // this->tileWidth = tileWidth*scale.x;
   // this->tileHeight = tileHeight*scale.y;
 
-  tileSet.SetScaleX(scale.x, scale.y);
+  tileSet.SetScale(scale.x, scale.y);
   //calcula o número de linhas colunas do tileset sado o tamnho dado pela função sprite
 
 }/////////////////////////lista de inicialização?

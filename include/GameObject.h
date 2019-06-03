@@ -15,6 +15,7 @@ class GameObject{
 private:
   std::vector< std::shared_ptr<Component> > components;
   bool isDead;
+  bool moving;
 
 public:
 
@@ -31,6 +32,7 @@ public:
   std::shared_ptr<Component> GetComponent(std::string type);
 
   void NotifyCollision(GameObject& other);
+  bool IsMoving();
 
   bool started;
   Rect box;

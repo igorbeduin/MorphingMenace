@@ -4,6 +4,9 @@ Force::Force(Vec2 direction, int acceleration) : direction(direction),
                                                  acceleration(acceleration)
 {}
 
+Force::~Force()
+{}
+
 void Force::Apply(GameObject* go)
 {
     // TODO: Aplica a aceleração da força no GameObject

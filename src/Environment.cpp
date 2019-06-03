@@ -1,5 +1,7 @@
 #include "../include/Environment.h"
 
+std::vector<Force> Environment::forcesArray;
+
 Environment::Environment()
 {
     /*

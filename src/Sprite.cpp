@@ -99,7 +99,6 @@ bool Sprite::Is(std::string type){
 
 void Sprite::Update(float dt){
 
-
   if (secondsToSelfDestruct > 0) {
     selfDestructCount.Update(dt);
     if (selfDestructCount.Get() >= secondsToSelfDestruct) {
@@ -108,20 +107,20 @@ void Sprite::Update(float dt){
     }
   }
 
-  if (frameCount > 1) {
+  if (frameCount > 1 && associated.IsMoving()) {
     timeElapsed += dt;
     if (timeElapsed >= frameTime) {//se o tempo passado for maior que o tempo em que o frame deve permanecer, muda o frame
       timeElapsed = 0;
       currentFrame += 1;//se não for o último vai para o próximo frame
       if (frameCount == currentFrame) {
-        currentFrame = 1; //se o frame atual foir o último, retorna para o fram inicial
+        currentFrame = 0; //se o frame atual foir o último, retorna para o fram inicial
       }
       SetClip(  (width/frameCount)*(currentFrame) , clipRect.y, width/frameCount, height);
     }
   }
 }
 
-void Sprite::SetScaleX(float scaleX, float scaleY){
+void Sprite::SetScale(float scaleX, float scaleY){
 
   if (scaleX > 0 ){
     scale.x = scaleX;
@@ -157,3 +156,9 @@ void Sprite::SetFrameTime(float frameTime){
   this->frameTime = frameTime;
   timeElapsed = 0;
 }
+
+int Sprite::GetCurrentFrame()
+{
+  return currentFrame;
+}
+
