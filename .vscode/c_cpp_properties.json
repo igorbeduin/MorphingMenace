@@ -3,7 +3,11 @@
         {
             "name": "Mac",
             "includePath": [
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "/usr/local/Cellar/sdl2/2.0.9/include",
+                "/usr/local/Cellar/sdl2_image/2.0.4/include",
+                "/usr/local/Cellar/sdl2_mixer/2.0.4/include",
+                "/usr/local/Cellar/sdl2/2.0.9/include/SDL2"
             ],
             "defines": [],
             "macFrameworkPath": [],
