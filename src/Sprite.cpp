@@ -157,3 +157,9 @@ void Sprite::SetFrameTime(float frameTime){
   this->frameTime = frameTime;
   timeElapsed = 0;
 }
+
+int Sprite::GetCurrentFrame()
+{
+  return currentFrame;
+}
+
