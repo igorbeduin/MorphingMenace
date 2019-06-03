@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "GameObject.h"
 #include "Vec2.h"
 
@@ -14,6 +16,8 @@ public:
     void SetDirection(Vec2 direction);
     int GetAcceleration();
     Vec2 GetDirection();
+    virtual bool Is(std::string type) = 0;
+    virtual std::string Type() = 0;
 
 private:
     Vec2 direction;
