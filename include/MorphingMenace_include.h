@@ -24,4 +24,8 @@
 *************************************************/
 #ifdef STATE
     #include "CameraFollower.h"
+    #include "Sprite.h"
+
+    #define PLANET_BACKGROUND_PATH "assets/img/PlanetBackground.png"
+    #define PLANET_BACKGROUND_SCALE 0.3
 #endif
