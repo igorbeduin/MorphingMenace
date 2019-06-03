@@ -32,7 +32,7 @@ void TileMap::Load(std::string file){
     map.seekg (1, map.cur);
   }
   map.close();
-std::cout << tileMatrix.size() << '\n';
+// std::cout << tileMatrix.size() << '\n';
 }
 
 void TileMap::SetTileSet(TileSet* tileSet){
