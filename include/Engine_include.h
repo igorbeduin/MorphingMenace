@@ -26,7 +26,6 @@
 /************************************************
 *				 Joystick					*
 *************************************************/
-#ifdef JOYSTICK
 #define LEFT_ARROW_KEY SDLK_LEFT
 #define RIGHT_ARROW_KEY SDLK_RIGHT
 #define UP_ARROW_KEY SDLK_UP
@@ -41,4 +40,3 @@
 #define D_KEY SDLK_d
 #define ENTER_KEY SDLK_KP_ENTER
 #define TAB_KEY SDLK_TAB
-#endif
