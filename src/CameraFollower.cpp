@@ -6,8 +6,8 @@ CameraFollower::CameraFollower(GameObject& associated)
 
 void CameraFollower::Update(float dt){
 
-  associated.box.x = -Camera::pos.x - 2900;
-  associated.box.y = -Camera::pos.y - 1300;
+  associated.box.x = -Camera::pos.x;
+  associated.box.y = -Camera::pos.y;
 
 }
 
