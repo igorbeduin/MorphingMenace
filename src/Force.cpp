@@ -11,6 +11,7 @@ void Force::Apply(GameObject* go)
 
 void Force::SetAcceleration(int acceleration)
 {
+    // TODO: normalizar as direções para manter a magnitude do vetor
     this->acceleration = acceleration;
 }
 
