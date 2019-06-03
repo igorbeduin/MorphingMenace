@@ -1,5 +1,7 @@
 #pragma once
 
+#define CHARACTER
+#define STATE
 #include "MorphingMenace_include.h"
 #include "Engine_include.h"
 
