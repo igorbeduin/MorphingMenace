@@ -3,6 +3,17 @@
 
 StageState::StageState()
 {
+    //Creating Stars background
+    GameObject *stars_object = new GameObject();
+    std::weak_ptr<GameObject> weak_stars =  AddObject(stars_object);
+    std::shared_ptr<GameObject> stars = weak_stars.lock();
+    stars->box.y = 0;
+    stars->box.x = 0;
+    std::shared_ptr<Sprite> stars_sprite(new Sprite(*stars, STARS_BACKGROUND_PATH));
+    std::shared_ptr<CameraFollower> CamFollow(new CameraFollower(*stars));
+    stars->AddComponent(stars_sprite);
+    stars->AddComponent(CamFollow);
+    
     //Creating planet background
     GameObject *planet_object = new GameObject();
     std::weak_ptr<GameObject> weak_planet =  AddObject(planet_object);
