@@ -1,7 +1,12 @@
 #include "../include/StageState.h"
+#include "../include/InputManager.h"
 
 StageState::StageState()
 {
+    GameObject* player = new GameObject();
+    std::shared_ptr<Character> playerBehaviour(new Character(*player, 1, char_type::PLAYER));
+    player->AddComponent(playerBehaviour);
+    AddObject(player);
 }
 
 void StageState::LoadAssets()
