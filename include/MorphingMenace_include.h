@@ -27,5 +27,6 @@
     #include "Sprite.h"
 
     #define PLANET_BACKGROUND_PATH "assets/img/PlanetBackground.png"
+    #define STARS_BACKGROUND_PATH "assets/img/StarsBackground.jpg"
     #define PLANET_BACKGROUND_SCALE 0.3
 #endif
