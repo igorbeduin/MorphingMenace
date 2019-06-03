@@ -37,6 +37,7 @@ void StageState::LoadAssets()
 
 void StageState::Update(float dt)
 {
+    Camera::Update(dt);
     if (InputManager::GetInstance().KeyPress(ESCAPE_KEY) || InputManager::GetInstance().QuitRequested())
     {
         quitRequested = true;
