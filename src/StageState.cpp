@@ -3,6 +3,17 @@
 
 StageState::StageState()
 {
+    //Creating planet background
+    GameObject *planet_object = new GameObject();
+    std::weak_ptr<GameObject> weak_planet =  AddObject(planet_object);
+    std::shared_ptr<GameObject> planet = weak_planet.lock();
+    planet->box.y = 0;
+    planet->box.x = 0;
+    std::shared_ptr<Sprite> planet_sprite(new Sprite(*planet, PLANET_BACKGROUND_PATH));
+    planet->AddComponent(planet_sprite);
+    planet_sprite->SetScale(PLANET_BACKGROUND_SCALE, PLANET_BACKGROUND_SCALE);
+
+    //Creating player
     GameObject* player = new GameObject();
     std::shared_ptr<Character> playerBehaviour(new Character(*player, 1, char_type::PLAYER));
     player->AddComponent(playerBehaviour);
