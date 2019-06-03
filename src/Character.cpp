@@ -41,6 +41,8 @@ float Character::GetMass()
 void Character::Move(Vec2 dst)
 {
     // TODO: Rotina de movimento da posição atual para a posição de destino
+    Sprite* sprite = (Sprite*) associated.GetComponent("Sprite").get();
+    sprite->SetFrame(sprite->GetCurrentFrame() + 1);
 }
 
 void Character::Update(float dt)
