@@ -65,3 +65,6 @@ bool Character::Is(std::string type)
     }
     }
 }
+
+void Character::Render()
+{}
