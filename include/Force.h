@@ -10,6 +10,7 @@ class Force
 {
 public:
     Force(Vec2 direction, int acceleration);
+    virtual ~Force();
     virtual bool Applicable(GameObject* go) = 0;
     void Apply(GameObject* go);
     void SetAcceleration(int acceleration);
