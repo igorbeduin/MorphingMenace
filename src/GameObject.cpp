@@ -5,6 +5,7 @@ GameObject::GameObject(){//inicializa IsDead como falso
   isDead = false;
   started = false;
   angleDeg = 0;
+  moving = false;
 }
 
 GameObject::~GameObject(){
@@ -78,4 +79,9 @@ void GameObject::NotifyCollision(GameObject& other){
   for (unsigned int i = 0; i < components.size(); i++) {
     components[i]->NotifyCollision(other);
   }
+}
+
+bool GameObject::IsMoving()
+{
+  return moving;
 }
