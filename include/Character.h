@@ -1,13 +1,8 @@
 #pragma once
 
+#define CHARACTER
 #include "MorphingMenace_include.h"
-
-#include <string>
-#include <iostream>
-
-#include "Component.h"
-#include "GameObject.h"
-#include "Vec2.h"
+#include "Engine_include.h"
 
 class Character : public Component
 {
