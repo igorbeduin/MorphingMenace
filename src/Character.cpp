@@ -1,15 +1,19 @@
 #include "../include/Character.h"
 
 Character::Character(GameObject &associated, float mass, char_type charType) : Component::Component(associated),
-                                                                           mass(mass),
-                                                                           charType(charType),
-                                                                           speed(Vec2(0, 0))
+                                                                               mass(mass),
+                                                                               charType(charType),
+                                                                               speed(Vec2(0, 0))
 {
     switch (charType)
     {
     case PLAYER:
     {
-        // TODO:: Cria um personagem do tipo player
+        // PROVISORIO:
+        std::shared_ptr<Sprite> charSprite(new Sprite(associated, PLAYER_LVL0_SPRITE_PATH, 3));
+        charSprite->SetScale(0.1, 0.1);
+        associated.AddComponent(charSprite);
+        // TODO:: Cria um personagem do tipo enemy
         break;
     }
     case ENEMY:
