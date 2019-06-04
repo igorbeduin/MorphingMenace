@@ -1,8 +1,13 @@
 #include "../include/StageState.h"
 #include "../include/InputManager.h"
+#include "../include/Environment.h"
 
 StageState::StageState()
-{
+{   
+    // Creating gravity
+    std::shared_ptr<Gravity> gravity(new Gravity());
+    Environment::AddForce(gravity);
+
     //Creating Stars background
     GameObject *stars_object = new GameObject();
     std::weak_ptr<GameObject> weak_stars =  AddObject(stars_object);
