@@ -19,6 +19,8 @@ enum char_type
     #define PLAYER_LVL0_SPRITES_TIME 0.08
     #define PLAYER_LVL0_SCALE 0.15
     #define PLAYER_LVL0_MASS 1
+    #define PLAYER_LVL0_STEP 200
+    #define CHARACTER_LVL0_JUMP -400
     #include "R0350N.h"
     #include "Character.h"
 #endif
@@ -40,13 +42,14 @@ enum char_type
     #define TILE_SCALE 0.0625
     #define TILE_HEIGHT 1024
     #define TILE_WIDTH 1024
+    #define STAGE_BG_MUSIC_PATH "assets/img/background_demo1.ogg"
 
 #endif
 
 /************************************************
 *					Environment					*
 *************************************************/
-#define GRAVITY_ACCELERATION {0, 3}
+#define GRAVITY_ACCELERATION {0, 20}
 #ifdef ENVIRONMENT
     #include "Force.h"
     #include "Gravity.h"
