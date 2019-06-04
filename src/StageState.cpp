@@ -9,7 +9,7 @@ StageState::StageState()
     Environment::AddForce(gravity);
 
     // Opening background music
-    //backgroundMusic.Open(STAGE_BG_MUSIC_PATH);
+    backgroundMusic.Open(STAGE_BG_MUSIC_PATH);
 
 
     //Creating Stars background
@@ -83,6 +83,7 @@ StageState::~StageState()
 
 void StageState::Start()
 {
+    backgroundMusic.Play(-1);
 }
 
 void StageState::Pause()
