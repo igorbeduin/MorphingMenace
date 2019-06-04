@@ -2,6 +2,7 @@
 
 #define CHARACTER
 #define STATE
+#define ENVIRONMENT
 #include "MorphingMenace_include.h"
 #include "Engine_include.h"
 

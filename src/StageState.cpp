@@ -41,7 +41,7 @@ StageState::StageState()
 
     //Creating player
     GameObject* player = new GameObject();
-    std::shared_ptr<Character> playerBehaviour(new Character(*player, 1, char_type::PLAYER));
+    std::shared_ptr<Character> playerBehaviour(new Character(*player, PLAYER_LVL0_MASS, char_type::PLAYER));
     player->AddComponent(playerBehaviour);
     AddObject(player);
 }
