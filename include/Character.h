@@ -8,16 +8,19 @@ class Character : public Component
 {
 public:
     Character(GameObject& associated, float mass, char_type type);
-    void SetMass(float mass);
-    float GetMass();
+    void SetSpeed(Vec2 speed);
+    Vec2 GetSpeed();
     void Accelerate(Vec2 acceleration = Vec2(0, 0));
 
     void Update(float dt);
     bool Is(std::string);
     void Render();
+
+    void Move(Vec2 speed);
+    void Walk(int step, float dt);
+    void Jump();
     
 private:
     char_type charType;
-    float mass;
     Vec2 speed;
 };

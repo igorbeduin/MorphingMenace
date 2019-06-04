@@ -1,8 +1,8 @@
 #include "../include/Character.h"
 #include "../include/Environment.h"
+#include "../include/InputManager.h"
 
 Character::Character(GameObject &associated, float mass, char_type charType) : Component::Component(associated),
-                                                                               mass(mass),
                                                                                charType(charType),
                                                                                speed(Vec2(0, 0))
 {
@@ -29,14 +29,14 @@ Character::Character(GameObject &associated, float mass, char_type charType) : C
     }
 }
 
-void Character::SetMass(float mass)
+void Character::SetSpeed(Vec2 speed)
 {
-    this->mass = mass;
+    this->speed = speed;
 }
 
-float Character::GetMass()
+Vec2 Character::GetSpeed()
 {
-    return mass;
+    return speed;
 }
 
 void Character::Accelerate(Vec2 acceleration)
@@ -47,7 +47,21 @@ void Character::Accelerate(Vec2 acceleration)
 void Character::Update(float dt)
 {
     Environment::ApplyForces(this);
-    
+
+    // Joystick
+    if (InputManager::GetInstance().KeyPress(SPACE_KEY))
+    {
+        Jump();
+    }
+    if (InputManager::GetInstance().IsKeyDown(D_KEY))
+    {
+        Walk(PLAYER_LVL0_STEP, dt);
+    }
+    if (InputManager::GetInstance().IsKeyDown(A_KEY))
+    {
+        Walk((-1) * PLAYER_LVL0_STEP, dt);
+    }
+
     associated.box.x += speed.x * dt;
     associated.box.y += speed.y * dt;
 }
@@ -71,3 +85,13 @@ bool Character::Is(std::string type)
 
 void Character::Render()
 {}
+
+void Character::Walk(int step, float dt)
+{
+    associated.box.x += step * dt;
+}
+
+void Character::Jump()
+{
+    speed.y = CHARACTER_LVL0_JUMP;
+}
