@@ -8,6 +8,10 @@ StageState::StageState()
     std::shared_ptr<Gravity> gravity(new Gravity());
     Environment::AddForce(gravity);
 
+    // Opening background music
+    //backgroundMusic.Open(STAGE_BG_MUSIC_PATH);
+
+
     //Creating Stars background
     GameObject *stars_object = new GameObject();
     std::weak_ptr<GameObject> weak_stars =  AddObject(stars_object);
