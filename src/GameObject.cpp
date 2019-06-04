@@ -5,7 +5,7 @@ GameObject::GameObject(){//inicializa IsDead como falso
   isDead = false;
   started = false;
   angleDeg = 0;
-  moving = false;
+  moving = true;
 }
 
 GameObject::~GameObject(){
