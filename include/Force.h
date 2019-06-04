@@ -4,23 +4,21 @@
 
 #include "GameObject.h"
 #include "Vec2.h"
+#include "Character.h"
 
 
 class Force 
 {
 public:
-    Force(Vec2 direction, int acceleration);
+    Force(Vec2 acceleration);
     virtual ~Force();
-    virtual bool Applicable(GameObject* go) = 0;
-    void Apply(GameObject* go);
-    void SetAcceleration(int acceleration);
-    void SetDirection(Vec2 direction);
-    int GetAcceleration();
-    Vec2 GetDirection();
+    virtual bool Applicable(Character* character) = 0;
+    void Apply(Character* character);
+    void SetAcceleration(Vec2 Acceleration);
+    Vec2 GetAcceleration();
     virtual bool Is(std::string type) = 0;
     virtual std::string Type() = 0;
 
 private:
-    Vec2 direction;
-    int acceleration;
+    Vec2 acceleration;
 };

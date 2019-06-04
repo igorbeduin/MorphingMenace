@@ -1,34 +1,22 @@
 #include "../include/Force.h"
+#include "../include/Character.h"
 
-Force::Force(Vec2 direction, int acceleration) : direction(direction),
-                                                 acceleration(acceleration)
+Force::Force(Vec2 acceleration) : acceleration(acceleration)
 {}
 
 Force::~Force()
 {}
 
-void Force::Apply(GameObject* go)
+void Force::Apply(Character* character)
 {
-    // TODO: Aplica a aceleração da força no GameObject
+    character->Accelerate(acceleration);
 }
 
-void Force::SetAcceleration(int acceleration)
+void Force::SetAcceleration(Vec2 acceleration)
 {
-    // TODO: normalizar as direções para manter a magnitude do vetor
     this->acceleration = acceleration;
 }
-
-void Force::SetDirection(Vec2 direction)
-{
-    this->direction = direction;
-}
-
-int Force::GetAcceleration()
+Vec2 Force::GetAcceleration()
 {
     return acceleration;
-}
-
-Vec2 Force::GetDirection()
-{
-    return direction;
 }

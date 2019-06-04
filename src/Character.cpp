@@ -1,4 +1,5 @@
 #include "../include/Character.h"
+#include "../include/Environment.h"
 
 Character::Character(GameObject &associated, float mass, char_type charType) : Component::Component(associated),
                                                                                mass(mass),
@@ -10,8 +11,8 @@ Character::Character(GameObject &associated, float mass, char_type charType) : C
     case PLAYER:
     {
         // PROVISORIO:
-        std::shared_ptr<Sprite> charSprite(new Sprite(associated, PLAYER_LVL0_SPRITE_PATH, 3));
-        charSprite->SetScale(0.1, 0.1);
+        std::shared_ptr<Sprite> charSprite(new Sprite(associated, PLAYER_LVL0_SPRITE_PATH, PLAYER_LVL0_SPRITES_NUMB, PLAYER_LVL0_SPRITES_TIME));
+        charSprite->SetScale(PLAYER_LVL0_SCALE, PLAYER_LVL0_SCALE);
         associated.AddComponent(charSprite);
         // TODO:: Cria um personagem do tipo enemy
         break;
@@ -38,15 +39,17 @@ float Character::GetMass()
     return mass;
 }
 
-void Character::Move(Vec2 dst)
+void Character::Accelerate(Vec2 acceleration)
 {
-    // TODO: Rotina de movimento da posição atual para a posição de destino
-    Sprite* sprite = (Sprite*) associated.GetComponent("Sprite").get();
-    sprite->SetFrame(sprite->GetCurrentFrame() + 1);
+    speed += acceleration;
 }
 
 void Character::Update(float dt)
 {
+    Environment::ApplyForces(this);
+    
+    associated.box.x += speed.x * dt;
+    associated.box.y += speed.y * dt;
 }
 
 bool Character::Is(std::string type)
@@ -55,12 +58,12 @@ bool Character::Is(std::string type)
     {
     case PLAYER:
     {
-        return (type == "Player");
+        return (type == "Player" || type == "Character");
         break;
     }
     case ENEMY:
     {
-        return (type == "Enemy");
+        return (type == "Enemy" || type == "Character");
         break;
     }
     }
