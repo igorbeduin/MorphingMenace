@@ -40,6 +40,7 @@ enum char_type
     #define TILE_SCALE 0.0625
     #define TILE_HEIGHT 1024
     #define TILE_WIDTH 1024
+    #define STAGE_BG_MUSIC_PATH "assets/img/background_demo1.ogg"
 
 #endif
 
