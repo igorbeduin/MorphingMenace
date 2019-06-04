@@ -10,7 +10,7 @@ public:
     Character(GameObject& associated, float mass, char_type type);
     void SetMass(float mass);
     float GetMass();
-    void Move(Vec2 dst);
+    void Accelerate(Vec2 acceleration = Vec2(0, 0));
 
     void Update(float dt);
     bool Is(std::string);

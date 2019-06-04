@@ -38,15 +38,17 @@ float Character::GetMass()
     return mass;
 }
 
-void Character::Move(Vec2 dst)
+void Character::Accelerate(Vec2 acceleration)
 {
-    // TODO: Rotina de movimento da posição atual para a posição de destino
-    Sprite* sprite = (Sprite*) associated.GetComponent("Sprite").get();
-    sprite->SetFrame(sprite->GetCurrentFrame() + 1);
+    speed += acceleration;
 }
 
 void Character::Update(float dt)
 {
+    Environment::ApplyForces(this);
+    
+    associated.box.x += speed.x * dt;
+    associated.box.y += speed.y * dt;
 }
 
 bool Character::Is(std::string type)
