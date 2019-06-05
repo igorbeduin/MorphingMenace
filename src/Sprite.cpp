@@ -71,7 +71,18 @@ void Sprite::Render(int x, int y){// wrapper para a SDL_RenderCopy que possui qu
   dstrect.h = clipRect.h*scale.y;
   int RenderError;
 
-  RenderError = SDL_RenderCopyEx(Game::GetInstance().GetRenderer(), texture.get(), &clipRect, &dstrect, associated.angleDeg, nullptr, SDL_FLIP_NONE);
+  SDL_RendererFlip flip = SDL_FLIP_NONE;
+
+  if (associated.GetComponent("Character").get() != nullptr)
+  {
+    Character* temp = (Character*)associated.GetComponent("Character").get();
+    if (temp->IsFlipped())
+    {
+      flip = SDL_FLIP_HORIZONTAL;
+    }
+  }
+
+  RenderError = SDL_RenderCopyEx(Game::GetInstance().GetRenderer(), texture.get(), &clipRect, &dstrect, associated.angleDeg, nullptr, flip);
   if (RenderError != 0) {
     std::cout << "Failed to Render Texture, error code: " << SDL_GetError() <<", texture = " << texture << std::endl;
   }
