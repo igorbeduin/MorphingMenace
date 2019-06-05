@@ -36,6 +36,22 @@ void TileSet::RenderTile(unsigned index, float x, float y){
     tileSet.SetClip((index%columns)*GetTileWidth(), (index/(columns))*GetTileHeight(), GetTileWidth(), GetTileHeight());//verificar conta
     tileSet.Render(x, y);
   }
+
+  if (createMapColliders == true)
+  {
+    GameObject* tile = new GameObject();
+    tile->box.x = x;
+    tile->box.y = y;
+    tile->box.w = tileSet.GetWidth();
+    tile->box.h = tileSet.GetHeight();
+
+    std::shared_ptr<Collider> collider(new Collider(* tile));
+    tile->AddComponent(collider);
+
+    Game::GetInstance().GetCurrentState().AddObject(tile);
+
+    createMapColliders = false;
+  }
 }
 
 int TileSet::GetTileWidth(){
