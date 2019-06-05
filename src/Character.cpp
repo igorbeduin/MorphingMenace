@@ -5,7 +5,8 @@
 Character::Character(GameObject &associated, float mass, char_type charType) : Component::Component(associated),
                                                                                charType(charType),
                                                                                speed(Vec2(0, 0)),
-                                                                               flip(false)
+                                                                               flip(false),
+                                                                               applyNormal(false)
 {
     switch (charType)
     {
@@ -70,6 +71,7 @@ void Character::Update(float dt)
             flip = true;
         }
     }
+    
 
     associated.box.x += speed.x * dt;
     associated.box.y += speed.y * dt;
@@ -108,4 +110,25 @@ void Character::Jump()
 bool Character::IsFlipped()
 {
     return flip;
+}
+
+void Character::NotifyCollision(GameObject &other)
+{
+    float fator = 0.08;
+    if (other.GetComponent("CollisionBox").get() != nullptr)
+    {   
+        if (!applyNormal)
+        {
+            if (((associated.box.y + associated.box.h) < (1 + fator) * other.box.y) && 
+                ((associated.box.y + associated.box.h) > (1 - fator) * other.box.y))
+            {   
+                if (speed.y > 0)
+                {
+                    associated.box.y = other.box.y - associated.box.h;
+                }
+                speed.y = 0;
+                applyNormal = true;
+            }
+        }
+    }
 }
