@@ -8,6 +8,10 @@ StageState::StageState()
     std::shared_ptr<Gravity> gravity(new Gravity());
     Environment::AddForce(gravity);
 
+    // Creating normal force
+    std::shared_ptr<Normal> normal(new Normal());
+    Environment::AddForce(normal);
+
     // Opening background music
     backgroundMusic.Open(STAGE_BG_MUSIC_PATH);
 
