@@ -59,6 +59,32 @@ StageState::StageState()
     player->box.y = initPos.y;
 
     AddObject(player);
+
+    //Creating enemy
+    GameObject *enemy = new GameObject();
+    std::shared_ptr<Character> enemyBehaviour(new Character(*enemy, PLAYER_LVL0_MASS, char_type::ENEMY));
+    enemy->AddComponent(enemyBehaviour);
+    std::shared_ptr<Collider> enemyCollider(new Collider(*enemy));
+    enemy->AddComponent(enemyCollider);
+
+    initPos = Vec2(ENEMY_1_INIT_POS);
+    enemy->box.x = initPos.x;
+    enemy->box.y = initPos.y;
+
+    AddObject(enemy);
+
+    //Creating boss
+    GameObject *boss = new GameObject();
+    std::shared_ptr<Character> BOSSBehaviour(new Character(*boss, PLAYER_LVL0_MASS, char_type::BOSS));
+    boss->AddComponent(BOSSBehaviour);
+    std::shared_ptr<Collider> BOSSCollider(new Collider(*boss));
+    boss->AddComponent(BOSSCollider);
+
+    initPos = Vec2(BOSS_INIT_POS);
+    boss->box.x = initPos.x;
+    boss->box.y = initPos.y;
+
+    AddObject(boss);
 }
 
 void StageState::LoadAssets()

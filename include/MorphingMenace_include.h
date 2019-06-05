@@ -11,9 +11,13 @@ enum char_type
 {
     // Different types of characters that the game might have
     PLAYER,
-    ENEMY
+    ENEMY,
+    BOSS
 };
 #ifdef CHARACTER
+    #include "R0350N.h"
+    #include "Character.h"
+
     #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/player-baby-crawling.png"
     #define PLAYER_LVL0_SPRITES_NUMB 3
     #define PLAYER_LVL0_SPRITES_TIME 0.08
@@ -21,9 +25,19 @@ enum char_type
     #define PLAYER_LVL0_MASS 1
     #define PLAYER_LVL0_STEP 200
     #define PLAYER_LVL0_JUMP -400
-    #define PLAYER_INIT_POS {500, 300}
-    #include "R0350N.h"
-    #include "Character.h"
+    #define PLAYER_INIT_POS {400, 300}
+
+    #define ENEMY_1_SPRITE_PATH "assets/img/char/alien 1 - idle.png"
+    #define ENEMY_1_SPRITES_NUMB 3
+    #define ENEMY_1_SPRITES_TIME 1
+    #define ENEMY_1_SCALE 0.15
+    #define ENEMY_1_INIT_POS {600, 300}
+
+    #define BOSS_SPRITE_PATH "assets/img/char/boss_temporario.png"
+    #define BOSS_SPRITES_NUMB 1
+    #define BOSS_SPRITES_TIME 1
+    #define BOSS_SCALE 0.3
+    #define BOSS_INIT_POS {2000, 0}
 #endif
 
 /************************************************
@@ -50,8 +64,8 @@ enum char_type
 /************************************************
 *					Environment					*
 *************************************************/
-#define GRAVITY_ACCELERATION {0, 40}
-#define NORMAL_ACCELERATION {0, -40}
+#define GRAVITY_ACCELERATION {0, 60}
+#define NORMAL_ACCELERATION {0, -60}
 #ifdef ENVIRONMENT
     #include "Force.h"
     #include "Gravity.h"
