@@ -7,6 +7,8 @@
 #define INCLUDE_SDL_IMAGE
 #include "SDL_include.h"
 
+#include "Character.h"
+
 class Sprite: public Component{//implementar update, is e render da classe mãe (component)
 
   private:
