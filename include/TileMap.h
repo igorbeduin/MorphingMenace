@@ -10,6 +10,7 @@ class TileMap: public Component{
     int mapWidth;
     int mapHeight;
     int mapDepth;
+    bool firstLoop;
 
   public:
     TileMap(GameObject& associated, std::string file, TileSet* tileSet);
