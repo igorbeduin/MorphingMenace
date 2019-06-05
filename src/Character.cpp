@@ -137,18 +137,14 @@ bool Character::IsFlipped()
 
 void Character::NotifyCollision(GameObject &other)
 {
-    float fator = 0.08;
     if (other.GetComponent("CollisionBox").get() != nullptr)
     {   
-        if (!applyNormal)
+        if (!applyNormal && speed.y >= 0)
         {
-            if (((associated.box.y + associated.box.h) < (1 + fator) * other.box.y) && 
-                ((associated.box.y + associated.box.h) > (1 - fator) * other.box.y))
+            if (((associated.box.y + associated.box.h) < (1 + COLLISION_RANGE) * other.box.y) && 
+                ((associated.box.y + associated.box.h) > (1 - COLLISION_RANGE) * other.box.y))
             {   
-                if (speed.y > 0)
-                {
-                    associated.box.y = other.box.y - associated.box.h;
-                }
+                associated.box.y = other.box.y - associated.box.h;
                 speed.y = 0;
                 applyNormal = true;
             }
