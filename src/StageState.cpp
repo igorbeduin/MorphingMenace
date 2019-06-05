@@ -68,10 +68,35 @@ void StageState::LoadAssets()
 void StageState::Update(float dt)
 {
     Camera::Update(dt);
+
+    // Verify collisions
+    std::vector<std::shared_ptr<GameObject>> objWithCollider;
+    for (int i = (int)objectArray.size() - 1; i >= 0; i--)
+    {
+        std::shared_ptr<Component> colliderComponent = objectArray[i]->GetComponent("Collider");
+        // If GO DOES has a "Collider" component
+        if (colliderComponent.get() != nullptr)
+        {
+            objWithCollider.push_back(objectArray[i]);
+            for (int j = 0; j < (int)objWithCollider.size(); j++)
+            {
+                if (objectArray[i] != objWithCollider[j])
+                {
+                    if (Collision::IsColliding(objectArray[i]->box, objWithCollider[j]->box, objectArray[i]->GetAngleRad(), objWithCollider[j]->GetAngleRad()))
+                    {
+                        objectArray[i]->NotifyCollision(*objWithCollider[j].get());
+                        objWithCollider[j]->NotifyCollision(*objectArray[i].get());
+                    }
+                }
+            }
+        }
+    }
+
     if (InputManager::GetInstance().KeyPress(ESCAPE_KEY) || InputManager::GetInstance().QuitRequested())
     {
         quitRequested = true;
     }
+    
     // std::cout << "(int)objectArray.size(): " << (int)objectArray.size() << std::endl;
     for (int i = 0; i < (int)objectArray.size(); i++)
     {
