@@ -20,7 +20,8 @@ enum char_type
     #define PLAYER_LVL0_SCALE 0.15
     #define PLAYER_LVL0_MASS 1
     #define PLAYER_LVL0_STEP 200
-    #define CHARACTER_LVL0_JUMP -400
+    #define PLAYER_LVL0_JUMP -400
+    #define PLAYER_INIT_POS {500, 300}
     #include "R0350N.h"
     #include "Character.h"
 #endif
