@@ -66,6 +66,7 @@ enum char_type
 *************************************************/
 #define GRAVITY_ACCELERATION {0, 60}
 #define NORMAL_ACCELERATION {0, -60}
+#define COLLISION_RANGE 0.05
 #ifdef ENVIRONMENT
     #include "Force.h"
     #include "Gravity.h"
