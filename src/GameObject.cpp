@@ -85,3 +85,8 @@ bool GameObject::IsMoving()
 {
   return moving;
 }
+
+double GameObject::GetAngleRad()
+{
+  return angleDeg * DEGtoRAD;
+}

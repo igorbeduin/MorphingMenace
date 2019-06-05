@@ -1,5 +1,8 @@
 #pragma once
 
+
+#include "Engine_include.h"
+
 #include <memory>
 #include <string>
 #include <vector>
@@ -33,7 +36,7 @@ public:
 
   void NotifyCollision(GameObject& other);
   bool IsMoving();
-
+  double GetAngleRad();
   bool started;
   Rect box;
   double angleDeg;

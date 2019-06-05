@@ -1,5 +1,6 @@
 #pragma once
 
+#include "CollisionBox.h"
 #include "Sprite.h"
 #include "GameObject.h"
 #include "Collider.h"

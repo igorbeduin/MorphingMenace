@@ -15,12 +15,15 @@ public:
     void Update(float dt);
     bool Is(std::string);
     void Render();
+    void NotifyCollision(GameObject &other);
 
     void Move(Vec2 speed);
     void Walk(int step, float dt);
     void Jump();
 
     bool IsFlipped();
+
+    bool applyNormal;
     
 private:
     char_type charType;
