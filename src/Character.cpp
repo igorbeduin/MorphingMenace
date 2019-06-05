@@ -93,5 +93,5 @@ void Character::Walk(int step, float dt)
 
 void Character::Jump()
 {
-    speed.y = CHARACTER_LVL0_JUMP;
+    speed.y = PLAYER_LVL0_JUMP;
 }

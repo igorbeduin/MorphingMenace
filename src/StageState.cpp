@@ -47,6 +47,13 @@ StageState::StageState()
     GameObject* player = new GameObject();
     std::shared_ptr<Character> playerBehaviour(new Character(*player, PLAYER_LVL0_MASS, char_type::PLAYER));
     player->AddComponent(playerBehaviour);
+    std::shared_ptr<Collider> playerCollider(new Collider(*player));
+    player->AddComponent(playerCollider);
+
+    Vec2 initPos = Vec2(PLAYER_INIT_POS);
+    player->box.x = initPos.x;
+    player->box.y = initPos.y;
+
     AddObject(player);
 }
 
@@ -61,7 +68,6 @@ void StageState::Update(float dt)
     {
         quitRequested = true;
     }
-
     // std::cout << "(int)objectArray.size(): " << (int)objectArray.size() << std::endl;
     for (int i = 0; i < (int)objectArray.size(); i++)
     {

@@ -1,7 +1,9 @@
 #include "../include/TileMap.h"
 #include "../include/Camera.h"
 
-TileMap::TileMap(GameObject& associated, std::string file, TileSet* tileSet):Component(associated){
+TileMap::TileMap(GameObject& associated, std::string file, TileSet* tileSet) : Component(associated),
+                                                                               firstLoop(true)
+{
 
   if (tileSet != nullptr) {
     SetTileSet(tileSet);
@@ -52,14 +54,26 @@ void TileMap::Render(){
     // RenderLayer(z, this->associated.box.x + Camera::pos.x*(1+z), this->associated.box.y + Camera::pos.y*(1+z)); Outra opção seria fazer desse jeito, mas manter uma função para calcular a mudança no layers pode se tornar útil mais para frente, caso alguma mudança na lógica seja necessária
     Camera::ParallaxUpdate(z, true);//Chama a função de novo para resetar os parâmetros originais
   }
+  if (firstLoop)
+  {
+    firstLoop = false;
+  }
 }
 
 void TileMap::RenderLayer(int layer, int cameraX = 0, int cameraY = 0){
 
   for (int i = 0; i < GetHeight(); i++) {
     for (int j = 0; j < GetWidth(); j++) {
-      tileSet->RenderTile(At(j, i, layer), cameraX + tileSet->GetTileWidth()*j*tileSet->scale.x , cameraY + tileSet->GetTileHeight()*i*tileSet->scale.y);
 
+      if (firstLoop)
+      {
+        if (At(j, i, layer) != -1)
+        {
+          tileSet->createMapColliders = true;
+        }
+      }
+
+        tileSet->RenderTile(At(j, i, layer), cameraX + tileSet->GetTileWidth() * j * tileSet->scale.x, cameraY + tileSet->GetTileHeight() * i * tileSet->scale.y);
     }
   }
 }
