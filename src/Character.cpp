@@ -51,24 +51,27 @@ void Character::Update(float dt)
     Environment::ApplyForces(this);
 
     // Joystick
-    if (InputManager::GetInstance().KeyPress(SPACE_KEY))
+    if (charType == PLAYER)
     {
-        Jump();
-    }
-    if (InputManager::GetInstance().IsKeyDown(D_KEY))
-    {
-        Walk(PLAYER_LVL0_STEP, dt);
-        if (flip)
+        if (InputManager::GetInstance().KeyPress(SPACE_KEY))
         {
-            flip = false;
+            Jump();
         }
-    }
-    if (InputManager::GetInstance().IsKeyDown(A_KEY))
-    {
-        Walk((-1) * PLAYER_LVL0_STEP, dt);
-        if (!flip)
+        if (InputManager::GetInstance().IsKeyDown(D_KEY))
         {
-            flip = true;
+            Walk(PLAYER_LVL0_STEP, dt);
+            if (flip)
+            {
+                flip = false;
+            }
+        }
+        if (InputManager::GetInstance().IsKeyDown(A_KEY))
+        {
+            Walk((-1) * PLAYER_LVL0_STEP, dt);
+            if (!flip)
+            {
+                flip = true;
+            }
         }
     }
     
