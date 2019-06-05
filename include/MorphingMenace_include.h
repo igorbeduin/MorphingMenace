@@ -49,7 +49,7 @@ enum char_type
 /************************************************
 *					Environment					*
 *************************************************/
-#define GRAVITY_ACCELERATION {0, 20}
+#define GRAVITY_ACCELERATION {0, 40}
 #ifdef ENVIRONMENT
     #include "Force.h"
     #include "Gravity.h"
