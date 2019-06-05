@@ -18,9 +18,9 @@ class GameObject{
 private:
   std::vector< std::shared_ptr<Component> > components;
   bool isDead;
-  bool moving;
 
 public:
+  bool moving;
 
   GameObject();
   ~GameObject();
