@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Sprite.h"
+#include "GameObject.h"
+#include "Collider.h"
 
 class TileSet{
 
@@ -20,5 +22,6 @@ public:
   int GetTileWidth();
   int GetTileHeight();
   Vec2 scale;
+  bool createMapColliders;
 
 };
