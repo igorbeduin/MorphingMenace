@@ -19,8 +19,11 @@ public:
     void Move(Vec2 speed);
     void Walk(int step, float dt);
     void Jump();
+
+    bool IsFlipped();
     
 private:
     char_type charType;
     Vec2 speed;
+    bool flip;
 };

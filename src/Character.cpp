@@ -4,7 +4,8 @@
 
 Character::Character(GameObject &associated, float mass, char_type charType) : Component::Component(associated),
                                                                                charType(charType),
-                                                                               speed(Vec2(0, 0))
+                                                                               speed(Vec2(0, 0)),
+                                                                               flip(false)
 {
     switch (charType)
     {
@@ -56,10 +57,18 @@ void Character::Update(float dt)
     if (InputManager::GetInstance().IsKeyDown(D_KEY))
     {
         Walk(PLAYER_LVL0_STEP, dt);
+        if (flip)
+        {
+            flip = false;
+        }
     }
     if (InputManager::GetInstance().IsKeyDown(A_KEY))
     {
         Walk((-1) * PLAYER_LVL0_STEP, dt);
+        if (!flip)
+        {
+            flip = true;
+        }
     }
 
     associated.box.x += speed.x * dt;
@@ -94,4 +103,9 @@ void Character::Walk(int step, float dt)
 void Character::Jump()
 {
     speed.y = PLAYER_LVL0_JUMP;
+}
+
+bool Character::IsFlipped()
+{
+    return flip;
 }
