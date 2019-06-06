@@ -26,7 +26,6 @@ Character::Character(GameObject &associated, float mass, char_type charType) : C
         charSprite->SetScale(ENEMY_1_SCALE, ENEMY_1_SCALE);
         associated.AddComponent(charSprite);
 
-        associated.moving = false;
         // TODO:: Cria um personagem do tipo enemy
         break;
     }
