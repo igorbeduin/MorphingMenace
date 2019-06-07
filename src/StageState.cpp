@@ -51,7 +51,7 @@ StageState::StageState()
     GameObject* player = new GameObject();
     std::shared_ptr<Character> playerBehaviour(new Character(*player, PLAYER_LVL0_MASS, char_type::PLAYER));
     player->AddComponent(playerBehaviour);
-    std::shared_ptr<Collider> playerCollider(new Collider(*player));
+    std::shared_ptr<Collider> playerCollider(new Collider(*player, Vec2(0.8, 0.58) ));
     player->AddComponent(playerCollider);
 
     Vec2 initPos = Vec2(PLAYER_INIT_POS);
@@ -99,16 +99,17 @@ void StageState::Update(float dt)
     std::vector<std::shared_ptr<GameObject>> objWithCollider;
     for (int i = (int)objectArray.size() - 1; i >= 0; i--)
     {
-        std::shared_ptr<Component> colliderComponent = objectArray[i]->GetComponent("Collider");
+        std::shared_ptr<Collider> colliderComponent = std::dynamic_pointer_cast<Collider>(objectArray[i]->GetComponent("Collider"));
         // If GO DOES has a "Collider" component
-        if (colliderComponent.get() != nullptr)
+        if (colliderComponent != nullptr)
         {
             objWithCollider.push_back(objectArray[i]);
             for (int j = 0; j < (int)objWithCollider.size(); j++)
             {
+                std::shared_ptr<Collider> ObjWithcolliderComponent = std::dynamic_pointer_cast<Collider>(objWithCollider[j]->GetComponent("Collider"));
                 if (objectArray[i] != objWithCollider[j])
                 {
-                    if (Collision::IsColliding(objectArray[i]->box, objWithCollider[j]->box, objectArray[i]->GetAngleRad(), objWithCollider[j]->GetAngleRad()))
+                    if (Collision::IsColliding(colliderComponent->box, ObjWithcolliderComponent->box, objectArray[i]->GetAngleRad(), objWithCollider[j]->GetAngleRad()))
                     {
                         objectArray[i]->NotifyCollision(*objWithCollider[j].get());
                         objWithCollider[j]->NotifyCollision(*objectArray[i].get());

@@ -42,8 +42,8 @@ void TileSet::RenderTile(unsigned index, float x, float y){
     GameObject* tile = new GameObject();
     tile->box.x = x;
     tile->box.y = y;
-    tile->box.w = tileSet.GetWidth();
-    tile->box.h = tileSet.GetHeight();
+    tile->box.w = GetTileWidth()*scale.x;
+    tile->box.h = GetTileHeight()*scale.y;
 
     std::shared_ptr<Collider> collider(new Collider(* tile));
     tile->AddComponent(collider);
