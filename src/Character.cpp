@@ -1,6 +1,7 @@
 #include "../include/Character.h"
 #include "../include/Environment.h"
 #include "../include/InputManager.h"
+#include "../include/Collider.h"
 
 Character::Character(GameObject &associated, float mass, char_type charType) : Component::Component(associated),
                                                                                charType(charType),
@@ -136,14 +137,17 @@ bool Character::IsFlipped()
 
 void Character::NotifyCollision(GameObject &other)
 {
-    if (other.GetComponent("CollisionBox").get() != nullptr)
+    Collider* other_collider = (Collider*)other.GetComponent("Collider").get();
+    Collider* associated_collider = (Collider*)associated.GetComponent("Collider").get();
+
+    if (  (other.GetComponent("CollisionBox").get() != nullptr) && (other_collider != nullptr) && (associated_collider != nullptr) )
     {   
         if (!applyNormal && speed.y >= 0)
         {
-            if (((associated.box.y + associated.box.h) < (1 + COLLISION_RANGE) * other.box.y) && 
-                ((associated.box.y + associated.box.h) > (1 - COLLISION_RANGE) * other.box.y))
+            if (((associated_collider->box.y + associated_collider->box.h) < (1 + COLLISION_RANGE) * other_collider->box.y) && 
+                ((associated_collider->box.y + associated_collider->box.h) > (1 - COLLISION_RANGE) * other_collider->box.y))
             {   
-                associated.box.y = other.box.y - associated.box.h;
+                associated.box.y = other_collider->box.y - associated_collider->box.h - (associated_collider->box.y - associated.box.y);
                 speed.y = 0;
                 applyNormal = true;
             }
