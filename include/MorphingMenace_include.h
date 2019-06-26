@@ -18,6 +18,7 @@ enum char_type
     #include "R0350N.h"
     #include "Character.h"
 
+    #define MAXIMUM_Y_SPEED 500
     #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/player-baby-crawling.png"
     #define PLAYER_LVL0_SPRITES_NUMB 3
     #define PLAYER_LVL0_SPRITES_TIME 0.08
