@@ -22,6 +22,7 @@ public:
     void Jump();
 
     bool IsFlipped();
+    void limitSpeeds();
 
     bool applyNormal;
     
