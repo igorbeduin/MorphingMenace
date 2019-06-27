@@ -59,6 +59,7 @@ Vec2 Character::GetSpeed()
 void Character::Accelerate(Vec2 acceleration)
 {
     speed += acceleration;
+    limitSpeeds();
 }
 
 void Character::Update(float dt)
@@ -89,7 +90,6 @@ void Character::Update(float dt)
             }
         }
     }
-    
 
     associated.box.x += speed.x * dt;
     associated.box.y += speed.y * dt;
@@ -99,26 +99,27 @@ bool Character::Is(std::string type)
 {
     switch (charType)
     {
-        case PLAYER:
-        {
-            return (type == "Player" || type == "Character");
-            break;
-        }
-        case ENEMY:
-        {
-            return (type == "Enemy" || type == "Character");
-            break;
-        }
-        case BOSS:
-        {
-            return (type == "Boss" || type == "Character");
-            break;
-        }
+    case PLAYER:
+    {
+        return (type == "Player" || type == "Character");
+        break;
+    }
+    case ENEMY:
+    {
+        return (type == "Enemy" || type == "Character");
+        break;
+    }
+    case BOSS:
+    {
+        return (type == "Boss" || type == "Character");
+        break;
+    }
     }
 }
 
 void Character::Render()
-{}
+{
+}
 
 void Character::Walk(int step, float dt)
 {
@@ -187,10 +188,46 @@ void Character::limitSpeeds()
     {
         speed.y = MAXIMUM_Y_SPEED;
     }
-    /*
-        if (speed.x > MAXIMUM_X_SPEED)
+}
+
+void Character::collisionSide(Rect boxA, Rect boxB)
+{
+    // This function returns the side colliding of B in relation of A, e.g, A->B returns "Left"
+
+    // Horizontal verification
+    if ((boxA.x + boxA.w > boxB.x - SAFETY_COLLISION_RANGE) &&
+        (boxA.x + boxA.w < boxB.x + DEPTH_COLLISION_RANGE) && 
+        (boxA.y + boxA.h != boxB.y))
+    {
+        horizontalCollision = collision_side::LEFT;
+    }
+    else
+    {
+        if ((boxA.x > boxB.x + boxB.w - DEPTH_COLLISION_RANGE) &&
+            (boxA.x < boxB.x + boxB.w + SAFETY_COLLISION_RANGE) &&
+            (boxA.y + boxA.h != boxB.y))
         {
-            speed.x = MAXIMUM_X_SPEED;
+            horizontalCollision = collision_side::RIGHT;
         }
-    */
+    }
+
+    // Vertical verification
+    if ((boxA.y + boxA.h > boxB.y - SAFETY_COLLISION_RANGE) &&
+        (boxA.y + boxA.h < boxB.y + DEPTH_COLLISION_RANGE) &&
+        (boxA.x + boxA.w != boxB.x) && 
+        (boxA.x != boxB.x + boxB.w))
+    {
+        verticalCollision = collision_side::UP;
+    }
+    else
+    {
+        if ((boxA.y > boxB.y + boxB.h - DEPTH_COLLISION_RANGE) &&
+            (boxA.y < boxB.y + boxB.h + SAFETY_COLLISION_RANGE) &&
+            (boxA.x + boxA.w != boxB.x) && 
+            (boxA.x != boxB.x + boxB.w))
+        {
+            verticalCollision = collision_side::DOWN;
+        }   
+    }
+    
 }
