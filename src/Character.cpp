@@ -138,41 +138,47 @@ bool Character::IsFlipped()
 void Character::NotifyCollision(GameObject &other)
 {
 
+    Collider *otherCollider = (Collider *)other.GetComponent("Collider").get();
+    Collider *associatedCollider = (Collider *)associated.GetComponent("Collider").get();
+
+    //TODO: colocar esse metodo em uma classe/arquivo de utilities
+    collisionSide(associatedCollider->box, otherCollider->box);
+
     if (other.GetComponent("CollisionBox").get() != nullptr)
     {
-        Collider* otherCollider = (Collider*)other.GetComponent("Collider").get();
-        Collider* associatedCollider = (Collider*)associated.GetComponent("Collider").get();
-
-        // Falling collision
-        if (!applyNormal && speed.y >= 0)
+        // Falling collision (Up-To-Down Collision)
+        if (verticalCollision == collision_side::UP)
         {
-            if (((associatedCollider->box.y + associatedCollider->box.h) < (1 + COLLISION_RANGE) * otherCollider->box.y) && 
-                ((associatedCollider->box.y + associatedCollider->box.h) > (1 - COLLISION_RANGE) * otherCollider->box.y))
-            {   
-                associated.box.y = otherCollider->box.y - associatedCollider->box.h - (associatedCollider->box.y - associated.box.y);
+            if (!applyNormal)
+            {
+                associated.box.y -= (associatedCollider->box.y + associatedCollider->box.h) - otherCollider->box.y;
                 speed.y = 0;
                 applyNormal = true;
             }
         }
-        
-        // Left-To-Right Collision collision (->)
-        if (((associatedCollider->box.x + associatedCollider->box.w) < (1 + COLLISION_RANGE) * otherCollider->box.x) &&
-            ((associatedCollider->box.x + associatedCollider->box.w) > (1 - COLLISION_RANGE) * otherCollider->box.x))
-        {   
-            if (((associatedCollider->box.y > otherCollider->box.y) &&
-                (associatedCollider->box.y < otherCollider->box.y + otherCollider->box.h)))
-            {
-                associated.box.x = otherCollider->box.x - associatedCollider->box.w - (associatedCollider->box.x - associated.box.x);
-                // std::cout << "CASO 1" << std::endl;
-            }
-            if (((associatedCollider->box.y + associatedCollider->box.h > otherCollider->box.y) &&
-                (associatedCollider->box.y + associatedCollider->box.h < otherCollider->box.y + otherCollider->box.h)))
-            {
-                associated.box.x = otherCollider->box.x - associatedCollider->box.w - (associatedCollider->box.x - associated.box.x);
-                // std::cout << "CASO 2" << std::endl;
-            }
+
+        // Down-To-Up Collision
+        if (verticalCollision == collision_side::DOWN)
+        {
+            associated.box.y += (otherCollider->box.y + otherCollider->box.h) - associatedCollider->box.y;
+            speed.y = 0;
         }
+
+        // Left-To-Right Collision
+        if (horizontalCollision == collision_side::LEFT)
+        {
+            associated.box.x -= (associatedCollider->box.x + associatedCollider->box.w) - otherCollider->box.x;
+        }
+
+        // Right-To-Left Collision
+        if (horizontalCollision == collision_side::RIGHT)
+        {
+            associated.box.x += (otherCollider->box.x + otherCollider->box.w) - associatedCollider->box.x;
+        }
+        
     }
+    verticalCollision = NONE;
+    horizontalCollision = NONE;
 }
 
 void Character::limitSpeeds()

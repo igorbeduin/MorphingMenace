@@ -4,6 +4,15 @@
 #include "MorphingMenace_include.h"
 #include "Engine_include.h"
 
+enum collision_side
+{
+    LEFT,
+    RIGHT,
+    UP,
+    DOWN,
+    NONE
+};
+
 class Character : public Component
 {
 public:
@@ -23,6 +32,7 @@ public:
 
     bool IsFlipped();
     void limitSpeeds();
+    void collisionSide(Rect boxA, Rect boxB);
 
     bool applyNormal;
     
@@ -30,4 +40,6 @@ private:
     char_type charType;
     Vec2 speed;
     bool flip;
+    collision_side verticalCollision = NONE;
+    collision_side horizontalCollision = NONE;
 };
