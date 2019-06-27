@@ -25,7 +25,7 @@ enum char_type
     #define PLAYER_LVL0_SCALE 0.15
     #define PLAYER_LVL0_MASS 1
     #define PLAYER_LVL0_STEP 200
-    #define PLAYER_LVL0_JUMP -400
+    #define PLAYER_LVL0_JUMP -500
     #define PLAYER_INIT_POS {400, 300}
 
     #define ENEMY_1_SPRITE_PATH "assets/img/char/alien1-idle.png"
@@ -65,9 +65,11 @@ enum char_type
 /************************************************
 *					Environment					*
 *************************************************/
-#define GRAVITY_ACCELERATION {0, 60}
-#define NORMAL_ACCELERATION {0, -60}
-#define COLLISION_RANGE 0.05
+#define GRAVITY_ACCELERATION {0, 15}
+#define NORMAL_ACCELERATION {0, -15}
+#define SAFETY_COLLISION_RANGE 10
+#define DEPTH_COLLISION_RANGE 10
+
 #ifdef ENVIRONMENT
     #include "Force.h"
     #include "Gravity.h"
