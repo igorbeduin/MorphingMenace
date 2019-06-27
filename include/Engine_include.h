@@ -62,4 +62,5 @@
 #include "Component.h"
 #include "GameObject.h"
 #include "Vec2.h"
+#include "Rect.h"
 #endif
