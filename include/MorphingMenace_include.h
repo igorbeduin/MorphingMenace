@@ -28,8 +28,8 @@ enum char_type
     #define PLAYER_LVL0_JUMP -500
     #define PLAYER_INIT_POS {400, 300}
 
-    #define ENEMY_1_SPRITE_PATH "assets/img/char/alien1-idle.png"
-    #define ENEMY_1_SPRITES_NUMB 3
+    #define ENEMY_1_SPRITE_PATH "assets/img/char/alien1_complete_movement.png"
+    #define ENEMY_1_SPRITES_NUMB 7
     #define ENEMY_1_SPRITES_TIME 0.1
     #define ENEMY_1_SCALE 0.15
     #define ENEMY_1_INIT_POS {600, 300}
