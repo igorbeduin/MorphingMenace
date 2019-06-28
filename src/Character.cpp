@@ -3,9 +3,11 @@
 #include "../include/InputManager.h"
 #include "../include/Collider.h"
 
-Character::Character(GameObject &associated, float mass, char_type charType) : Component::Component(associated),
-                                                                               applyNormal(false),
-                                                                               flip(false)
+Character::Character(GameObject &associated, int maxHP, char_type charType) : Component::Component(associated),
+                                                                           maxHP(maxHP),
+                                                                           applyNormal(false),
+                                                                           flip(false),
+                                                                           currentHP(maxHP)
 {
     switch (charType)
     {
@@ -39,6 +41,11 @@ Character::Character(GameObject &associated, float mass, char_type charType) : C
 
 void Character::Update(float dt)
 {
+    if (currentHP <= 0)
+    {
+        associated.RequestDelete();
+    }
+
     Environment::ApplyForces(this);
     
     lastPosition.x = associated.box.x;
@@ -67,15 +74,13 @@ void Character::Render()
 
 void Character::NotifyCollision(GameObject &other)
 {
-
-    Collider *otherCollider = (Collider *)other.GetComponent("Collider").get();
-    Collider *associatedCollider = (Collider *)associated.GetComponent("Collider").get();
-
-    //TODO: colocar esse metodo em uma classe/arquivo de utilities
-    collisionSide(associatedCollider->box, otherCollider->box);
-
     if (other.GetComponent("CollisionBox").get() != nullptr)
     {
+        Collider *otherCollider = (Collider *)other.GetComponent("Collider").get();
+        Collider *associatedCollider = (Collider *)associated.GetComponent("Collider").get();
+
+        //TODO: colocar esse metodo em uma classe/arquivo de utilities
+        collisionSide(associatedCollider->box, otherCollider->box);
         // Falling collision (Up-To-Down Collision)
         if (verticalCollision == collision_side::UP)
         {
@@ -106,9 +111,15 @@ void Character::NotifyCollision(GameObject &other)
             associated.box.x += (otherCollider->box.x + otherCollider->box.w) - associatedCollider->box.x;
         }
         
+        verticalCollision = collision_side::NONE_SIDE;
+        horizontalCollision = collision_side::NONE_SIDE;
     }
-    verticalCollision = collision_side::NONE_SIDE;
-    horizontalCollision = collision_side::NONE_SIDE;
+
+    if (other.GetComponent("Damage").get() != nullptr)
+    {
+        Damage *damagePtr = (Damage *)other.GetComponent("Damage").get();
+        // ApplyDamage(damagePtr->GetDamage());
+    }
 }
 
 void Character::limitSpeeds()
@@ -199,4 +210,9 @@ void Character::EnableFlip()
 void Character::DisableFlip()
 {
     flip = false;
+}
+
+void Character::ApplyDamage(int damage)
+{
+    currentHP -= damage;
 }

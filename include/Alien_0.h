@@ -1,5 +1,8 @@
 #pragma once
 
+#define CHARACTER
+#include "MorphingMenace_include.h"
+#include "Engine_include.h"
 #include "GameObject.h"
 #include "Component.h"
 #include "Transformation.h"

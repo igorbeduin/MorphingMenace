@@ -2,8 +2,8 @@
 
 Entokraton_1::Entokraton_1(GameObject &associated) : Component::Component(associated)
 {
-    std::shared_ptr<Sprite> charSprite(new Sprite(associated, ENEMY_1_SPRITE_PATH, ENEMY_1_SPRITES_NUMB, ENEMY_1_SPRITES_TIME));
-    charSprite->SetScale(ENEMY_1_SCALE, ENEMY_1_SCALE);
+    std::shared_ptr<Sprite> charSprite(new Sprite(associated, ENTOKRATON_1_SPRITE_PATH, ENTOKRATON_1_SPRITES_NUMB, ENTOKRATON_1_SPRITES_TIME));
+    charSprite->SetScale(ENTOKRATON_1_SCALE, ENTOKRATON_1_SCALE);
     associated.AddComponent(charSprite);
 }
 void Entokraton_1::Update(float dt)

@@ -7,7 +7,7 @@
 class Character : public Component
 {
 public:
-    Character(GameObject& associated, float mass, char_type type);
+    Character(GameObject& associated, int maxHP, char_type type);
     void Accelerate(Vec2 acceleration = Vec2(0, 0));
 
     void Update(float dt);
@@ -26,6 +26,7 @@ public:
     bool IsFlipped();
     void EnableFlip();
     void DisableFlip();
+    void ApplyDamage(int damage);
 
 private:
     Vec2 speed;
@@ -33,4 +34,6 @@ private:
     collision_side verticalCollision;
     collision_side horizontalCollision;
     bool flip;
+    int maxHP;
+    int currentHP;
 };

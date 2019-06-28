@@ -5,7 +5,7 @@ void Transformation::Downgrade()
 
 void Transformation::Attack()
 {
-    std::cout << "ATTACK" << std::endl;
+
 }
 void Transformation::Absorb()
 {

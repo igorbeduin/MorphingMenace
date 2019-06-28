@@ -233,6 +233,6 @@ void Sprite::RunSpecificAnimation()
         // PARA CHAMAR A ANIMAÇÂO 
         // Sprite *enemySprite = (Sprite *)associated.GetComponent("Sprite").get();
         //     enemySprite->RunSpecificAnimation();
-        //     enemySprite->SetStartFrame(ENEMY_1_IDLE_START);
-        //     enemySprite->SetEndFrame(ENEMY_1_IDLE_END);
-        //     enemySprite->SetAnimationTime(ENEMY_1_IDLE_TIME);
+        //     enemySprite->SetStartFrame(ENTOKRATON_1_IDLE_START);
+        //     enemySprite->SetEndFrame(ENTOKRATON_1_IDLE_END);
+        //     enemySprite->SetAnimationTime(ENTOKRATON_1_IDLE_TIME);
