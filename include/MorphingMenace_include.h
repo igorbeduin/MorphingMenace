@@ -66,12 +66,27 @@ enum character_state
     #define ENTOKRATON_1_WALK_END 6
     #define ENTOKRATON_1_WALK_TIME 0.1
     #define ENTOKRATON_1_HP 50
+    #define ENEMY_1_IDLE_START 0
+    #define ENEMY_1_IDLE_END 2
+    #define ENEMY_1_IDLE_TIME 0.1
+    #define ENEMY_1_WALK_START 3
+    #define ENEMY_1_WALK_END 6
+    #define ENEMY_1_WALK_TIME 0.1
+    #define ENEMY_1_COOLDOWN 2
+    #define ENEMY_1_STEP 150
+    #define ENEMY_1_PERCEPTION 250
+    #define ENEMY_1_ATTACK_RANGE 30
+    #define WALK_RANGE 200
+    #define STOP_RANGE 5
 
-    #define BOSS_SPRITE_PATH "assets/img/char/boss_temporario.png"
-    #define BOSS_SPRITES_NUMB 1
-    #define BOSS_SPRITES_TIME 1
-    #define BOSS_SCALE 0.3
-    #define BOSS_INIT_POS {2000, 0}
+#define BOSS_SPRITE_PATH "assets/img/char/boss_temporario.png"
+#define BOSS_SPRITES_NUMB 1
+#define BOSS_SPRITES_TIME 1
+#define BOSS_SCALE 0.3
+#define BOSS_INIT_POS \
+    {                 \
+        2000, 0       \
+    }
 #endif
 
 /************************************************
@@ -100,8 +115,8 @@ enum character_state
 *************************************************/
 #define GRAVITY_ACCELERATION {0, 15}
 #define NORMAL_ACCELERATION {0, -15}
-#define SAFETY_COLLISION_RANGE 10
-#define DEPTH_COLLISION_RANGE 10
+#define SAFETY_COLLISION_RANGE 20
+#define DEPTH_COLLISION_RANGE 20
 
 #ifdef ENVIRONMENT
     #include "Force.h"
