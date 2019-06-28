@@ -10,7 +10,16 @@ enum collision_side
     RIGHT,
     UP,
     DOWN,
-    NONE
+    NONE_SIDE
+};
+
+enum character_state
+{
+    IDLE,
+    WALKING,
+    JUMPING,
+    FALLING,
+    NONE_STATE
 };
 
 class Character : public Component
@@ -29,6 +38,7 @@ public:
     void Move(Vec2 speed);
     void Walk(int step, float dt);
     void Jump();
+    void Idle();
 
     bool IsFlipped();
     void limitSpeeds();
@@ -40,6 +50,8 @@ private:
     char_type charType;
     Vec2 speed;
     bool flip;
-    collision_side verticalCollision = NONE;
-    collision_side horizontalCollision = NONE;
+    collision_side verticalCollision;
+    collision_side horizontalCollision;
+    character_state characterState;
+    Vec2 lastPosition;
 };

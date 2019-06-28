@@ -18,18 +18,18 @@ enum char_type
     #include "R0350N.h"
     #include "Character.h"
 
-    #define MAXIMUM_Y_SPEED 500
+    #define MAXIMUM_Y_SPEED 800
     #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/player-baby-crawling.png"
     #define PLAYER_LVL0_SPRITES_NUMB 3
     #define PLAYER_LVL0_SPRITES_TIME 0.08
     #define PLAYER_LVL0_SCALE 0.15
     #define PLAYER_LVL0_MASS 1
     #define PLAYER_LVL0_STEP 200
-    #define PLAYER_LVL0_JUMP -500
+    #define PLAYER_LVL0_JUMP -600
     #define PLAYER_INIT_POS {400, 300}
 
-    #define ENEMY_1_SPRITE_PATH "assets/img/char/alien1-idle.png"
-    #define ENEMY_1_SPRITES_NUMB 3
+    #define ENEMY_1_SPRITE_PATH "assets/img/char/alien1_complete_movement.png"
+    #define ENEMY_1_SPRITES_NUMB 7
     #define ENEMY_1_SPRITES_TIME 0.1
     #define ENEMY_1_SCALE 0.15
     #define ENEMY_1_INIT_POS {600, 300}

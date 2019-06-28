@@ -7,7 +7,11 @@ Character::Character(GameObject &associated, float mass, char_type charType) : C
                                                                                charType(charType),
                                                                                speed(Vec2(0, 0)),
                                                                                flip(false),
-                                                                               applyNormal(false)
+                                                                               applyNormal(false),
+                                                                               verticalCollision(collision_side::NONE_SIDE),
+                                                                               horizontalCollision(collision_side::NONE_SIDE),
+                                                                               characterState(character_state::NONE_STATE),
+                                                                               lastPosition(Vec2(0, 0))
 {
     switch (charType)
     {
@@ -66,9 +70,18 @@ void Character::Update(float dt)
 {
     Environment::ApplyForces(this);
 
+
     // Joystick
     if (charType == PLAYER)
     {
+        if ((associated.box.x == lastPosition.x) && (associated.box.y == lastPosition.y) && speed.y == 0)
+        {
+            if (characterState != character_state::IDLE)
+            {
+                Idle();
+            }
+        }
+
         if (InputManager::GetInstance().KeyPress(SPACE_KEY))
         {
             Jump();
@@ -91,8 +104,32 @@ void Character::Update(float dt)
         }
     }
 
+    lastPosition.x = associated.box.x;
+    lastPosition.y = associated.box.y;
+
     associated.box.x += speed.x * dt;
     associated.box.y += speed.y * dt;
+    if (charType == char_type::PLAYER)
+    {
+        switch (characterState)
+        {
+            case character_state::WALKING:
+                std::cout << "Walking" << std::endl;
+                break;
+            case character_state::JUMPING:
+                std::cout << "Jumping" << std::endl;
+                break;
+            case character_state::FALLING:
+                std::cout << "Falling" << std::endl;
+                break;
+            case character_state::IDLE:
+                std::cout << "Idle" << std::endl;
+                break;    
+            case character_state::NONE_STATE:
+                std::cout << "None" << std::endl;
+                break;
+        }
+    }
 }
 
 bool Character::Is(std::string type)
@@ -124,11 +161,21 @@ void Character::Render()
 void Character::Walk(int step, float dt)
 {
     associated.box.x += step * dt;
+    if (characterState == character_state::IDLE)
+    {
+        characterState = character_state::WALKING;
+    }
 }
 
 void Character::Jump()
 {
     speed.y = PLAYER_LVL0_JUMP;
+    characterState = character_state::JUMPING;
+}
+
+void Character::Idle()
+{
+    characterState = character_state::IDLE;
 }
 
 bool Character::IsFlipped()
@@ -178,8 +225,8 @@ void Character::NotifyCollision(GameObject &other)
         }
         
     }
-    verticalCollision = NONE;
-    horizontalCollision = NONE;
+    verticalCollision = collision_side::NONE_SIDE;
+    horizontalCollision = collision_side::NONE_SIDE;
 }
 
 void Character::limitSpeeds()
