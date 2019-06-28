@@ -60,6 +60,10 @@ enum character_state
     #define ENEMY_1_WALK_START 3
     #define ENEMY_1_WALK_END 6
     #define ENEMY_1_WALK_TIME 0.1
+    #define ENEMY_1_COOLDOWN 1
+    #define ENEMY_1_STEP 150
+    #define WALK_RANGE 200
+    #define STOP_RANGE 5
 
     #define BOSS_SPRITE_PATH "assets/img/char/boss_temporario.png"
     #define BOSS_SPRITES_NUMB 1
