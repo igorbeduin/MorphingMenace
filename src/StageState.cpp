@@ -60,6 +60,7 @@ StageState::StageState()
 
     AddObject(player);
 
+    /*
     //Creating enemy
     GameObject *enemy = new GameObject();
     std::shared_ptr<Character> enemyBehaviour(new Character(*enemy, PLAYER_LVL0_MASS, char_type::ENEMY));
@@ -85,6 +86,7 @@ StageState::StageState()
     boss->box.y = initPos.y;
 
     AddObject(boss);
+    */
 }
 
 void StageState::LoadAssets()
