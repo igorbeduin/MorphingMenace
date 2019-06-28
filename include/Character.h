@@ -4,30 +4,13 @@
 #include "MorphingMenace_include.h"
 #include "Engine_include.h"
 
-enum collision_side
-{
-    LEFT,
-    RIGHT,
-    UP,
-    DOWN,
-    NONE_SIDE
-};
+#include "Player.h"
 
-enum character_state
-{
-    IDLE,
-    WALKING,
-    JUMPING,
-    FALLING,
-    NONE_STATE
-};
 
 class Character : public Component
 {
 public:
     Character(GameObject& associated, float mass, char_type type);
-    void SetSpeed(Vec2 speed);
-    Vec2 GetSpeed();
     void Accelerate(Vec2 acceleration = Vec2(0, 0));
 
     void Update(float dt);
@@ -35,23 +18,22 @@ public:
     void Render();
     void NotifyCollision(GameObject &other);
 
-    void Move(Vec2 speed);
-    void Walk(int step, float dt);
-    void Jump();
-    void Idle();
-
-    bool IsFlipped();
     void limitSpeeds();
     void collisionSide(Rect boxA, Rect boxB);
-
     bool applyNormal;
-    
+    Vec2 GetLastPosition();
+    Vec2 GetSpeed();
+    void SetSpeed(int speedX, int speedY);
+    void SetSpeedX(int speedX);
+    void SetSpeedY(int speedY);
+    bool IsFlipped();
+    void EnableFlip();
+    void DisableFlip();
+
 private:
-    char_type charType;
     Vec2 speed;
-    bool flip;
+    Vec2 lastPosition;
     collision_side verticalCollision;
     collision_side horizontalCollision;
-    character_state characterState;
-    Vec2 lastPosition;
+    bool flip;
 };

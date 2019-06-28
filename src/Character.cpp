@@ -4,24 +4,15 @@
 #include "../include/Collider.h"
 
 Character::Character(GameObject &associated, float mass, char_type charType) : Component::Component(associated),
-                                                                               charType(charType),
-                                                                               speed(Vec2(0, 0)),
-                                                                               flip(false),
                                                                                applyNormal(false),
-                                                                               verticalCollision(collision_side::NONE_SIDE),
-                                                                               horizontalCollision(collision_side::NONE_SIDE),
-                                                                               characterState(character_state::NONE_STATE),
-                                                                               lastPosition(Vec2(0, 0))
+                                                                               flip(false)
 {
     switch (charType)
     {
     case PLAYER:
     {
-        // PROVISORIO:
-        std::shared_ptr<Sprite> charSprite(new Sprite(associated, PLAYER_LVL0_SPRITE_PATH, PLAYER_LVL0_SPRITES_NUMB, PLAYER_LVL0_SPRITES_TIME));
-        charSprite->SetScale(PLAYER_LVL0_SCALE, PLAYER_LVL0_SCALE);
-        associated.AddComponent(charSprite);
-        // TODO:: Cria um personagem do tipo enemy
+        std::shared_ptr<Player> playerBehav(new Player(associated));
+        associated.AddComponent(playerBehav);
         break;
     }
     case ENEMY:
@@ -50,14 +41,15 @@ Character::Character(GameObject &associated, float mass, char_type charType) : C
     }
 }
 
-void Character::SetSpeed(Vec2 speed)
+void Character::Update(float dt)
 {
-    this->speed = speed;
-}
+    Environment::ApplyForces(this);
+    
+    lastPosition.x = associated.box.x;
+    lastPosition.y = associated.box.y;
 
-Vec2 Character::GetSpeed()
-{
-    return speed;
+    associated.box.x += speed.x * dt;
+    associated.box.y += speed.y * dt;
 }
 
 void Character::Accelerate(Vec2 acceleration)
@@ -66,132 +58,16 @@ void Character::Accelerate(Vec2 acceleration)
     limitSpeeds();
 }
 
-void Character::Update(float dt)
-{
-    Environment::ApplyForces(this);
-
-
-    // Joystick
-    if (charType == PLAYER)
-    {
-        if ((associated.box.x == lastPosition.x) && (associated.box.y == lastPosition.y) && speed.y == 0)
-        {
-            if (characterState != character_state::IDLE)
-            {
-                Idle();
-            }
-        }
-
-        if (InputManager::GetInstance().KeyPress(SPACE_KEY))
-        {
-            Jump();
-        }
-        if (InputManager::GetInstance().IsKeyDown(D_KEY))
-        {
-            Walk(PLAYER_LVL0_STEP, dt);
-            if (flip)
-            {
-                flip = false;
-            }
-        }
-        if (InputManager::GetInstance().IsKeyDown(A_KEY))
-        {
-            Walk((-1) * PLAYER_LVL0_STEP, dt);
-            if (!flip)
-            {
-                flip = true;
-            }
-        }
-
-        if (    (associated.box.x <= (-Camera::pos.x + LEFT_FOCUS_LIMIT)  && lastPosition.x > associated.box.x) || 
-                (associated.box.x + associated.box.w >= (-Camera::pos.x + RIGHT_FOCUS_LIMIT) && lastPosition.x < associated.box.x)  )
-        {
-            Camera::Follow(&associated);   
-        }
-        else
-        {
-            Camera::Unfollow();
-        }
-    }
-
-    lastPosition.x = associated.box.x;
-    lastPosition.y = associated.box.y;
-
-    associated.box.x += speed.x * dt;
-    associated.box.y += speed.y * dt;
-    if (charType == char_type::PLAYER)
-    {
-        switch (characterState)
-        {
-            case character_state::WALKING:
-                std::cout << "Walking" << std::endl;
-                break;
-            case character_state::JUMPING:
-                std::cout << "Jumping" << std::endl;
-                break;
-            case character_state::FALLING:
-                std::cout << "Falling" << std::endl;
-                break;
-            case character_state::IDLE:
-                std::cout << "Idle" << std::endl;
-                break;    
-            case character_state::NONE_STATE:
-                std::cout << "None" << std::endl;
-                break;
-        }
-    }
-}
 
 bool Character::Is(std::string type)
 {
-    switch (charType)
-    {
-    case PLAYER:
-    {
-        return (type == "Player" || type == "Character");
-        break;
-    }
-    case ENEMY:
-    {
-        return (type == "Enemy" || type == "Character");
-        break;
-    }
-    case BOSS:
-    {
-        return (type == "Boss" || type == "Character");
-        break;
-    }
-    }
+    return (type == "Character");
 }
 
 void Character::Render()
 {
 }
 
-void Character::Walk(int step, float dt)
-{
-    associated.box.x += step * dt;
-    if (characterState == character_state::IDLE)
-    {
-        characterState = character_state::WALKING;
-    }
-}
-
-void Character::Jump()
-{
-    speed.y = PLAYER_LVL0_JUMP;
-    characterState = character_state::JUMPING;
-}
-
-void Character::Idle()
-{
-    characterState = character_state::IDLE;
-}
-
-bool Character::IsFlipped()
-{
-    return flip;
-}
 
 void Character::NotifyCollision(GameObject &other)
 {
@@ -287,4 +163,44 @@ void Character::collisionSide(Rect boxA, Rect boxB)
         }   
     }
     
+}
+
+Vec2 Character::GetLastPosition()
+{
+    return lastPosition;
+}
+
+Vec2 Character::GetSpeed()
+{
+    return speed;
+}
+
+void Character::SetSpeedX(int speedX)
+{
+    speed.x = speedX;
+}
+void Character::SetSpeedY(int speedY)
+{
+    speed.y = speedY;
+}
+
+void Character::SetSpeed(int speedX, int speedY)
+{
+    SetSpeedX(speedX);
+    SetSpeedY(speedY);
+}
+
+bool Character::IsFlipped()
+{
+    return flip;
+}
+
+void Character::EnableFlip()
+{
+    flip = true;
+}
+
+void Character::DisableFlip()
+{
+    flip = false;
 }
