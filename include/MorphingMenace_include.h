@@ -33,6 +33,12 @@ enum char_type
     #define ENEMY_1_SPRITES_TIME 0.1
     #define ENEMY_1_SCALE 0.15
     #define ENEMY_1_INIT_POS {600, 300}
+    #define ENEMY_1_IDLE_START 0
+    #define ENEMY_1_IDLE_END 2
+    #define ENEMY_1_IDLE_TIME 0.1    
+    #define ENEMY_1_WALK_START 3
+    #define ENEMY_1_WALK_END 6
+    #define ENEMY_1_WALK_TIME 0.1
 
     #define BOSS_SPRITE_PATH "assets/img/char/boss_temporario.png"
     #define BOSS_SPRITES_NUMB 1

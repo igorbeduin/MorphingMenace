@@ -27,6 +27,11 @@ class Sprite: public Component{//implementar update, is e render da classe mãe 
     Timer selfDestructCount;
     float secondsToSelfDestruct;
 
+    bool ChangeAnimation;
+    int StartFrame;
+    int EndFrame;
+    float AnimationTime;
+
   public:
     Sprite(GameObject& associated);
     Sprite(GameObject& associated, std::string file, int frameCount = 1, float frameTime = 1, float secondsToSelfDestruct = 0);
@@ -48,4 +53,9 @@ class Sprite: public Component{//implementar update, is e render da classe mãe 
     void SetFrameCount(int frameCount);
     void SetFrameTime(float frameTime);
     int GetCurrentFrame();
+
+    void SetStartFrame(int startFrame);
+    void SetEndFrame(int endFrame);
+    void SetAnimationTime(float animationTime);
+    void RunSpecificAnimation();
 };
