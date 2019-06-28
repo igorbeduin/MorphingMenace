@@ -15,6 +15,7 @@ Character::Character(GameObject &associated, float mass, char_type charType) : C
         std::shared_ptr<Player> playerBehav(new Player(associated));
         associated.AddComponent(playerBehav);
         player = this;
+        this->box = associated.box;
         break;
     }
     case ENTOKRATON_1:
