@@ -11,7 +11,7 @@ enum char_type
 {
     // Different types of characters that the game might have
     PLAYER,
-    ENEMY,
+    ENTOKRATON_1,
     BOSS
 };
 
@@ -36,7 +36,9 @@ enum character_state
 
 #ifdef CHARACTER
     #include "Character.h"
-
+    #include "Player.h"
+    #include "Entokraton_1.h"
+    
     #define MAXIMUM_Y_SPEED 800
     #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/player-baby-crawling.png"
     #define PLAYER_LVL0_SPRITES_NUMB 3

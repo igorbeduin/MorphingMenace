@@ -15,14 +15,10 @@ Character::Character(GameObject &associated, float mass, char_type charType) : C
         associated.AddComponent(playerBehav);
         break;
     }
-    case ENEMY:
+    case ENTOKRATON_1:
     {
-        // PROVISORIO:
-        std::shared_ptr<Sprite> charSprite(new Sprite(associated, ENEMY_1_SPRITE_PATH, ENEMY_1_SPRITES_NUMB, ENEMY_1_SPRITES_TIME));
-        charSprite->SetScale(ENEMY_1_SCALE, ENEMY_1_SCALE);
-        associated.AddComponent(charSprite);
-
-        // TODO:: Cria um personagem do tipo enemy
+        std::shared_ptr<Entokraton_1> enemyBehav(new Entokraton_1(associated));
+        associated.AddComponent(enemyBehav);
         break;
     }
     case BOSS:
