@@ -96,12 +96,12 @@ void Player::Idle()
 
 void Player::Attack()
 {
-    Transformation* currentTransf = (Transformation*)transformStack.top().get();
+    Alien_0* currentTransf = (Alien_0*)transformStack.top().get();
     currentTransf->Attack();
 }
 
 void Player::Absorb()
 {
-    Transformation* currentTransf = (Transformation*)transformStack.top().get();
+    Alien_0* currentTransf = (Alien_0*)transformStack.top().get();
     currentTransf->Absorb();
 }

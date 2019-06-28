@@ -38,34 +38,34 @@ enum character_state
     #include "Character.h"
     #include "Player.h"
     #include "Entokraton_1.h"
+    #include "Damage.h"
     
     #define MAXIMUM_Y_SPEED 800
     #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/player-baby-crawling.png"
     #define PLAYER_LVL0_SPRITES_NUMB 3
     #define PLAYER_LVL0_SPRITES_TIME 0.08
     #define PLAYER_LVL0_SCALE 0.15
-    #define PLAYER_LVL0_MASS 1
     #define PLAYER_LVL0_STEP 200
     #define PLAYER_LVL0_JUMP -600
     #define PLAYER_INIT_POS {400, 300}
+    #define PLAYER_INITIAL_HP 50
+    #define PLAYER_LVL0_ATTACK_WIDTH 100
+    #define PLAYER_LVL0_ATTACK_HEIGHT 20
+    #define PLAYER_LVL0_ATTACK_TIME 0.1
+    #define PLAYER_LVL0_ATTACK_DAMAGE 10
 
-    #define ENEMY_1_SPRITE_PATH "assets/img/char/alien1_complete_movement.png"
-    #define ENEMY_1_SPRITES_NUMB 7
-    #define ENEMY_1_SPRITES_TIME 0.1
-    #define ENEMY_1_SCALE 0.15
-    #define ENEMY_1_INIT_POS {800, 300}
-    #define ENEMY_1_IDLE_START 0
-    #define ENEMY_1_IDLE_END 2
-    #define ENEMY_1_IDLE_TIME 0.1    
-    #define ENEMY_1_WALK_START 3
-    #define ENEMY_1_WALK_END 6
-    #define ENEMY_1_WALK_TIME 0.1
-    #define ENEMY_1_COOLDOWN 2
-    #define ENEMY_1_STEP 150
-    #define ENEMY_1_PERCEPTION 250
-    #define ENEMY_1_ATTACK_RANGE 30
-    #define WALK_RANGE 200
-    #define STOP_RANGE 5
+    #define ENTOKRATON_1_SPRITE_PATH "assets/img/char/alien1_complete_movement.png"
+    #define ENTOKRATON_1_SPRITES_NUMB 7
+    #define ENTOKRATON_1_SPRITES_TIME 0.1
+    #define ENTOKRATON_1_SCALE 0.15
+    #define ENTOKRATON_1_INIT_POS {600, 300}
+    #define ENTOKRATON_1_IDLE_START 0
+    #define ENTOKRATON_1_IDLE_END 2
+    #define ENTOKRATON_1_IDLE_TIME 0.1    
+    #define ENTOKRATON_1_WALK_START 3
+    #define ENTOKRATON_1_WALK_END 6
+    #define ENTOKRATON_1_WALK_TIME 0.1
+    #define ENTOKRATON_1_HP 50
 
     #define BOSS_SPRITE_PATH "assets/img/char/boss_temporario.png"
     #define BOSS_SPRITES_NUMB 1
