@@ -46,12 +46,12 @@ enum character_state
     #define PLAYER_LVL0_SPRITES_TIME 0.16
     #define PLAYER_LVL0_SCALE 0.15
     #define PLAYER_LVL0_STEP 200
-    #define PLAYER_LVL0_JUMP -600
+    #define PLAYER_LVL0_JUMP -800
     #define PLAYER_INIT_POS {400, 300}
     #define PLAYER_INITIAL_HP 50
     #define PLAYER_LVL0_ATTACK_WIDTH 100
     #define PLAYER_LVL0_ATTACK_HEIGHT 20
-    #define PLAYER_LVL0_ATTACK_TIME 0.1
+    #define PLAYER_LVL0_ATTACK_TIME 0.05
     #define PLAYER_LVL0_ATTACK_DAMAGE 10
 
     #define ENTOKRATON_1_SPRITE_PATH "assets/img/char/alien1_complete_movement.png"
@@ -113,10 +113,11 @@ enum character_state
 /************************************************
 *					Environment					*
 *************************************************/
-#define GRAVITY_ACCELERATION {0, 15}
-#define NORMAL_ACCELERATION {0, -15}
+#define GRAVITY_ACCELERATION {0, 20}
+#define NORMAL_ACCELERATION {0, -20}
 #define SAFETY_COLLISION_RANGE 20
 #define DEPTH_COLLISION_RANGE 20
+#define COLLISION_COMPENSATION 5
 
 #ifdef ENVIRONMENT
     #include "Force.h"

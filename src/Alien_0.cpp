@@ -27,11 +27,11 @@ void Alien_0::Attack()
     attack->box.h = PLAYER_LVL0_ATTACK_HEIGHT;
     if (associatedCharacter->IsFlipped())
     {
-        attack->box.x = associatedCollider->box.x - attack->box.w;
+        attack->box.x = associatedCollider->box.x - attack->box.w - 20;
     }
     else
     {
-        attack->box.x = associatedCollider->box.x + associatedCollider->box.w;
+        attack->box.x = associatedCollider->box.x + associatedCollider->box.w + 20;
     }
     attack->box.y = associatedCollider->box.GetCenter().y + (PLAYER_LVL0_ATTACK_HEIGHT/2);
 

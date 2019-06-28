@@ -121,7 +121,7 @@ void Character::NotifyCollision(GameObject &other)
     if (other.GetComponent("Damage").get() != nullptr)
     {
         Damage *damagePtr = (Damage *)other.GetComponent("Damage").get();
-        // // ApplyDamage(damagePtr->GetDamage());
+        ApplyDamage(damagePtr->GetDamage());
     }
 }
 
@@ -157,8 +157,8 @@ void Character::collisionSide(Rect boxA, Rect boxB)
     // Vertical verification
     if ((boxA.y + boxA.h > boxB.y - SAFETY_COLLISION_RANGE) &&
         (boxA.y + boxA.h < boxB.y + DEPTH_COLLISION_RANGE) &&
-        (boxA.x + boxA.w > boxB.x + DEPTH_COLLISION_RANGE) &&
-        (boxA.x < boxB.x + boxB.w - DEPTH_COLLISION_RANGE))
+        (boxA.x + boxA.w > boxB.x + COLLISION_COMPENSATION) &&
+        (boxA.x < boxB.x + boxB.w - COLLISION_COMPENSATION))
     {
         verticalCollision = collision_side::UP;
     }
@@ -166,8 +166,8 @@ void Character::collisionSide(Rect boxA, Rect boxB)
     {
         if ((boxA.y > boxB.y + boxB.h - DEPTH_COLLISION_RANGE) &&
             (boxA.y < boxB.y + boxB.h + SAFETY_COLLISION_RANGE) &&
-            (boxA.x + boxA.w > boxB.x + DEPTH_COLLISION_RANGE) &&
-            (boxA.x < boxB.x + boxB.w - DEPTH_COLLISION_RANGE))
+            (boxA.x + boxA.w > boxB.x + COLLISION_COMPENSATION) &&
+            (boxA.x < boxB.x + boxB.w - COLLISION_COMPENSATION))
         {
             verticalCollision = collision_side::DOWN;
         }   

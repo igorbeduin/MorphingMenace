@@ -26,7 +26,10 @@ void Player::Update(float dt)
         // Joystick
         if (InputManager::GetInstance().KeyPress(SPACE_KEY))
         {
-            Jump();
+            if ((characterState != character_state::JUMPING) && (characterPtr->GetSpeed().y == 0))
+            {
+                Jump();
+            }
         }
         if (InputManager::GetInstance().IsKeyDown(D_KEY))
         {
