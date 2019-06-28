@@ -74,7 +74,7 @@ void Character::Update(float dt)
     // Joystick
     if (charType == PLAYER)
     {
-        if ((associated.box.x == lastPosition.x) && (associated.box.y == lastPosition.y))
+        if ((associated.box.x == lastPosition.x) && (associated.box.y == lastPosition.y) && speed.y == 0)
         {
             if (characterState != character_state::IDLE)
             {
