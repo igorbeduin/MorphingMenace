@@ -60,10 +60,9 @@ StageState::StageState()
 
     AddObject(player);
 
-    /*
     //Creating enemy
     GameObject *enemy = new GameObject();
-    std::shared_ptr<Character> enemyBehaviour(new Character(*enemy, PLAYER_LVL0_MASS, char_type::ENEMY));
+    std::shared_ptr<Character> enemyBehaviour(new Character(*enemy, PLAYER_LVL0_MASS, char_type::ENTOKRATON_1));
     enemy->AddComponent(enemyBehaviour);
     std::shared_ptr<Collider> enemyCollider(new Collider(*enemy));
     enemy->AddComponent(enemyCollider);
@@ -74,6 +73,7 @@ StageState::StageState()
 
     AddObject(enemy);
 
+    /*
     //Creating boss
     GameObject *boss = new GameObject();
     std::shared_ptr<Character> BOSSBehaviour(new Character(*boss, PLAYER_LVL0_MASS, char_type::BOSS));
