@@ -41,9 +41,9 @@ enum character_state
     #include "Damage.h"
     
     #define MAXIMUM_Y_SPEED 800
-    #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/player-baby-crawling.png"
-    #define PLAYER_LVL0_SPRITES_NUMB 3
-    #define PLAYER_LVL0_SPRITES_TIME 0.08
+    #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/adulto_andando.png"
+    #define PLAYER_LVL0_SPRITES_NUMB 4
+    #define PLAYER_LVL0_SPRITES_TIME 0.16
     #define PLAYER_LVL0_SCALE 0.15
     #define PLAYER_LVL0_STEP 200
     #define PLAYER_LVL0_JUMP -600
