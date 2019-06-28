@@ -118,7 +118,7 @@ void Character::NotifyCollision(GameObject &other)
     if (other.GetComponent("Damage").get() != nullptr)
     {
         Damage *damagePtr = (Damage *)other.GetComponent("Damage").get();
-        // ApplyDamage(damagePtr->GetDamage());
+        // // ApplyDamage(damagePtr->GetDamage());
     }
 }
 
