@@ -29,8 +29,6 @@ public:
     void DisableFlip();
 
     static Character* player;
-    static Character* enemy;
-
 private:
     Vec2 speed;
     Vec2 lastPosition;
