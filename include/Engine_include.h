@@ -42,6 +42,8 @@
 #define A_KEY SDLK_a
 #define S_KEY SDLK_s
 #define D_KEY SDLK_d
+#define P_KEY SDLK_p
+#define O_KEY SDLK_o
 #define ENTER_KEY SDLK_KP_ENTER
 #define TAB_KEY SDLK_TAB
 
