@@ -14,8 +14,27 @@ enum char_type
     ENEMY,
     BOSS
 };
+
+enum collision_side
+{
+    LEFT,
+    RIGHT,
+    UP,
+    DOWN,
+    NONE_SIDE
+};
+
+enum character_state
+{
+    IDLE,
+    WALKING,
+    JUMPING,
+    FALLING,
+    ABSORBING,
+    NONE_STATE
+};
+
 #ifdef CHARACTER
-    #include "R0350N.h"
     #include "Character.h"
 
     #define MAXIMUM_Y_SPEED 800
