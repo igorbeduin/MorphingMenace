@@ -29,6 +29,7 @@ public:
     void DisableFlip();
 
     static Character* player;
+    Rect box;
 private:
     Vec2 speed;
     Vec2 lastPosition;
