@@ -102,6 +102,16 @@ void Character::Update(float dt)
                 flip = true;
             }
         }
+
+        if (    (associated.box.x <= (-Camera::pos.x + LEFT_FOCUS_LIMIT)  && lastPosition.x > associated.box.x) || 
+                (associated.box.x + associated.box.w >= (-Camera::pos.x + RIGHT_FOCUS_LIMIT) && lastPosition.x < associated.box.x)  )
+        {
+            Camera::Follow(&associated);   
+        }
+        else
+        {
+            Camera::Unfollow();
+        }
     }
 
     lastPosition.x = associated.box.x;
