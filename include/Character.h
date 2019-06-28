@@ -19,6 +19,7 @@ public:
     void collisionSide(Rect boxA, Rect boxB);
     bool applyNormal;
     Vec2 GetLastPosition();
+    Vec2 GetPosition();
     Vec2 GetSpeed();
     void SetSpeed(int speedX, int speedY);
     void SetSpeedX(int speedX);
@@ -27,6 +28,7 @@ public:
     void EnableFlip();
     void DisableFlip();
 
+    static Character* player;
 private:
     Vec2 speed;
     Vec2 lastPosition;

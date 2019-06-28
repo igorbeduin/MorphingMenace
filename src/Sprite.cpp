@@ -143,9 +143,9 @@ void Sprite::Update(float dt)
       timeElapsed += dt;
       if (timeElapsed >= AnimationTime)
       {//se o tempo passado for maior que o tempo em que o frame deve permanecer, muda o frame
-        std::cout << "current: " << currentFrame << std::endl;
-        std::cout << "Start: " << StartFrame << std::endl;
-        std::cout << "End: " << EndFrame << std::endl;
+        // std::cout << "current: " << currentFrame << std::endl;
+        // std::cout << "Start: " << StartFrame << std::endl;
+        // std::cout << "End: " << EndFrame << std::endl;
         SetClip(  (width/frameCount)*(currentFrame) , clipRect.y, width/frameCount, height);
         timeElapsed = 0;
         currentFrame += 1;//se não for o último vai para o próximo frame

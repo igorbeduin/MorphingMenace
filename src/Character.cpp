@@ -3,6 +3,7 @@
 #include "../include/InputManager.h"
 #include "../include/Collider.h"
 
+Character* Character::player = nullptr;
 Character::Character(GameObject &associated, float mass, char_type charType) : Component::Component(associated),
                                                                                applyNormal(false),
                                                                                flip(false)
@@ -13,6 +14,7 @@ Character::Character(GameObject &associated, float mass, char_type charType) : C
     {
         std::shared_ptr<Player> playerBehav(new Player(associated));
         associated.AddComponent(playerBehav);
+        player = this;
         break;
     }
     case ENTOKRATON_1:
@@ -199,4 +201,8 @@ void Character::EnableFlip()
 void Character::DisableFlip()
 {
     flip = false;
+}
+Vec2 Character::GetPosition()
+{
+    return associated.box.GetVec2();
 }
