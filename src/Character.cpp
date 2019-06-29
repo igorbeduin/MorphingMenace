@@ -17,7 +17,6 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
         std::shared_ptr<Player> playerBehav(new Player(associated));
         associated.AddComponent(playerBehav);
         player = this;
-        this->box = associated.box;
         break;
     }
     case ENTOKRATON_1:
@@ -177,7 +176,7 @@ void Character::collisionSide(Rect boxA, Rect boxB)
 
 Vec2 Character::GetPosition()
 {
-    return associated.box.GetVec2();
+    return associated.box.GetCenter();
 }
 
 Vec2 Character::GetLastPosition()
