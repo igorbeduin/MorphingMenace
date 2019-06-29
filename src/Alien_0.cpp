@@ -27,15 +27,15 @@ void Alien_0::Attack()
     attack->box.h = PLAYER_LVL0_ATTACK_HEIGHT;
     if (associatedCharacter->IsFlipped())
     {
-        attack->box.x = associatedCollider->box.x - attack->box.w - 20;
+        attack->box.x = associatedCollider->box.x - attack->box.w;
     }
     else
     {
-        attack->box.x = associatedCollider->box.x + associatedCollider->box.w + 20;
+        attack->box.x = associatedCollider->box.x + associatedCollider->box.w;
     }
     attack->box.y = associatedCollider->box.GetCenter().y + (PLAYER_LVL0_ATTACK_HEIGHT/2);
 
-    std::shared_ptr<Damage> attackBehaviour(new Damage(*attack, PLAYER_LVL0_ATTACK_DAMAGE, PLAYER_LVL0_ATTACK_TIME));
+    std::shared_ptr<Damage> attackBehaviour(new Damage(*attack, PLAYER_LVL0_ATTACK_DAMAGE, PLAYER_LVL0_ATTACK_TIME, associatedCharacter->Type()));
     attack->AddComponent(attackBehaviour);
     std::shared_ptr<Collider> attackCollider(new Collider(*attack));
     attack->AddComponent(attackCollider);
