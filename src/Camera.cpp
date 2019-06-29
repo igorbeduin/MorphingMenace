@@ -25,8 +25,17 @@ void Camera::Update(float dt){
     // pos.x -= WINDOW_WIDTH/2 ;// A posição da câmera é o calculo da posição do objeto na tels
     // pos.y -= WINDOW_HEIGHT/2 ;
 
-    pos.x = -focus->box.x - focus->box.w/2 + WINDOW_WIDTH/2;
-    pos.y = -focus->box.y - focus->box.h/2 + WINDOW_HEIGHT/2;
+    // pos.x = -focus->box.x - focus->box.w/2 + WINDOW_WIDTH/2;
+    // pos.y = -focus->box.y - focus->box.h/2 + WINDOW_HEIGHT/2;
+
+    if (focus->box.x <= -pos.x + LEFT_FOCUS_LIMIT)
+    {    
+      pos.x = -focus->box.x + LEFT_FOCUS_LIMIT;
+    }
+    else if (focus->box.x >= -pos.x + RIGHT_FOCUS_LIMIT)
+    {
+      pos.x = -focus->box.x + RIGHT_FOCUS_LIMIT;
+    }
 
   } else {
 

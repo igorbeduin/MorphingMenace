@@ -49,9 +49,9 @@ StageState::StageState()
 
     //Creating player
     GameObject* player = new GameObject();
-    std::shared_ptr<Character> playerBehaviour(new Character(*player, PLAYER_LVL0_MASS, char_type::PLAYER));
+    std::shared_ptr<Character> playerBehaviour(new Character(*player, PLAYER_INITIAL_HP, char_type::PLAYER));
     player->AddComponent(playerBehaviour);
-    std::shared_ptr<Collider> playerCollider(new Collider(*player));
+    std::shared_ptr<Collider> playerCollider(new Collider(*player, Vec2(0.65, 1) ));
     player->AddComponent(playerCollider);
 
     Vec2 initPos = Vec2(PLAYER_INIT_POS);
@@ -62,17 +62,18 @@ StageState::StageState()
 
     //Creating enemy
     GameObject *enemy = new GameObject();
-    std::shared_ptr<Character> enemyBehaviour(new Character(*enemy, PLAYER_LVL0_MASS, char_type::ENEMY));
+    std::shared_ptr<Character> enemyBehaviour(new Character(*enemy, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
     enemy->AddComponent(enemyBehaviour);
     std::shared_ptr<Collider> enemyCollider(new Collider(*enemy));
     enemy->AddComponent(enemyCollider);
 
-    initPos = Vec2(ENEMY_1_INIT_POS);
+    initPos = Vec2(ENTOKRATON_1_INIT_POS);
     enemy->box.x = initPos.x;
     enemy->box.y = initPos.y;
 
     AddObject(enemy);
 
+    /*
     //Creating boss
     GameObject *boss = new GameObject();
     std::shared_ptr<Character> BOSSBehaviour(new Character(*boss, PLAYER_LVL0_MASS, char_type::BOSS));
@@ -85,6 +86,7 @@ StageState::StageState()
     boss->box.y = initPos.y;
 
     AddObject(boss);
+    */
 }
 
 void StageState::LoadAssets()
@@ -95,20 +97,29 @@ void StageState::Update(float dt)
 {
     Camera::Update(dt);
 
+    for (int i = 0; i < (int)objectArray.size(); i++)
+    {
+        if (objectArray[i]->IsDead())
+        {
+            objectArray.erase(objectArray.begin() + i);
+        }
+    }
+
     // Verify collisions
     std::vector<std::shared_ptr<GameObject>> objWithCollider;
     for (int i = (int)objectArray.size() - 1; i >= 0; i--)
     {
-        std::shared_ptr<Component> colliderComponent = objectArray[i]->GetComponent("Collider");
+        std::shared_ptr<Collider> colliderComponent = std::dynamic_pointer_cast<Collider>(objectArray[i]->GetComponent("Collider"));
         // If GO DOES has a "Collider" component
-        if (colliderComponent.get() != nullptr)
+        if (colliderComponent != nullptr)
         {
             objWithCollider.push_back(objectArray[i]);
             for (int j = 0; j < (int)objWithCollider.size(); j++)
             {
+                std::shared_ptr<Collider> ObjWithcolliderComponent = std::dynamic_pointer_cast<Collider>(objWithCollider[j]->GetComponent("Collider"));
                 if (objectArray[i] != objWithCollider[j])
                 {
-                    if (Collision::IsColliding(objectArray[i]->box, objWithCollider[j]->box, objectArray[i]->GetAngleRad(), objWithCollider[j]->GetAngleRad()))
+                    if (Collision::IsColliding(colliderComponent->box, ObjWithcolliderComponent->box, objectArray[i]->GetAngleRad(), objWithCollider[j]->GetAngleRad()))
                     {
                         objectArray[i]->NotifyCollision(*objWithCollider[j].get());
                         objWithCollider[j]->NotifyCollision(*objectArray[i].get());

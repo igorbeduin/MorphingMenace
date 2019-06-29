@@ -1,33 +1,29 @@
 #include "../include/Character.h"
 #include "../include/Environment.h"
 #include "../include/InputManager.h"
+#include "../include/Collider.h"
 
-Character::Character(GameObject &associated, float mass, char_type charType) : Component::Component(associated),
-                                                                               charType(charType),
-                                                                               speed(Vec2(0, 0)),
-                                                                               flip(false),
-                                                                               applyNormal(false)
+Character* Character::player = nullptr;
+Character::Character(GameObject &associated, int maxHP, char_type charType) : Component::Component(associated),
+                                                                           maxHP(maxHP),
+                                                                           applyNormal(false),
+                                                                           flip(false),
+                                                                           currentHP(maxHP)
 {
     switch (charType)
     {
     case PLAYER:
     {
-        // PROVISORIO:
-        std::shared_ptr<Sprite> charSprite(new Sprite(associated, PLAYER_LVL0_SPRITE_PATH, PLAYER_LVL0_SPRITES_NUMB, PLAYER_LVL0_SPRITES_TIME));
-        charSprite->SetScale(PLAYER_LVL0_SCALE, PLAYER_LVL0_SCALE);
-        associated.AddComponent(charSprite);
-        // TODO:: Cria um personagem do tipo enemy
+        std::shared_ptr<Player> playerBehav(new Player(associated));
+        associated.AddComponent(playerBehav);
+        player = this;
+        this->box = associated.box;
         break;
     }
-    case ENEMY:
+    case ENTOKRATON_1:
     {
-        // PROVISORIO:
-        std::shared_ptr<Sprite> charSprite(new Sprite(associated, ENEMY_1_SPRITE_PATH, ENEMY_1_SPRITES_NUMB, ENEMY_1_SPRITES_TIME));
-        charSprite->SetScale(ENEMY_1_SCALE, ENEMY_1_SCALE);
-        associated.AddComponent(charSprite);
-
-        associated.moving = false;
-        // TODO:: Cria um personagem do tipo enemy
+        std::shared_ptr<Entokraton_1> enemyBehav(new Entokraton_1(associated));
+        associated.AddComponent(enemyBehav);
         break;
     }
     case BOSS:
@@ -46,9 +42,147 @@ Character::Character(GameObject &associated, float mass, char_type charType) : C
     }
 }
 
-void Character::SetSpeed(Vec2 speed)
+void Character::Update(float dt)
 {
-    this->speed = speed;
+    if (currentHP <= 0)
+    {
+        associated.RequestDelete();
+    }
+
+    Environment::ApplyForces(this);
+    
+    lastPosition.x = associated.box.x;
+    lastPosition.y = associated.box.y;
+
+    associated.box.x += speed.x * dt;
+    associated.box.y += speed.y * dt;
+}
+
+void Character::Accelerate(Vec2 acceleration)
+{
+    speed += acceleration;
+    limitSpeeds();
+}
+
+
+bool Character::Is(std::string type)
+{
+    return (type == "Character");
+}
+
+void Character::Render()
+{
+}
+
+
+void Character::NotifyCollision(GameObject &other)
+{
+    if (other.GetComponent("CollisionBox").get() != nullptr)
+    {
+        Collider *otherCollider = (Collider *)other.GetComponent("Collider").get();
+        Collider *associatedCollider = (Collider *)associated.GetComponent("Collider").get();
+
+        //TODO: colocar esse metodo em uma classe/arquivo de utilities
+        collisionSide(associatedCollider->box, otherCollider->box);
+        // Falling collision (Up-To-Down Collision)
+        if (verticalCollision == collision_side::UP)
+        {
+            if (!applyNormal)
+            {
+                associated.box.y -= (associatedCollider->box.y + associatedCollider->box.h) - otherCollider->box.y;
+                speed.y = 0;
+                applyNormal = true;
+            }
+        }
+
+        // Down-To-Up Collision
+        if (verticalCollision == collision_side::DOWN)
+        {
+            associated.box.y += (otherCollider->box.y + otherCollider->box.h) - associatedCollider->box.y;
+            speed.y = 0;
+        }
+
+        // Left-To-Right Collision
+        if (horizontalCollision == collision_side::LEFT)
+        {
+            associated.box.x -= (associatedCollider->box.x + associatedCollider->box.w) - otherCollider->box.x;
+        }
+
+        // Right-To-Left Collision
+        if (horizontalCollision == collision_side::RIGHT)
+        {
+            associated.box.x += (otherCollider->box.x + otherCollider->box.w) - associatedCollider->box.x;
+        }
+        
+        verticalCollision = collision_side::NONE_SIDE;
+        horizontalCollision = collision_side::NONE_SIDE;
+    }
+
+    if (other.GetComponent("Damage").get() != nullptr)
+    {
+        Damage *damagePtr = (Damage *)other.GetComponent("Damage").get();
+        ApplyDamage(damagePtr->GetDamage());
+    }
+}
+
+void Character::limitSpeeds()
+{
+    if (speed.y > MAXIMUM_Y_SPEED)
+    {
+        speed.y = MAXIMUM_Y_SPEED;
+    }
+}
+
+void Character::collisionSide(Rect boxA, Rect boxB)
+{
+    // This function returns the side colliding of B in relation of A, e.g, A->B returns "Left"
+
+    // Horizontal verification
+    if ((boxA.x + boxA.w > boxB.x - SAFETY_COLLISION_RANGE) &&
+        (boxA.x + boxA.w < boxB.x + DEPTH_COLLISION_RANGE) && 
+        (boxA.y + boxA.h != boxB.y))
+    {
+        horizontalCollision = collision_side::LEFT;
+    }
+    else
+    {
+        if ((boxA.x > boxB.x + boxB.w - DEPTH_COLLISION_RANGE) &&
+            (boxA.x < boxB.x + boxB.w + SAFETY_COLLISION_RANGE) &&
+            (boxA.y + boxA.h != boxB.y))
+        {
+            horizontalCollision = collision_side::RIGHT;
+        }
+    }
+
+    // Vertical verification
+    if ((boxA.y + boxA.h > boxB.y - SAFETY_COLLISION_RANGE) &&
+        (boxA.y + boxA.h < boxB.y + DEPTH_COLLISION_RANGE) &&
+        (boxA.x + boxA.w > boxB.x + COLLISION_COMPENSATION) &&
+        (boxA.x < boxB.x + boxB.w - COLLISION_COMPENSATION))
+    {
+        verticalCollision = collision_side::UP;
+    }
+    else
+    {
+        if ((boxA.y > boxB.y + boxB.h - DEPTH_COLLISION_RANGE) &&
+            (boxA.y < boxB.y + boxB.h + SAFETY_COLLISION_RANGE) &&
+            (boxA.x + boxA.w > boxB.x + COLLISION_COMPENSATION) &&
+            (boxA.x < boxB.x + boxB.w - COLLISION_COMPENSATION))
+        {
+            verticalCollision = collision_side::DOWN;
+        }   
+    }
+    
+}
+
+Vec2 Character::GetPosition()
+{
+    return associated.box.GetVec2();
+}
+
+Vec2 Character::GetLastPosition()
+{
+    return lastPosition;
 }
 
 Vec2 Character::GetSpeed()
@@ -56,78 +190,19 @@ Vec2 Character::GetSpeed()
     return speed;
 }
 
-void Character::Accelerate(Vec2 acceleration)
+void Character::SetSpeedX(int speedX)
 {
-    speed += acceleration;
+    speed.x = speedX;
+}
+void Character::SetSpeedY(int speedY)
+{
+    speed.y = speedY;
 }
 
-void Character::Update(float dt)
+void Character::SetSpeed(int speedX, int speedY)
 {
-    Environment::ApplyForces(this);
-
-    // Joystick
-    if (charType == PLAYER)
-    {
-        if (InputManager::GetInstance().KeyPress(SPACE_KEY))
-        {
-            Jump();
-        }
-        if (InputManager::GetInstance().IsKeyDown(D_KEY))
-        {
-            Walk(PLAYER_LVL0_STEP, dt);
-            if (flip)
-            {
-                flip = false;
-            }
-        }
-        if (InputManager::GetInstance().IsKeyDown(A_KEY))
-        {
-            Walk((-1) * PLAYER_LVL0_STEP, dt);
-            if (!flip)
-            {
-                flip = true;
-            }
-        }
-    }
-    
-
-    associated.box.x += speed.x * dt;
-    associated.box.y += speed.y * dt;
-}
-
-bool Character::Is(std::string type)
-{
-    switch (charType)
-    {
-        case PLAYER:
-        {
-            return (type == "Player" || type == "Character");
-            break;
-        }
-        case ENEMY:
-        {
-            return (type == "Enemy" || type == "Character");
-            break;
-        }
-        case BOSS:
-        {
-            return (type == "Boss" || type == "Character");
-            break;
-        }
-    }
-}
-
-void Character::Render()
-{}
-
-void Character::Walk(int step, float dt)
-{
-    associated.box.x += step * dt;
-}
-
-void Character::Jump()
-{
-    speed.y = PLAYER_LVL0_JUMP;
+    SetSpeedX(speedX);
+    SetSpeedY(speedY);
 }
 
 bool Character::IsFlipped()
@@ -135,19 +210,17 @@ bool Character::IsFlipped()
     return flip;
 }
 
-void Character::NotifyCollision(GameObject &other)
+void Character::EnableFlip()
 {
-    if (other.GetComponent("CollisionBox").get() != nullptr)
-    {   
-        if (!applyNormal && speed.y >= 0)
-        {
-            if (((associated.box.y + associated.box.h) < (1 + COLLISION_RANGE) * other.box.y) && 
-                ((associated.box.y + associated.box.h) > (1 - COLLISION_RANGE) * other.box.y))
-            {   
-                associated.box.y = other.box.y - associated.box.h;
-                speed.y = 0;
-                applyNormal = true;
-            }
-        }
-    }
+    flip = true;
+}
+
+void Character::DisableFlip()
+{
+    flip = false;
+}
+
+void Character::ApplyDamage(int damage)
+{
+    currentHP -= damage;
 }

@@ -11,33 +11,82 @@ enum char_type
 {
     // Different types of characters that the game might have
     PLAYER,
-    ENEMY,
+    ENTOKRATON_1,
     BOSS
 };
+
+enum collision_side
+{
+    LEFT,
+    RIGHT,
+    UP,
+    DOWN,
+    NONE_SIDE
+};
+
+enum character_state
+{
+    IDLE,
+    WALKING,
+    JUMPING,
+    FALLING,
+    ABSORBING,
+    NONE_STATE
+};
+
 #ifdef CHARACTER
-    #include "R0350N.h"
     #include "Character.h"
-
-    #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/player-baby-crawling.png"
-    #define PLAYER_LVL0_SPRITES_NUMB 3
-    #define PLAYER_LVL0_SPRITES_TIME 0.08
+    #include "Player.h"
+    #include "Entokraton_1.h"
+    #include "Damage.h"
+    
+    #define MAXIMUM_Y_SPEED 800
+    #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/adulto_andando.png"
+    #define PLAYER_LVL0_SPRITES_NUMB 4
+    #define PLAYER_LVL0_SPRITES_TIME 0.16
     #define PLAYER_LVL0_SCALE 0.15
-    #define PLAYER_LVL0_MASS 1
     #define PLAYER_LVL0_STEP 200
-    #define PLAYER_LVL0_JUMP -400
+    #define PLAYER_LVL0_JUMP -800
     #define PLAYER_INIT_POS {400, 300}
+    #define PLAYER_INITIAL_HP 50
+    #define PLAYER_LVL0_ATTACK_WIDTH 100
+    #define PLAYER_LVL0_ATTACK_HEIGHT 20
+    #define PLAYER_LVL0_ATTACK_TIME 0.05
+    #define PLAYER_LVL0_ATTACK_DAMAGE 10
 
-    #define ENEMY_1_SPRITE_PATH "assets/img/char/alien 1 - idle.png"
-    #define ENEMY_1_SPRITES_NUMB 3
-    #define ENEMY_1_SPRITES_TIME 1
-    #define ENEMY_1_SCALE 0.15
-    #define ENEMY_1_INIT_POS {600, 300}
+    #define ENTOKRATON_1_SPRITE_PATH "assets/img/char/alien1_complete_movement.png"
+    #define ENTOKRATON_1_SPRITES_NUMB 7
+    #define ENTOKRATON_1_SPRITES_TIME 0.1
+    #define ENTOKRATON_1_SCALE 0.15
+    #define ENTOKRATON_1_INIT_POS {600, 300}
+    #define ENTOKRATON_1_IDLE_START 0
+    #define ENTOKRATON_1_IDLE_END 2
+    #define ENTOKRATON_1_IDLE_TIME 0.1    
+    #define ENTOKRATON_1_WALK_START 3
+    #define ENTOKRATON_1_WALK_END 6
+    #define ENTOKRATON_1_WALK_TIME 0.1
+    #define ENTOKRATON_1_HP 50
+    #define ENEMY_1_IDLE_START 0
+    #define ENEMY_1_IDLE_END 2
+    #define ENEMY_1_IDLE_TIME 0.1
+    #define ENEMY_1_WALK_START 3
+    #define ENEMY_1_WALK_END 6
+    #define ENEMY_1_WALK_TIME 0.1
+    #define ENEMY_1_COOLDOWN 2
+    #define ENEMY_1_STEP 150
+    #define ENEMY_1_PERCEPTION 250
+    #define ENEMY_1_ATTACK_RANGE 30
+    #define WALK_RANGE 200
+    #define STOP_RANGE 5
 
-    #define BOSS_SPRITE_PATH "assets/img/char/boss_temporario.png"
-    #define BOSS_SPRITES_NUMB 1
-    #define BOSS_SPRITES_TIME 1
-    #define BOSS_SCALE 0.3
-    #define BOSS_INIT_POS {2000, 0}
+#define BOSS_SPRITE_PATH "assets/img/char/boss_temporario.png"
+#define BOSS_SPRITES_NUMB 1
+#define BOSS_SPRITES_TIME 1
+#define BOSS_SCALE 0.3
+#define BOSS_INIT_POS \
+    {                 \
+        2000, 0       \
+    }
 #endif
 
 /************************************************
@@ -64,9 +113,12 @@ enum char_type
 /************************************************
 *					Environment					*
 *************************************************/
-#define GRAVITY_ACCELERATION {0, 60}
-#define NORMAL_ACCELERATION {0, -60}
-#define COLLISION_RANGE 0.05
+#define GRAVITY_ACCELERATION {0, 20}
+#define NORMAL_ACCELERATION {0, -20}
+#define SAFETY_COLLISION_RANGE 20
+#define DEPTH_COLLISION_RANGE 20
+#define COLLISION_COMPENSATION 5
+
 #ifdef ENVIRONMENT
     #include "Force.h"
     #include "Gravity.h"

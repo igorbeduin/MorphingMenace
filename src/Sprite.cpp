@@ -108,26 +108,58 @@ bool Sprite::Is(std::string type){
   return(type == "Sprite");
 }
 
-void Sprite::Update(float dt){
-
-  if (secondsToSelfDestruct > 0) {
-    selfDestructCount.Update(dt);
-    if (selfDestructCount.Get() >= secondsToSelfDestruct) {
-      associated.RequestDelete();
-      // std::cout << "fim da explosão" << '\n';
-    }
-  }
-
-  if (frameCount > 1 && associated.IsMoving()) {
-    timeElapsed += dt;
-    if (timeElapsed >= frameTime) {//se o tempo passado for maior que o tempo em que o frame deve permanecer, muda o frame
-      timeElapsed = 0;
-      currentFrame += 1;//se não for o último vai para o próximo frame
-      if (frameCount == currentFrame) {
-        currentFrame = 0; //se o frame atual foir o último, retorna para o fram inicial
+void Sprite::Update(float dt)
+{
+  if (!ChangeAnimation)
+  {
+    if (secondsToSelfDestruct > 0)
+    {
+      selfDestructCount.Update(dt);
+      if (selfDestructCount.Get() >= secondsToSelfDestruct)
+      {
+        associated.RequestDelete();
+        // std::cout << "fim da explosão" << '\n';
       }
-      SetClip(  (width/frameCount)*(currentFrame) , clipRect.y, width/frameCount, height);
     }
+
+    if (frameCount > 1 && associated.IsMoving())
+    {
+      timeElapsed += dt;
+      if (timeElapsed >= frameTime)
+      {//se o tempo passado for maior que o tempo em que o frame deve permanecer, muda o frame
+        timeElapsed = 0;
+        currentFrame += 1;//se não for o último vai para o próximo frame
+        if (frameCount == currentFrame)
+        {
+          currentFrame = 0; //se o frame atual foir o último, retorna para o fram inicial
+        }
+        SetClip(  (width/frameCount)*(currentFrame) , clipRect.y, width/frameCount, height);
+      }
+    }
+  } else {
+    // std::cout << currentFrame << std::endl;
+    if (currentFrame <= EndFrame)
+    {
+      timeElapsed += dt;
+      if (timeElapsed >= AnimationTime)
+      {//se o tempo passado for maior que o tempo em que o frame deve permanecer, muda o frame
+        // std::cout << "current: " << currentFrame << std::endl;
+        // std::cout << "Start: " << StartFrame << std::endl;
+        // std::cout << "End: " << EndFrame << std::endl;
+        SetClip(  (width/frameCount)*(currentFrame) , clipRect.y, width/frameCount, height);
+        timeElapsed = 0;
+        currentFrame += 1;//se não for o último vai para o próximo frame
+      }
+    }
+    else if (currentFrame > EndFrame)//para chamar essa animação, na função em que for necessária a mudança faça um GetComponent(sprite) e então deve-se chamar o RunSpecificAnimation para setar a flag que permite esse loop, então setar os parâmetros StartFrame, EndFrame e AnimationTime
+    {
+      ChangeAnimation = false;
+    }
+    if (currentFrame < StartFrame)
+    {
+      ChangeAnimation = false;
+    }
+    
   }
 }
 
@@ -149,7 +181,7 @@ Vec2 Sprite::GetScale(){
 }
 
 void Sprite::SetFrame(int frame){
-  if (frame <= frameCount && frame > 0) {
+  if (frame <= frameCount) {
     currentFrame = frame;
     SetClip(  (width/frameCount)*currentFrame , 0, width/frameCount, height);
   }
@@ -173,3 +205,34 @@ int Sprite::GetCurrentFrame()
   return currentFrame;
 }
 
+void Sprite::SetStartFrame(int startFrame)
+{
+  this->StartFrame = startFrame;
+}
+
+void Sprite::SetEndFrame(int endFrame)
+{
+  this->EndFrame = endFrame;
+}
+
+void Sprite::SetAnimationTime(float animationTime)
+{
+  this->AnimationTime = animationTime;
+}
+
+void Sprite::RunSpecificAnimation()
+{
+  if (!this->ChangeAnimation)
+  {//se essa função é chamada e a condição era falsa, quer dizer que é o primeira vez que a animação vai ser executada, logo o currentframe tem que ser o start frame e o timeelapsed deve ser 0
+    currentFrame = StartFrame;
+    timeElapsed = 0;
+  }
+  
+  this->ChangeAnimation = true;
+}
+        // PARA CHAMAR A ANIMAÇÂO 
+        // Sprite *enemySprite = (Sprite *)associated.GetComponent("Sprite").get();
+        //     enemySprite->RunSpecificAnimation();
+        //     enemySprite->SetStartFrame(ENTOKRATON_1_IDLE_START);
+        //     enemySprite->SetEndFrame(ENTOKRATON_1_IDLE_END);
+        //     enemySprite->SetAnimationTime(ENTOKRATON_1_IDLE_TIME);
