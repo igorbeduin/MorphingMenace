@@ -29,5 +29,5 @@ private:
     character_state characterState;
     std::shared_ptr<Component> sharedChar;
     Character *characterPtr;
-    std::stack<std::shared_ptr<Component>> transformStack;
+    std::stack<std::shared_ptr<Transformation>> transformStack;
 };
