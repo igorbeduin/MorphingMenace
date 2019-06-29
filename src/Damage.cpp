@@ -1,8 +1,9 @@
 #include "../include/Damage.h"
 
-Damage::Damage(GameObject &associated, int damage, float destrTime) : Component::Component(associated),
-                                                                    damage(damage),
-                                                                    destrTime(destrTime)
+Damage::Damage(GameObject &associated, int damage, float destrTime, char_type shooter) : Component::Component(associated),
+                                                                                         damage(damage),
+                                                                                         destrTime(destrTime),
+                                                                                         shooter(shooter)
 {}
 void Damage::Update(float dt)
 {
@@ -32,4 +33,9 @@ void Damage::NotifyCollision(GameObject &other)
     {
         associated.RequestDelete();
     }
+}
+
+char_type Damage::Shooter()
+{
+    return shooter;
 }

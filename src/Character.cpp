@@ -8,7 +8,8 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
                                                                            maxHP(maxHP),
                                                                            applyNormal(false),
                                                                            flip(false),
-                                                                           currentHP(maxHP)
+                                                                           currentHP(maxHP),
+                                                                           charType(charType)
 {
     switch (charType)
     {
@@ -121,7 +122,10 @@ void Character::NotifyCollision(GameObject &other)
     if (other.GetComponent("Damage").get() != nullptr)
     {
         Damage *damagePtr = (Damage *)other.GetComponent("Damage").get();
-        ApplyDamage(damagePtr->GetDamage());
+        if (damagePtr->Shooter() != charType)
+        {
+            ApplyDamage(damagePtr->GetDamage());
+        }
     }
 }
 
@@ -223,4 +227,9 @@ void Character::DisableFlip()
 void Character::ApplyDamage(int damage)
 {
     currentHP -= damage;
+}
+
+char_type Character::Type()
+{
+    return charType;
 }

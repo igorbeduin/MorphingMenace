@@ -28,9 +28,11 @@ public:
     void EnableFlip();
     void DisableFlip();
     void ApplyDamage(int damage);
+    char_type Type();
 
     static Character* player;
     Rect box;
+
 private:
     Vec2 speed;
     Vec2 lastPosition;
@@ -39,4 +41,5 @@ private:
     bool flip;
     int maxHP;
     int currentHP;
+    char_type charType;
 };

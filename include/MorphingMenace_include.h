@@ -12,7 +12,8 @@ enum char_type
     // Different types of characters that the game might have
     PLAYER,
     ENTOKRATON_1,
-    BOSS
+    BOSS,
+    NONE_TYPE
 };
 
 enum collision_side
