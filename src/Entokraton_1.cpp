@@ -8,59 +8,46 @@ Entokraton_1::Entokraton_1(GameObject &associated) : Component::Component(associ
 }
 void Entokraton_1::Update(float dt)
 {
+    Character *enemyCharacter = (Character *)associated.GetComponent("Character").get();
     Sprite *enemySprite = (Sprite *)associated.GetComponent("Sprite").get();
     switch (state)
     {
 
     case RESTING:
     std::cout << "idle" << std::endl;
+    // std::cout << associated.box.x << " - " << Character::player->box.x << std::endl;
 
     enemySprite->RunSpecificAnimation();
-    enemySprite->SetStartFrame(ENEMY_1_IDLE_START);
-    enemySprite->SetEndFrame(ENEMY_1_IDLE_END);
-    enemySprite->SetAnimationTime(ENEMY_1_IDLE_TIME);
+    enemySprite->SetStartFrame(ENTOKRATON_1_IDLE_START);
+    enemySprite->SetEndFrame(ENTOKRATON_1_IDLE_END);
+    enemySprite->SetAnimationTime(ENTOKRATON_1_IDLE_TIME);
 
-        if (restTimer.Get() >= ENEMY_1_COOLDOWN)
+        if  (Character::player != nullptr && 
+                ( abs( associated.box.GetCenter().x - Character::player->GetPosition().x ) < ENTOKRATON_1_PERCEPTION )  && abs( associated.box.GetCenter().y - Character::player->GetPosition().y) <  ENTOKRATON_1_PERCEPTION/2.5 )
+        {                
+            state = CHASING;
+        }
+        if (restTimer.Get() >= ENTOKRATON_1_COOLDOWN)
         {
 
-            if  (Character::player != nullptr && 
-                ( abs( associated.box.x - Character::player->GetPosition().x ) < ENEMY_1_PERCEPTION ) )
+            if (direction == -1 )
             {
-                // distance = Character::player->GetPosition() - associated.box.GetVec2();
-                // if (distance.x < 0)
-                // {
-                //     direction = -1;
-                // }
-                // else
-                // {
-                //     direction = 1;
-                // }
-                
-                
-                state = CHASING;
-                // std::cout << "chama chasing" << std::endl;
+                // std::cout << "right" << std::endl;
+                destination.x = associated.box.GetCenter().x - ENTOKRATON_1_WALK_RANGE;
+                destination.y = associated.box.GetCenter().y;
+                distance = destination - associated.box.GetVec2();
+                enemyCharacter->EnableFlip();
             }
-            else
+            if (direction == 1 )
             {
-                Character *enemyCharacter = (Character *)associated.GetComponent("Character").get();
-                if (direction == -1 )
-                {
-                    // std::cout << "right" << std::endl;
-                    destination.x = associated.box.x - WALK_RANGE;
-                    destination.y = associated.box.y;
-                    distance = destination - associated.box.GetVec2();
-                    enemyCharacter->EnableFlip();
-                }
-                if (direction == 1 )
-                {
-                    // std::cout << "left" << std::endl;
-                    destination.x = associated.box.x + WALK_RANGE;
-                    destination.y = associated.box.y;
-                    distance = destination - associated.box.GetVec2();
-                    enemyCharacter->DisableFlip();
-                }
-                state = MOVING;
+                // std::cout << "left" << std::endl;
+                destination.x = associated.box.GetCenter().x + ENTOKRATON_1_WALK_RANGE;
+                destination.y = associated.box.GetCenter().y;
+                distance = destination - associated.box.GetVec2();
+                enemyCharacter->DisableFlip();
             }
+            state = MOVING;
+            
         }
         else
         {
@@ -74,33 +61,24 @@ void Entokraton_1::Update(float dt)
     std::cout << "wandering away" << std::endl;
 
         enemySprite->RunSpecificAnimation();
-        enemySprite->SetStartFrame(ENEMY_1_WALK_START);
-        enemySprite->SetEndFrame(ENEMY_1_WALK_END);
-        enemySprite->SetAnimationTime(ENEMY_1_WALK_TIME);
+        enemySprite->SetStartFrame(ENTOKRATON_1_WALK_START);
+        enemySprite->SetEndFrame(ENTOKRATON_1_WALK_END);
+        enemySprite->SetAnimationTime(ENTOKRATON_1_WALK_TIME);
 
         if  (Character::player != nullptr && 
-                ( abs( associated.box.x - Character::player->GetPosition().x ) < ENEMY_1_PERCEPTION ) )
+                ( abs( associated.box.GetCenter().x - Character::player->GetPosition().x ) < ENTOKRATON_1_PERCEPTION )  && abs( associated.box.GetCenter().y - Character::player->GetPosition().y) <  ENTOKRATON_1_PERCEPTION/2.5 )
         {                
             state = CHASING;
         }
-        else if ( abs(distance.x) >= STOP_RANGE  )
+        else if ( abs(distance.x) >= ENTOKRATON_1_STOP_RANGE  )
         {
-            float movement = direction * ENEMY_1_STEP * dt;
-            
-            // std::cout << "\ndest: "  << destination.x << ", " << destination.y << std::endl;
-            // std::cout << "assc: " << associated.box.x << ", " << associated.box.y << std::endl;
-            // std::cout << "dist: " << distance.x << ", " << distance.y << std::endl;
-            // std::cout << " mov: " << movement << ", dir: "<< direction <<"\n" <<std::endl;
-            
+            float movement = direction * ENTOKRATON_1_STEP * dt;
+
             if (abs(distance.x) >= abs(movement))
             {
                 associated.box.x += movement; 
-                distance.x = destination.x - associated.box.x;
-                distance.y = destination.y - associated.box.y;
-            }
-            if (abs(distance.x) < STOP_RANGE +1)
-            {
-                associated.box.x = destination.x;
+                distance.x = destination.x - associated.box.GetCenter().x;
+                // distance.y = destination.y - associated.box.y;
             }
 
         }
@@ -115,77 +93,59 @@ void Entokraton_1::Update(float dt)
 
 
         break;
-        
-    case ATTACKING:        
-        //para o movimento e chama o método attacking
-        std::cout << "ENTOKRATON used SLASH" << std::endl;
-        state = RESTING;
-        break;
     
-    case CHASING://flipar sprite
-        // std::cout << "VOLTA AQUI OTÀRIO" << std::endl;
+    case CHASING:
         std::cout << "CHASING" << std::endl;
         //se aproxima do jogador, muda o estado para attacking
 
-        // enemySprite->RunSpecificAnimation();
-        // enemySprite->SetStartFrame(ENEMY_1_WALK_START);
-        // enemySprite->SetEndFrame(ENEMY_1_WALK_END);
-        // enemySprite->SetAnimationTime(ENEMY_1_WALK_TIME);
+        enemySprite->RunSpecificAnimation();
+        enemySprite->SetStartFrame(ENTOKRATON_1_WALK_START);
+        enemySprite->SetEndFrame(ENTOKRATON_1_WALK_END);
+        enemySprite->SetAnimationTime(ENTOKRATON_1_WALK_TIME);
 
-        // if (associated.box.x + associated.box.w < Character::player->box.x)
-        // {//inimigo à esquerda
-        //     std::cout << "->";
-        //     distance.x = Character::player->box.x - associated.box.x - associated.box.w;
-        //     float movement = ENEMY_1_STEP * dt;
+        distance = Character::player->GetPosition() - associated.box.GetCenter();
+        destination = Character::player->GetPosition();
 
-        //     if (distance.x >= abs(movement))
-        //     {
-        //         associated.box.x += movement;
-        //         distance.x -= movement;
-        //     }
-        //     else if (distance.x < ENEMY_1_ATTACK_RANGE)
-        //     {
-        //         state = ATTACKING;
-        //     }
-        // }
-        // else if (associated.box.x > Character::player->box.x + Character::player->box.w)
-        // {//inimigo à direita
-        //     std::cout << "<-";
-        //     distance.x = associated.box.x - Character::player->box.x - Character::player->box.w;
-        //     float movement = ENEMY_1_STEP * dt;
+        if (distance.x < 0)
+        {
+            direction = -1;
+            enemyCharacter->EnableFlip();            
+        }
+        else
+        {
+            direction = 1;
+            enemyCharacter->DisableFlip();
 
-        //     if (distance.x >= abs(movement))
-        //     {
-        //         associated.box.x -= movement;
-        //         distance.x -= movement;
-        //     }
-        //     if (distance.x < ENEMY_1_ATTACK_RANGE)
-        //     {
-        //         state = ATTACKING;
-        //     }        
-        // }
-        // else if (distance.x > ENEMY_1_PERCEPTION)
-        // {
-        //    state = RESTING;
-        // }
-        // std::cout << "distance" << distance.x << std::endl;
-        /////////////////////////////////////////////////////////////////
-        // if ( distance.Absolute() >= STOP_RANGE  )
-        // {
-        //     float movement = direction * ENEMY_1_STEP * dt;
-        //     // std::cout << "\ndest: "  << destination.x << ", " << destination.y << std::endl;
-        //     // std::cout << "assc: " << associated.box.x << ", " << associated.box.y << std::endl;
-        //     // std::cout << "dist: " << distance.x << ", " << distance.y << std::endl;
-        //     // std::cout << " mov: " << movement << ", dir: "<< direction <<"\n" <<std::endl;
+        }
+        // std::cout << "x: "<< (  abs(distance.x) > ENTOKRATON_1_PERCEPTION  ) << ", y: " << (abs(distance.y) > ENTOKRATON_1_PERCEPTION/5) << std::endl;
+        if ( abs(distance.x) > ENTOKRATON_1_PERCEPTION && abs(distance.y) < ENTOKRATON_1_PERCEPTION/2.5)
+        {
+            std::cout << "ROBSON FUGIU" << std::endl;
+            state = RESTING;
+            direction = -direction;
+        }
+         else if ( abs(Character::player->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/2 > ENTOKRATON_1_ATTACK_RANGE && (abs(distance.x) <= ENTOKRATON_1_PERCEPTION && abs(distance.y) <= ENTOKRATON_1_PERCEPTION/2.5) )
+        {
+            std::cout << "volta aqui" << std::endl;
+            float movement = direction * ENTOKRATON_1_STEP * dt;
             
-        //     if (distance.Absolute() >= abs(movement))
-        //     {
-        //         associated.box.x += movement;
-        //         distance = Character::player->GetPosition() - associated.box.GetVec2();
-        //     }
-        // }
+            if (abs(distance.x) >= abs(movement))
+            {
+                associated.box.x += movement; 
+                distance.x = destination.x - associated.box.x;
+            }
+
+        } else if (abs(Character::player->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/2 <= ENTOKRATON_1_ATTACK_RANGE)
+        {
+            state = ATTACKING;
+        }
+
+        break;
+
+    case ATTACKING:        
+
+        std::cout << "ENTOKRATON used SLASH" << std::endl;
         state = RESTING;
-        
         break;
     
     default:
