@@ -10,7 +10,7 @@
 class Transformation
 {
 public:
-    virtual void Attack();
-    virtual void Absorb();
+    virtual void Attack() = 0;
+    virtual void Absorb() = 0;
     void Downgrade();
 };

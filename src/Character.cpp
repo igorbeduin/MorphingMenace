@@ -33,7 +33,6 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
         std::shared_ptr<Sprite> charSprite(new Sprite(associated, BOSS_SPRITE_PATH, BOSS_SPRITES_NUMB, BOSS_SPRITES_TIME));
         charSprite->SetScale(BOSS_SCALE, BOSS_SCALE);
         associated.AddComponent(charSprite);
-        // TODO:: Cria um personagem do tipo enemy
         break;
     }
 

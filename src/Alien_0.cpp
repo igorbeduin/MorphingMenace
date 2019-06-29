@@ -1,16 +1,22 @@
 #include "../include/Alien_0.h"
 #include "../include/Game.h"
 
-Alien_0::Alien_0(GameObject &associated) : Component::Component(associated)
+Alien_0::Alien_0(GameObject &associated) : Component::Component(associated),
+                                           sprite(new Sprite(associated, PLAYER_LVL0_SPRITE_PATH, PLAYER_LVL0_SPRITES_NUMB, PLAYER_LVL0_SPRITES_TIME))
 {
-    std::shared_ptr<Sprite> charSprite(new Sprite(associated, PLAYER_LVL0_SPRITE_PATH, PLAYER_LVL0_SPRITES_NUMB, PLAYER_LVL0_SPRITES_TIME));
-    charSprite->SetScale(PLAYER_LVL0_SCALE, PLAYER_LVL0_SCALE);
-    associated.AddComponent(charSprite);
+    //std::shared_ptr<Sprite> charSprite(new Sprite(associated, PLAYER_LVL0_SPRITE_PATH, PLAYER_LVL0_SPRITES_NUMB, PLAYER_LVL0_SPRITES_TIME));
+    //sprite = charSprite;
+    
+    sprite->SetScale(PLAYER_LVL0_SCALE, PLAYER_LVL0_SCALE);
 }
 void Alien_0::Update(float dt)
-{}
+{
+    sprite->Update(dt);
+}
 void Alien_0::Render()
-{}
+{
+    sprite->Render();
+}
 bool Alien_0::Is(std::string type)
 {
     return (type == "Alien_0");

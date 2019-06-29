@@ -8,6 +8,8 @@
 #include "Transformation.h"
 #include "Sprite.h"
 
+class Sprite;
+
 class Alien_0 : public Component, public Transformation
 {
 public:
@@ -17,4 +19,6 @@ public:
     bool Is(std::string type);
     void Attack();
     void Absorb();
+private:
+    std::shared_ptr<Sprite> sprite;
 };

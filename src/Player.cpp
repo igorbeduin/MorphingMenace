@@ -5,12 +5,14 @@
 Player::Player(GameObject &associated) : Component::Component(associated)
 {
     std::shared_ptr<Alien_0> alien_0(new Alien_0(associated));
-    associated.AddComponent(alien_0);
     transformStack.push(alien_0);
 }
 
 void Player::Update(float dt)
 {
+    Alien_0 *currentTransf = (Alien_0 *)transformStack.top().get();
+    currentTransf->Update(dt);
+
     sharedChar = associated.GetComponent("Character");
     if (sharedChar != nullptr)
     {
@@ -70,7 +72,10 @@ void Player::Update(float dt)
 }
 
 void Player::Render()
-{}
+{
+    Alien_0 *currentTransf = (Alien_0 *)transformStack.top().get();
+    currentTransf->Render();
+}
 
 bool Player::Is(std::string type)
 {
@@ -99,12 +104,12 @@ void Player::Idle()
 
 void Player::Attack()
 {
-    Alien_0* currentTransf = (Alien_0*)transformStack.top().get();
+    Transformation* currentTransf = (Transformation*)transformStack.top().get();
     currentTransf->Attack();
 }
 
 void Player::Absorb()
 {
-    Alien_0* currentTransf = (Alien_0*)transformStack.top().get();
+    Transformation* currentTransf = (Transformation*)transformStack.top().get();
     currentTransf->Absorb();
 }
