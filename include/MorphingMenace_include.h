@@ -58,7 +58,7 @@ enum character_state
     #define ENTOKRATON_1_SPRITES_NUMB 7
     #define ENTOKRATON_1_SPRITES_TIME 0.1
     #define ENTOKRATON_1_SCALE 0.15
-    #define ENTOKRATON_1_INIT_POS {600, 300}
+    #define ENTOKRATON_1_INIT_POS {1000, 300}
     #define ENTOKRATON_1_IDLE_START 0
     #define ENTOKRATON_1_IDLE_END 2
     #define ENTOKRATON_1_IDLE_TIME 0.1    
@@ -66,18 +66,18 @@ enum character_state
     #define ENTOKRATON_1_WALK_END 6
     #define ENTOKRATON_1_WALK_TIME 0.1
     #define ENTOKRATON_1_HP 50
-    #define ENEMY_1_IDLE_START 0
-    #define ENEMY_1_IDLE_END 2
-    #define ENEMY_1_IDLE_TIME 0.1
-    #define ENEMY_1_WALK_START 3
-    #define ENEMY_1_WALK_END 6
-    #define ENEMY_1_WALK_TIME 0.1
-    #define ENEMY_1_COOLDOWN 2
-    #define ENEMY_1_STEP 150
-    #define ENEMY_1_PERCEPTION 250
-    #define ENEMY_1_ATTACK_RANGE 30
-    #define WALK_RANGE 200
-    #define STOP_RANGE 5
+    #define ENTOKRATON_1_IDLE_START 0
+    #define ENTOKRATON_1_IDLE_END 2
+    #define ENTOKRATON_1_IDLE_TIME 0.1
+    #define ENTOKRATON_1_WALK_START 3
+    #define ENTOKRATON_1_WALK_END 6
+    #define ENTOKRATON_1_WALK_TIME 0.1
+    #define ENTOKRATON_1_COOLDOWN 2
+    #define ENTOKRATON_1_STEP 150
+    #define ENTOKRATON_1_PERCEPTION 300
+    #define ENTOKRATON_1_ATTACK_RANGE 30
+    #define ENTOKRATON_1_WALK_RANGE 200
+    #define ENTOKRATON_1_STOP_RANGE 5
 
 #define BOSS_SPRITE_PATH "assets/img/char/boss_temporario.png"
 #define BOSS_SPRITES_NUMB 1
