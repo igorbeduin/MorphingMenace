@@ -10,6 +10,8 @@ void Entokraton_1::Update(float dt)
 {
     Character *enemyCharacter = (Character *)associated.GetComponent("Character").get();
     Sprite *enemySprite = (Sprite *)associated.GetComponent("Sprite").get();
+
+    // std::cout << Character::player << std::endl ;
     switch (state)
     {
 
@@ -120,13 +122,13 @@ void Entokraton_1::Update(float dt)
         // std::cout << "x: "<< (  abs(distance.x) > ENTOKRATON_1_PERCEPTION  ) << ", y: " << (abs(distance.y) > ENTOKRATON_1_PERCEPTION/5) << std::endl;
         if ( abs(distance.x) > ENTOKRATON_1_PERCEPTION && abs(distance.y) < ENTOKRATON_1_PERCEPTION/2.5)
         {
-            std::cout << "ROBSON FUGIU" << std::endl;
+            // std::cout << "ROBSON FUGIU" << std::endl;
             state = RESTING;
             direction = -direction;
         }
          else if ( abs(Character::player->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/2 > ENTOKRATON_1_ATTACK_RANGE && (abs(distance.x) <= ENTOKRATON_1_PERCEPTION && abs(distance.y) <= ENTOKRATON_1_PERCEPTION/2.5) )
         {
-            std::cout << "volta aqui" << std::endl;
+            // std::cout << "volta aqui" << std::endl;
             float movement = direction * ENTOKRATON_1_STEP * dt;
             
             if (abs(distance.x) >= abs(movement))
@@ -144,9 +146,18 @@ void Entokraton_1::Update(float dt)
 
     case ATTACKING:        
 
-        std::cout << "ENTOKRATON used SLASH" << std::endl;
-        state = RESTING;
-        break;
+        enemySprite->RunSpecificAnimation();
+        enemySprite->SetStartFrame(ENTOKRATON_1_WALK_START);
+        enemySprite->SetEndFrame(ENTOKRATON_1_WALK_END);
+        enemySprite->SetAnimationTime(ENTOKRATON_1_WALK_TIME);
+
+        if (enemySprite->GetCurrentFrame() == ENTOKRATON_1_WALK_START + 2)
+        {
+            std::cout << "Entokraton used CUT" << std::endl;
+            Attack();
+            state = RESTING;
+        }
+        
     
     default:
         break;
@@ -159,4 +170,31 @@ void Entokraton_1::Render()
 bool Entokraton_1::Is(std::string type)
 {
     return (type == "Entokraton_1");
+}
+void Entokraton_1::Attack()//verificar friendly fire
+{   
+    Collider* associatedCollider = (Collider *)associated.GetComponent("Collider").get();
+    Character* associatedCharacter = (Character *)associated.GetComponent("Character").get();
+
+    //Creating attack
+    GameObject *attack = new GameObject();
+    attack->box.w = ENTOKRATON_1_ATTACK_WIDTH;
+    attack->box.h = ENTOKRATON_1_ATTACK_HEIGHT;
+    if (associatedCharacter->IsFlipped())
+    {
+        attack->box.x = associatedCollider->box.x - attack->box.w;
+    }
+    else
+    {
+        attack->box.x = associatedCollider->box.x + associatedCollider->box.w;
+    }
+    attack->box.y = associatedCollider->box.GetVec2().y ;
+
+    std::shared_ptr<Damage> attackBehaviour(new Damage(*attack, ENTOKRATON_1_ATTACK_DAMAGE, ENTOKRATON_1_ATTACK_TIME));
+    attack->AddComponent(attackBehaviour);
+    std::shared_ptr<Collider> attackCollider(new Collider(*attack));
+    attack->AddComponent(attackCollider);
+    Game::GetInstance().GetCurrentState().AddObject(attack);
+    std::cout << "ATTACK" << std::endl;
+    restTimer.Restart();
 }
