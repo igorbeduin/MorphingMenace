@@ -43,9 +43,16 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
 
 void Character::Update(float dt)
 {
+    std::cout << currentHP << std::endl;    
     if (currentHP <= 0)
     {
+        if (associated.GetComponent("Player").get())//verificar se player ainda existe
+        {
+            Camera::Unfollow();
+        }
+            // std::cout << player << " " << player->currentHP << std::endl;
         associated.RequestDelete();
+
     }
 
     Environment::ApplyForces(this);
