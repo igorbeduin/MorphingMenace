@@ -29,7 +29,7 @@ public:
     void DisableFlip();
     void ApplyDamage(int damage);
 
-    static Character* player;
+    static Character* player;//trocar isso por weakpointer de player
     Rect box;
 private:
     Vec2 speed;
