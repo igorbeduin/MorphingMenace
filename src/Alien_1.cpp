@@ -11,21 +11,22 @@ Alien_1::Alien_1(GameObject &associated) : Component::Component(associated),
 }
 void Alien_1::Update(float dt)
 {   
+    VerifyState();
     if (Player::player->GetCharacterState() == character_state::ATTACKING)
     {
         atkTimer.Update(dt);
-        if (atkTimer.Get() >= 0.1)
+        if (atkTimer.Get() >= (PLAYER_LVL1_ATTACK_END - PLAYER_LVL1_ATTACK_START + 1) * PLAYER_LVL1_ATTACK_TIME)
         {
             Player::player->SetCharacterState(character_state::IDLE);
             atkTimer.Restart();
         }
     }
-    VerifyState();
     sprite->Update(dt);
 }
 void Alien_1::Render()
 {
     sprite->Render();
+    std::cout << "sprite->GetCurrentFrame():" << sprite->GetCurrentFrame() << std::endl;
 }
 bool Alien_1::Is(std::string type)
 {
@@ -89,13 +90,18 @@ void Alien_1::VerifyState()
         sprite->SetAnimationTime(PLAYER_LVL1_ATTACK_TIME);
         break;
     }
-    default:
+
+    case IDLE:
     {
         // std::cout << "DEFAULT" << std::endl;
         sprite->RunSpecificAnimation();
         sprite->SetStartFrame(PLAYER_LVL1_IDLE_START);
         sprite->SetEndFrame(PLAYER_LVL1_IDLE_END);
         sprite->SetAnimationTime(PLAYER_LVL1_IDLE_TIME);
+        break;
+    }
+    default:
+    {
         break;
     }
     }
