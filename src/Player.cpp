@@ -2,10 +2,14 @@
 #include "../include/InputManager.h"
 #include "../include/Camera.h"
 
-Player::Player(GameObject &associated) : Component::Component(associated)
+Player *Player::player = nullptr;
+
+Player::Player(GameObject &associated) : Component::Component(associated),
+                                         lvl(0)
 {
     std::shared_ptr<Alien_0> alien_0(new Alien_0(associated));
     transformStack.push(alien_0);
+    player = this;
 }
 
 void Player::Update(float dt)
