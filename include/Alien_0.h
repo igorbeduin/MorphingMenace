@@ -19,6 +19,7 @@ public:
     bool Is(std::string type);
     void Attack();
     void Absorb();
+    void VerifyState();
 private:
     std::shared_ptr<Sprite> sprite;
 };
