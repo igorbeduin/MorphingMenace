@@ -44,7 +44,7 @@ bool Player::Is(std::string type)
 void Player::Walk(int step, float dt)
 {
     associated.box.x += step * dt;
-    if (characterState == character_state::IDLE)
+    if (characterState == IDLE)
     {
         characterState = character_state::WALKING;
     }
@@ -64,6 +64,7 @@ void Player::Idle()
 void Player::Attack()
 {
     Transformation *currentTransf = (Transformation *)transformStack.top().get();
+    characterState = ATTACKING;
     currentTransf->Attack();
 }
 
@@ -86,6 +87,9 @@ void Player::LvlUp()
 void Player::LvlDown()
 {
     transformStack.pop();
+    Alien_0 *currentTransf = (Alien_0 *)transformStack.top().get();
+    //TODO: Resolver esse bug aqui
+    //          currentTransf->UpdateAssocBox();
     lvl -= 1;
 }
 
@@ -105,22 +109,104 @@ void Player::NotifyCollision(GameObject &other)
             Transform(enemyCharPtr->Type());
         }
     }
+    if (characterState == character_state::JUMPING)
+    {
+        if ((other.GetComponent("CollisionBox").get() != nullptr))
+        {
+            Idle();
+        }
+    }
 }
 
 void Player::Transform(char_type type)
 {
     switch (type)
     {
-        case ENTOKRATON_1:
-        {
-            std::shared_ptr<Alien_1> alien_1(new Alien_1(associated));
-            transformStack.push(alien_1);
-            LvlUp();
-            break;
+    case ENTOKRATON_1:
+    {
+        std::shared_ptr<Alien_1> alien_1(new Alien_1(associated));
+        alien_1->UpdateAssocBox();
+        transformStack.push(alien_1);
+        LvlUp();
+        break;
+    }
 
+    default:
+        break;
+    }
+}
+
+void Player::EnteringState(float dt)
+{
+    sharedChar = associated.GetComponent("Character");
+    if (sharedChar != nullptr)
+    {
+        characterPtr = (Character *)sharedChar.get();
+        // if (characterState == ATTACKING)
+        // {
+        //     if (associated.GetComponent("Damage").get() == nullptr)
+        //     {
+        //         characterState = NONE_STATE;
+        //     }
+        // }
+
+        // It's only possible to do stuff if player is not ABSORBING
+        if (characterState != character_state::ABSORBING)
+        {
+            // Joystick
+            if (InputManager::GetInstance().KeyPress(SPACE_KEY))
+            {
+                if (characterState != character_state::JUMPING)
+                {
+                    Jump();
+                }
+            }
+            if (InputManager::GetInstance().IsKeyDown(D_KEY))
+            {
+                Walk(PLAYER_LVL0_STEP, dt);
+                if (characterPtr->IsFlipped())
+                {
+                    characterPtr->DisableFlip();
+                }
+            }
+            if (InputManager::GetInstance().IsKeyDown(A_KEY))
+            {
+                Walk((-1) * PLAYER_LVL0_STEP, dt);
+                if (!characterPtr->IsFlipped())
+                {
+                    characterPtr->EnableFlip();
+                }
+            }
+
+            if (InputManager::GetInstance().KeyPress(O_KEY))
+            {
+                Attack();
+            }
+            if (InputManager::GetInstance().KeyPress(P_KEY))
+            {
+                Absorb();
+            }
+
+            if ((associated.box.x <= (-Camera::pos.x + LEFT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x > associated.box.x) ||
+                (associated.box.x + associated.box.w >= (-Camera::pos.x + RIGHT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x < associated.box.x))
+            {
+                Camera::Follow(&associated);
+            }
+            else
+            {
+                Camera::Unfollow();
+            }
         }
-        
-        default:
-            break;
+    }
+}
+
+void Player::ExitingState(float dt)
+{
+    if (characterState == WALKING)
+    {
+        if (InputManager::GetInstance().KeyRelease(A_KEY) || InputManager::GetInstance().KeyRelease(D_KEY))
+        {
+            Idle();
         }
+    }
 }
