@@ -104,12 +104,62 @@ void Player::Idle()
 
 void Player::Attack()
 {
-    Transformation* currentTransf = (Transformation*)transformStack.top().get();
+    Transformation *currentTransf = (Transformation *)transformStack.top().get();
     currentTransf->Attack();
 }
 
 void Player::Absorb()
 {
-    Transformation* currentTransf = (Transformation*)transformStack.top().get();
+    Transformation *currentTransf = (Transformation *)transformStack.top().get();
     currentTransf->Absorb();
+}
+
+int Player::GetLvl()
+{
+    return lvl;
+}
+
+void Player::LvlUp()
+{
+    lvl += 1;
+}
+
+void Player::LvlDown()
+{
+    lvl -= 1;
+}
+
+void Player::NotifyCollision(GameObject &other)
+{
+    if (characterState == character_state::ABSORBING)
+    {
+        if ((other.GetComponent("CollisionBox").get() != nullptr) || (other.GetComponent("Character").get() != nullptr))
+        {
+            characterState = character_state::IDLE;
+            Character *characterPtr = (Character *)associated.GetComponent("Character").get();
+            characterPtr->SetSpeed(Vec2(0, 0));
+        }
+        Character *enemyCharPtr = (Character *)other.GetComponent("Character").get();
+        if (enemyCharPtr != nullptr)
+        {
+            Transform(enemyCharPtr->Type());
+        }
+    }
+}
+
+void Player::Transform(char_type type)
+{
+    switch (type)
+    {
+        case ENTOKRATON_1:
+        {
+            std::shared_ptr<Alien_1> alien_1(new Alien_1(associated));
+            transformStack.push(alien_1);
+            break;
+
+        }
+        
+        default:
+            break;
+        }
 }
