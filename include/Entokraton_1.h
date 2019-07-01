@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Component.h"
 #include "Sprite.h"
+#include "Sound.h"
 
 class Entokraton_1 : public Component
 {
@@ -16,6 +17,9 @@ private:
     Vec2 destination;
     Vec2 lastPosition;
     int direction = 1;// -1 = left, 1 = right 
+
+    std::vector< std::shared_ptr<Sound> > sounds;
+    bool firstTime = false;
 
 public:
     Entokraton_1(GameObject &associated);
