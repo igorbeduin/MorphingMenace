@@ -3,7 +3,7 @@
 #include "../include/InputManager.h"
 #include "../include/Collider.h"
 
-Character* Character::player = nullptr;
+Character* Character::playerChar = nullptr;
 Character::Character(GameObject &associated, int maxHP, char_type charType) : Component::Component(associated),
                                                                            maxHP(maxHP),
                                                                            applyNormal(false),
