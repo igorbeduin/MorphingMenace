@@ -48,20 +48,23 @@ enum character_state
     #define PLAYER_LVL0_STEP 200
     #define PLAYER_LVL0_JUMP -800
     #define PLAYER_INIT_POS {400, 300}
-    #define PLAYER_INITIAL_HP 50
+    #define PLAYER_INITIAL_HP 20
     #define PLAYER_LVL0_ATTACK_WIDTH 100
     #define PLAYER_LVL0_ATTACK_HEIGHT 20
     #define PLAYER_LVL0_ATTACK_TIME 0.05
     #define PLAYER_LVL0_ATTACK_DAMAGE 10
 
     #define ENTOKRATON_1_SPRITE_PATH "assets/img/char/alien1_complete_movement.png"
+    #define ENTOKRATON_1_IDLE1_SOUND "assets/audio/alien1/alien 1 - idle 1.ogg"
+    #define ENTOKRATON_1_IDLE2_SOUND "assets/audio/alien1/alien 1 - idle 2.ogg"
+    #define ENTOKRATON_1_WALK1_SOUND "assets/audio/alien1/alien 1 - andar.ogg"
     #define ENTOKRATON_1_SPRITES_NUMB 7
     #define ENTOKRATON_1_SPRITES_TIME 0.1
     #define ENTOKRATON_1_SCALE 0.15
     #define ENTOKRATON_1_INIT_POS {1000, 300}
     #define ENTOKRATON_1_IDLE_START 0
     #define ENTOKRATON_1_IDLE_END 2
-    #define ENTOKRATON_1_IDLE_TIME 0.1    
+    #define ENTOKRATON_1_IDLE_TIME 1
     #define ENTOKRATON_1_WALK_START 3
     #define ENTOKRATON_1_WALK_END 6
     #define ENTOKRATON_1_WALK_TIME 0.1
@@ -76,7 +79,7 @@ enum character_state
     #define ENTOKRATON_1_IDLE_TIME 0.1
     #define ENTOKRATON_1_WALK_START 3
     #define ENTOKRATON_1_WALK_END 6
-    #define ENTOKRATON_1_WALK_TIME 0.1
+    #define ENTOKRATON_1_WALK_TIME 0.14
     #define ENTOKRATON_1_COOLDOWN 2
     #define ENTOKRATON_1_STEP 150
     #define ENTOKRATON_1_PERCEPTION 300
