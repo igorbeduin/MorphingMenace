@@ -126,6 +126,14 @@ void StageState::Update(float dt)
                     }
                 }
             }
+            for (int j = 0; j < (int)collisionObjectsArray.size(); j++)
+            {
+                std::shared_ptr<Collider> collisionObjectComponent = std::dynamic_pointer_cast<Collider>(collisionObjectsArray[j]->GetComponent("Collider"));
+                if (Collision::IsColliding(colliderComponent->box, collisionObjectComponent->box, objectArray[i]->GetAngleRad(), collisionObjectsArray[j]->GetAngleRad()))
+                {
+                    objectArray[i]->NotifyCollision(*collisionObjectsArray[j].get());
+                }
+            }
         }
     }
 
@@ -134,10 +142,13 @@ void StageState::Update(float dt)
         quitRequested = true;
     }
     
-    // std::cout << "(int)objectArray.size(): " << (int)objectArray.size() << std::endl;
     for (int i = 0; i < (int)objectArray.size(); i++)
     {
         objectArray[i]->Update(dt);
+    }
+    for (int i = 0; i < (int)collisionObjectsArray.size(); i++)
+    {
+        collisionObjectsArray[i]->Update(dt);
     }
 }
 
@@ -146,6 +157,10 @@ void StageState::Render()
     for (int i = 0; i < (int)objectArray.size(); i++)
     {
         objectArray[i]->Render();
+    }
+    for (int i = 0; i < (int)collisionObjectsArray.size(); i++)
+    {
+        collisionObjectsArray[i]->Render();
     }
 }
 
