@@ -16,7 +16,7 @@ void Entokraton_1::Update(float dt)
     {
 
     case RESTING:
-    std::cout << "idle" << std::endl;
+    // std::cout << "idle" << std::endl;
     // std::cout << associated.box.x << " - " << Character::player->box.x << std::endl;
 
     enemySprite->RunSpecificAnimation();
@@ -60,7 +60,7 @@ void Entokraton_1::Update(float dt)
         break;
 
     case MOVING://flipar sprite
-    std::cout << "wandering away" << std::endl;
+    // std::cout << "wandering away" << std::endl;
 
         enemySprite->RunSpecificAnimation();
         enemySprite->SetStartFrame(ENTOKRATON_1_WALK_START);
@@ -97,7 +97,7 @@ void Entokraton_1::Update(float dt)
         break;
     
     case CHASING:
-        std::cout << "CHASING" << std::endl;
+        // std::cout << "CHASING" << std::endl;
         //se aproxima do jogador, muda o estado para attacking
 
         enemySprite->RunSpecificAnimation();
@@ -195,6 +195,5 @@ void Entokraton_1::Attack()//verificar friendly fire
     std::shared_ptr<Collider> attackCollider(new Collider(*attack));
     attack->AddComponent(attackCollider);
     Game::GetInstance().GetCurrentState().AddObject(attack);
-    std::cout << "ATTACK" << std::endl;
-    restTimer.Restart();
+    // std::cout << "ATTACK" << std::endl;
 }
