@@ -17,58 +17,71 @@ void Player::Update(float dt)
     if (sharedChar != nullptr)
     {
         characterPtr = (Character *)sharedChar.get();
+        // It's only possible to do stuff if player is not ABSORBING
+        if (characterState != character_state::ABSORBING)
+        {
+            if ((associated.box.x == characterPtr->GetLastPosition().x) && (associated.box.y == characterPtr->GetLastPosition().y) && characterPtr->GetSpeed().y == 0)
+            {
+                if (characterState != character_state::IDLE)
+                {
+                    Idle();
+                }
+            }
+            // Joystick
+            if (InputManager::GetInstance().KeyPress(SPACE_KEY))
+            {
+                if ((characterState != character_state::JUMPING) && (characterPtr->GetSpeed().y == 0))
+                {
+                    Jump();
+                }
+            }
+            if (InputManager::GetInstance().IsKeyDown(D_KEY))
+            {
+                Walk(PLAYER_LVL0_STEP, dt);
+                if (characterPtr->IsFlipped())
+                {
+                    characterPtr->DisableFlip();
+                }
+            }
+            if (InputManager::GetInstance().IsKeyDown(A_KEY))
+            {
+                Walk((-1) * PLAYER_LVL0_STEP, dt);
+                if (!characterPtr->IsFlipped())
+                {
+                    characterPtr->EnableFlip();
+                }
+            }
 
-        if ((associated.box.x == characterPtr->GetLastPosition().x) && (associated.box.y == characterPtr->GetLastPosition().y) && characterPtr->GetSpeed().y == 0)
-        {
-            if (characterState != character_state::IDLE)
+            if (InputManager::GetInstance().KeyPress(O_KEY))
             {
-                Idle();
+                Attack();
             }
-        }
-        // Joystick
-        if (InputManager::GetInstance().KeyPress(SPACE_KEY))
-        {
-            if ((characterState != character_state::JUMPING) && (characterPtr->GetSpeed().y == 0))
+            if (InputManager::GetInstance().KeyPress(P_KEY))
             {
-                Jump();
+                Absorb();
             }
-        }
-        if (InputManager::GetInstance().IsKeyDown(D_KEY))
-        {
-            Walk(PLAYER_LVL0_STEP, dt);
-            if (characterPtr->IsFlipped())
-            {
-                characterPtr->DisableFlip();
-            }
-        }
-        if (InputManager::GetInstance().IsKeyDown(A_KEY))
-        {
-            Walk((-1) * PLAYER_LVL0_STEP, dt);
-            if (!characterPtr->IsFlipped())
-            {
-                characterPtr->EnableFlip();
-            }
-        }
 
-        if (InputManager::GetInstance().KeyPress(O_KEY))
-        {
-            Attack();
-        }
-        if (InputManager::GetInstance().KeyPress(P_KEY))
-        {
-            Absorb();
-        }
-
-        if ((associated.box.x <= (-Camera::pos.x + LEFT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x > associated.box.x) ||
-            (associated.box.x + associated.box.w >= (-Camera::pos.x + RIGHT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x < associated.box.x))
-        {
-            Camera::Follow(&associated);
-        }
-        else
-        {
-            Camera::Unfollow();
+            if ((associated.box.x <= (-Camera::pos.x + LEFT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x > associated.box.x) ||
+                (associated.box.x + associated.box.w >= (-Camera::pos.x + RIGHT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x < associated.box.x))
+            {
+                Camera::Follow(&associated);
+            }
+            else
+            {
+                Camera::Unfollow();
+            }
         }
     }
+}
+
+void Player::SetCharacterState(character_state state)
+{
+    characterState = state;
+}
+
+character_state Player::GetCharacterState()
+{
+    return characterState;
 }
 
 void Player::Render()
