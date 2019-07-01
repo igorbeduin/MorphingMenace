@@ -17,7 +17,7 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
     {
         std::shared_ptr<Player> playerBehav(new Player(associated));
         associated.AddComponent(playerBehav);
-        player = this;
+        playerChar = this;
         this->box = associated.box;
         break;
     }
@@ -76,7 +76,8 @@ void Character::Render()
 
 
 void Character::NotifyCollision(GameObject &other)
-{
+{   
+    // Collision with environment
     if (other.GetComponent("CollisionBox").get() != nullptr)
     {
         Collider *otherCollider = (Collider *)other.GetComponent("Collider").get();
@@ -118,6 +119,7 @@ void Character::NotifyCollision(GameObject &other)
         horizontalCollision = collision_side::NONE_SIDE;
     }
 
+    // Collision with damages
     if (other.GetComponent("Damage").get() != nullptr)
     {
         Damage *damagePtr = (Damage *)other.GetComponent("Damage").get();
@@ -200,6 +202,11 @@ void Character::SetSpeedX(int speedX)
 void Character::SetSpeedY(int speedY)
 {
     speed.y = speedY;
+}
+
+void Character::SetSpeed(Vec2 speed)
+{
+    SetSpeed(speed.x, speed.y);
 }
 
 void Character::SetSpeed(int speedX, int speedY)
