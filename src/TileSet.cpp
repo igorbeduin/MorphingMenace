@@ -50,7 +50,7 @@ void TileSet::RenderTile(unsigned index, float x, float y){
     std::shared_ptr<CollisionBox> boxBehaviour(new CollisionBox(* tile));
     tile->AddComponent(boxBehaviour);
 
-    Game::GetInstance().GetCurrentState().AddObject(tile);
+    Game::GetInstance().GetCurrentState().AddCollisionObject(tile);
 
     createMapColliders = false;
   }

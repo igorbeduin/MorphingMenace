@@ -165,3 +165,20 @@ void StageState::Pause()
 void StageState::Resume()
 {
 }
+
+std::weak_ptr<GameObject> StageState::AddCollisionObject(GameObject *object)
+{
+
+    std::shared_ptr<GameObject> shared(object);
+    collisionObjectsArray.emplace_back(shared); //adicionando o shared object criado no object array
+
+    std::weak_ptr<GameObject> weak;
+    weak = collisionObjectsArray.back(); //weak recebe o último elemento adicionado no object array (que é o shared criado)
+
+    if (started)
+    {
+        collisionObjectsArray.back()->Start();
+    }
+
+    return weak;
+}
