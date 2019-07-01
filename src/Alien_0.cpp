@@ -56,10 +56,6 @@ void Alien_0::Absorb()
     if (Player::player != nullptr)
     {
         int directABSORB_X_SPEED;
-        if (Player::player->GetLvl() != 0)
-        {
-            Downgrade();
-        }
         Player::player->SetCharacterState(character_state::ABSORBING);
         Character::playerChar->IsFlipped() ? (directABSORB_X_SPEED = ABSORB_Y_SPEED) : (directABSORB_X_SPEED = -ABSORB_Y_SPEED);
         Character::playerChar->SetSpeedX(directABSORB_X_SPEED);

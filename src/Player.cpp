@@ -143,6 +143,7 @@ void Player::LvlUp()
 
 void Player::LvlDown()
 {
+    transformStack.pop();
     lvl -= 1;
 }
 
@@ -172,6 +173,7 @@ void Player::Transform(char_type type)
         {
             std::shared_ptr<Alien_1> alien_1(new Alien_1(associated));
             transformStack.push(alien_1);
+            LvlUp();
             break;
 
         }

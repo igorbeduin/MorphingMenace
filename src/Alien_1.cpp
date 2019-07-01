@@ -53,6 +53,8 @@ void Alien_1::Attack()
 
 void Alien_1::Absorb()
 {
+    Player::player->LvlDown();
+    Player::player->Absorb();
    /*
     if (Player::player != nullptr)
     {
