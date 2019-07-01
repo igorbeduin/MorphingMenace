@@ -2,10 +2,14 @@
 #include "../include/InputManager.h"
 #include "../include/Camera.h"
 
-Player::Player(GameObject &associated) : Component::Component(associated)
+Player *Player::player = nullptr;
+
+Player::Player(GameObject &associated) : Component::Component(associated),
+                                         lvl(0)
 {
     std::shared_ptr<Alien_0> alien_0(new Alien_0(associated));
     transformStack.push(alien_0);
+    player = this;
 }
 
 void Player::Update(float dt)
@@ -17,58 +21,71 @@ void Player::Update(float dt)
     if (sharedChar != nullptr)
     {
         characterPtr = (Character *)sharedChar.get();
+        // It's only possible to do stuff if player is not ABSORBING
+        if (characterState != character_state::ABSORBING)
+        {
+            if ((associated.box.x == characterPtr->GetLastPosition().x) && (associated.box.y == characterPtr->GetLastPosition().y) && characterPtr->GetSpeed().y == 0)
+            {
+                if (characterState != character_state::IDLE)
+                {
+                    Idle();
+                }
+            }
+            // Joystick
+            if (InputManager::GetInstance().KeyPress(SPACE_KEY))
+            {
+                if ((characterState != character_state::JUMPING) && (characterPtr->GetSpeed().y == 0))
+                {
+                    Jump();
+                }
+            }
+            if (InputManager::GetInstance().IsKeyDown(D_KEY))
+            {
+                Walk(PLAYER_LVL0_STEP, dt);
+                if (characterPtr->IsFlipped())
+                {
+                    characterPtr->DisableFlip();
+                }
+            }
+            if (InputManager::GetInstance().IsKeyDown(A_KEY))
+            {
+                Walk((-1) * PLAYER_LVL0_STEP, dt);
+                if (!characterPtr->IsFlipped())
+                {
+                    characterPtr->EnableFlip();
+                }
+            }
 
-        if ((associated.box.x == characterPtr->GetLastPosition().x) && (associated.box.y == characterPtr->GetLastPosition().y) && characterPtr->GetSpeed().y == 0)
-        {
-            if (characterState != character_state::IDLE)
+            if (InputManager::GetInstance().KeyPress(O_KEY))
             {
-                Idle();
+                Attack();
             }
-        }
-        // Joystick
-        if (InputManager::GetInstance().KeyPress(SPACE_KEY))
-        {
-            if ((characterState != character_state::JUMPING) && (characterPtr->GetSpeed().y == 0))
+            if (InputManager::GetInstance().KeyPress(P_KEY))
             {
-                Jump();
+                Absorb();
             }
-        }
-        if (InputManager::GetInstance().IsKeyDown(D_KEY))
-        {
-            Walk(PLAYER_LVL0_STEP, dt);
-            if (characterPtr->IsFlipped())
-            {
-                characterPtr->DisableFlip();
-            }
-        }
-        if (InputManager::GetInstance().IsKeyDown(A_KEY))
-        {
-            Walk((-1) * PLAYER_LVL0_STEP, dt);
-            if (!characterPtr->IsFlipped())
-            {
-                characterPtr->EnableFlip();
-            }
-        }
 
-        if (InputManager::GetInstance().KeyPress(O_KEY))
-        {
-            Attack();
-        }
-        if (InputManager::GetInstance().KeyPress(P_KEY))
-        {
-            Absorb();
-        }
-
-        if ((associated.box.x <= (-Camera::pos.x + LEFT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x > associated.box.x) ||
-            (associated.box.x + associated.box.w >= (-Camera::pos.x + RIGHT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x < associated.box.x))
-        {
-            Camera::Follow(&associated);
-        }
-        else
-        {
-            Camera::Unfollow();
+            if ((associated.box.x <= (-Camera::pos.x + LEFT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x > associated.box.x) ||
+                (associated.box.x + associated.box.w >= (-Camera::pos.x + RIGHT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x < associated.box.x))
+            {
+                Camera::Follow(&associated);
+            }
+            else
+            {
+                Camera::Unfollow();
+            }
         }
     }
+}
+
+void Player::SetCharacterState(character_state state)
+{
+    characterState = state;
+}
+
+character_state Player::GetCharacterState()
+{
+    return characterState;
 }
 
 void Player::Render()
@@ -104,12 +121,62 @@ void Player::Idle()
 
 void Player::Attack()
 {
-    Transformation* currentTransf = (Transformation*)transformStack.top().get();
+    Transformation *currentTransf = (Transformation *)transformStack.top().get();
     currentTransf->Attack();
 }
 
 void Player::Absorb()
 {
-    Transformation* currentTransf = (Transformation*)transformStack.top().get();
+    Transformation *currentTransf = (Transformation *)transformStack.top().get();
     currentTransf->Absorb();
+}
+
+int Player::GetLvl()
+{
+    return lvl;
+}
+
+void Player::LvlUp()
+{
+    lvl += 1;
+}
+
+void Player::LvlDown()
+{
+    lvl -= 1;
+}
+
+void Player::NotifyCollision(GameObject &other)
+{
+    if (characterState == character_state::ABSORBING)
+    {
+        if ((other.GetComponent("CollisionBox").get() != nullptr) || (other.GetComponent("Character").get() != nullptr))
+        {
+            characterState = character_state::IDLE;
+            Character *characterPtr = (Character *)associated.GetComponent("Character").get();
+            characterPtr->SetSpeed(Vec2(0, 0));
+        }
+        Character *enemyCharPtr = (Character *)other.GetComponent("Character").get();
+        if (enemyCharPtr != nullptr)
+        {
+            Transform(enemyCharPtr->Type());
+        }
+    }
+}
+
+void Player::Transform(char_type type)
+{
+    switch (type)
+    {
+        case ENTOKRATON_1:
+        {
+            std::shared_ptr<Alien_1> alien_1(new Alien_1(associated));
+            transformStack.push(alien_1);
+            break;
+
+        }
+        
+        default:
+            break;
+        }
 }

@@ -21,6 +21,7 @@ public:
     Vec2 GetLastPosition();
     Vec2 GetPosition();
     Vec2 GetSpeed();
+    void SetSpeed(Vec2 speed);
     void SetSpeed(int speedX, int speedY);
     void SetSpeedX(int speedX);
     void SetSpeedY(int speedY);
@@ -30,7 +31,7 @@ public:
     void ApplyDamage(int damage);
     char_type Type();
 
-    static Character* player;
+    static Character* playerChar;
     Rect box;
 
 private:
