@@ -23,10 +23,10 @@ void Entokraton_1::Update(float dt)
         if (restTimer.Get() >= ENEMY_1_COOLDOWN)
         {
 
-            if  (Character::player != nullptr && 
-                ( abs( associated.box.x - Character::player->GetPosition().x ) < ENEMY_1_PERCEPTION ) )
+            if  (Character::playerChar != nullptr && 
+                ( abs( associated.box.x - Character::playerChar->GetPosition().x ) < ENEMY_1_PERCEPTION ) )
             {
-                // distance = Character::player->GetPosition() - associated.box.GetVec2();
+                // distance = Character::playerChar->GetPosition() - associated.box.GetVec2();
                 // if (distance.x < 0)
                 // {
                 //     direction = -1;
@@ -78,8 +78,8 @@ void Entokraton_1::Update(float dt)
         enemySprite->SetEndFrame(ENEMY_1_WALK_END);
         enemySprite->SetAnimationTime(ENEMY_1_WALK_TIME);
 
-        if  (Character::player != nullptr && 
-                ( abs( associated.box.x - Character::player->GetPosition().x ) < ENEMY_1_PERCEPTION ) )
+        if  (Character::playerChar != nullptr && 
+                ( abs( associated.box.x - Character::playerChar->GetPosition().x ) < ENEMY_1_PERCEPTION ) )
         {                
             state = CHASING;
         }
@@ -132,10 +132,10 @@ void Entokraton_1::Update(float dt)
         // enemySprite->SetEndFrame(ENEMY_1_WALK_END);
         // enemySprite->SetAnimationTime(ENEMY_1_WALK_TIME);
 
-        // if (associated.box.x + associated.box.w < Character::player->box.x)
+        // if (associated.box.x + associated.box.w < Character::playerChar->box.x)
         // {//inimigo à esquerda
         //     std::cout << "->";
-        //     distance.x = Character::player->box.x - associated.box.x - associated.box.w;
+        //     distance.x = Character::playerChar->box.x - associated.box.x - associated.box.w;
         //     float movement = ENEMY_1_STEP * dt;
 
         //     if (distance.x >= abs(movement))
@@ -148,10 +148,10 @@ void Entokraton_1::Update(float dt)
         //         state = ATTACKING;
         //     }
         // }
-        // else if (associated.box.x > Character::player->box.x + Character::player->box.w)
+        // else if (associated.box.x > Character::playerChar->box.x + Character::playerChar->box.w)
         // {//inimigo à direita
         //     std::cout << "<-";
-        //     distance.x = associated.box.x - Character::player->box.x - Character::player->box.w;
+        //     distance.x = associated.box.x - Character::playerChar->box.x - Character::playerChar->box.w;
         //     float movement = ENEMY_1_STEP * dt;
 
         //     if (distance.x >= abs(movement))
@@ -181,7 +181,7 @@ void Entokraton_1::Update(float dt)
         //     if (distance.Absolute() >= abs(movement))
         //     {
         //         associated.box.x += movement;
-        //         distance = Character::player->GetPosition() - associated.box.GetVec2();
+        //         distance = Character::playerChar->GetPosition() - associated.box.GetVec2();
         //     }
         // }
         state = RESTING;
