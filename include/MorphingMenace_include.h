@@ -106,6 +106,19 @@ enum character_state
 #define ENTOKRATON_1_WALK_END 6
 #define ENTOKRATON_1_WALK_TIME 0.1
 #define ENTOKRATON_1_HP 50
+#define ENTOKRATON_1_IDLE1_SOUND "assets/audio/alien1/alien 1 - idle 1.ogg"
+#define ENTOKRATON_1_IDLE2_SOUND "assets/audio/alien1/alien 1 - idle 2.ogg"
+#define ENTOKRATON_1_WALK1_SOUND "assets/audio/alien1/alien 1 - andar.ogg"
+#define ENTOKRATON_1_STEP 150
+#define ENTOKRATON_1_COOLDOWN 2
+#define ENTOKRATON_1_PERCEPTION 300
+#define ENTOKRATON_1_ATTACK_RANGE 30
+#define ENTOKRATON_1_WALK_RANGE 200
+#define ENTOKRATON_1_STOP_RANGE 5
+#define ENTOKRATON_1_ATTACK_WIDTH 30
+#define ENTOKRATON_1_ATTACK_HEIGHT 100
+#define ENTOKRATON_1_ATTACK_TIME 0.05
+#define ENTOKRATON_1_ATTACK_DAMAGE 10
 #define ENEMY_1_IDLE_START 0
 #define ENEMY_1_IDLE_END 2
 #define ENEMY_1_IDLE_TIME 0.1
