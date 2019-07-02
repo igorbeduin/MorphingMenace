@@ -6,6 +6,7 @@
 #include "MorphingMenace_include.h"
 #include "Engine_include.h"
 
+#include "GUI.h"
 #include "Collider.h"
 #include "State.h"
 #include "Music.h"
