@@ -51,7 +51,7 @@ StageState::StageState()
     GameObject* player = new GameObject();
     std::shared_ptr<Character> playerBehaviour(new Character(*player, PLAYER_INITIAL_HP, char_type::PLAYER));
     player->AddComponent(playerBehaviour);
-    std::shared_ptr<Collider> playerCollider(new Collider(*player, {0.8,0.5}));
+    std::shared_ptr<Collider> playerCollider(new Collider(*player));
     player->AddComponent(playerCollider);
 
     Vec2 initPos = Vec2(PLAYER_INIT_POS);
