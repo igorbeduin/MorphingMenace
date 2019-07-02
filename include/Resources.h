@@ -29,12 +29,15 @@ class Resources{
     static void ClearImages();
 
     static std::shared_ptr<Mix_Music> GetMusic(std::string file);
+    static void AddMusic(std::string file);
     static void ClearMusics();
 
     static std::shared_ptr<Mix_Chunk> GetSound(std::string file);
+    static void AddSound(std::string file);
     static void ClearSounds();
 
     static std::shared_ptr<TTF_Font> GetFont(std::string file, int fontSize);
+    // static void AddFont(std::string file);
     static void ClearFonts();
 
 };

@@ -183,3 +183,43 @@ void Resources::AddImage(std::string file)
     }
   }
 }
+void Resources::AddMusic(std::string file)
+{
+
+  std::unordered_map<std::string, std::shared_ptr<Mix_Music> >::const_iterator it = musicTable.find(file);//procura o arquivo solicitado na tabela de Músicas
+  if ( it == musicTable.end() )
+  {//Caso não encontre a música, abre e aloca ela na memória
+    const char* path = file.c_str();
+    Mix_Music* raw_music = Mix_LoadMUS(path);
+    std::shared_ptr<Mix_Music> music(raw_music, [](Mix_Music* delete_music){Mix_FreeMusic(delete_music); } );
+
+     if (music == nullptr)
+     {
+        std::cout << "Error loading music, Error code: "<< SDL_GetError() << std::endl;
+     } 
+     else 
+     {
+       musicTable.emplace(file, music);//coloca a música e seu caminho na tabela
+     }
+   }
+}
+void Resources::AddSound(std::string file)
+{
+     std::unordered_map<std::string, std::shared_ptr<Mix_Chunk> >::const_iterator it = soundTable.find(file);
+   if ( it == soundTable.end() ){
+
+    const char* path = file.c_str();
+    Mix_Chunk* raw_chunk = Mix_LoadWAV(path);
+    std::shared_ptr<Mix_Chunk> chunk(raw_chunk, [](Mix_Chunk* delete_chunk){Mix_FreeChunk(delete_chunk); } );
+
+    if (chunk == nullptr)
+    {
+      std::cout << "Error loading chunk, Error code: "<< SDL_GetError() << std::endl;
+    }
+    else
+    {
+      soundTable.emplace (file, chunk);
+    }
+  }
+}
+
