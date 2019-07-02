@@ -215,7 +215,7 @@ void Sprite::SetStartFrame(int startFrame)
 
 void Sprite::SetEndFrame(int endFrame)
 {
-  if (this->EndFrame = endFrame)
+  if (this->EndFrame != endFrame)
   {
     this->EndFrame = endFrame;
   }
