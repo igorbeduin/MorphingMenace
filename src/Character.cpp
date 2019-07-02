@@ -2,6 +2,7 @@
 #include "../include/Environment.h"
 #include "../include/InputManager.h"
 #include "../include/Collider.h"
+#include "../include/Camera.h"
 
 Character* Character::playerChar = nullptr;
 Character::Character(GameObject &associated, int maxHP, char_type charType) : Component::Component(associated),
