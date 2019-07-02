@@ -25,7 +25,7 @@ void Entokraton_1::Update(float dt)
     std::cout << enemySprite->GetCurrentFrame() << std::endl;
     // Sound *idle1Sound = (Sound *)associated.GetComponent("Sound").get();
     // Sound *walkSound = (Sound *)associated.GetComponent("Sound").get();
-    // std::cout << Character::player << std::endl ;
+    // std::cout << Character::playerChar << std::endl ;
     switch (state)
     {
 
@@ -33,15 +33,15 @@ void Entokraton_1::Update(float dt)
     // std::cout << "idle" << std::endl;
     
     std::cout << "idle" << std::endl;
-    // std::cout << associated.box.x << " - " << Character::player->box.x << std::endl;
+    // std::cout << associated.box.x << " - " << Character::playerChar->box.x << std::endl;
 
     enemySprite->RunSpecificAnimation();
     enemySprite->SetStartFrame(ENTOKRATON_1_IDLE_START);
     enemySprite->SetEndFrame(ENTOKRATON_1_IDLE_END);
     enemySprite->SetAnimationTime(ENTOKRATON_1_IDLE_TIME);
 
-        if  (Character::player != nullptr && 
-                ( abs( associated.box.GetCenter().x - Character::player->GetPosition().x ) < ENTOKRATON_1_PERCEPTION )  && abs( associated.box.GetCenter().y - Character::player->GetPosition().y) <  ENTOKRATON_1_PERCEPTION/2.5 )
+        if  (Character::playerChar != nullptr && 
+                ( abs( associated.box.GetCenter().x - Character::playerChar->GetPosition().x ) < ENTOKRATON_1_PERCEPTION )  && abs( associated.box.GetCenter().y - Character::playerChar->GetPosition().y) <  ENTOKRATON_1_PERCEPTION/2.5 )
         {   
             sounds[0]->Play(1);                
             state = CHASING;
@@ -95,8 +95,8 @@ void Entokraton_1::Update(float dt)
             firstTime = false;
         }
 
-        if  (Character::player != nullptr && 
-                ( abs( associated.box.GetCenter().x - Character::player->GetPosition().x ) < ENTOKRATON_1_PERCEPTION )  && abs( associated.box.GetCenter().y - Character::player->GetPosition().y) <  ENTOKRATON_1_PERCEPTION/2.5 )
+        if  (Character::playerChar != nullptr && 
+                ( abs( associated.box.GetCenter().x - Character::playerChar->GetPosition().x ) < ENTOKRATON_1_PERCEPTION )  && abs( associated.box.GetCenter().y - Character::playerChar->GetPosition().y) <  ENTOKRATON_1_PERCEPTION/2.5 )
         {                
             sounds[0]->Play(1);
             state = CHASING;
@@ -147,8 +147,8 @@ void Entokraton_1::Update(float dt)
             firstTime = false;
         }
 
-        distance = Character::player->GetPosition() - associated.box.GetCenter();
-        destination = Character::player->GetPosition();
+        distance = Character::playerChar->GetPosition() - associated.box.GetCenter();
+        destination = Character::playerChar->GetPosition();
 
         if (distance.x < 0)
         {
@@ -169,7 +169,7 @@ void Entokraton_1::Update(float dt)
             sounds[1]->Play(1);
             direction = -direction;
         }
-         else if ( abs(Character::player->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/2 > ENTOKRATON_1_ATTACK_RANGE && (abs(distance.x) <= ENTOKRATON_1_PERCEPTION && abs(distance.y) <= ENTOKRATON_1_PERCEPTION/2.5) )
+         else if ( abs(Character::playerChar->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/2 > ENTOKRATON_1_ATTACK_RANGE && (abs(distance.x) <= ENTOKRATON_1_PERCEPTION && abs(distance.y) <= ENTOKRATON_1_PERCEPTION/2.5) )
         {
             // std::cout << "volta aqui" << std::endl;
             float movement = direction * ENTOKRATON_1_STEP * dt;
@@ -180,7 +180,7 @@ void Entokraton_1::Update(float dt)
                 distance.x = destination.x - associated.box.x;
             }
 
-        } else if (abs(Character::player->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/2 <= ENTOKRATON_1_ATTACK_RANGE)
+        } else if (abs(Character::playerChar->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/2 <= ENTOKRATON_1_ATTACK_RANGE)
         {
             state = ATTACKING;
         }
