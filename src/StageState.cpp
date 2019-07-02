@@ -98,6 +98,10 @@ void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carre
     Resources::AddImage(STARS_BACKGROUND_PATH);
     Resources::AddImage(TILESET_PATH);
     Resources::AddImage(PLANET_BACKGROUND_PATH);
+    ////////////////////////////////////////////
+    Resources::AddSound(ENTOKRATON_1_IDLE1_SOUND);
+    Resources::AddSound(ENTOKRATON_1_IDLE2_SOUND);
+    Resources::AddSound(ENTOKRATON_1_WALK1_SOUND);
 }
 
 void StageState::Update(float dt)
