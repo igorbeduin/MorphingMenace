@@ -159,3 +159,27 @@ std::shared_ptr<Mix_Chunk> Resources::GetSound(std::string file){// Funciona de 
     }
     // imageTable.clear();//limpa a tabela
   }
+
+void Resources::AddImage(std::string file)
+{
+
+  std::unordered_map<std::string, std::shared_ptr<SDL_Texture>>::const_iterator it = imageTable.find(file);//procura o arquivo solicitado na tabela de imagens
+  SDL_Texture* raw_texture;
+
+  if ( it == imageTable.end() )
+    {//Caso não encontre a imagem, abre e aloca ela na memória
+
+    const char* path = file.c_str();
+    raw_texture = IMG_LoadTexture(Game::GetInstance().GetRenderer(), path);
+    std::shared_ptr<SDL_Texture> texture(raw_texture, [](SDL_Texture* delete_texture){ SDL_DestroyTexture(delete_texture); } );
+
+    if (texture == nullptr)
+    {
+      std::cout << "Error loading texture, Error code: "<< SDL_GetError() << std::endl;//caso o IMG_LoadTexture retorne nullptr (erro comum)
+    } 
+    else
+    {
+      imageTable.emplace(file, texture);//coloca a imagem e seu caminho na tabela
+    }
+  }
+}

@@ -25,6 +25,7 @@ class Resources{
 
   public:
     static std::shared_ptr<SDL_Texture> GetImage(std::string file);
+    static void AddImage(std::string file);
     static void ClearImages();
 
     static std::shared_ptr<Mix_Music> GetMusic(std::string file);
