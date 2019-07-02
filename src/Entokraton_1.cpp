@@ -13,7 +13,7 @@ void Entokraton_1::Update(float dt)
     {
 
     case RESTING:
-    std::cout << "idle" << std::endl;
+    // std::cout << "idle" << std::endl;
 
     enemySprite->RunSpecificAnimation();
     enemySprite->SetStartFrame(ENEMY_1_IDLE_START);
@@ -71,7 +71,7 @@ void Entokraton_1::Update(float dt)
         break;
 
     case MOVING://flipar sprite
-    std::cout << "wandering away" << std::endl;
+    // std::cout << "wandering away" << std::endl;
 
         enemySprite->RunSpecificAnimation();
         enemySprite->SetStartFrame(ENEMY_1_WALK_START);
@@ -118,13 +118,13 @@ void Entokraton_1::Update(float dt)
         
     case ATTACKING:        
         //para o movimento e chama o método attacking
-        std::cout << "ENTOKRATON used SLASH" << std::endl;
+        // std::cout << "ENTOKRATON used SLASH" << std::endl;
         state = RESTING;
         break;
     
     case CHASING://flipar sprite
         // std::cout << "VOLTA AQUI OTÀRIO" << std::endl;
-        std::cout << "CHASING" << std::endl;
+        // std::cout << "CHASING" << std::endl;
         //se aproxima do jogador, muda o estado para attacking
 
         // enemySprite->RunSpecificAnimation();

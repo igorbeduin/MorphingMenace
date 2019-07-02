@@ -5,10 +5,7 @@
 
 Alien_0::Alien_0(GameObject &associated) : Component::Component(associated),
                                            sprite(new Sprite(associated, PLAYER_LVL0_SPRITE_PATH, PLAYER_LVL0_SPRITES_NUMB, PLAYER_LVL0_SPRITES_TIME))
-{
-    //std::shared_ptr<Sprite> charSprite(new Sprite(associated, PLAYER_LVL0_SPRITE_PATH, PLAYER_LVL0_SPRITES_NUMB, PLAYER_LVL0_SPRITES_TIME));
-    //sprite = charSprite;
-    
+{   
     sprite->SetScale(PLAYER_LVL0_SCALE, PLAYER_LVL0_SCALE);
 }
 void Alien_0::Update(float dt)
@@ -86,4 +83,11 @@ void Alien_0::VerifyState()
             break;
         }
     }
+}
+
+void Alien_0::UpdateAssocBox()
+{
+    Collider* colliderPtr = (Collider*)associated.GetComponent("Collider").get();
+    colliderPtr->box.w = sprite->GetWidth();
+    colliderPtr->box.h = sprite->GetHeight();
 }

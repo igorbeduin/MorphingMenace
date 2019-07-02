@@ -20,6 +20,8 @@ public:
     void Attack();
     void Absorb();
     void VerifyState();
+    void UpdateAssocBox();
+
 private:
     std::shared_ptr<Sprite> sprite;
 };

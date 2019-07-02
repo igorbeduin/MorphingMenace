@@ -30,7 +30,7 @@ void TileMap::Load(std::string file){
 //Nesse laço, percorre-se o resto do arquivo salvando todos os tiles no tilemap em um único vector
   for (int i = 0; i < (mapWidth*mapHeight*mapDepth); i++){
     map >> tile;
-    tileMatrix.push_back(tile-1);
+    tileMatrix.push_back(tile);
     map.seekg (1, map.cur);
   }
   map.close();
