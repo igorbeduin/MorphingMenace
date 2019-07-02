@@ -32,6 +32,8 @@ public:
     static Player* player;
     void NotifyCollision(GameObject &other);
     void Transform(char_type type);
+    void EnteringState(float dt);
+    void ExitingState(float dt);
 
 private:
     character_state characterState;

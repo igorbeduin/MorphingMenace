@@ -17,6 +17,7 @@ private:
 
   TileSet* tileSet;
   Music backgroundMusic;
+  std::vector<std::shared_ptr<GameObject>> collisionObjectsArray;
 
 public:
 
@@ -30,4 +31,5 @@ public:
   void Start();
   void Pause();
   void Resume();
+  std::weak_ptr<GameObject> AddCollisionObject(GameObject *object);
 };

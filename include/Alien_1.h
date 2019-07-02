@@ -7,6 +7,7 @@
 #include "Component.h"
 #include "Transformation.h"
 #include "Sprite.h"
+#include "Timer.h"
 
 class Sprite;
 
@@ -18,9 +19,10 @@ public:
     void Render();
     bool Is(std::string type);
     void Attack();
-    void Absorb();
     void VerifyState();
+    void UpdateAssocBox();
 
 private:
     std::shared_ptr<Sprite> sprite;
+    Timer atkTimer;
 };

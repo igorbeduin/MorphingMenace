@@ -51,7 +51,7 @@ StageState::StageState()
     GameObject* player = new GameObject();
     std::shared_ptr<Character> playerBehaviour(new Character(*player, PLAYER_INITIAL_HP, char_type::PLAYER));
     player->AddComponent(playerBehaviour);
-    std::shared_ptr<Collider> playerCollider(new Collider(*player, Vec2(0.65, 1) ));
+    std::shared_ptr<Collider> playerCollider(new Collider(*player, {0.8,0.5}));
     player->AddComponent(playerCollider);
 
     Vec2 initPos = Vec2(PLAYER_INIT_POS);
@@ -126,6 +126,14 @@ void StageState::Update(float dt)
                     }
                 }
             }
+            for (int j = 0; j < (int)collisionObjectsArray.size(); j++)
+            {
+                std::shared_ptr<Collider> collisionObjectComponent = std::dynamic_pointer_cast<Collider>(collisionObjectsArray[j]->GetComponent("Collider"));
+                if (Collision::IsColliding(colliderComponent->box, collisionObjectComponent->box, objectArray[i]->GetAngleRad(), collisionObjectsArray[j]->GetAngleRad()))
+                {
+                    objectArray[i]->NotifyCollision(*collisionObjectsArray[j].get());
+                }
+            }
         }
     }
 
@@ -134,10 +142,13 @@ void StageState::Update(float dt)
         quitRequested = true;
     }
     
-    // std::cout << "(int)objectArray.size(): " << (int)objectArray.size() << std::endl;
     for (int i = 0; i < (int)objectArray.size(); i++)
     {
         objectArray[i]->Update(dt);
+    }
+    for (int i = 0; i < (int)collisionObjectsArray.size(); i++)
+    {
+        collisionObjectsArray[i]->Update(dt);
     }
 }
 
@@ -147,6 +158,10 @@ void StageState::Render()
     {
         objectArray[i]->Render();
     }
+    for (int i = 0; i < (int)collisionObjectsArray.size(); i++)
+    {
+        collisionObjectsArray[i]->Render();
+    }
 }
 
 StageState::~StageState()
@@ -155,7 +170,7 @@ StageState::~StageState()
 
 void StageState::Start()
 {
-    backgroundMusic.Play(-1);
+    // backgroundMusic.Play(-1);
 }
 
 void StageState::Pause()
@@ -164,4 +179,21 @@ void StageState::Pause()
 
 void StageState::Resume()
 {
+}
+
+std::weak_ptr<GameObject> StageState::AddCollisionObject(GameObject *object)
+{
+
+    std::shared_ptr<GameObject> shared(object);
+    collisionObjectsArray.emplace_back(shared); //adicionando o shared object criado no object array
+
+    std::weak_ptr<GameObject> weak;
+    weak = collisionObjectsArray.back(); //weak recebe o último elemento adicionado no object array (que é o shared criado)
+
+    if (started)
+    {
+        collisionObjectsArray.back()->Start();
+    }
+
+    return weak;
 }
