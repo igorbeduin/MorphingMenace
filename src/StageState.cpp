@@ -60,6 +60,15 @@ StageState::StageState()
 
     AddObject(player);
 
+    //Creating GUI
+    GameObject *gui = new GameObject();
+    std::shared_ptr<CameraFollower> guiCamFollow(new CameraFollower(*gui));
+    gui->AddComponent(guiCamFollow);
+    std::shared_ptr<GUI> playerGUI(new GUI(*gui));
+    gui->AddComponent(playerGUI);
+
+    AddObject(gui);
+
     //Creating enemy
     GameObject *enemy = new GameObject();
     std::shared_ptr<Character> enemyBehaviour(new Character(*enemy, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
