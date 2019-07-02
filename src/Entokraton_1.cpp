@@ -1,4 +1,5 @@
 #include "../include/Entokraton_1.h"
+#include "../include/Game.h"
 
 Entokraton_1::Entokraton_1(GameObject &associated) : Component::Component(associated), state(RESTING)
 {
