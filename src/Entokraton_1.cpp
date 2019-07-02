@@ -234,7 +234,7 @@ void Entokraton_1::Attack()//verificar friendly fire
     }
     attack->box.y = associatedCollider->box.GetVec2().y ;
 
-    std::shared_ptr<Damage> attackBehaviour(new Damage(*attack, ENTOKRATON_1_ATTACK_DAMAGE, ENTOKRATON_1_ATTACK_TIME));
+    std::shared_ptr<Damage> attackBehaviour(new Damage(*attack, ENTOKRATON_1_ATTACK_DAMAGE, ENTOKRATON_1_ATTACK_TIME, associatedCharacter->Type()));
     attack->AddComponent(attackBehaviour);
     std::shared_ptr<Collider> attackCollider(new Collider(*attack));
     attack->AddComponent(attackCollider);
