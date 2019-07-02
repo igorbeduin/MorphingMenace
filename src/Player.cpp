@@ -89,7 +89,7 @@ void Player::LvlDown()
     transformStack.pop();
     Alien_0 *currentTransf = (Alien_0 *)transformStack.top().get();
     //TODO: Resolver esse bug aqui
-    //          currentTransf->UpdateAssocBox();
+    currentTransf->UpdateAssocBox();
     lvl -= 1;
 }
 
