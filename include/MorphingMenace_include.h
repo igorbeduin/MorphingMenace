@@ -50,7 +50,7 @@ enum character_state
     #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/baby-pulando.png"
     #define PLAYER_LVL0_SPRITES_NUMB 8
     #define PLAYER_LVL0_SPRITES_TIME 0.16
-    #define PLAYER_LVL0_SCALE 0.15
+    #define PLAYER_LVL0_SCALE 0.08
     #define PLAYER_LVL0_STEP 200
     #define PLAYER_LVL0_JUMP -800
     #define PLAYER_INIT_POS {400, 300}
@@ -138,14 +138,14 @@ enum character_state
     #include "Sprite.h"
     #include "TileMap.h"
 
-    #define PLANET_BACKGROUND_PATH "assets/img/PlanetBackground.png"
+    #define PLANET_BACKGROUND_PATH "assets/img/BG01.png"
     #define STARS_BACKGROUND_PATH "assets/img/StarsBackground.jpg"
-    #define PLANET_BACKGROUND_SCALE 0.3
-    #define TILESET_PATH "assets/img/Chao4x2.png"
+    #define PLANET_BACKGROUND_SCALE 1.2
+    #define TILESET_PATH "assets/img/tileset.png"
     #define TILEMAP_PATH "assets/map/tileMap.txt"
-    #define TILE_SCALE 0.0625
-    #define TILE_HEIGHT 1024
-    #define TILE_WIDTH 1024
+    #define TILE_SCALE 1.2
+    #define TILE_HEIGHT 64
+    #define TILE_WIDTH 64
     #define STAGE_BG_MUSIC_PATH "assets/audio/background_demo1.ogg"
 
 #endif
