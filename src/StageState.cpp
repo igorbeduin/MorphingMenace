@@ -1,6 +1,7 @@
 #include "../include/StageState.h"
 #include "../include/InputManager.h"
 #include "../include/Environment.h"
+#include "../include/Resources.h"
 
 StageState::StageState()
 {   
@@ -98,8 +99,18 @@ StageState::StageState()
     */
 }
 
-void StageState::LoadAssets()
+void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carregar ele no load
 {
+    Resources::AddImage(PLAYER_LVL0_SPRITE_PATH);
+    Resources::AddImage(PLAYER_LVL1_SPRITE_PATH);
+    Resources::AddImage(ENTOKRATON_1_SPRITE_PATH);
+    Resources::AddImage(STARS_BACKGROUND_PATH);
+    Resources::AddImage(TILESET_PATH);
+    Resources::AddImage(PLANET_BACKGROUND_PATH);
+    ////////////////////////////////////////////
+    Resources::AddSound(ENTOKRATON_1_IDLE1_SOUND);
+    Resources::AddSound(ENTOKRATON_1_IDLE2_SOUND);
+    Resources::AddSound(ENTOKRATON_1_WALK1_SOUND);
 }
 
 void StageState::Update(float dt)
@@ -179,7 +190,8 @@ StageState::~StageState()
 
 void StageState::Start()
 {
-    // backgroundMusic.Play(-1);
+    LoadAssets();
+    backgroundMusic.Play(-1);
 }
 
 void StageState::Pause()
