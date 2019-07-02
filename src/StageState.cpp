@@ -170,7 +170,7 @@ StageState::~StageState()
 
 void StageState::Start()
 {
-    backgroundMusic.Play(-1);
+    // backgroundMusic.Play(-1);
 }
 
 void StageState::Pause()

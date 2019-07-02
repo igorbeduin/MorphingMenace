@@ -207,12 +207,18 @@ int Sprite::GetCurrentFrame()
 
 void Sprite::SetStartFrame(int startFrame)
 {
-  this->StartFrame = startFrame;
+  if (this->StartFrame != startFrame)
+  {
+    this->StartFrame = startFrame;
+  }
 }
 
 void Sprite::SetEndFrame(int endFrame)
 {
-  this->EndFrame = endFrame;
+  if (this->EndFrame = endFrame)
+  {
+    this->EndFrame = endFrame;
+  }
 }
 
 void Sprite::SetAnimationTime(float animationTime)
@@ -227,7 +233,6 @@ void Sprite::RunSpecificAnimation()
     currentFrame = StartFrame;
     timeElapsed = 0;
   }
-  
   this->ChangeAnimation = true;
 }
         // PARA CHAMAR A ANIMAÇÂO 
