@@ -108,6 +108,7 @@ void StageState::Update(float dt)
 
     // Verify collisions
     std::vector<std::shared_ptr<GameObject>> objWithCollider;
+    Vec2 distanceToBox;
     for (int i = (int)objectArray.size() - 1; i >= 0; i--)
     {
         std::shared_ptr<Collider> colliderComponent = std::dynamic_pointer_cast<Collider>(objectArray[i]->GetComponent("Collider"));
@@ -115,6 +116,7 @@ void StageState::Update(float dt)
         if (colliderComponent != nullptr)
         {
             objWithCollider.push_back(objectArray[i]);
+            // Verify collision with other GameObjects
             for (int j = 0; j < (int)objWithCollider.size(); j++)
             {
                 std::shared_ptr<Collider> ObjWithcolliderComponent = std::dynamic_pointer_cast<Collider>(objWithCollider[j]->GetComponent("Collider"));
@@ -127,12 +129,18 @@ void StageState::Update(float dt)
                     }
                 }
             }
+            // Verify collision with SCENARIO collision objects
             for (int j = 0; j < (int)collisionObjectsArray.size(); j++)
-            {
-                std::shared_ptr<Collider> collisionObjectComponent = std::dynamic_pointer_cast<Collider>(collisionObjectsArray[j]->GetComponent("Collider"));
-                if (Collision::IsColliding(colliderComponent->box, collisionObjectComponent->box, objectArray[i]->GetAngleRad(), collisionObjectsArray[j]->GetAngleRad()))
+            {   
+                distanceToBox = objectArray[i]->box.GetCenter() - collisionObjectsArray[j]->box.GetCenter();
+            
+                if (distanceToBox.Absolute() <= SCENARIO_COLLISION_RADIUS)
                 {
-                    objectArray[i]->NotifyCollision(*collisionObjectsArray[j].get());
+                    std::shared_ptr<Collider> collisionObjectComponent = std::dynamic_pointer_cast<Collider>(collisionObjectsArray[j]->GetComponent("Collider"));
+                    if (Collision::IsColliding(colliderComponent->box, collisionObjectComponent->box, objectArray[i]->GetAngleRad(), collisionObjectsArray[j]->GetAngleRad()))
+                    {
+                        objectArray[i]->NotifyCollision(*collisionObjectsArray[j].get());
+                    }
                 }
             }
         }
