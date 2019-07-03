@@ -119,13 +119,17 @@ void StageState::Update(float dt)
             // Verify collision with other GameObjects
             for (int j = 0; j < (int)objWithCollider.size(); j++)
             {
-                std::shared_ptr<Collider> ObjWithcolliderComponent = std::dynamic_pointer_cast<Collider>(objWithCollider[j]->GetComponent("Collider"));
-                if (objectArray[i] != objWithCollider[j])
+                distanceToBox = objectArray[i]->box.GetCenter() - objWithCollider[j]->box.GetCenter();
+                if (distanceToBox.Absolute() <= SCENARIO_COLLISION_RADIUS)
                 {
-                    if (Collision::IsColliding(colliderComponent->box, ObjWithcolliderComponent->box, objectArray[i]->GetAngleRad(), objWithCollider[j]->GetAngleRad()))
+                    std::shared_ptr<Collider> ObjWithcolliderComponent = std::dynamic_pointer_cast<Collider>(objWithCollider[j]->GetComponent("Collider"));
+                    if (objectArray[i] != objWithCollider[j])
                     {
-                        objectArray[i]->NotifyCollision(*objWithCollider[j].get());
-                        objWithCollider[j]->NotifyCollision(*objectArray[i].get());
+                        if (Collision::IsColliding(colliderComponent->box, ObjWithcolliderComponent->box, objectArray[i]->GetAngleRad(), objWithCollider[j]->GetAngleRad()))
+                        {
+                            objectArray[i]->NotifyCollision(*objWithCollider[j].get());
+                            objWithCollider[j]->NotifyCollision(*objectArray[i].get());
+                        }
                     }
                 }
             }
@@ -133,7 +137,6 @@ void StageState::Update(float dt)
             for (int j = 0; j < (int)collisionObjectsArray.size(); j++)
             {   
                 distanceToBox = objectArray[i]->box.GetCenter() - collisionObjectsArray[j]->box.GetCenter();
-            
                 if (distanceToBox.Absolute() <= SCENARIO_COLLISION_RADIUS)
                 {
                     std::shared_ptr<Collider> collisionObjectComponent = std::dynamic_pointer_cast<Collider>(collisionObjectsArray[j]->GetComponent("Collider"));
