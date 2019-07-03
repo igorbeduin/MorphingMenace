@@ -186,7 +186,7 @@ void Player::EnteringState(float dt)
             if ((associated.box.x <= (-Camera::pos.x + LEFT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x > associated.box.x) ||
                 (associated.box.x + associated.box.w >= (-Camera::pos.x + RIGHT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x < associated.box.x) ||
                 (associated.box.y <= (-Camera::pos.y + UP_FOCUS_LIMIT) && characterPtr->GetLastPosition().y > associated.box.y) ||
-                (associated.box.y + associated.box.h >= (-Camera::pos.y + DOWN_FOCUS_LIMIT) && characterPtr->GetLastPosition().y < associated.box.y) )
+                (associated.box.y + associated.box.h >= (-Camera::pos.y + DOWN_FOCUS_LIMIT) && characterPtr->GetLastPosition().y < associated.box.y))
             {
                 Camera::Follow(&associated);
             }
