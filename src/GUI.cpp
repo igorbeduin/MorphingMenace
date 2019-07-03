@@ -64,5 +64,31 @@ void GUI::VerifyLife()
 
 void GUI::VerifyInfuence()
 {
-    influenceSprite->SetFrame(0);
+    if (!Game::GetInstance().GetCurrentState().GetObjectPtr(&other).expired())
+    {
+        Player *otherPlayerPtr = (Player *)other.GetComponent("Player").get();
+        if (otherPlayerPtr != nullptr)
+        {
+            if (otherPlayerPtr->GetCurrentInfluence() > 0.75 * otherPlayerPtr->GetMaxInfluence() && otherPlayerPtr->GetCurrentInfluence() <= otherPlayerPtr->GetMaxInfluence())
+            {
+                influenceSprite->SetFrame(0);
+            }
+            if (otherPlayerPtr->GetCurrentInfluence() > 0.5 * otherPlayerPtr->GetMaxInfluence() && otherPlayerPtr->GetCurrentInfluence() <= 0.75 * otherPlayerPtr->GetMaxInfluence())
+            {
+                influenceSprite->SetFrame(1);
+            }
+            if (otherPlayerPtr->GetCurrentInfluence() > 0.25 && otherPlayerPtr->GetCurrentInfluence() <= 0.5 * otherPlayerPtr->GetMaxInfluence())
+            {
+                influenceSprite->SetFrame(2);
+            }
+            if (otherPlayerPtr->GetCurrentInfluence() > 0 && otherPlayerPtr->GetCurrentInfluence() <= 0.25 * otherPlayerPtr->GetMaxInfluence())
+            {
+                influenceSprite->SetFrame(3);
+            }
+            if (otherPlayerPtr->GetCurrentInfluence() <= 0)
+            {
+                influenceSprite->SetFrame(4);
+            }
+        }
+    }
 }
