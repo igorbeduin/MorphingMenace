@@ -222,4 +222,27 @@ void Resources::AddSound(std::string file)
     }
   }
 }
+void Resources::AddFont(std::string file, int fontSize)
+{
+  std::string file_and_size = file + std::to_string(fontSize);
+  std::unordered_map<std::string, std::shared_ptr<TTF_Font> >::const_iterator it = fontTable.find(file_and_size);//procura o arquivo solicitado na tabela de imagens
+  TTF_Font* raw_font;
+
+  if ( it == fontTable.end() )
+  {//Caso não encontre a imagem, abre e aloca ela na memória
+
+    const char* path = file.c_str();
+    raw_font = TTF_OpenFont(path, fontSize);
+    std::shared_ptr<TTF_Font> font(raw_font, [](TTF_Font* delete_font){ TTF_CloseFont(delete_font); } );
+
+    if (font == nullptr)
+    {
+      std::cout << "Error loading font, Error code: "<< SDL_GetError() << std::endl;//caso o IMG_LoadTexture retorne nullptr (erro comum)
+    } else 
+    {
+      fontTable.emplace(file, font);//coloca a imagem e seu caminho na tabela
+    }
+  }
+}
+
 

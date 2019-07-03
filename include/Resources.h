@@ -37,7 +37,7 @@ class Resources{
     static void ClearSounds();
 
     static std::shared_ptr<TTF_Font> GetFont(std::string file, int fontSize);
-    // static void AddFont(std::string file);
+    static void AddFont(std::string file, int fontSize);
     static void ClearFonts();
 
 };
