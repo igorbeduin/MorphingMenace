@@ -2,7 +2,7 @@
 
 #define INCLUDE_SDL
 #define MATH
-#define DEBUG
+// #define DEBUG
 
 #include "SDL_include.h"
 #include "Engine_include.h"

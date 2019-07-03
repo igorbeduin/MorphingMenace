@@ -1,4 +1,5 @@
 #include "../include/Entokraton_1.h"
+#include "../include/Game.h"
 
 Entokraton_1::Entokraton_1(GameObject &associated) : Component::Component(associated), state(RESTING)
 {
@@ -22,7 +23,7 @@ void Entokraton_1::Update(float dt)
 {
     Character *enemyCharacter = (Character *)associated.GetComponent("Character").get();
     Sprite *enemySprite = (Sprite *)associated.GetComponent("Sprite").get();
-    std::cout << enemySprite->GetCurrentFrame() << std::endl;
+    // std::cout << enemySprite->GetCurrentFrame() << std::endl;
     // Sound *idle1Sound = (Sound *)associated.GetComponent("Sound").get();
     // Sound *walkSound = (Sound *)associated.GetComponent("Sound").get();
     // std::cout << Character::playerChar << std::endl ;
@@ -32,7 +33,7 @@ void Entokraton_1::Update(float dt)
     case RESTING:
     // std::cout << "idle" << std::endl;
     
-    std::cout << "idle" << std::endl;
+    // std::cout << "idle" << std::endl;
     // std::cout << associated.box.x << " - " << Character::playerChar->box.x << std::endl;
 
     enemySprite->RunSpecificAnimation();
@@ -78,7 +79,7 @@ void Entokraton_1::Update(float dt)
         break;
 
     case MOVING://flipar sprite
-    std::cout << "moving" << std::endl;
+    // std::cout << "moving" << std::endl;
         enemySprite->RunSpecificAnimation();
         enemySprite->SetStartFrame(ENTOKRATON_1_WALK_START);
         enemySprite->SetEndFrame(ENTOKRATON_1_WALK_END);
@@ -137,7 +138,7 @@ void Entokraton_1::Update(float dt)
 
         if (enemySprite->GetCurrentFrame() == 4 && firstTime == false)
         {
-            std::cout << "step ";
+            // std::cout << "step ";
             sounds[2]->Play(1);
             firstTime = true;
         } 
@@ -189,7 +190,7 @@ void Entokraton_1::Update(float dt)
 
     case ATTACKING:        
 
-        std::cout << "Entokraton used CUT" << std::endl;
+        // std::cout << "Entokraton used CUT" << std::endl;
         enemySprite->RunSpecificAnimation();
         enemySprite->SetStartFrame(ENTOKRATON_1_WALK_START);
         enemySprite->SetEndFrame(ENTOKRATON_1_WALK_END);
@@ -234,7 +235,7 @@ void Entokraton_1::Attack()//verificar friendly fire
     }
     attack->box.y = associatedCollider->box.GetVec2().y ;
 
-    std::shared_ptr<Damage> attackBehaviour(new Damage(*attack, ENTOKRATON_1_ATTACK_DAMAGE, ENTOKRATON_1_ATTACK_TIME));
+    std::shared_ptr<Damage> attackBehaviour(new Damage(*attack, ENTOKRATON_1_ATTACK_DAMAGE, ENTOKRATON_1_ATTACK_TIME, associatedCharacter->Type()));
     attack->AddComponent(attackBehaviour);
     std::shared_ptr<Collider> attackCollider(new Collider(*attack));
     attack->AddComponent(attackCollider);

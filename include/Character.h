@@ -30,6 +30,8 @@ public:
     void DisableFlip();
     void ApplyDamage(int damage);
     char_type Type();
+    int GetCurrentHP();
+    int GetMaxHP();
 
     static Character* playerChar;
     Rect box;

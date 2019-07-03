@@ -88,8 +88,7 @@ void Player::LvlDown()
 {
     transformStack.pop();
     Alien_0 *currentTransf = (Alien_0 *)transformStack.top().get();
-    //TODO: Resolver esse bug aqui
-    //          currentTransf->UpdateAssocBox();
+    currentTransf->UpdateAssocBox();
     lvl -= 1;
 }
 
@@ -185,6 +184,10 @@ void Player::EnteringState(float dt)
             if (InputManager::GetInstance().KeyPress(P_KEY))
             {
                 Absorb();
+            }
+            if (InputManager::GetInstance().KeyPress(T_KEY))
+            {
+                characterPtr->ApplyDamage(50);
             }
 
             if ((associated.box.x <= (-Camera::pos.x + LEFT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x > associated.box.x) ||

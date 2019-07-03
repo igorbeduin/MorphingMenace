@@ -51,7 +51,7 @@ StageState::StageState()
     GameObject* player = new GameObject();
     std::shared_ptr<Character> playerBehaviour(new Character(*player, PLAYER_INITIAL_HP, char_type::PLAYER));
     player->AddComponent(playerBehaviour);
-    std::shared_ptr<Collider> playerCollider(new Collider(*player, {0.8,0.5}));
+    std::shared_ptr<Collider> playerCollider(new Collider(*player));
     player->AddComponent(playerCollider);
 
     Vec2 initPos = Vec2(PLAYER_INIT_POS);
@@ -59,6 +59,15 @@ StageState::StageState()
     player->box.y = initPos.y;
 
     AddObject(player);
+
+    //Creating GUI
+    GameObject *gui = new GameObject();
+    std::shared_ptr<CameraFollower> guiCamFollow(new CameraFollower(*gui));
+    gui->AddComponent(guiCamFollow);
+    std::shared_ptr<GUI> playerGUI(new GUI(*gui, *player));
+    gui->AddComponent(playerGUI);
+
+    AddObject(gui);
 
     //Creating enemy
     GameObject *enemy = new GameObject();
@@ -97,14 +106,6 @@ void StageState::Update(float dt)
 {
     Camera::Update(dt);
 
-    for (int i = 0; i < (int)objectArray.size(); i++)
-    {
-        if (objectArray[i]->IsDead())
-        {
-            objectArray.erase(objectArray.begin() + i);
-        }
-    }
-
     // Verify collisions
     std::vector<std::shared_ptr<GameObject>> objWithCollider;
     for (int i = (int)objectArray.size() - 1; i >= 0; i--)
@@ -136,7 +137,6 @@ void StageState::Update(float dt)
             }
         }
     }
-
     if (InputManager::GetInstance().KeyPress(ESCAPE_KEY) || InputManager::GetInstance().QuitRequested())
     {
         quitRequested = true;
@@ -150,6 +150,15 @@ void StageState::Update(float dt)
     {
         collisionObjectsArray[i]->Update(dt);
     }
+
+    for (int i = 0; i < (int)objectArray.size(); i++)
+    {
+        if (objectArray[i]->IsDead())
+        {
+            objectArray.erase(objectArray.begin() + i);
+        }
+    }
+    std::cout << "objectArray.size():" << objectArray.size() << std::endl;
 }
 
 void StageState::Render()

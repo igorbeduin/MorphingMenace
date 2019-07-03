@@ -2,6 +2,8 @@
 #include "../include/Environment.h"
 #include "../include/InputManager.h"
 #include "../include/Collider.h"
+#include "../include/Camera.h"
+#include "../include/Game.h"
 
 Character* Character::playerChar = nullptr;
 Character::Character(GameObject &associated, int maxHP, char_type charType) : Component::Component(associated),
@@ -45,16 +47,6 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
 void Character::Update(float dt)
 {
     // std::cout << currentHP << std::endl;    
-    if (currentHP <= 0)
-    {
-        if (associated.GetComponent("Player").get())//verificar se player ainda existe
-        {
-            Camera::Unfollow();
-        }
-            // std::cout << player << " " << player->currentHP << std::endl;
-        associated.RequestDelete();
-
-    }
 
     Environment::ApplyForces(this);
     
@@ -63,6 +55,21 @@ void Character::Update(float dt)
 
     associated.box.x += speed.x * dt;
     associated.box.y += speed.y * dt;
+
+    if (currentHP <= 0)
+    {
+        if (associated.GetComponent("Player").get()) //verificar se player ainda existe
+        {
+            Camera::Unfollow();
+        }
+        std::cout << "debug 1" << std::endl;
+        associated.RequestDelete();
+        if (charType == char_type::PLAYER)
+        {
+            playerChar = nullptr;
+        }
+        std::cout << "debug 2" << std::endl;
+    }
 }
 
 void Character::Accelerate(Vec2 acceleration)
@@ -86,7 +93,7 @@ void Character::NotifyCollision(GameObject &other)
 {   
     // Collision with environment
     if (other.GetComponent("CollisionBox").get() != nullptr)
-    {
+    {   
         Collider *otherCollider = (Collider *)other.GetComponent("Collider").get();
         Collider *associatedCollider = (Collider *)associated.GetComponent("Collider").get();
 
@@ -240,9 +247,20 @@ void Character::DisableFlip()
 void Character::ApplyDamage(int damage)
 {
     currentHP -= damage;
+    std::cout << "currentHP:" << currentHP << std::endl;
 }
 
 char_type Character::Type()
 {
     return charType;
+}
+
+int Character::GetCurrentHP()
+{
+    return currentHP;
+}
+
+int Character::GetMaxHP()
+{
+    return maxHP;
 }
