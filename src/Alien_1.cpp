@@ -26,7 +26,7 @@ void Alien_1::Update(float dt)
 void Alien_1::Render()
 {
     sprite->Render();
-    std::cout << "sprite->GetCurrentFrame():" << sprite->GetCurrentFrame() << std::endl;
+    // std::cout << "sprite->GetCurrentFrame():" << sprite->GetCurrentFrame() << std::endl;
 }
 bool Alien_1::Is(std::string type)
 {
