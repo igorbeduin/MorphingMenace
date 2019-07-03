@@ -1,5 +1,6 @@
 #include "../include/Camera.h"
 #include "../include/InputManager.h"
+#include "../include/Engine_include.h"
 
 GameObject *Camera::focus;
 Vec2 Camera::pos;
@@ -25,7 +26,7 @@ void Camera::Update(float dt)
 
   if (focus != nullptr)
   {
-
+    std::cout << pos.x << ", " << pos.y << std::endl;
     // pos = focus->box.GetCenter();
     // pos.x -= WINDOW_WIDTH/2 ;// A posição da câmera é o calculo da posição do objeto na tels
     // pos.y -= WINDOW_HEIGHT/2 ;
@@ -50,6 +51,26 @@ void Camera::Update(float dt)
     {
       pos.y = -focus->box.y + UP_FOCUS_LIMIT;
     }
+
+    if (-pos.x <= 0)//Limiting camera
+    {
+      pos.x = 0;
+    }
+    if (-pos.x >= 6900 - WINDOW_WIDTH)
+    {
+      pos.x = +WINDOW_WIDTH -6900;
+    }
+    
+    if (-pos.y <= 0)
+    {
+      pos.y = 0;
+    }
+    if (-pos.y >= 4587 - WINDOW_HEIGHT)
+    {
+      pos.y = -4587 +WINDOW_HEIGHT;
+    }
+    
+
   }
   else
   {
