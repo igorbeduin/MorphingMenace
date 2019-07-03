@@ -64,7 +64,7 @@ StageState::StageState()
     GameObject *gui = new GameObject();
     std::shared_ptr<CameraFollower> guiCamFollow(new CameraFollower(*gui));
     gui->AddComponent(guiCamFollow);
-    std::shared_ptr<GUI> playerGUI(new GUI(*gui));
+    std::shared_ptr<GUI> playerGUI(new GUI(*gui, *player));
     gui->AddComponent(playerGUI);
 
     AddObject(gui);
