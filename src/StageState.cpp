@@ -85,7 +85,7 @@ StageState::StageState()
     
     //Creating boss
     GameObject *boss = new GameObject();
-    std::shared_ptr<Character> bossCharacter(new Character(*boss, 1000,  char_type::BOSS));
+    std::shared_ptr<Character> bossCharacter(new Character(*boss, 100, char_type::BOSS));
     boss->AddComponent(bossCharacter);
     std::shared_ptr<Collider> BOSSCollider(new Collider(*boss));
     boss->AddComponent(BOSSCollider);
