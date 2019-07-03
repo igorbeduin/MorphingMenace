@@ -148,8 +148,8 @@ enum character_state
 *************************************************/
 #define GRAVITY_ACCELERATION {0, 20}
 #define NORMAL_ACCELERATION {0, -20}
-#define SAFETY_COLLISION_RANGE 20
-#define DEPTH_COLLISION_RANGE 20
+#define SAFETY_COLLISION_RANGE 15
+#define DEPTH_COLLISION_RANGE 15
 #define COLLISION_COMPENSATION 5
 
 #ifdef ENVIRONMENT
