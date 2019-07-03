@@ -31,10 +31,8 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
     }
     case BOSS:
     {
-        // PROVISORIO:
-        std::shared_ptr<Sprite> charSprite(new Sprite(associated, BOSS_SPRITE_PATH, BOSS_SPRITES_NUMB, BOSS_SPRITES_TIME));
-        charSprite->SetScale(BOSS_SCALE, BOSS_SCALE);
-        associated.AddComponent(charSprite);
+        std::shared_ptr<Boss> bossBehav(new Boss(associated));
+        associated.AddComponent(bossBehav);
         break;
     }
 
@@ -46,13 +44,6 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
 
 void Character::Update(float dt)
 {
-    // std::cout << currentHP << std::endl;    
-
-    if (charType == char_type::BOSS)
-    {
-        std::cout << "boss location:" << associated.box.x << " , " << associated.box.y << std::endl;
-    }
-
     Environment::ApplyForces(this);
     
     lastPosition.x = associated.box.x;
@@ -67,18 +58,14 @@ void Character::Update(float dt)
         {
             Camera::Unfollow();
         }
-        associated.RequestDelete();
-        if (charType == char_type::PLAYER)
-        {
-            playerChar = nullptr;
-        }
+        Die();
     }
+    limitSpeeds();
 }
 
 void Character::Accelerate(Vec2 acceleration)
 {
     speed += acceleration;
-    limitSpeeds();
 }
 
 
@@ -266,4 +253,25 @@ int Character::GetCurrentHP()
 int Character::GetMaxHP()
 {
     return maxHP;
+}
+
+bool Character::IsAbsorbable()
+{
+    if (currentHP <= ABSORBABLE_PERC * maxHP)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Character::Die()
+{
+    associated.RequestDelete();
+    if (charType == char_type::PLAYER)
+    {
+        playerChar = nullptr;
+    }
 }

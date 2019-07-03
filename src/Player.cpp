@@ -5,7 +5,9 @@
 Player *Player::player = nullptr;
 
 Player::Player(GameObject &associated) : Component::Component(associated),
-                                         lvl(0)
+                                         lvl(0),
+                                         currentInfluence(INITIAL_INFLUENCE),
+                                         maxInfluence(INITIAL_INFLUENCE)
 {
     std::shared_ptr<Alien_0> alien_0(new Alien_0(associated));
     transformStack.push(alien_0);
@@ -13,7 +15,13 @@ Player::Player(GameObject &associated) : Component::Component(associated),
 }
 
 void Player::Update(float dt)
-{
+{   
+    std::cout << "currentInfluence:" << currentInfluence << std::endl;
+    if (currentInfluence <= 0 && lvl != 0)
+    {
+        currentInfluence = 0;
+        LvlDown();
+    }
     Alien_0 *currentTransf = (Alien_0 *)transformStack.top().get();
     currentTransf->Update(dt);
     ExitingState(dt);
@@ -105,7 +113,13 @@ void Player::NotifyCollision(GameObject &other)
         Character *enemyCharPtr = (Character *)other.GetComponent("Character").get();
         if (enemyCharPtr != nullptr)
         {
-            Transform(enemyCharPtr->Type());
+            if (enemyCharPtr->IsAbsorbable())
+            {
+                Transform(enemyCharPtr->Type());
+                associated.box.x = other.box.x;
+                associated.box.y = other.box.y;
+                enemyCharPtr->Die();
+            }
         }
     }
     if (characterState == character_state::JUMPING)
@@ -176,11 +190,18 @@ void Player::EnteringState(float dt)
             }
             if (InputManager::GetInstance().KeyPress(P_KEY))
             {
-                Absorb();
+                if (currentInfluence > 0)
+                {
+                    Absorb();
+                }
             }
             if (InputManager::GetInstance().KeyPress(T_KEY))
             {
                 characterPtr->ApplyDamage(50);
+            }
+            if (characterPtr->GetSpeed().y >= MAXIMUM_Y_SPEED)
+            {
+                characterState = character_state::JUMPING;
             }
 
             if ((associated.box.x <= (-Camera::pos.x + LEFT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x > associated.box.x) ||
@@ -207,4 +228,19 @@ void Player::ExitingState(float dt)
             Idle();
         }
     }
+}
+
+int Player::GetCurrentInfluence()
+{
+    return currentInfluence;
+}
+
+void Player::SetInfluence(int influence)
+{
+    currentInfluence = influence;
+}
+
+int Player::GetMaxInfluence()
+{
+    return maxInfluence;
 }
