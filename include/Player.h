@@ -34,6 +34,9 @@ public:
     void Transform(char_type type);
     void EnteringState(float dt);
     void ExitingState(float dt);
+    int GetCurrentInfluence();
+    int GetMaxInfluence();
+    void SetInfluence(int influence);
 
 private:
     character_state characterState;
@@ -41,4 +44,6 @@ private:
     Character *characterPtr;
     std::stack<std::shared_ptr<Transformation>> transformStack;
     int lvl;
+    int currentInfluence;
+    int maxInfluence;
 };
