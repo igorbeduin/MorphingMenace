@@ -82,11 +82,11 @@ StageState::StageState()
 
     AddObject(enemy);
 
-    /*
+    
     //Creating boss
     GameObject *boss = new GameObject();
-    std::shared_ptr<Character> BOSSBehaviour(new Character(*boss, PLAYER_LVL0_MASS, char_type::BOSS));
-    boss->AddComponent(BOSSBehaviour);
+    std::shared_ptr<Character> bossCharacter(new Character(*boss, 1000,  char_type::BOSS));
+    boss->AddComponent(bossCharacter);
     std::shared_ptr<Collider> BOSSCollider(new Collider(*boss));
     boss->AddComponent(BOSSCollider);
 
@@ -95,7 +95,7 @@ StageState::StageState()
     boss->box.y = initPos.y;
 
     AddObject(boss);
-    */
+    
 }
 
 void StageState::LoadAssets()
@@ -169,7 +169,7 @@ void StageState::Update(float dt)
             objectArray.erase(objectArray.begin() + i);
         }
     }
-    std::cout << "objectArray.size():" << objectArray.size() << std::endl;
+    // std::cout << "objectArray.size():" << objectArray.size() << std::endl;
 }
 
 void StageState::Render()

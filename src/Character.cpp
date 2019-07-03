@@ -48,6 +48,11 @@ void Character::Update(float dt)
 {
     // std::cout << currentHP << std::endl;    
 
+    if (charType == char_type::BOSS)
+    {
+        std::cout << "boss location:" << associated.box.x << " , " << associated.box.y << std::endl;
+    }
+
     Environment::ApplyForces(this);
     
     lastPosition.x = associated.box.x;
