@@ -40,6 +40,7 @@ enum character_state
     #include "Character.h"
     #include "Player.h"
     #include "Entokraton_1.h"
+    #include "Boss.h"
     #include "Damage.h"
     
     #define ABSORB_X_SPEED 300
@@ -47,6 +48,9 @@ enum character_state
 
     #define MAXIMUM_Y_SPEED 800
     #define PLAYER_INITIAL_HP 100
+    #define INITIAL_INFLUENCE 10000
+    //#define INITIAL_INFLUENCE 100
+    #define ABSORBABLE_PERC 0.8
 
 
 #define PLAYER_LVL1_SPRITE_PATH "assets/img/char/adulto.png"
@@ -85,7 +89,7 @@ enum character_state
 #define ENTOKRATON_1_WALK_START 3
 #define ENTOKRATON_1_WALK_END 6
 #define ENTOKRATON_1_WALK_TIME 0.1
-#define ENTOKRATON_1_HP 50
+#define ENTOKRATON_1_HP 100
 #define ENTOKRATON_1_IDLE1_SOUND "assets/audio/alien1/alien 1 - idle 1.ogg"
 #define ENTOKRATON_1_IDLE2_SOUND "assets/audio/alien1/alien 1 - idle 2.ogg"
 #define ENTOKRATON_1_WALK1_SOUND "assets/audio/alien1/alien 1 - andar.ogg"
@@ -111,13 +115,6 @@ enum character_state
 #define ENEMY_1_ATTACK_RANGE 30
 #define WALK_RANGE 200
 #define STOP_RANGE 5
-
-#define BOSS_SPRITE_PATH "assets/img/char/boss_temporario.png"
-#define BOSS_SPRITES_NUMB 1
-#define BOSS_SPRITES_TIME 1
-#define BOSS_SCALE 0.20
-#define BOSS_INIT_POS {4400, 3300}
-//#define BOSS_INIT_POS {0, 0}
 
 #endif
 
@@ -148,8 +145,8 @@ enum character_state
 *************************************************/
 #define GRAVITY_ACCELERATION {0, 20}
 #define NORMAL_ACCELERATION {0, -20}
-#define SAFETY_COLLISION_RANGE 15
-#define DEPTH_COLLISION_RANGE 15
+#define SAFETY_COLLISION_RANGE 20
+#define DEPTH_COLLISION_RANGE 20
 #define COLLISION_COMPENSATION 5
 
 #ifdef ENVIRONMENT
