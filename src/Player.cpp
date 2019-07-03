@@ -141,24 +141,17 @@ void Player::EnteringState(float dt)
     if (sharedChar != nullptr)
     {
         characterPtr = (Character *)sharedChar.get();
-        // if (characterState == ATTACKING)
-        // {
-        //     if (associated.GetComponent("Damage").get() == nullptr)
-        //     {
-        //         characterState = NONE_STATE;
-        //     }
-        // }
-
         // It's only possible to do stuff if player is not ABSORBING
         if (characterState != character_state::ABSORBING)
         {
             // Joystick
             if (InputManager::GetInstance().KeyPress(SPACE_KEY))
             {
-                if (characterState != character_state::JUMPING)
-                {
-                    Jump();
-                }
+                // if (characterState != character_state::JUMPING)
+                // {
+                //     Jump();
+                // }
+                Jump();
             }
             if (InputManager::GetInstance().IsKeyDown(D_KEY))
             {

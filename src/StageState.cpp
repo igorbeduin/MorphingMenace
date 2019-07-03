@@ -50,8 +50,8 @@ StageState::StageState()
 
     //Creating player
     GameObject* player = new GameObject();
-    std::shared_ptr<Character> playerBehaviour(new Character(*player, PLAYER_INITIAL_HP, char_type::PLAYER));
-    player->AddComponent(playerBehaviour);
+    std::shared_ptr<Character> playerCharacter(new Character(*player, PLAYER_INITIAL_HP, char_type::PLAYER));
+    player->AddComponent(playerCharacter);
     std::shared_ptr<Collider> playerCollider(new Collider(*player));
     player->AddComponent(playerCollider);
 
@@ -72,8 +72,8 @@ StageState::StageState()
 
     //Creating enemy
     GameObject *enemy = new GameObject();
-    std::shared_ptr<Character> enemyBehaviour(new Character(*enemy, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
-    enemy->AddComponent(enemyBehaviour);
+    std::shared_ptr<Character> enemyCharacter(new Character(*enemy, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
+    enemy->AddComponent(enemyCharacter);
     std::shared_ptr<Collider> enemyCollider(new Collider(*enemy));
     enemy->AddComponent(enemyCollider);
 
@@ -83,11 +83,11 @@ StageState::StageState()
 
     AddObject(enemy);
 
-    /*
+    
     //Creating boss
     GameObject *boss = new GameObject();
-    std::shared_ptr<Character> BOSSBehaviour(new Character(*boss, PLAYER_LVL0_MASS, char_type::BOSS));
-    boss->AddComponent(BOSSBehaviour);
+    std::shared_ptr<Character> bossCharacter(new Character(*boss, 1000,  char_type::BOSS));
+    boss->AddComponent(bossCharacter);
     std::shared_ptr<Collider> BOSSCollider(new Collider(*boss));
     boss->AddComponent(BOSSCollider);
 
@@ -96,7 +96,7 @@ StageState::StageState()
     boss->box.y = initPos.y;
 
     AddObject(boss);
-    */
+    
 }
 
 void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carregar ele no load
@@ -119,6 +119,7 @@ void StageState::Update(float dt)
 
     // Verify collisions
     std::vector<std::shared_ptr<GameObject>> objWithCollider;
+    Vec2 distanceToBox;
     for (int i = (int)objectArray.size() - 1; i >= 0; i--)
     {
         std::shared_ptr<Collider> colliderComponent = std::dynamic_pointer_cast<Collider>(objectArray[i]->GetComponent("Collider"));
@@ -126,24 +127,34 @@ void StageState::Update(float dt)
         if (colliderComponent != nullptr)
         {
             objWithCollider.push_back(objectArray[i]);
+            // Verify collision with other GameObjects
             for (int j = 0; j < (int)objWithCollider.size(); j++)
             {
-                std::shared_ptr<Collider> ObjWithcolliderComponent = std::dynamic_pointer_cast<Collider>(objWithCollider[j]->GetComponent("Collider"));
-                if (objectArray[i] != objWithCollider[j])
+                distanceToBox = objectArray[i]->box.GetCenter() - objWithCollider[j]->box.GetCenter();
+                if (distanceToBox.Absolute() <= SCENARIO_COLLISION_RADIUS)
                 {
-                    if (Collision::IsColliding(colliderComponent->box, ObjWithcolliderComponent->box, objectArray[i]->GetAngleRad(), objWithCollider[j]->GetAngleRad()))
+                    std::shared_ptr<Collider> ObjWithcolliderComponent = std::dynamic_pointer_cast<Collider>(objWithCollider[j]->GetComponent("Collider"));
+                    if (objectArray[i] != objWithCollider[j])
                     {
-                        objectArray[i]->NotifyCollision(*objWithCollider[j].get());
-                        objWithCollider[j]->NotifyCollision(*objectArray[i].get());
+                        if (Collision::IsColliding(colliderComponent->box, ObjWithcolliderComponent->box, objectArray[i]->GetAngleRad(), objWithCollider[j]->GetAngleRad()))
+                        {
+                            objectArray[i]->NotifyCollision(*objWithCollider[j].get());
+                            objWithCollider[j]->NotifyCollision(*objectArray[i].get());
+                        }
                     }
                 }
             }
+            // Verify collision with SCENARIO collision objects
             for (int j = 0; j < (int)collisionObjectsArray.size(); j++)
-            {
-                std::shared_ptr<Collider> collisionObjectComponent = std::dynamic_pointer_cast<Collider>(collisionObjectsArray[j]->GetComponent("Collider"));
-                if (Collision::IsColliding(colliderComponent->box, collisionObjectComponent->box, objectArray[i]->GetAngleRad(), collisionObjectsArray[j]->GetAngleRad()))
+            {   
+                distanceToBox = objectArray[i]->box.GetCenter() - collisionObjectsArray[j]->box.GetCenter();
+                if (distanceToBox.Absolute() <= SCENARIO_COLLISION_RADIUS)
                 {
-                    objectArray[i]->NotifyCollision(*collisionObjectsArray[j].get());
+                    std::shared_ptr<Collider> collisionObjectComponent = std::dynamic_pointer_cast<Collider>(collisionObjectsArray[j]->GetComponent("Collider"));
+                    if (Collision::IsColliding(colliderComponent->box, collisionObjectComponent->box, objectArray[i]->GetAngleRad(), collisionObjectsArray[j]->GetAngleRad()))
+                    {
+                        objectArray[i]->NotifyCollision(*collisionObjectsArray[j].get());
+                    }
                 }
             }
         }
