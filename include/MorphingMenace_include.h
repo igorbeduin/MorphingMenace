@@ -157,8 +157,8 @@ enum character_state
     #define TILESET_PATH "assets/img/tileset.png"
     #define TILEMAP_PATH "assets/map/tileMap.txt"
     #define TILE_SCALE 1.2
-    #define TILE_HEIGHT 64
-    #define TILE_WIDTH 64
+    #define TILE_HEIGHT 32
+    #define TILE_WIDTH 32
     #define STAGE_BG_MUSIC_PATH "assets/audio/background_demo1.ogg"
 
 #endif
