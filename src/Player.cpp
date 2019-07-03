@@ -185,6 +185,10 @@ void Player::EnteringState(float dt)
             {
                 Absorb();
             }
+            if (InputManager::GetInstance().KeyPress(T_KEY))
+            {
+                characterPtr->ApplyDamage(50);
+            }
 
             if ((associated.box.x <= (-Camera::pos.x + LEFT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x > associated.box.x) ||
                 (associated.box.x + associated.box.w >= (-Camera::pos.x + RIGHT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x < associated.box.x))
