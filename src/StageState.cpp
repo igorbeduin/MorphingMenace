@@ -106,14 +106,6 @@ void StageState::Update(float dt)
 {
     Camera::Update(dt);
 
-    for (int i = 0; i < (int)objectArray.size(); i++)
-    {
-        if (objectArray[i]->IsDead())
-        {
-            objectArray.erase(objectArray.begin() + i);
-        }
-    }
-
     // Verify collisions
     std::vector<std::shared_ptr<GameObject>> objWithCollider;
     for (int i = (int)objectArray.size() - 1; i >= 0; i--)
@@ -145,7 +137,6 @@ void StageState::Update(float dt)
             }
         }
     }
-
     if (InputManager::GetInstance().KeyPress(ESCAPE_KEY) || InputManager::GetInstance().QuitRequested())
     {
         quitRequested = true;
@@ -159,6 +150,15 @@ void StageState::Update(float dt)
     {
         collisionObjectsArray[i]->Update(dt);
     }
+
+    for (int i = 0; i < (int)objectArray.size(); i++)
+    {
+        if (objectArray[i]->IsDead())
+        {
+            objectArray.erase(objectArray.begin() + i);
+        }
+    }
+    std::cout << "objectArray.size():" << objectArray.size() << std::endl;
 }
 
 void StageState::Render()
