@@ -8,8 +8,8 @@
 /************************************************
 *					Window						*
 *************************************************/
-#define WINDOW_WIDTH 1024
-#define WINDOW_HEIGHT 600
+#define WINDOW_WIDTH 1280
+#define WINDOW_HEIGHT 750
 
 /************************************************
 *				 Camera					*

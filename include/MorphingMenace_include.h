@@ -115,8 +115,8 @@ enum character_state
 #define BOSS_SPRITE_PATH "assets/img/char/boss_temporario.png"
 #define BOSS_SPRITES_NUMB 1
 #define BOSS_SPRITES_TIME 1
-#define BOSS_SCALE 0.25
-#define BOSS_INIT_POS {4350, 3270}
+#define BOSS_SCALE 0.20
+#define BOSS_INIT_POS {4400, 3300}
 //#define BOSS_INIT_POS {0, 0}
 
 #endif
@@ -148,8 +148,8 @@ enum character_state
 *************************************************/
 #define GRAVITY_ACCELERATION {0, 20}
 #define NORMAL_ACCELERATION {0, -20}
-#define SAFETY_COLLISION_RANGE 20
-#define DEPTH_COLLISION_RANGE 20
+#define SAFETY_COLLISION_RANGE 15
+#define DEPTH_COLLISION_RANGE 15
 #define COLLISION_COMPENSATION 5
 
 #ifdef ENVIRONMENT
