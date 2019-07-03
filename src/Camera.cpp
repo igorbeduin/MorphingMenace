@@ -14,6 +14,7 @@ void Camera::Follow(GameObject* newFocus){
 
 void Camera::Unfollow(){
   focus = nullptr;
+  
 }
 
 void Camera::Update(float dt){
@@ -28,14 +29,23 @@ void Camera::Update(float dt){
     // pos.x = -focus->box.x - focus->box.w/2 + WINDOW_WIDTH/2;
     // pos.y = -focus->box.y - focus->box.h/2 + WINDOW_HEIGHT/2;
 
-    if (focus->box.x <= -pos.x + LEFT_FOCUS_LIMIT)
-    {    
-      pos.x = -focus->box.x + LEFT_FOCUS_LIMIT;
-    }
-    else if (focus->box.x >= -pos.x + RIGHT_FOCUS_LIMIT)
-    {
-      pos.x = -focus->box.x + RIGHT_FOCUS_LIMIT;
-    }
+  if (focus->box.x <= -pos.x + LEFT_FOCUS_LIMIT)
+  {    
+    pos.x = -focus->box.x + LEFT_FOCUS_LIMIT;
+  }
+  else if (focus->box.x >= -pos.x + RIGHT_FOCUS_LIMIT)
+  {
+    pos.x = -focus->box.x + RIGHT_FOCUS_LIMIT;
+  }
+
+  if (focus->box.y >= -pos.y + DOWN_FOCUS_LIMIT)
+  {
+    pos.y = -focus->box.y + DOWN_FOCUS_LIMIT;
+  }
+  else if (focus->box.y <= -pos.y + UP_FOCUS_LIMIT)
+  {    
+    pos.y = -focus->box.y + UP_FOCUS_LIMIT;
+  }
 
   } else {
 
