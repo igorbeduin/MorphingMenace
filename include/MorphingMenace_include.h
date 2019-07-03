@@ -46,6 +46,7 @@ enum character_state
     #define ABSORB_Y_SPEED -700
 
     #define MAXIMUM_Y_SPEED 800
+    #define PLAYER_INITIAL_HP 100
 
     #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/baby-pulando.png"
     #define PLAYER_LVL0_SPRITES_NUMB 8
@@ -54,7 +55,6 @@ enum character_state
     #define PLAYER_LVL0_STEP 200
     #define PLAYER_LVL0_JUMP -800
     #define PLAYER_INIT_POS {400, 300}
-    #define PLAYER_INITIAL_HP 20
     #define PLAYER_LVL0_ATTACK_WIDTH 100
     #define PLAYER_LVL0_ATTACK_HEIGHT 20
     #define PLAYER_LVL0_ATTACK_TIME 0.05
@@ -118,7 +118,7 @@ enum character_state
 #define ENTOKRATON_1_ATTACK_WIDTH 30
 #define ENTOKRATON_1_ATTACK_HEIGHT 100
 #define ENTOKRATON_1_ATTACK_TIME 0.05
-#define ENTOKRATON_1_ATTACK_DAMAGE 0
+#define ENTOKRATON_1_ATTACK_DAMAGE 5
 #define ENEMY_1_IDLE_START 0
 #define ENEMY_1_IDLE_END 2
 #define ENEMY_1_IDLE_TIME 0.1
