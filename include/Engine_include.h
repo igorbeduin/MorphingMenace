@@ -18,7 +18,9 @@
 #define MAX_CAM_SPEED_X 300
 #define MAX_CAM_SPEED_Y 300
 #define LEFT_FOCUS_LIMIT 342
-#define RIGHT_FOCUS_LIMIT 482 
+#define RIGHT_FOCUS_LIMIT 482
+#define UP_FOCUS_LIMIT 300
+#define DOWN_FOCUS_LIMIT 500
 
 /************************************************
 *				 Audio					*
