@@ -49,8 +49,8 @@ StageState::StageState()
 
     //Creating player
     GameObject* player = new GameObject();
-    std::shared_ptr<Character> playerBehaviour(new Character(*player, PLAYER_INITIAL_HP, char_type::PLAYER));
-    player->AddComponent(playerBehaviour);
+    std::shared_ptr<Character> playerCharacter(new Character(*player, PLAYER_INITIAL_HP, char_type::PLAYER));
+    player->AddComponent(playerCharacter);
     std::shared_ptr<Collider> playerCollider(new Collider(*player));
     player->AddComponent(playerCollider);
 
@@ -71,8 +71,8 @@ StageState::StageState()
 
     //Creating enemy
     GameObject *enemy = new GameObject();
-    std::shared_ptr<Character> enemyBehaviour(new Character(*enemy, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
-    enemy->AddComponent(enemyBehaviour);
+    std::shared_ptr<Character> enemyCharacter(new Character(*enemy, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
+    enemy->AddComponent(enemyCharacter);
     std::shared_ptr<Collider> enemyCollider(new Collider(*enemy));
     enemy->AddComponent(enemyCollider);
 
