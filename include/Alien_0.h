@@ -7,6 +7,7 @@
 #include "Component.h"
 #include "Transformation.h"
 #include "Sprite.h"
+#include "macros/Alien_0_include.h"
 
 class Sprite;
 
