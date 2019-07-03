@@ -32,6 +32,8 @@ public:
     char_type Type();
     int GetCurrentHP();
     int GetMaxHP();
+    bool IsAbsorbable();
+    void Die();
 
     static Character* playerChar;
     Rect box;

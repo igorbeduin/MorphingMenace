@@ -269,3 +269,24 @@ int Character::GetMaxHP()
 {
     return maxHP;
 }
+
+bool Character::IsAbsorbable()
+{
+    if (currentHP <= ABSORBABLE_PERC * maxHP)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void Character::Die()
+{
+    associated.RequestDelete();
+    if (charType == char_type::PLAYER)
+    {
+        playerChar = nullptr;
+    }
+}
