@@ -48,31 +48,11 @@ enum character_state
     #define MAXIMUM_Y_SPEED 800
     #define PLAYER_INITIAL_HP 100
 
-    #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/baby-pulando.png"
-    #define PLAYER_LVL0_SPRITES_NUMB 8
-    #define PLAYER_LVL0_SPRITES_TIME 0.16
-    #define PLAYER_LVL0_SCALE 0.08
-    #define PLAYER_LVL0_STEP 200
-    #define PLAYER_LVL0_JUMP -800
-    #define PLAYER_INIT_POS {400, 300}
-    #define PLAYER_LVL0_ATTACK_WIDTH 100
-    #define PLAYER_LVL0_ATTACK_HEIGHT 20
-    #define PLAYER_LVL0_ATTACK_TIME 0.05
-    #define PLAYER_LVL0_ATTACK_DAMAGE 10
-    #define PLAYER_LVL0_IDLE_START 0
-    #define PLAYER_LVL0_IDLE_END 1
-    #define PLAYER_LVL0_IDLE_TIME 0.1
-    #define PLAYER_LVL0_WALK_START 0
-    #define PLAYER_LVL0_WALK_END 7
-    #define PLAYER_LVL0_WALK_TIME 0.1
-    #define PLAYER_LVL0_JUMP_START 0
-    #define PLAYER_LVL0_JUMP_END 7
-    #define PLAYER_LVL0_JUMP_TIME 0.08
 
 #define PLAYER_LVL1_SPRITE_PATH "assets/img/char/adulto.png"
 #define PLAYER_LVL1_SPRITES_NUMB 18
 #define PLAYER_LVL1_SPRITES_TIME 0.16
-#define PLAYER_LVL1_SCALE 0.20
+#define PLAYER_LVL1_SCALE 0.12
 #define PLAYER_LVL1_STEP 200
 #define PLAYER_LVL1_JUMP -800
 #define PLAYER_LVL1_IDLE_START 0
@@ -135,11 +115,10 @@ enum character_state
 #define BOSS_SPRITE_PATH "assets/img/char/boss_temporario.png"
 #define BOSS_SPRITES_NUMB 1
 #define BOSS_SPRITES_TIME 1
-#define BOSS_SCALE 0.3
-#define BOSS_INIT_POS \
-    {                 \
-        2000, 0       \
-    }
+#define BOSS_SCALE 0.25
+#define BOSS_INIT_POS {4350, 3270}
+//#define BOSS_INIT_POS {0, 0}
+
 #endif
 
 /************************************************
@@ -160,7 +139,7 @@ enum character_state
     #define TILE_HEIGHT 32
     #define TILE_WIDTH 32
     #define STAGE_BG_MUSIC_PATH "assets/audio/background_demo1.ogg"
-    #define SCENARIO_COLLISION_RADIUS 100
+    #define SCENARIO_COLLISION_RADIUS 400
 
 #endif
 
