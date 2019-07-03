@@ -113,7 +113,13 @@ void Player::NotifyCollision(GameObject &other)
         Character *enemyCharPtr = (Character *)other.GetComponent("Character").get();
         if (enemyCharPtr != nullptr)
         {
-            Transform(enemyCharPtr->Type());
+            if (enemyCharPtr->IsAbsorbable())
+            {
+                Transform(enemyCharPtr->Type());
+                associated.box.x = other.box.x;
+                associated.box.y = other.box.y;
+                enemyCharPtr->Die();
+            }
         }
     }
     if (characterState == character_state::JUMPING)
