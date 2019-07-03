@@ -169,7 +169,7 @@ void StageState::Update(float dt)
             objectArray.erase(objectArray.begin() + i);
         }
     }
-    std::cout << "objectArray.size():" << objectArray.size() << std::endl;
+    // std::cout << "objectArray.size():" << objectArray.size() << std::endl;
 }
 
 void StageState::Render()

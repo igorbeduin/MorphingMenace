@@ -62,13 +62,11 @@ void Character::Update(float dt)
         {
             Camera::Unfollow();
         }
-        std::cout << "debug 1" << std::endl;
         associated.RequestDelete();
         if (charType == char_type::PLAYER)
         {
             playerChar = nullptr;
         }
-        std::cout << "debug 2" << std::endl;
     }
 }
 
