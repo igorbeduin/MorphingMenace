@@ -15,6 +15,10 @@ StageState::StageState()
     std::shared_ptr<Normal> normal(new Normal());
     Environment::AddForce(normal);
 
+    // Creating normal force
+    std::shared_ptr<WaterThrust> waterThrust(new WaterThrust());
+    Environment::AddForce(waterThrust);
+
     // Opening background music
     backgroundMusic.Open(STAGE_BG_MUSIC_PATH);
 

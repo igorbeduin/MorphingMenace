@@ -37,6 +37,7 @@ public:
     int GetCurrentInfluence();
     int GetMaxInfluence();
     void SetInfluence(int influence);
+    void Swim();
 
 private:
     character_state characterState;
