@@ -86,16 +86,25 @@ enum character_state
     #include "Sprite.h"
     #include "TileMap.h"
 
+    #define SCENARIO_SCALE 1.4
+
     #define PLANET_BACKGROUND_PATH "assets/img/BG01.png"
+    #define PLANET_BACKGROUND_SCALE SCENARIO_SCALE
+
     #define STARS_BACKGROUND_PATH "assets/img/StarsBackground.jpg"
-    #define PLANET_BACKGROUND_SCALE 1.4
+
+    #define OCEAN_BACKGROUND_PATH "assets/img/agua.png"
+    #define OCEAN_BACKGROUND_SCALE SCENARIO_SCALE
+    #define OCEAN_INITIAL_POS {1732, 1650}
+
     #define TILESET_PATH "assets/img/tileset.png"
     #define TILEMAP_PATH "assets/map/tileMap.txt"
-    #define TILE_SCALE 1.4
+    #define TILE_SCALE SCENARIO_SCALE
     #define TILE_HEIGHT 32
     #define TILE_WIDTH 32
     #define STAGE_BG_MUSIC_PATH "assets/audio/background_demo1.ogg"
     #define SCENARIO_COLLISION_RADIUS 400
+    
 
 #endif
 
