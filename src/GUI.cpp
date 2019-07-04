@@ -75,6 +75,15 @@ void GUI::VerifyLife()
         {
             associated.angleDeg -= GUI_ANGLE_DAMAGED;
             stored_HP = otherCharPtr->GetCurrentHP();
+
+                GameObject *bone_particle = new GameObject();
+                std::weak_ptr<GameObject> weak_bone =  Game::GetInstance().GetCurrentState().AddObject(bone_particle);
+                std::shared_ptr<GameObject> bone_dust = weak_bone.lock();
+                bone_dust->box.y = associated.box.y;
+                bone_dust->box.x = associated.box.x;
+                std::shared_ptr<Sprite> bone_dust_sprite(new Sprite(*bone_dust, GUI_BONE_DUST_PATH, GUI_BONE_DUST_FRAMES_NUMBER, GUI_BONE_DUST_FRAME_TIME, GUI_BONE_DUST_FRAMES_NUMBER*GUI_BONE_DUST_FRAME_TIME));
+                bone_dust_sprite->SetScale(GUI_SCALE, GUI_SCALE);
+                bone_dust->AddComponent(bone_dust_sprite);
         }
     }
 }
