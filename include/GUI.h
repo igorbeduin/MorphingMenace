@@ -13,11 +13,13 @@ public:
     void Render();
     bool Is(std::string type);
     void VerifyLife();
-    void VerifyInfuence();
+    void VerifyInfuence(float dt);
 
 private:
     GameObject& other;
     std::shared_ptr<Sprite> lifeSprite;
     std::shared_ptr<Sprite> influenceSprite;
+    Timer blink_timer;
+    int stored_HP = 100;
 
 };

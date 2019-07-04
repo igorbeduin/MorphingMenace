@@ -4,6 +4,7 @@
 #include "Component.h"
 #include "Sprite.h"
 #include "Sound.h"
+#include "macros/Entokraton_1_include.h"
 
 class Entokraton_1 : public Component
 {
