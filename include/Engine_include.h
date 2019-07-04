@@ -8,8 +8,8 @@
 /************************************************
 *					Window						*
 *************************************************/
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 750
+#define WINDOW_WIDTH 1024
+#define WINDOW_HEIGHT 600
 
 /************************************************
 *				 Camera					*
@@ -17,10 +17,10 @@
 #define CAMERA_SPEED 100
 #define MAX_CAM_SPEED_X 300
 #define MAX_CAM_SPEED_Y 300
-#define LEFT_FOCUS_LIMIT 450
-#define RIGHT_FOCUS_LIMIT 800
-#define UP_FOCUS_LIMIT 200
-#define DOWN_FOCUS_LIMIT 500
+#define LEFT_FOCUS_LIMIT 410
+#define RIGHT_FOCUS_LIMIT 564
+#define UP_FOCUS_LIMIT 300
+#define DOWN_FOCUS_LIMIT 400
 
 /************************************************
 *				 Audio					*

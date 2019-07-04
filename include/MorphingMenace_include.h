@@ -56,7 +56,7 @@ enum character_state
 #define PLAYER_LVL1_SPRITE_PATH "assets/img/char/adulto.png"
 #define PLAYER_LVL1_SPRITES_NUMB 18
 #define PLAYER_LVL1_SPRITES_TIME 0.16
-#define PLAYER_LVL1_SCALE 0.12
+#define PLAYER_LVL1_SCALE 0.22
 #define PLAYER_LVL1_STEP 200
 #define PLAYER_LVL1_JUMP -800
 #define PLAYER_LVL1_IDLE_START 0
@@ -129,10 +129,10 @@ enum character_state
 
     #define PLANET_BACKGROUND_PATH "assets/img/BG01.png"
     #define STARS_BACKGROUND_PATH "assets/img/StarsBackground.jpg"
-    #define PLANET_BACKGROUND_SCALE 1.2
+    #define PLANET_BACKGROUND_SCALE 1.4
     #define TILESET_PATH "assets/img/tileset.png"
     #define TILEMAP_PATH "assets/map/tileMap.txt"
-    #define TILE_SCALE 1.2
+    #define TILE_SCALE 1.4
     #define TILE_HEIGHT 32
     #define TILE_WIDTH 32
     #define STAGE_BG_MUSIC_PATH "assets/audio/background_demo1.ogg"
