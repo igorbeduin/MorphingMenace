@@ -113,6 +113,7 @@ enum character_state
 *************************************************/
 #define GRAVITY_ACCELERATION {0, 20}
 #define NORMAL_ACCELERATION {0, -20}
+#define WATERTHRUST_ACCELERATION {0, -15}
 #define SAFETY_COLLISION_RANGE 20
 #define DEPTH_COLLISION_RANGE 20
 #define COLLISION_COMPENSATION 5
@@ -122,4 +123,5 @@ enum character_state
     #include "Gravity.h"
     #include "Normal.h"
     #include "Character.h"
+    #include "WaterThrust.h"
 #endif
