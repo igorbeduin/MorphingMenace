@@ -8,6 +8,7 @@ GUI::GUI(GameObject &associated, GameObject& other) : Component::Component(assoc
 {
     lifeSprite->SetScale(GUI_SCALE, GUI_SCALE);
     influenceSprite->SetScale(GUI_SCALE, GUI_SCALE);
+    stored_HP = 100;
 }
 
 void GUI::Update(float dt)
@@ -17,7 +18,7 @@ void GUI::Update(float dt)
     associated.box.x += 15;
     associated.box.y += -30;
     VerifyLife();
-    VerifyInfuence();
+    VerifyInfuence(dt);  
 }
 
 void GUI::Render()
@@ -59,10 +60,26 @@ void GUI::VerifyLife()
         {
             associated.RequestDelete();
         }
+
+        if (associated.angleDeg != 0)//retorna para o angulo 0 após levar uma pancada
+        {
+            associated.angleDeg += GUI_ANGLE_STEP;
+            if (associated.angleDeg <= 5 || associated.angleDeg >= -5)
+            {
+                associated.angleDeg = 0;
+            }
+            
+        }
+
+        if (stored_HP > otherCharPtr->GetCurrentHP())//quando o player leva dano, desloca o angulo do gui como se estivesse abaixando a cabeça por conta da pancada
+        {
+            associated.angleDeg -= GUI_ANGLE_DAMAGED;
+            stored_HP = otherCharPtr->GetCurrentHP();
+        }
     }
 }
 
-void GUI::VerifyInfuence()
+void GUI::VerifyInfuence(float dt)
 {
     if (!Game::GetInstance().GetCurrentState().GetObjectPtr(&other).expired())
     {
@@ -72,18 +89,90 @@ void GUI::VerifyInfuence()
             if (otherPlayerPtr->GetCurrentInfluence() > 0.75 * otherPlayerPtr->GetMaxInfluence() && otherPlayerPtr->GetCurrentInfluence() <= otherPlayerPtr->GetMaxInfluence())
             {
                 influenceSprite->SetFrame(0);
+                
+                if (otherPlayerPtr->GetLvl() > 0)//blink logic
+                {
+                    if (blink_timer.Get() >= INFLUENCE_BLINK_TIME)
+                    {
+                        influenceSprite->SetFrame(1);
+                        
+                        if (blink_timer.Get() >= 2*INFLUENCE_BLINK_TIME)
+                        {
+                            blink_timer.Restart();
+                        }
+                    }
+                    else
+                    {
+                        influenceSprite->SetFrame(0);
+                    }                   
+                    blink_timer.Update(dt);
+                }
             }
             if (otherPlayerPtr->GetCurrentInfluence() > 0.5 * otherPlayerPtr->GetMaxInfluence() && otherPlayerPtr->GetCurrentInfluence() <= 0.75 * otherPlayerPtr->GetMaxInfluence())
             {
                 influenceSprite->SetFrame(1);
+
+                if (otherPlayerPtr->GetLvl() > 0)//blink logic
+                {
+                    if (blink_timer.Get() >= INFLUENCE_BLINK_TIME)
+                    {
+                        influenceSprite->SetFrame(2);
+                        
+                        if (blink_timer.Get() >= 2*INFLUENCE_BLINK_TIME)
+                        {
+                            blink_timer.Restart();
+                        }
+                    }
+                    else
+                    {
+                        influenceSprite->SetFrame(1);
+                    }                   
+                    blink_timer.Update(dt);
+                }
             }
             if (otherPlayerPtr->GetCurrentInfluence() > 0.25 && otherPlayerPtr->GetCurrentInfluence() <= 0.5 * otherPlayerPtr->GetMaxInfluence())
             {
                 influenceSprite->SetFrame(2);
+
+                if (otherPlayerPtr->GetLvl() > 0)//blink logic
+                {
+                    if (blink_timer.Get() >= INFLUENCE_BLINK_TIME)
+                    {
+                        influenceSprite->SetFrame(3);
+                        
+                        if (blink_timer.Get() >= 2*INFLUENCE_BLINK_TIME)
+                        {
+                            blink_timer.Restart();
+                        }
+                    }
+                    else
+                    {
+                        influenceSprite->SetFrame(2);
+                    }                   
+                    blink_timer.Update(dt);
+                }
             }
             if (otherPlayerPtr->GetCurrentInfluence() > 0 && otherPlayerPtr->GetCurrentInfluence() <= 0.25 * otherPlayerPtr->GetMaxInfluence())
             {
                 influenceSprite->SetFrame(3);
+
+                if (otherPlayerPtr->GetLvl() > 0)//blink logic
+                {
+                    if (blink_timer.Get() >= INFLUENCE_BLINK_TIME)
+                    {
+                        influenceSprite->SetFrame(4);
+                        
+                        if (blink_timer.Get() >= 2*INFLUENCE_BLINK_TIME)
+                        {
+                            blink_timer.Restart();
+                        }
+                    }
+                    else
+                    {
+                        influenceSprite->SetFrame(3);
+                    }                   
+                    blink_timer.Update(dt);
+                }
             }
             if (otherPlayerPtr->GetCurrentInfluence() <= 0)
             {
