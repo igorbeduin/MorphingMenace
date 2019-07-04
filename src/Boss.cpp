@@ -16,7 +16,7 @@ void Boss::Update(float dt)
     {
         float currentDistance = (Character::playerChar->GetPosition() - associated.box.GetCenter()).Absolute();
         float influenceFactor = influenceReference / currentDistance;
-        std::cout << influenceFactor << std::endl;
+        // std::cout << influenceFactor << std::endl;
         if (Player::player->GetLvl() != 0)
         {
             Player::player->SetInfluence(Player::player->GetCurrentInfluence() - influenceFactor);
