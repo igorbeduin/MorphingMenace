@@ -3,6 +3,8 @@
 #include "../include/Environment.h"
 #include "../include/Resources.h"
 
+std::shared_ptr<GameObject> StageState::ocean;
+
 StageState::StageState()
 {   
     // Creating gravity
@@ -37,6 +39,19 @@ StageState::StageState()
     std::shared_ptr<Sprite> planet_sprite(new Sprite(*planet, PLANET_BACKGROUND_PATH));
     planet->AddComponent(planet_sprite);
     planet_sprite->SetScale(PLANET_BACKGROUND_SCALE, PLANET_BACKGROUND_SCALE);
+
+    //Creating ocean
+    GameObject *ocean_object = new GameObject();
+    std::weak_ptr<GameObject> weak_ocean = AddObject(ocean_object);
+    ocean = weak_ocean.lock();
+    Vec2 oceanPos = OCEAN_INITIAL_POS;
+    ocean->box.x = oceanPos.x;
+    ocean->box.y = oceanPos.y;
+    std::shared_ptr<Sprite> ocean_sprite(new Sprite(*ocean, OCEAN_BACKGROUND_PATH));
+    ocean->AddComponent(ocean_sprite);
+    ocean_sprite->SetScale(OCEAN_BACKGROUND_SCALE, OCEAN_BACKGROUND_SCALE);
+    std::cout << ocean->box.h << std::endl;
+    std::cout << ocean->box.w << std::endl;
 
     //Creating TileSet and TileMap
     GameObject *tile_object = new GameObject();
