@@ -12,5 +12,5 @@
 
 #define INFLUENCE_BLINK_TIME 0.5
 #define GUI_SCALE 0.2
-#define GUI_ANGLE_DAMAGED -25
+#define GUI_ANGLE_DAMAGED -8
 #define GUI_ANGLE_STEP -5
