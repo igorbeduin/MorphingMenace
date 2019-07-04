@@ -8,6 +8,7 @@ GUI::GUI(GameObject &associated, GameObject& other) : Component::Component(assoc
 {
     lifeSprite->SetScale(GUI_SCALE, GUI_SCALE);
     influenceSprite->SetScale(GUI_SCALE, GUI_SCALE);
+    stored_HP = 100;
 }
 
 void GUI::Update(float dt)
@@ -17,7 +18,7 @@ void GUI::Update(float dt)
     associated.box.x += 15;
     associated.box.y += -30;
     VerifyLife();
-    VerifyInfuence(dt);
+    VerifyInfuence(dt);  
 }
 
 void GUI::Render()
@@ -58,6 +59,22 @@ void GUI::VerifyLife()
         else
         {
             associated.RequestDelete();
+        }
+
+        if (associated.angleDeg != 0)//retorna para o angulo 0 após levar uma pancada
+        {
+            associated.angleDeg += GUI_ANGLE_STEP;
+            if (associated.angleDeg <= 5 || associated.angleDeg >= -5)
+            {
+                associated.angleDeg = 0;
+            }
+            
+        }
+
+        if (stored_HP > otherCharPtr->GetCurrentHP())//quando o player leva dano, desloca o angulo do gui como se estivesse abaixando a cabeça por conta da pancada
+        {
+            associated.angleDeg -= GUI_ANGLE_DAMAGED;
+            stored_HP = otherCharPtr->GetCurrentHP();
         }
     }
 }
