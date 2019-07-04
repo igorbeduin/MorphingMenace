@@ -122,7 +122,7 @@ void Player::NotifyCollision(GameObject &other)
             }
         }
     }
-    if (characterState == character_state::JUMPING)
+    if (characterState == character_state::JUMPING || characterState == character_state::FALLING)
     {
         if ((other.GetComponent("CollisionBox").get() != nullptr))
         {
@@ -161,11 +161,14 @@ void Player::EnteringState(float dt)
             // Joystick
             if (InputManager::GetInstance().KeyPress(SPACE_KEY))
             {
-                // if (characterState != character_state::JUMPING)
-                // {
-                //     Jump();
-                // }
-                Jump();
+                if (characterPtr->VerifyOcean())
+                {
+                    Swim();
+                }
+                else
+                {
+                    Jump();
+                }
             }
             if (InputManager::GetInstance().IsKeyDown(D_KEY))
             {
@@ -199,9 +202,17 @@ void Player::EnteringState(float dt)
             {
                 characterPtr->ApplyDamage(50);
             }
-            if (characterPtr->GetSpeed().y >= MAXIMUM_Y_SPEED)
+            if (characterPtr->GetSpeed().y >= 0.15 * MAXIMUM_Y_SPEED)
             {
-                characterState = character_state::JUMPING;
+                characterState = character_state::FALLING; 
+            }
+
+            if (characterPtr->VerifyOcean())
+            {
+                if (characterPtr->GetSpeed().y > 0.15 * MAXIMUM_Y_SPEED)
+                {
+                    characterPtr->SetSpeedY(0.15 * MAXIMUM_Y_SPEED);
+                }
             }
 
             if ((associated.box.x <= (-Camera::pos.x + LEFT_FOCUS_LIMIT) && characterPtr->GetLastPosition().x > associated.box.x) ||
@@ -243,4 +254,10 @@ void Player::SetInfluence(int influence)
 int Player::GetMaxInfluence()
 {
     return maxInfluence;
+}
+
+void Player::Swim()
+{
+    characterPtr->SetSpeedY( 0.2 * PLAYER_LVL0_JUMP);
+    // characterState = character_state::JUMPING;
 }
