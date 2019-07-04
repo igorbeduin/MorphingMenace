@@ -17,7 +17,7 @@ void GUI::Update(float dt)
     associated.box.x += 15;
     associated.box.y += -30;
     VerifyLife();
-    VerifyInfuence();
+    VerifyInfuence(dt);
 }
 
 void GUI::Render()
@@ -62,7 +62,7 @@ void GUI::VerifyLife()
     }
 }
 
-void GUI::VerifyInfuence()
+void GUI::VerifyInfuence(float dt)
 {
     if (!Game::GetInstance().GetCurrentState().GetObjectPtr(&other).expired())
     {
@@ -72,18 +72,90 @@ void GUI::VerifyInfuence()
             if (otherPlayerPtr->GetCurrentInfluence() > 0.75 * otherPlayerPtr->GetMaxInfluence() && otherPlayerPtr->GetCurrentInfluence() <= otherPlayerPtr->GetMaxInfluence())
             {
                 influenceSprite->SetFrame(0);
+                
+                if (otherPlayerPtr->GetLvl() > 0)//blink logic
+                {
+                    if (blink_timer.Get() >= INFLUENCE_BLINK_TIME)
+                    {
+                        influenceSprite->SetFrame(1);
+                        
+                        if (blink_timer.Get() >= 2*INFLUENCE_BLINK_TIME)
+                        {
+                            blink_timer.Restart();
+                        }
+                    }
+                    else
+                    {
+                        influenceSprite->SetFrame(0);
+                    }                   
+                    blink_timer.Update(dt);
+                }
             }
             if (otherPlayerPtr->GetCurrentInfluence() > 0.5 * otherPlayerPtr->GetMaxInfluence() && otherPlayerPtr->GetCurrentInfluence() <= 0.75 * otherPlayerPtr->GetMaxInfluence())
             {
                 influenceSprite->SetFrame(1);
+
+                if (otherPlayerPtr->GetLvl() > 0)//blink logic
+                {
+                    if (blink_timer.Get() >= INFLUENCE_BLINK_TIME)
+                    {
+                        influenceSprite->SetFrame(2);
+                        
+                        if (blink_timer.Get() >= 2*INFLUENCE_BLINK_TIME)
+                        {
+                            blink_timer.Restart();
+                        }
+                    }
+                    else
+                    {
+                        influenceSprite->SetFrame(1);
+                    }                   
+                    blink_timer.Update(dt);
+                }
             }
             if (otherPlayerPtr->GetCurrentInfluence() > 0.25 && otherPlayerPtr->GetCurrentInfluence() <= 0.5 * otherPlayerPtr->GetMaxInfluence())
             {
                 influenceSprite->SetFrame(2);
+
+                if (otherPlayerPtr->GetLvl() > 0)//blink logic
+                {
+                    if (blink_timer.Get() >= INFLUENCE_BLINK_TIME)
+                    {
+                        influenceSprite->SetFrame(3);
+                        
+                        if (blink_timer.Get() >= 2*INFLUENCE_BLINK_TIME)
+                        {
+                            blink_timer.Restart();
+                        }
+                    }
+                    else
+                    {
+                        influenceSprite->SetFrame(2);
+                    }                   
+                    blink_timer.Update(dt);
+                }
             }
             if (otherPlayerPtr->GetCurrentInfluence() > 0 && otherPlayerPtr->GetCurrentInfluence() <= 0.25 * otherPlayerPtr->GetMaxInfluence())
             {
                 influenceSprite->SetFrame(3);
+
+                if (otherPlayerPtr->GetLvl() > 0)//blink logic
+                {
+                    if (blink_timer.Get() >= INFLUENCE_BLINK_TIME)
+                    {
+                        influenceSprite->SetFrame(4);
+                        
+                        if (blink_timer.Get() >= 2*INFLUENCE_BLINK_TIME)
+                        {
+                            blink_timer.Restart();
+                        }
+                    }
+                    else
+                    {
+                        influenceSprite->SetFrame(3);
+                    }                   
+                    blink_timer.Update(dt);
+                }
             }
             if (otherPlayerPtr->GetCurrentInfluence() <= 0)
             {
