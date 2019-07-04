@@ -56,18 +56,18 @@ void Camera::Update(float dt)
     {
       pos.x = 0;
     }
-    if (-pos.x >= 6900 - WINDOW_WIDTH)
+    if (-pos.x >= 8050 - WINDOW_WIDTH)
     {
-      pos.x = +WINDOW_WIDTH -6900;
+      pos.x = +WINDOW_WIDTH -8050;
     }
     
     if (-pos.y <= 0)
     {
       pos.y = 0;
     }
-    if (-pos.y >= 4587 - WINDOW_HEIGHT)
+    if (-pos.y >= 5352 - WINDOW_HEIGHT)
     {
-      pos.y = -4587 +WINDOW_HEIGHT;
+      pos.y = -5352 +WINDOW_HEIGHT;
     }
     
 
