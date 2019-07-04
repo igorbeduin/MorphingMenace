@@ -4,14 +4,16 @@
 #include "../include/Collider.h"
 #include "../include/Camera.h"
 #include "../include/Game.h"
+#include "../include/StageState.h"
 
 Character* Character::playerChar = nullptr;
 Character::Character(GameObject &associated, int maxHP, char_type charType) : Component::Component(associated),
-                                                                           maxHP(maxHP),
-                                                                           applyNormal(false),
-                                                                           flip(false),
-                                                                           currentHP(maxHP),
-                                                                           charType(charType)
+                                                                              maxHP(maxHP),
+                                                                              applyNormal(false),
+                                                                              applyWaterThrust(false),
+                                                                              flip(false),
+                                                                              currentHP(maxHP),
+                                                                              charType(charType)
 {
     switch (charType)
     {
@@ -44,6 +46,7 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
 
 void Character::Update(float dt)
 {
+    VerifyOcean();
     Environment::ApplyForces(this);
     
     lastPosition.x = associated.box.x;
@@ -274,4 +277,20 @@ void Character::Die()
     {
         playerChar = nullptr;
     }
+}
+
+bool Character::VerifyOcean()
+{
+    if (StageState::ocean.get() != nullptr)
+    {
+        if (StageState::ocean->box.Contains(associated.box.GetCenter().x, associated.box.GetCenter().y))
+        {
+            applyWaterThrust = true;
+        }
+        else
+        {
+            applyWaterThrust = false;
+        }
+    }
+    return applyWaterThrust;
 }
