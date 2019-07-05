@@ -1,5 +1,6 @@
 #include "../include/GUI.h"
 #include "../include/Game.h"
+#include "../include/CameraFollower.h"
 
 GUI::GUI(GameObject &associated, GameObject& other) : Component::Component(associated),
                                    other(other),
@@ -81,9 +82,13 @@ void GUI::VerifyLife()
                 std::shared_ptr<GameObject> bone_dust = weak_bone.lock();
                 bone_dust->box.y = associated.box.y;
                 bone_dust->box.x = associated.box.x;
+                
                 std::shared_ptr<Sprite> bone_dust_sprite(new Sprite(*bone_dust, GUI_BONE_DUST_PATH, GUI_BONE_DUST_FRAMES_NUMBER, GUI_BONE_DUST_FRAME_TIME, GUI_BONE_DUST_FRAMES_NUMBER*GUI_BONE_DUST_FRAME_TIME));
-                bone_dust_sprite->SetScale(GUI_SCALE, GUI_SCALE);
+                bone_dust_sprite->SetScale(GUI_BONE_DUST_SCALE, GUI_BONE_DUST_SCALE);
                 bone_dust->AddComponent(bone_dust_sprite);
+
+                std::shared_ptr<CameraFollower> BoneCamFollow(new CameraFollower(*bone_dust, {41,-48}));
+                bone_dust->AddComponent(BoneCamFollow);
         }
     }
 }
