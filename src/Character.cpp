@@ -281,16 +281,17 @@ void Character::Die()
 
 bool Character::VerifyOcean()
 {
-    if (StageState::ocean.get() != nullptr)
+    for (int i = 0; i < (int)StageState::oceanArray.size(); i++)
     {
-        if (StageState::ocean->box.Contains(associated.box.GetCenter().x, associated.box.GetCenter().y))
+        if (StageState::oceanArray[i].get() != nullptr)
         {
-            applyWaterThrust = true;
-        }
-        else
-        {
-            applyWaterThrust = false;
+            if (StageState::oceanArray[i]->box.Contains(associated.box.GetCenter().x, associated.box.GetCenter().y))
+            {
+                applyWaterThrust = true;
+                return applyWaterThrust;
+            }
         }
     }
-    return applyWaterThrust;
+    applyWaterThrust = false;
+    return false;
 }

@@ -3,7 +3,7 @@
 #include "../include/Environment.h"
 #include "../include/Resources.h"
 
-std::shared_ptr<GameObject> StageState::ocean;
+std::vector<std::shared_ptr<GameObject>> StageState::oceanArray;
 
 StageState::StageState()
 {   

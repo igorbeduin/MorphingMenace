@@ -33,5 +33,5 @@ public:
   void Pause();
   void Resume();
   std::weak_ptr<GameObject> AddCollisionObject(GameObject *object);
-  static std::shared_ptr<GameObject> ocean;
+  static std::vector<std::shared_ptr<GameObject>> oceanArray;
 };
