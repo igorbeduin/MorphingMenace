@@ -16,7 +16,7 @@ Player::Player(GameObject &associated) : Component::Component(associated),
 
 void Player::Update(float dt)
 {   
-    std::cout << "currentInfluence:" << currentInfluence << std::endl;
+    // std::cout << "currentInfluence:" << currentInfluence << std::endl;
     if (currentInfluence <= 0 && lvl != 0)
     {
         currentInfluence = 0;
