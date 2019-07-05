@@ -90,7 +90,6 @@ void Character::NotifyCollision(GameObject &other)
         Collider *otherCollider = (Collider *)other.GetComponent("Collider").get();
         Collider *associatedCollider = (Collider *)associated.GetComponent("Collider").get();
 
-        //TODO: colocar esse metodo em uma classe/arquivo de utilities
         collisionSide(associatedCollider->box, otherCollider->box);
         // Falling collision (Up-To-Down Collision)
         if (verticalCollision == collision_side::UP)
@@ -99,6 +98,7 @@ void Character::NotifyCollision(GameObject &other)
             {
                 associated.box.y -= (associatedCollider->box.y + associatedCollider->box.h) - otherCollider->box.y;
                 speed.y = 0;
+                speed.x = 0;
                 applyNormal = true;
             }
         }
@@ -114,12 +114,14 @@ void Character::NotifyCollision(GameObject &other)
         if (horizontalCollision == collision_side::LEFT)
         {
             associated.box.x -= (associatedCollider->box.x + associatedCollider->box.w) - otherCollider->box.x;
+            speed.x = 0;
         }
 
         // Right-To-Left Collision
         if (horizontalCollision == collision_side::RIGHT)
         {
             associated.box.x += (otherCollider->box.x + otherCollider->box.w) - associatedCollider->box.x;
+            speed.x = 0;
         }
         
         verticalCollision = collision_side::NONE_SIDE;
@@ -150,36 +152,36 @@ void Character::collisionSide(Rect boxA, Rect boxB)
     // This function returns the side colliding of B in relation of A, e.g, A->B returns "Left"
 
     // Horizontal verification
-    if ((boxA.x + boxA.w > boxB.x - SAFETY_COLLISION_RANGE) &&
-        (boxA.x + boxA.w < boxB.x + DEPTH_COLLISION_RANGE) && 
-        (boxA.y + boxA.h != boxB.y))
+    if ((boxA.x + boxA.w > boxB.x /*- SAFETY_COLLISION_RANGE*/) &&
+        (boxA.x + boxA.w <= boxB.x + DEPTH_COLLISION_RANGE) &&
+        (boxA.y + boxA.h > boxB.y + DEPTH_COLLISION_RANGE))
     {
         horizontalCollision = collision_side::LEFT;
     }
     else
     {
-        if ((boxA.x > boxB.x + boxB.w - DEPTH_COLLISION_RANGE) &&
-            (boxA.x < boxB.x + boxB.w + SAFETY_COLLISION_RANGE) &&
-            (boxA.y + boxA.h != boxB.y))
+        if ((boxA.x >= boxB.x + boxB.w - DEPTH_COLLISION_RANGE) &&
+            (boxA.x < boxB.x + boxB.w /*+ SAFETY_COLLISION_RANGE*/) &&
+            (boxA.y + boxA.h > boxB.y + DEPTH_COLLISION_RANGE))
         {
             horizontalCollision = collision_side::RIGHT;
         }
     }
 
     // Vertical verification
-    if ((boxA.y + boxA.h > boxB.y - SAFETY_COLLISION_RANGE) &&
-        (boxA.y + boxA.h < boxB.y + DEPTH_COLLISION_RANGE) &&
-        (boxA.x + boxA.w > boxB.x + COLLISION_COMPENSATION) &&
-        (boxA.x < boxB.x + boxB.w - COLLISION_COMPENSATION))
+    if ((boxA.y + boxA.h > boxB.y /*- SAFETY_COLLISION_RANGE*/) &&
+        (boxA.y + boxA.h <= boxB.y + DEPTH_COLLISION_RANGE) &&
+        (boxA.x + boxA.w > boxB.x + DEPTH_COLLISION_RANGE) &&
+        (boxA.x < boxB.x + boxB.w - DEPTH_COLLISION_RANGE))
     {
         verticalCollision = collision_side::UP;
     }
     else
     {
-        if ((boxA.y > boxB.y + boxB.h - DEPTH_COLLISION_RANGE) &&
-            (boxA.y < boxB.y + boxB.h + SAFETY_COLLISION_RANGE) &&
-            (boxA.x + boxA.w > boxB.x + COLLISION_COMPENSATION) &&
-            (boxA.x < boxB.x + boxB.w - COLLISION_COMPENSATION))
+        if ((boxA.y < boxB.y + boxB.h /*- DEPTH_COLLISION_RANGE*/) &&
+            (boxA.y >= boxB.y + boxB.h - DEPTH_COLLISION_RANGE) &&
+            (boxA.x + boxA.w > boxB.x + DEPTH_COLLISION_RANGE) &&
+            (boxA.x < boxB.x + boxB.w - DEPTH_COLLISION_RANGE))
         {
             verticalCollision = collision_side::DOWN;
         }   

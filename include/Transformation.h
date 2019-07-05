@@ -12,5 +12,6 @@ class Transformation
 public:
     virtual void Attack() = 0;
     virtual void Absorb();
+    virtual void Update(float dt) = 0;
     void Downgrade();
 };
