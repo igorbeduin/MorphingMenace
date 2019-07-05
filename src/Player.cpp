@@ -22,11 +22,13 @@ void Player::Update(float dt)
     VerifiesInfluence();
     Transformation *currentTransf = (Transformation *)transformStack.top().get();
     currentTransf->Update(deltaTime);
-    Joystick();
+    if (characterState != ABSORBING)
+    {
+        Joystick();
+    }
     EnteringState();
     ExitingState();
     FollowingCamera();
-
 }
 
 void Player::SetCharacterState(character_state state)
@@ -107,9 +109,8 @@ void Player::NotifyCollision(GameObject &other)
     {
         if ((other.GetComponent("CollisionBox").get() != nullptr) || (other.GetComponent("Character").get() != nullptr))
         {
-            characterState = character_state::IDLE;
             Character *characterPtr = (Character *)associated.GetComponent("Character").get();
-            characterPtr->SetSpeed(Vec2(0, 0));
+            Idle();
         }
         Character *enemyCharPtr = (Character *)other.GetComponent("Character").get();
         if (enemyCharPtr != nullptr)
@@ -177,6 +178,10 @@ void Player::EnteringState()
         if (characterPtr->GetSpeed().y > MAXIMUM_Y_SPEED_WATER)
         {
             characterPtr->SetSpeedY(MAXIMUM_Y_SPEED_WATER);
+        }
+        if (characterPtr->GetSpeed().y < -MAXIMUM_Y_SPEED_WATER)
+        {
+            characterPtr->SetSpeedY(-MAXIMUM_Y_SPEED_WATER);
         }
     }
 }

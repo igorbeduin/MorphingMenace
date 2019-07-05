@@ -3,6 +3,16 @@
 *					General						*
 *************************************************/
 #define GAME_NAME "The Morphing Menace!"
+#define ABSORB_X_SPEED 100
+#define ABSORB_Y_SPEED -300
+#define SWIM_Y_SPEED -800
+#define MAXIMUM_Y_SPEED 600
+#define MAXIMUM_Y_SPEED_WATER 100
+#define FALLING_SPEED 5
+#define PLAYER_INITIAL_HP 100
+#define INITIAL_INFLUENCE 10000
+#define ABSORBABLE_PERC 0.8
+#define SCENARIO_SCALE 1.1
 
 /************************************************
 *					Character					*
@@ -43,22 +53,14 @@ enum character_state
     #include "Boss.h"
     #include "Damage.h"
     
-    #define ABSORB_X_SPEED 300
-    #define ABSORB_Y_SPEED -700
-
-    #define MAXIMUM_Y_SPEED 800
-    #define PLAYER_INITIAL_HP 100
-    #define INITIAL_INFLUENCE 10000
-    //#define INITIAL_INFLUENCE 100
-    #define ABSORBABLE_PERC 0.8
 
 
 #define PLAYER_LVL1_SPRITE_PATH "assets/img/char/adulto.png"
 #define PLAYER_LVL1_SPRITES_NUMB 18
 #define PLAYER_LVL1_SPRITES_TIME 0.16
-#define PLAYER_LVL1_SCALE 0.22
+#define PLAYER_LVL1_SCALE SCENARIO_SCALE / 6.3636
 #define PLAYER_LVL1_STEP 200
-#define PLAYER_LVL1_JUMP -800
+#define PLAYER_LVL1_JUMP -850
 #define PLAYER_LVL1_IDLE_START 0
 #define PLAYER_LVL1_IDLE_END 1
 #define PLAYER_LVL1_IDLE_TIME 0.3
@@ -86,8 +88,6 @@ enum character_state
     #include "Sprite.h"
     #include "TileMap.h"
 
-    #define SCENARIO_SCALE 1.4
-
     #define PLANET_BACKGROUND_PATH "assets/img/BG01.png"
     #define PLANET_BACKGROUND_SCALE SCENARIO_SCALE
 
@@ -106,7 +106,7 @@ enum character_state
     #define TILE_HEIGHT 32
     #define TILE_WIDTH 32
     #define STAGE_BG_MUSIC_PATH "assets/audio/background_demo1.ogg"
-    #define SCENARIO_COLLISION_RADIUS 400
+    #define SCENARIO_COLLISION_RADIUS 200
     
 
 #endif
@@ -114,12 +114,18 @@ enum character_state
 /************************************************
 *					Environment					*
 *************************************************/
-#define GRAVITY_ACCELERATION {0, 20}
-#define NORMAL_ACCELERATION {0, -20}
-#define WATERTHRUST_ACCELERATION {0, -15}
-#define SAFETY_COLLISION_RANGE 20
-#define DEPTH_COLLISION_RANGE 20
-#define COLLISION_COMPENSATION 5
+#define GRAVITY_ACCELERATION_Y 15
+#define GRAVITY_ACCELERATION_X 0
+#define GRAVITY_ACCELERATION {GRAVITY_ACCELERATION_X, GRAVITY_ACCELERATION_Y}
+#define NORMAL_ACCELERATION_Y -1 * GRAVITY_ACCELERATION_Y
+#define NORMAL_ACCELERATION_X 0
+#define NORMAL_ACCELERATION {NORMAL_ACCELERATION_X, GRAVITY_ACCELERATION_Y}
+#define WATERTHRUST_ACCELERATION_Y  -1 * GRAVITY_ACCELERATION_Y / 1.33
+#define WATERTHRUST_ACCELERATION_X 0
+#define WATERTHRUST_ACCELERATION {WATERTHRUST_ACCELERATION_X, WATERTHRUST_ACCELERATION_Y}
+#define SAFETY_COLLISION_RANGE 5
+#define DEPTH_COLLISION_RANGE 10
+#define COLLISION_COMPENSATION 10
 
 #ifdef ENVIRONMENT
     #include "Force.h"
