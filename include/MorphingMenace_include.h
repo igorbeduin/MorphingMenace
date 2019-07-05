@@ -93,9 +93,12 @@ enum character_state
 
     #define STARS_BACKGROUND_PATH "assets/img/StarsBackground.jpg"
 
-    #define OCEAN_BACKGROUND_PATH "assets/img/agua.png"
-    #define OCEAN_BACKGROUND_SCALE SCENARIO_SCALE
-    #define OCEAN_INITIAL_POS {1732, 1650}
+    #define OCEAN1_BACKGROUND_PATH "assets/img/agua1.png"
+    #define OCEAN1_BACKGROUND_SCALE SCENARIO_SCALE * 2
+    #define OCEAN1_INITIAL_POS {1732, 1650}
+    #define OCEAN2_BACKGROUND_PATH "assets/img/agua2.png"
+    #define OCEAN2_BACKGROUND_SCALE SCENARIO_SCALE * 2
+    #define OCEAN2_INITIAL_POS {4900, 1700}
 
     #define TILESET_PATH "assets/img/tileset.png"
     #define TILEMAP_PATH "assets/map/tileMap.txt"

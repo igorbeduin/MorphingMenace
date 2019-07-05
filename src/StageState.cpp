@@ -44,18 +44,29 @@ StageState::StageState()
     planet->AddComponent(planet_sprite);
     planet_sprite->SetScale(PLANET_BACKGROUND_SCALE, PLANET_BACKGROUND_SCALE);
 
-    //Creating ocean
-    GameObject *ocean_object = new GameObject();
-    std::weak_ptr<GameObject> weak_ocean = AddObject(ocean_object);
-    ocean = weak_ocean.lock();
-    Vec2 oceanPos = OCEAN_INITIAL_POS;
-    ocean->box.x = oceanPos.x;
-    ocean->box.y = oceanPos.y;
-    std::shared_ptr<Sprite> ocean_sprite(new Sprite(*ocean, OCEAN_BACKGROUND_PATH));
-    ocean->AddComponent(ocean_sprite);
-    ocean_sprite->SetScale(OCEAN_BACKGROUND_SCALE, OCEAN_BACKGROUND_SCALE);
-    std::cout << ocean->box.h << std::endl;
-    std::cout << ocean->box.w << std::endl;
+    //Creating ocean1
+    GameObject *ocean1_object = new GameObject();
+    std::weak_ptr<GameObject> weak_ocean1 = AddObject(ocean1_object);
+    std::shared_ptr<GameObject> ocean1 = weak_ocean1.lock();
+    Vec2 ocean1Pos = OCEAN1_INITIAL_POS;
+    ocean1->box.x = ocean1Pos.x;
+    ocean1->box.y = ocean1Pos.y;
+    std::shared_ptr<Sprite> ocean1_sprite(new Sprite(*ocean1, OCEAN1_BACKGROUND_PATH));
+    ocean1->AddComponent(ocean1_sprite);
+    ocean1_sprite->SetScale(OCEAN1_BACKGROUND_SCALE, OCEAN1_BACKGROUND_SCALE);
+    oceanArray.push_back(ocean1);
+
+    //Creating ocean2
+    GameObject *ocean2_object = new GameObject();
+    std::weak_ptr<GameObject> weak_ocean2 = AddObject(ocean2_object);
+    std::shared_ptr<GameObject> ocean2 = weak_ocean2.lock();
+    Vec2 ocean2Pos = OCEAN2_INITIAL_POS;
+    ocean2->box.x = ocean2Pos.x;
+    ocean2->box.y = ocean2Pos.y;
+    std::shared_ptr<Sprite> ocean2_sprite(new Sprite(*ocean2, OCEAN2_BACKGROUND_PATH));
+    ocean2->AddComponent(ocean2_sprite);
+    ocean2_sprite->SetScale(OCEAN2_BACKGROUND_SCALE, OCEAN2_BACKGROUND_SCALE);
+    oceanArray.push_back(ocean2);
 
     //Creating TileSet and TileMap
     GameObject *tile_object = new GameObject();
