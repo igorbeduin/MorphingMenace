@@ -19,7 +19,7 @@ public:
     void Update(float dt);
     void Render();
     bool Is(std::string type);
-    void Walk(int step, float dt);
+    void Walk(int step);
     void Jump();
     void Idle();
     void Attack();
@@ -32,12 +32,16 @@ public:
     static Player* player;
     void NotifyCollision(GameObject &other);
     void Transform(char_type type);
-    void EnteringState(float dt);
-    void ExitingState(float dt);
+    void EnteringState();
+    void ExitingState();
     int GetCurrentInfluence();
     int GetMaxInfluence();
     void SetInfluence(int influence);
     void Swim();
+    void VerifiesInfluence();
+    void Joystick();
+    void FollowingCamera();
+    void UpdateVariables(float dt);
 
 private:
     character_state characterState;
@@ -47,4 +51,7 @@ private:
     int lvl;
     int currentInfluence;
     int maxInfluence;
+    float deltaTime;
+    int walkStep;
+    int jumpVelocity;
 };

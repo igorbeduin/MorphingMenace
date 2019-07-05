@@ -20,7 +20,7 @@
 #define LEFT_FOCUS_LIMIT 410
 #define RIGHT_FOCUS_LIMIT 564
 #define UP_FOCUS_LIMIT 300
-#define DOWN_FOCUS_LIMIT 400
+#define DOWN_FOCUS_LIMIT 350
 
 /************************************************
 *				 Audio					*
