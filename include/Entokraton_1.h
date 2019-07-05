@@ -10,7 +10,7 @@ class Entokraton_1 : public Component
 {
 private:
 
-    enum EntoState{RESTING, MOVING, ATTACKING, CHASING};
+    enum EntoState{RESTING, MOVING, ATTACKING, CHASING, DYING};
     EntoState state;
     Timer restTimer;
 
