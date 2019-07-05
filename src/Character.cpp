@@ -47,7 +47,10 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
 void Character::Update(float dt)
 {
     VerifyOcean();
-    Environment::ApplyForces(this);
+    if (charType != char_type::BOSS)
+    {
+        Environment::ApplyForces(this);
+    }
     
     lastPosition.x = associated.box.x;
     lastPosition.y = associated.box.y;
