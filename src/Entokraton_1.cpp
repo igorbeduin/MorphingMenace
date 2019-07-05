@@ -18,6 +18,10 @@ Entokraton_1::Entokraton_1(GameObject &associated) : Component::Component(associ
     std::shared_ptr<Sound> walk1(new Sound(associated, ENTOKRATON_1_WALK1_SOUND));
     associated.AddComponent(walk1);
     sounds.emplace_back(walk1);
+
+    std::shared_ptr<Sound> attack(new Sound(associated, ENTOKRATON_1_ATTACK_SOUND));
+    associated.AddComponent(attack);
+    sounds.emplace_back(attack);
 }
 void Entokraton_1::Update(float dt)
 {
@@ -27,19 +31,24 @@ void Entokraton_1::Update(float dt)
     // Sound *idle1Sound = (Sound *)associated.GetComponent("Sound").get();
     // Sound *walkSound = (Sound *)associated.GetComponent("Sound").get();
     // std::cout << Character::playerChar << std::endl ;
+
+    if (enemyCharacter->GetCurrentHP() <= 0)
+    {
+        state = DYING;
+    }
     switch (state)
     {
 
     case RESTING:
     // std::cout << "idle" << std::endl;
-    
-    // std::cout << "idle" << std::endl;
-    // std::cout << associated.box.x << " - " << Character::playerChar->box.x << std::endl;
-
-    enemySprite->RunSpecificAnimation();
-    enemySprite->SetStartFrame(ENTOKRATON_1_IDLE_START);
-    enemySprite->SetEndFrame(ENTOKRATON_1_IDLE_END);
-    enemySprite->SetAnimationTime(ENTOKRATON_1_IDLE_TIME);
+        // if (enemyCharacter->GetCurrentHP() <= 0)
+        // {
+        //     state = DYING;
+        // }
+        enemySprite->RunSpecificAnimation();
+        enemySprite->SetStartFrame(ENTOKRATON_1_IDLE_START);
+        enemySprite->SetEndFrame(ENTOKRATON_1_IDLE_END);
+        enemySprite->SetAnimationTime(ENTOKRATON_1_IDLE_TIME);
 
         if  (Character::playerChar != nullptr && 
                 ( abs( associated.box.GetCenter().x - Character::playerChar->GetPosition().x ) < ENTOKRATON_1_PERCEPTION )  && abs( associated.box.GetCenter().y - Character::playerChar->GetPosition().y) <  ENTOKRATON_1_PERCEPTION/2.5 )
@@ -80,19 +89,31 @@ void Entokraton_1::Update(float dt)
 
     case MOVING://flipar sprite
     // std::cout << "moving" << std::endl;
+
+        // if (enemyCharacter->GetCurrentHP() <= 0)
+        // {
+        //     state = DYING;
+        // }
+
         enemySprite->RunSpecificAnimation();
         enemySprite->SetStartFrame(ENTOKRATON_1_WALK_START);
         enemySprite->SetEndFrame(ENTOKRATON_1_WALK_END);
         enemySprite->SetAnimationTime(ENTOKRATON_1_WALK_TIME);
-
-        if (enemySprite->GetCurrentFrame() == 4 && firstTime == false)
+        
+        if (enemySprite->GetCurrentFrame() == 13 && firstTime == false)
         {
             sounds[2]->Play(1);
             firstTime = true;
-        } 
-        else if (enemySprite->GetCurrentFrame() == 7)
+        }
+        else if (enemySprite->GetCurrentFrame() == 15 && firstTime == false)
         {
-            sounds[2]->Stop();
+            sounds[2]->Play(1);
+            firstTime = true;
+        }
+         
+        else if (enemySprite->GetCurrentFrame() == 16)
+        {
+            // sounds[2]->Stop();
             firstTime = false;
         }
 
@@ -131,20 +152,30 @@ void Entokraton_1::Update(float dt)
         // std::cout << "CHASING" << std::endl;
         //se aproxima do jogador, muda o estado para attacking
 
+        // if (enemyCharacter->GetCurrentHP() <= 0)
+        // {
+        //     state = DYING;
+        // }
+
         enemySprite->RunSpecificAnimation();
         enemySprite->SetStartFrame(ENTOKRATON_1_WALK_START);
         enemySprite->SetEndFrame(ENTOKRATON_1_WALK_END);
         enemySprite->SetAnimationTime(ENTOKRATON_1_WALK_TIME);
 
-        if (enemySprite->GetCurrentFrame() == 4 && firstTime == false)
+        if (enemySprite->GetCurrentFrame() == 13 && firstTime == false)
         {
-            // std::cout << "step ";
             sounds[2]->Play(1);
             firstTime = true;
-        } 
-        else if (enemySprite->GetCurrentFrame() == 7)
+        }
+        else if (enemySprite->GetCurrentFrame() == 15 && firstTime == false)
         {
-            sounds[2]->Stop();
+            sounds[2]->Play(1);
+            firstTime = true;
+        }
+         
+        else if (enemySprite->GetCurrentFrame() == 16)
+        {
+            // sounds[2]->Stop();
             firstTime = false;
         }
 
@@ -184,30 +215,65 @@ void Entokraton_1::Update(float dt)
         } else if (abs(Character::playerChar->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/2 <= ENTOKRATON_1_ATTACK_RANGE)
         {
             state = ATTACKING;
+            sounds[3]->Play(1);
         }
 
         break;
 
     case ATTACKING:        
 
+        // if (enemyCharacter->GetCurrentHP() <= 0)
+        // {
+        //     state = DYING;
+        // }
+
         // std::cout << "Entokraton used CUT" << std::endl;
         enemySprite->RunSpecificAnimation();
-        enemySprite->SetStartFrame(ENTOKRATON_1_WALK_START);
-        enemySprite->SetEndFrame(ENTOKRATON_1_WALK_END);
-        enemySprite->SetAnimationTime(ENTOKRATON_1_WALK_TIME);
+        enemySprite->SetStartFrame(ENTOKRATON_1_ATTACK_START);
+        enemySprite->SetEndFrame(ENTOKRATON_1_ATTACK_END);
+        enemySprite->SetAnimationTime(ENTOKRATON_1_ATTACK_TIME);
 
-        if (enemySprite->GetCurrentFrame() == ENTOKRATON_1_WALK_START + 2)
+        if (enemySprite->GetCurrentFrame() == 4)
         {
             Attack();
+        }
+        if (enemySprite->GetCurrentFrame() == 6)
+        {
             state = RESTING;
-            sounds[1]->Play(1);
+        }
+        break;
+
+    case DYING:
+
+        if (enemyCharacter->GetCurrentHP() <= 0)
+        {
+            GameObject *enemyDeath = new GameObject();
+            std::weak_ptr<GameObject> weak_enemy =  Game::GetInstance().GetCurrentState().AddObject(enemyDeath);
+            std::shared_ptr<GameObject> enemy_death = weak_enemy.lock();
+            enemy_death->box.y = associated.box.y;
+            enemy_death->box.x = associated.box.x;
+                    
+            std::shared_ptr<Sprite> death_animation_sprite(new Sprite(*enemy_death, ENTOKRATON_1_SPRITE_PATH, ENTOKRATON_1_SPRITES_NUMB, ENTOKRATON_1_DIE_TIME, ENTOKRATON_1_DIE_TIME));
+            death_animation_sprite->SetScale(ENTOKRATON_1_SCALE, ENTOKRATON_1_SCALE);
+            enemy_death->AddComponent(death_animation_sprite);
+
+            death_animation_sprite->RunSpecificAnimation();
+            death_animation_sprite->SetStartFrame(ENTOKRATON_1_DIE_START);
+            death_animation_sprite->SetEndFrame(ENTOKRATON_1_DIE_END);
+            death_animation_sprite->SetAnimationTime(ENTOKRATON_1_DIE_TIME);
         }
         
+        // if (enemySprite->GetCurrentFrame() == 12)
+        // {
+        // }
+
+
+        break;
+    
     
     default:
         break;
-    }
-
+    } 
 }
 
 void Entokraton_1::Render()
