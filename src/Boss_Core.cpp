@@ -5,7 +5,7 @@ BossCore::BossCore(GameObject &associated):Component(associated)
     std::shared_ptr<Sprite> sprite(new Sprite(associated, BOSS_CORE_SPRITE_PATH));
     sprite->SetScale(BOSS_CORE_SCALE, BOSS_CORE_SCALE);
     associated.AddComponent(sprite);
-    std::cout << "Criou core" << std::endl;
+    // std::cout << "Criou core" << std::endl;
 
 }
 
@@ -44,7 +44,7 @@ void BossCore::Shoot(Vec2 target)
     acid->AddComponent(acid_s);
 
     // std::shared_ptr<Damage> acidBehaviour(new Damage(*acid, ACID_DAMAGE, ACID_DAMAGE_TIME, char_type::BOSS_CORE));
-    std::cout << "passando pro damage: " << associatedCharacter->Type() << std::endl;
+    // std::cout << "passando pro damage: " << associatedCharacter->Type() << std::endl;
     // acid->AddComponent(acidBehaviour);
 }
 void BossCore::CoreDeath(int killed_core)
