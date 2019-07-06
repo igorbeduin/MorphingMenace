@@ -86,8 +86,10 @@ StageState::StageState()
     player->AddComponent(playerCollider);
 
     Vec2 initPos = Vec2(PLAYER_INIT_POS);
-    player->box.x = initPos.x;
-    player->box.y = initPos.y;
+    // player->box.x = initPos.x;
+    // player->box.y = initPos.y;
+    player->box.x = 5000;
+    player->box.y = 3050;
 
     AddObject(player);
 
