@@ -29,3 +29,29 @@ bool Boss::Is(std::string type)
 {
     return (type == "Boss");
 }
+void Boss::Start()
+{
+
+    Vec2 InitialPos[2];
+    InitialPos[0].x = associated.box.x + 120; 
+    InitialPos[0].y = associated.box.y + 715;
+    InitialPos[1].x = associated.box.x + 120;
+    InitialPos[1].y = associated.box.y + 515;
+
+    for (int i = 0; i < 2; i++)
+    {    
+        GameObject *boss_core = new GameObject();
+        std::weak_ptr<GameObject> weak_core = Game::GetInstance().GetCurrentState().AddObject(boss_core);
+        std::shared_ptr<GameObject> core = weak_core.lock();
+
+        std::shared_ptr<Character> coreCharacter(new Character(*core, 100, char_type::BOSS_CORE));
+        core->AddComponent(coreCharacter);
+        std::shared_ptr<Collider> CORECollider(new Collider(*core));
+        core->AddComponent(CORECollider);
+
+        core->box.x = InitialPos[i].x;
+        core->box.y = InitialPos[i].y;
+
+        coreArray.emplace_back(weak_core);   
+    }
+}
