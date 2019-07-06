@@ -39,7 +39,7 @@ public:
 
     static Character* playerChar;
     Rect box;
-
+    bool ISEnemy;
 private:
     Vec2 speed;
     Vec2 lastPosition;

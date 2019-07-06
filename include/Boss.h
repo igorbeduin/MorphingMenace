@@ -15,7 +15,12 @@ public:
     void Render();
     bool Is(std::string type);
     void Start();
+    void Attack();
     std::vector< std::weak_ptr<GameObject> > coreArray;
+
+    enum BossState{RESTING, ATTACKING};
+    BossState state;
+    Timer WaveTimer;
 
 private:
     int influenceReference;
