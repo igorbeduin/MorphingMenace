@@ -23,24 +23,28 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
         associated.AddComponent(playerBehav);
         playerChar = this;
         this->box = associated.box;
+        ISEnemy = false;
         break;
     }
     case ENTOKRATON_1:
     {
         std::shared_ptr<Entokraton_1> enemyBehav(new Entokraton_1(associated));
         associated.AddComponent(enemyBehav);
+        ISEnemy = true;
         break;
     }
     case BOSS:
     {
         std::shared_ptr<Boss> bossBehav(new Boss(associated));
         associated.AddComponent(bossBehav);
+        ISEnemy = true;
         break;
     }
     case BOSS_CORE:
     {
         std::shared_ptr<BossCore> coreBehav(new BossCore(associated));
         associated.AddComponent(coreBehav);
+        ISEnemy = true;
         break;
     }
 
@@ -138,12 +142,21 @@ void Character::NotifyCollision(GameObject &other)
     }
 
     // Collision with damages
-    if (other.GetComponent("Damage").get() != nullptr)
+    if (charType == char_type::BOSS_CORE)
     {
-        Damage *damagePtr = (Damage *)other.GetComponent("Damage").get();
-        if (damagePtr->Shooter() != charType)
+        if (other.GetComponent("Damage").get() != nullptr)
         {
-            ApplyDamage(damagePtr->GetDamage());
+            std::cout << "bosscore" << std::endl;
+            Damage *damagePtr = (Damage *)other.GetComponent("Damage").get();   
+            // if (damagePtr->Shooter() == char_type::BOSS_CORE && charType != char_type::BOSS)
+        
+            std::cout << "Shooter: " << damagePtr->Shooter()<< " é  player?" << (other.GetComponent("Player").get() == nullptr) << std::endl;
+            std::cout << "Target " << charType << std::endl; 
+            if (damagePtr->Shooter() != charType)
+            {
+                ApplyDamage(damagePtr->GetDamage());
+                // other.RequestDelete();
+            }
         }
     }
 }
@@ -288,6 +301,11 @@ void Character::Die()
     {
         playerChar = nullptr;
     }
+    // if (charType == char_type::BOSS_CORE)
+    // {
+    //     // (BossCore *)associated.GetComponent("BossCore").get()->
+
+    // }
 }
 
 bool Character::VerifyOcean()
