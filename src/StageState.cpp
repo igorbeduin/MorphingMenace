@@ -237,6 +237,7 @@ void StageState::Start()
 {
     LoadAssets();
     backgroundMusic.Play(-1);
+    StartArray();
 }
 
 void StageState::Pause()
