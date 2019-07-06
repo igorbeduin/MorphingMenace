@@ -95,10 +95,10 @@ enum character_state
 
     #define OCEAN1_BACKGROUND_PATH "assets/img/agua1.png"
     #define OCEAN1_BACKGROUND_SCALE SCENARIO_SCALE * 2
-    #define OCEAN1_INITIAL_POS {1732, 1650}
+    #define OCEAN1_INITIAL_POS {1370, 1300}
     #define OCEAN2_BACKGROUND_PATH "assets/img/agua2.png"
     #define OCEAN2_BACKGROUND_SCALE SCENARIO_SCALE * 2
-    #define OCEAN2_INITIAL_POS {4900, 1700}
+    #define OCEAN2_INITIAL_POS {3900, 1332}
 
     #define TILESET_PATH "assets/img/tileset.png"
     #define TILEMAP_PATH "assets/map/tileMap.txt"
@@ -106,7 +106,7 @@ enum character_state
     #define TILE_HEIGHT 32
     #define TILE_WIDTH 32
     #define STAGE_BG_MUSIC_PATH "assets/audio/background_demo1.ogg"
-    #define SCENARIO_COLLISION_RADIUS 200
+    #define SCENARIO_COLLISION_RADIUS 500
     
 
 #endif
