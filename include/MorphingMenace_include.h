@@ -23,6 +23,7 @@ enum char_type
     PLAYER,
     ENTOKRATON_1,
     BOSS,
+    BOSS_CORE,
     NONE_TYPE
 };
 
@@ -51,6 +52,7 @@ enum character_state
     #include "Player.h"
     #include "Entokraton_1.h"
     #include "Boss.h"
+    #include "Boss_Core.h"
     #include "Damage.h"
     
 
