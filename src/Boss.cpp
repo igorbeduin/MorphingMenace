@@ -61,6 +61,17 @@ void Boss::Update(float dt)
         }
         
     }
+    std::cout << (int)coreArray.size() << std::endl;
+    for (int i = 0; i < (int)coreArray.size(); i++)
+    {
+        if (coreArray[i].expired())
+        {
+            coreArray.erase(coreArray.begin() + i);
+        }
+        
+
+    }
+    
 }
 void Boss::Render()
 {}
