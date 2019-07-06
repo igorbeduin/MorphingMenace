@@ -26,7 +26,7 @@ void Camera::Update(float dt)
 
   if (focus != nullptr)
   {
-    std::cout << pos.x << ", " << pos.y << std::endl;
+    // std::cout << pos.x << ", " << pos.y << std::endl;
     // pos = focus->box.GetCenter();
     // pos.x -= WINDOW_WIDTH/2 ;// A posição da câmera é o calculo da posição do objeto na tels
     // pos.y -= WINDOW_HEIGHT/2 ;
