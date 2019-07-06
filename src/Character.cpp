@@ -37,6 +37,12 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
         associated.AddComponent(bossBehav);
         break;
     }
+    case BOSS_CORE:
+    {
+        std::shared_ptr<BossCore> coreBehav(new BossCore(associated));
+        associated.AddComponent(coreBehav);
+        break;
+    }
 
     default:
         std::cout << "Character >> WARNING: Character type not specified. Make sure to specify it. " << std::endl;
@@ -47,7 +53,7 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
 void Character::Update(float dt)
 {
     VerifyOcean();
-    if (charType != char_type::BOSS)
+    if (charType != char_type::BOSS && charType != char_type::BOSS_CORE)
     {
         Environment::ApplyForces(this);
     }
