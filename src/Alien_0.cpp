@@ -12,6 +12,7 @@ void Alien_0::Update(float dt)
 {
     VerifyState();
     sprite->Update(dt);
+    std::cout << (associated.GetComponent("Damage").get() == nullptr) << std::endl;
 }
 void Alien_0::Render()
 {
