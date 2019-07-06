@@ -289,15 +289,15 @@ void Entokraton_1::Attack()//verificar friendly fire
 
     //Creating attack
     GameObject *attack = new GameObject();
-    attack->box.w = ENTOKRATON_1_ATTACK_WIDTH;
-    attack->box.h = ENTOKRATON_1_ATTACK_HEIGHT;
+    attack->box.w = associated.box.w/2;
+    attack->box.h = associated.box.h;
     if (associatedCharacter->IsFlipped())
     {
-        attack->box.x = associatedCollider->box.x - attack->box.w;
+        attack->box.x = associatedCollider->box.x - attack->box.w/2;
     }
     else
     {
-        attack->box.x = associatedCollider->box.x + associatedCollider->box.w;
+        attack->box.x = associatedCollider->box.x + associatedCollider->box.w/2;
     }
     attack->box.y = associatedCollider->box.GetVec2().y ;
 
