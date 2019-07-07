@@ -11,7 +11,7 @@ Damage::Damage(GameObject &associated, int damage, float destrTime, char_type sh
 void Damage::Update(float dt)
 {
     autodestruction.Update(dt);
-    std::cout << "shooter: " << shooter << " damage: " << damage << std::endl;
+    // std::cout << "shooter: " << shooter << " damage: " << damage << std::endl;
     if (autodestruction.Get() >= destrTime)
     {
         associated.RequestDelete();

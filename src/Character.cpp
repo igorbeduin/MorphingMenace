@@ -100,6 +100,9 @@ void Character::NotifyCollision(GameObject &other)
     // Collision with environment
     if (other.GetComponent("CollisionBox").get() != nullptr)
     {   
+        if (other.GetComponent("Damage").get() != nullptr)
+            std::cout << "Damage? " << (other.GetComponent("Damage").get() != nullptr) << " Sound? " << (other.GetComponent("Sound").get() != nullptr) << " Player? " << (other.GetComponent("Player").get() != nullptr) << std::endl;
+
         Collider *otherCollider = (Collider *)other.GetComponent("Collider").get();
         Collider *associatedCollider = (Collider *)associated.GetComponent("Collider").get();
 
@@ -144,7 +147,8 @@ void Character::NotifyCollision(GameObject &other)
     // Collision with damages
     if (other.GetComponent("Damage").get() != nullptr)
     {
-        if (other.GetComponent("Player").get() != nullptr)
+        std::cout << "static: " << Character::playerChar << std::endl;
+        if (other.GetComponent("Player").get() == Character::playerChar )
         {
             std::cout << "É player" << std::endl;
         }
@@ -153,6 +157,7 @@ void Character::NotifyCollision(GameObject &other)
             std::cout << "Nao eh player" << std::endl;
             
         }
+        std::cout << "Player? " << (other.GetComponent("Player").get() != nullptr) << " Entokraton_1? " << (other.GetComponent("Entokraton_1").get() != nullptr) << " Damage? " << (other.GetComponent("Damage").get() != nullptr) << std::endl;
         
         Damage *damagePtr = (Damage *)other.GetComponent("Damage").get();   
         std::cout << "Character tipo: " << charType << std::endl;
