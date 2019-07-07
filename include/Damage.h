@@ -16,10 +16,10 @@ public:
     int GetDamage();
     void NotifyCollision(GameObject &other);
     char_type Shooter();
+    int damage;
+    char_type shooter;
 
 private:
-    int damage;
     float destrTime;
     Timer autodestruction;
-    char_type shooter;
 };

@@ -18,6 +18,7 @@ Player::Player(GameObject &associated) : Component::Component(associated),
 
 void Player::Update(float dt)
 {   
+    // std::cout << " player update " << (associated.GetComponent("Damage").get() == nullptr )<< std::endl;
     UpdateVariables(dt);
     VerifiesInfluence();
     Transformation *currentTransf = (Transformation *)transformStack.top().get();

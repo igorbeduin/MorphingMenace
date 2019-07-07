@@ -111,7 +111,8 @@ void Boss::Attack()
     {
         if (coreArray.size() > 1) 
         {
-            std::shared_ptr<BossCore> core = std::dynamic_pointer_cast<BossCore>( coreArray[0].lock()->GetComponent("BossCore"));
+            // std::shared_ptr<BossCore> core = std::dynamic_pointer_cast<BossCore>( coreArray[0].lock()->GetComponent("BossCore"));
+            BossCore *core = (BossCore *)coreArray[0].lock()->GetComponent("BossCore").get();           
             core->Shoot(Character::playerChar->GetPosition());
         }
     }

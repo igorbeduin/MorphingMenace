@@ -44,6 +44,7 @@ void Alien_0::Attack()
 
     std::shared_ptr<Damage> attackBehaviour(new Damage(*attack, PLAYER_LVL0_ATTACK_DAMAGE, PLAYER_LVL0_ATTACK_TIME, associatedCharacter->Type()));
     attack->AddComponent(attackBehaviour);
+    // std::cout << "criou damage do ataque do player" << std::endl;
     std::shared_ptr<Collider> attackCollider(new Collider(*attack));
     attack->AddComponent(attackCollider);
     Game::GetInstance().GetCurrentState().AddObject(attack);

@@ -2,16 +2,16 @@
 #include "../include/Character.h"
 
 Damage::Damage(GameObject &associated, int damage, float destrTime, char_type shooter) : Component::Component(associated),
-                                                                                         damage(damage),
-                                                                                         destrTime(destrTime),
-                                                                                         shooter(shooter)
+                                                                                         destrTime(destrTime)
 {
-    std::cout << "damage shooter  " << shooter << std::endl;
+    std::cout << "damage tipo " << shooter << std::endl;
+    this->damage = damage;
+    this->shooter = shooter;
 }
 void Damage::Update(float dt)
 {
     autodestruction.Update(dt);
-    // std::cout << dt << std::endl;
+    std::cout << "shooter: " << shooter << " damage: " << damage << std::endl;
     if (autodestruction.Get() >= destrTime)
     {
         associated.RequestDelete();
@@ -32,16 +32,19 @@ int Damage::GetDamage()
 
 void Damage::NotifyCollision(GameObject &other)
 {
-    // Character* associatedCharacter = (Character *)associated.GetComponent("Character").get();
-    // Character* otherCharacter = (Character *)other.GetComponent("Character").get();
-    // if ((other.GetComponent("Character").get() != nullptr) && (other.GetComponent("Player").get() == nullptr))
-    // {
-    // //     // std::cout << " asdasda" << otherCharacter->ISEnemy << ", " << associatedCharacter->ISEnemy << std::endl;
-    //     associated.RequestDelete();
-    // }
+    Character* associatedCharacter = (Character *)associated.GetComponent("Character").get();
+    Character* otherCharacter = (Character *)other.GetComponent("Character").get();
+
+    if (otherCharacter->Type() != shooter)
+    {
+        associated.RequestDelete();
+        std::cout << shooter << std::endl;
+    }
 }
 
 char_type Damage::Shooter()
 {
+    std::cout << "retornando damage tipo " << shooter << std::endl;
     return shooter;
+
 }

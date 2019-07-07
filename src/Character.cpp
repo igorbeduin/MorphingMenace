@@ -142,21 +142,26 @@ void Character::NotifyCollision(GameObject &other)
     }
 
     // Collision with damages
-    if (charType == char_type::BOSS_CORE)
+    if (other.GetComponent("Damage").get() != nullptr)
     {
-        if (other.GetComponent("Damage").get() != nullptr)
+        if (other.GetComponent("Player").get() != nullptr)
         {
-            std::cout << "bosscore" << std::endl;
-            Damage *damagePtr = (Damage *)other.GetComponent("Damage").get();   
-            // if (damagePtr->Shooter() == char_type::BOSS_CORE && charType != char_type::BOSS)
+            std::cout << "É player" << std::endl;
+        }
+        else
+        {
+            std::cout << "Nao eh player" << std::endl;
+            
+        }
         
-            std::cout << "Shooter: " << damagePtr->Shooter()<< " é  player?" << (other.GetComponent("Player").get() == nullptr) << std::endl;
-            std::cout << "Target " << charType << std::endl; 
-            if (damagePtr->Shooter() != charType)
-            {
-                ApplyDamage(damagePtr->GetDamage());
-                // other.RequestDelete();
-            }
+        Damage *damagePtr = (Damage *)other.GetComponent("Damage").get();   
+        std::cout << "Character tipo: " << charType << std::endl;
+        std::cout << "tipo do damage: " << damagePtr->shooter << std::endl; 
+        std::cout << "dano do damage: " << damagePtr->damage << std::endl;
+        if (damagePtr->shooter != charType)
+        {
+           // ApplyDamage(damagePtr->GetDamage());
+            // other.RequestDelete();
         }
     }
 }
