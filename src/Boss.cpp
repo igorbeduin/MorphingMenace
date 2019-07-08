@@ -48,10 +48,9 @@ void Boss::Update(float dt)
                 break;
 
             case ATTACKING:
-                // std::cout << "ATAQUE DOS LATINO LOKO" << std::endl;
                 WaveTimer.Restart();
-            //player chegou perto o suficiente, manda o ovo(?) atirar projeteis durante o tempo da wave (waveTimer)
-            //passando o wave timer volta para o resting por um tempo de cooldown
+                //player chegou perto o suficiente, manda o ovo(?) atirar projeteis durante o tempo da wave (waveTimer)
+                //passando o wave timer volta para o resting por um tempo de cooldown
                 Attack();
                 state = RESTING;
                 break;
@@ -111,7 +110,6 @@ void Boss::Attack()
     {
         if (coreArray.size() > 1) 
         {
-            // std::shared_ptr<BossCore> core = std::dynamic_pointer_cast<BossCore>( coreArray[0].lock()->GetComponent("BossCore"));
             BossCore *core = (BossCore *)coreArray[0].lock()->GetComponent("BossCore").get();           
             core->Shoot(Character::playerChar->GetPosition());
         }

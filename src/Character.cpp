@@ -23,28 +23,24 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
         associated.AddComponent(playerBehav);
         playerChar = this;
         this->box = associated.box;
-        ISEnemy = false;
         break;
     }
     case ENTOKRATON_1:
     {
         std::shared_ptr<Entokraton_1> enemyBehav(new Entokraton_1(associated));
         associated.AddComponent(enemyBehav);
-        ISEnemy = true;
         break;
     }
     case BOSS:
     {
         std::shared_ptr<Boss> bossBehav(new Boss(associated));
         associated.AddComponent(bossBehav);
-        ISEnemy = true;
         break;
     }
     case BOSS_CORE:
     {
         std::shared_ptr<BossCore> coreBehav(new BossCore(associated));
         associated.AddComponent(coreBehav);
-        ISEnemy = true;
         break;
     }
 
@@ -100,8 +96,6 @@ void Character::NotifyCollision(GameObject &other)
     // Collision with environment
     if (other.GetComponent("CollisionBox").get() != nullptr)
     {   
-        if (other.GetComponent("Damage").get() != nullptr)
-            std::cout << "Damage? " << (other.GetComponent("Damage").get() != nullptr) << " Sound? " << (other.GetComponent("Sound").get() != nullptr) << " Player? " << (other.GetComponent("Player").get() != nullptr) << std::endl;
 
         Collider *otherCollider = (Collider *)other.GetComponent("Collider").get();
         Collider *associatedCollider = (Collider *)associated.GetComponent("Collider").get();
@@ -146,27 +140,12 @@ void Character::NotifyCollision(GameObject &other)
 
     // Collision with damages
     if (other.GetComponent("Damage").get() != nullptr)
-    {
-        std::cout << "static: " << Character::playerChar << std::endl;
-        if (other.GetComponent("Player").get() == Character::playerChar )
-        {
-            std::cout << "É player" << std::endl;
-        }
-        else
-        {
-            std::cout << "Nao eh player" << std::endl;
-            
-        }
-        std::cout << "Player? " << (other.GetComponent("Player").get() != nullptr) << " Entokraton_1? " << (other.GetComponent("Entokraton_1").get() != nullptr) << " Damage? " << (other.GetComponent("Damage").get() != nullptr) << std::endl;
-        
+    {        
         Damage *damagePtr = (Damage *)other.GetComponent("Damage").get();   
-        std::cout << "Character tipo: " << charType << std::endl;
-        std::cout << "tipo do damage: " << damagePtr->shooter << std::endl; 
-        std::cout << "dano do damage: " << damagePtr->damage << std::endl;
         if (damagePtr->shooter != charType)
         {
-           // ApplyDamage(damagePtr->GetDamage());
-            // other.RequestDelete();
+           ApplyDamage(damagePtr->GetDamage());
+            other.RequestDelete();
         }
     }
 }
@@ -311,11 +290,6 @@ void Character::Die()
     {
         playerChar = nullptr;
     }
-    // if (charType == char_type::BOSS_CORE)
-    // {
-    //     // (BossCore *)associated.GetComponent("BossCore").get()->
-
-    // }
 }
 
 bool Character::VerifyOcean()

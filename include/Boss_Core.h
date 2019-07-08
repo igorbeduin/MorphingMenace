@@ -17,7 +17,6 @@ public:
     bool Is(std::string type);
     void Shoot(Vec2 target);
     // std::weak_ptr< Boss > boss;
-    void CoreDeath(int killed_core);
     int coreNumber;
 
 private:

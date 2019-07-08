@@ -5,8 +5,6 @@ BossCore::BossCore(GameObject &associated):Component(associated)
     std::shared_ptr<Sprite> sprite(new Sprite(associated, BOSS_CORE_SPRITE_PATH));
     sprite->SetScale(BOSS_CORE_SCALE, BOSS_CORE_SCALE);
     associated.AddComponent(sprite);
-    // std::cout << "Criou core" << std::endl;
-
 }
 
 void BossCore::Update(float dt)
@@ -27,8 +25,6 @@ bool BossCore::Is(std::string type)
 void BossCore::Shoot(Vec2 target)
 {
     //criar projétil e atirar
-    std::cout << "bang" << std::endl;
-    // std::shared_ptr<Character> associatedCharacter = std::dynamic_pointer_cast<Character>( associated.GetComponent("Character") );
     Character* associatedCharacter = (Character *)associated.GetComponent("Character").get();
 
     GameObject *acid_object = new GameObject;
@@ -44,17 +40,6 @@ void BossCore::Shoot(Vec2 target)
     acid->AddComponent(acid_s);
 
 
-    std::cout << "boss core tipo: " << associatedCharacter->Type()  << std::endl;
     std::shared_ptr<Damage> acidBehaviour(new Damage(*acid, ACID_DAMAGE, ACID_DAMAGE_TIME, associatedCharacter->Type()));
-    std::cout << "boss core tipo depois : " << associatedCharacter->Type()  << std::endl;
     acid->AddComponent(acidBehaviour);
-}
-void BossCore::CoreDeath(int killed_core)
-{
-    // std::shared_ptr<Boss> hivemind = boss.lock();
-    // if (hivemind->coreArray.size() != 0)
-    // {
-    //     hivemind->coreArray.erase(hivemind->coreArray.begin() + killed_core);
-    // }
-    
 }
