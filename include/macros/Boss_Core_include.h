@@ -1,7 +1,13 @@
-#define BOSS_CORE_SPRITE_PATH "assets/img/char/temporary_core.png"
+#define BOSS_CORE_SPRITE_PATH "assets/img/char/hivemind_core.png"
 #define BOSS_CORE_SPRITES_NUMB 1
 #define BOSS_CORE_SPRITES_TIME 1
-#define BOSS_CORE_SCALE 1
+#define BOSS_CORE_SCALE 0.35
+
+#define CORE0_BOSS_OFFSET_X 600
+#define CORE0_BOSS_OFFSET_Y 605
+#define CORE1_BOSS_OFFSET_X 120
+#define CORE1_BOSS_OFFSET_Y 605
+
 #define ACID_DISTANCE 500
 // #define BOSS_CORE_INIT_POS {3858, 2477}
 //#define BOSS_INIT_POS {0, 0}

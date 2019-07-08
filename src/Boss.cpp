@@ -82,10 +82,10 @@ void Boss::Start()
 {
 
     Vec2 InitialPos[2];
-    InitialPos[0].x = associated.box.x + 120; 
-    InitialPos[0].y = associated.box.y + 715;
-    InitialPos[1].x = associated.box.x + 120;
-    InitialPos[1].y = associated.box.y + 515;
+    InitialPos[0].x = associated.box.x + CORE0_BOSS_OFFSET_X; 
+    InitialPos[0].y = associated.box.y + CORE0_BOSS_OFFSET_Y;
+    InitialPos[1].x = associated.box.x + CORE1_BOSS_OFFSET_X;
+    InitialPos[1].y = associated.box.y + CORE1_BOSS_OFFSET_Y;
 
     for (int i = 0; i < 2; i++)
     {    
@@ -95,7 +95,7 @@ void Boss::Start()
 
         std::shared_ptr<Character> coreCharacter(new Character(*core, 100, char_type::BOSS_CORE));
         core->AddComponent(coreCharacter);
-        std::shared_ptr<Collider> CORECollider(new Collider(*core));
+        std::shared_ptr<Collider> CORECollider(new Collider(*core, {BOSS_CORE_SCALE,BOSS_CORE_SCALE}));
         core->AddComponent(CORECollider);
 
         core->box.x = InitialPos[i].x;

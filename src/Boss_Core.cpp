@@ -31,8 +31,8 @@ void BossCore::Shoot(Vec2 target)
     std::weak_ptr<GameObject> weak_acid =  Game::GetInstance().GetCurrentState().AddObject(acid_object);//pega a função AddObject do state para adicionar o novo acid ao array de objetos
     std::shared_ptr<GameObject> acid = weak_acid.lock();
 
-    acid->box.x = associated.box.x + associated.box.w/2;//a posição em que a acid sai é a mesma possição so minion
-    acid->box.y = associated.box.y + associated.box.h/2;
+    acid->box.x = associated.box.GetCenter().x;//a posição em que a acid sai é a mesma possição so minion
+    acid->box.y = associated.box.GetCenter().y;
 
     float angle = atan2(target.y - associated.box.y - associated.box.h/2, target.x - associated.box.x - associated.box.w/2);
 
