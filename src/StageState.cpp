@@ -100,18 +100,31 @@ StageState::StageState()
 
     AddObject(gui);
 
-    //Creating enemy
-    GameObject *enemy = new GameObject();
-    std::shared_ptr<Character> enemyCharacter(new Character(*enemy, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
-    enemy->AddComponent(enemyCharacter);
-    std::shared_ptr<Collider> enemyCollider(new Collider(*enemy));
-    enemy->AddComponent(enemyCollider);
+    //Creating enemy 1
+    GameObject *enemy1 = new GameObject();
+    std::shared_ptr<Character> enemy1Character(new Character(*enemy1, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
+    enemy1->AddComponent(enemy1Character);
+    std::shared_ptr<Collider> enemy1Collider(new Collider(*enemy1));
+    enemy1->AddComponent(enemy1Collider);
 
     initPos = Vec2(ENTOKRATON_1_INIT_POS);
-    enemy->box.x = initPos.x;
-    enemy->box.y = initPos.y;
+    enemy1->box.x = initPos.x;
+    enemy1->box.y = initPos.y;
 
-    AddObject(enemy);
+    AddObject(enemy1);
+
+    //Creating enemy 2
+    GameObject *enemy2 = new GameObject();
+    std::shared_ptr<Character> enemy2Character(new Character(*enemy2, ENTOKRATON_2_HP, char_type::ENTOKRATON_2));
+    enemy2->AddComponent(enemy2Character);
+    std::shared_ptr<Collider> enemy2Collider(new Collider(*enemy2, {ENTOKRATON_2_COLLISION_SCALE, ENTOKRATON_2_COLLISION_SCALE}));
+    enemy2->AddComponent(enemy2Collider);
+
+    initPos = Vec2(ENTOKRATON_2_INIT_POS);
+    enemy2->box.x = initPos.x;
+    enemy2->box.y = initPos.y;
+
+    AddObject(enemy2);
 
     
     //Creating boss
@@ -134,6 +147,7 @@ void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carre
     Resources::AddImage(PLAYER_LVL0_SPRITE_PATH);
     Resources::AddImage(PLAYER_LVL1_SPRITE_PATH);
     Resources::AddImage(ENTOKRATON_1_SPRITE_PATH);
+    Resources::AddImage(ENTOKRATON_2_SPRITE_PATH);
     Resources::AddImage(STARS_BACKGROUND_PATH);
     Resources::AddImage(TILESET_PATH);
     Resources::AddImage(PLANET_BACKGROUND_PATH);

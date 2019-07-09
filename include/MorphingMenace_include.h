@@ -22,6 +22,7 @@ enum char_type
     // Different types of characters that the game might have
     PLAYER,
     ENTOKRATON_1,
+    ENTOKRATON_2,
     BOSS,
     BOSS_CORE,
     NONE_TYPE
@@ -51,6 +52,7 @@ enum character_state
     #include "Character.h"
     #include "Player.h"
     #include "Entokraton_1.h"
+    #include "Entokraton_2.h"
     #include "Boss.h"
     #include "Boss_Core.h"
     #include "Damage.h"
