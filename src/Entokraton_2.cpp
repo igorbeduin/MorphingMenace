@@ -13,6 +13,8 @@ void Entokraton_2::Update(float dt)
     Character *enemyCharacter = (Character *)associated.GetComponent("Character").get();
     Sprite *enemySprite = (Sprite *)associated.GetComponent("Sprite").get();
 
+    Easing();
+
     if (enemyCharacter->GetCurrentHP() <= 0)
     {
         state = DYING;
@@ -28,7 +30,7 @@ void Entokraton_2::Update(float dt)
             // std::cout << "right" << std::endl;
             destination.x = associated.box.GetCenter().x - ENTOKRATON_2_SWIM_RANGE;
             destination.y = associated.box.GetCenter().y;
-            distance = destination - associated.box.GetVec2();
+            distance = destination - associated.box.GetCenter();
             enemyCharacter->DisableFlip();
         }
         if (direction == 1 )
@@ -36,7 +38,7 @@ void Entokraton_2::Update(float dt)
             // std::cout << "left" << std::endl;
             destination.x = associated.box.GetCenter().x + ENTOKRATON_2_SWIM_RANGE;
             destination.y = associated.box.GetCenter().y;
-            distance = destination - associated.box.GetVec2();
+            distance = destination - associated.box.GetCenter();
             enemyCharacter->EnableFlip();
         }
         state = MOVING;
@@ -111,4 +113,13 @@ void Entokraton_2::Render()
 bool Entokraton_2::Is(std::string type)
 {
     return (type == "Entokraton_2");
+}
+void Entokraton_2::Easing()
+{
+    associated.box.y = Vec2(ENTOKRATON_2_INIT_POS).y + 10 * (1 - cos(EasingCounter * M_PI));  
+    if (EasingCounter >= 2)
+    {
+        EasingCounter = 0;
+    }
+    EasingCounter += 0.05;
 }
