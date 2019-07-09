@@ -59,7 +59,7 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
 void Character::Update(float dt)
 {
     VerifyOcean();
-    if (charType != char_type::BOSS && charType != char_type::BOSS_CORE)
+    if (charType != char_type::BOSS && charType != char_type::BOSS_CORE && charType != char_type::ENTOKRATON_2)
     {
         Environment::ApplyForces(this);
     }
