@@ -56,7 +56,7 @@ void Entokraton_1::Update(float dt)
                 // std::cout << "right" << std::endl;
                 destination.x = associated.box.GetCenter().x - ENTOKRATON_1_WALK_RANGE;
                 destination.y = associated.box.GetCenter().y;
-                distance = destination - associated.box.GetVec2();
+                distance = destination - associated.box.GetCenter();
                 enemyCharacter->EnableFlip();
             }
             if (direction == 1 )
@@ -64,7 +64,7 @@ void Entokraton_1::Update(float dt)
                 // std::cout << "left" << std::endl;
                 destination.x = associated.box.GetCenter().x + ENTOKRATON_1_WALK_RANGE;
                 destination.y = associated.box.GetCenter().y;
-                distance = destination - associated.box.GetVec2();
+                distance = destination - associated.box.GetCenter();
                 enemyCharacter->DisableFlip();
             }
             sounds[1]->Play(1);
@@ -117,7 +117,8 @@ void Entokraton_1::Update(float dt)
             if (abs(distance.x) >= abs(movement))
             {
                 associated.box.x += movement; 
-                distance.x = destination.x - associated.box.GetCenter().x;
+                distance.x -= movement; 
+                // distance.x = destination.x - associated.box.GetCenter().x;
                 // distance.y = destination.y - associated.box.y;
             }
 
