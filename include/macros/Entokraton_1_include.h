@@ -28,11 +28,11 @@
 #define ENTOKRATON_1_IDLE2_SOUND "assets/audio/alien1/alien 1 - idle 2.ogg"
 #define ENTOKRATON_1_WALK1_SOUND "assets/audio/alien1/alien 1 - andar.ogg"
 #define ENTOKRATON_1_ATTACK_SOUND "assets/audio/alien1/alien 1 - ataque 1.ogg"
-#define ENTOKRATON_1_STEP 150
+#define ENTOKRATON_1_STEP 200
 #define ENTOKRATON_1_COOLDOWN 2
 #define ENTOKRATON_1_PERCEPTION 300
 #define ENTOKRATON_1_ATTACK_RANGE 30
-#define ENTOKRATON_1_WALK_RANGE 200
+#define ENTOKRATON_1_WALK_RANGE 250
 #define ENTOKRATON_1_STOP_RANGE 5
 #define ENTOKRATON_1_ATTACK_WIDTH 30
 #define ENTOKRATON_1_ATTACK_HEIGHT 100
