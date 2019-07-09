@@ -5,7 +5,7 @@
 #define ENTOKRATON_2_COLLISION_SCALE 0.6
 #define ENTOKRATON_2_INIT_POS \
     {                         \
-        2900, 500              \
+        3000, 2000             \
     }
 
 #define ENTOKRATON_2_IDLE_START 3
@@ -23,7 +23,7 @@
 #define ENTOKRATON_2_HP 100
 #define ENTOKRATON_2_STEP 150
 #define ENTOKRATON_2_COOLDOWN 0.5
-#define ENTOKRATON_2_SWIM_RANGE 200
+#define ENTOKRATON_2_SWIM_RANGE 400
 #define ENTOKRATON_2_STOP_RANGE 5
 
 #define WALK_RANGE 200

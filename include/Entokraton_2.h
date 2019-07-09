@@ -21,6 +21,8 @@ private:
 
     std::vector< std::shared_ptr<Sound> > sounds;
     bool firstTime = false;
+    float EasingCounter;
+    void Easing();
 
 public:
     Entokraton_2(GameObject &associated);
