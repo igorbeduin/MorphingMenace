@@ -210,6 +210,7 @@ void Sprite::SetStartFrame(int startFrame)
   if (this->StartFrame != startFrame)
   {
     this->StartFrame = startFrame;
+    currentFrame = startFrame;
   }
 }
 

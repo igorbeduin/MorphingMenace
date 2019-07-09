@@ -1,14 +1,15 @@
 #include "../include/Damage.h"
+#include "../include/Character.h"
 
 Damage::Damage(GameObject &associated, int damage, float destrTime, char_type shooter) : Component::Component(associated),
-                                                                                         damage(damage),
-                                                                                         destrTime(destrTime),
-                                                                                         shooter(shooter)
-{}
+                                                                                         destrTime(destrTime)
+{
+    this->damage = damage;
+    this->shooter = shooter;
+}
 void Damage::Update(float dt)
 {
     autodestruction.Update(dt);
-    // std::cout << dt << std::endl;
     if (autodestruction.Get() >= destrTime)
     {
         associated.RequestDelete();
@@ -29,7 +30,10 @@ int Damage::GetDamage()
 
 void Damage::NotifyCollision(GameObject &other)
 {
-    if ((other.GetComponent("Character").get() != nullptr) && (other.GetComponent("Player").get() == nullptr))
+    Character* associatedCharacter = (Character *)associated.GetComponent("Character").get();
+    Character* otherCharacter = (Character *)other.GetComponent("Character").get();
+
+    if (otherCharacter->Type() != shooter)
     {
         associated.RequestDelete();
     }
@@ -38,4 +42,5 @@ void Damage::NotifyCollision(GameObject &other)
 char_type Damage::Shooter()
 {
     return shooter;
+
 }

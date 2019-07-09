@@ -1,6 +1,9 @@
 #include "../include/StageState.h"
 #include "../include/InputManager.h"
 #include "../include/Environment.h"
+#include "../include/Resources.h"
+
+std::vector<std::shared_ptr<GameObject>> StageState::oceanArray;
 
 StageState::StageState()
 {   
@@ -11,6 +14,10 @@ StageState::StageState()
     // Creating normal force
     std::shared_ptr<Normal> normal(new Normal());
     Environment::AddForce(normal);
+
+    // Creating normal force
+    std::shared_ptr<WaterThrust> waterThrust(new WaterThrust());
+    Environment::AddForce(waterThrust);
 
     // Opening background music
     backgroundMusic.Open(STAGE_BG_MUSIC_PATH);
@@ -37,6 +44,30 @@ StageState::StageState()
     planet->AddComponent(planet_sprite);
     planet_sprite->SetScale(PLANET_BACKGROUND_SCALE, PLANET_BACKGROUND_SCALE);
 
+    //Creating ocean1
+    GameObject *ocean1_object = new GameObject();
+    std::weak_ptr<GameObject> weak_ocean1 = AddObject(ocean1_object);
+    std::shared_ptr<GameObject> ocean1 = weak_ocean1.lock();
+    Vec2 ocean1Pos = OCEAN1_INITIAL_POS;
+    ocean1->box.x = ocean1Pos.x;
+    ocean1->box.y = ocean1Pos.y;
+    std::shared_ptr<Sprite> ocean1_sprite(new Sprite(*ocean1, OCEAN1_BACKGROUND_PATH));
+    ocean1->AddComponent(ocean1_sprite);
+    ocean1_sprite->SetScale(OCEAN1_BACKGROUND_SCALE, OCEAN1_BACKGROUND_SCALE);
+    oceanArray.push_back(ocean1);
+
+    //Creating ocean2
+    GameObject *ocean2_object = new GameObject();
+    std::weak_ptr<GameObject> weak_ocean2 = AddObject(ocean2_object);
+    std::shared_ptr<GameObject> ocean2 = weak_ocean2.lock();
+    Vec2 ocean2Pos = OCEAN2_INITIAL_POS;
+    ocean2->box.x = ocean2Pos.x;
+    ocean2->box.y = ocean2Pos.y;
+    std::shared_ptr<Sprite> ocean2_sprite(new Sprite(*ocean2, OCEAN2_BACKGROUND_PATH));
+    ocean2->AddComponent(ocean2_sprite);
+    ocean2_sprite->SetScale(OCEAN2_BACKGROUND_SCALE, OCEAN2_BACKGROUND_SCALE);
+    oceanArray.push_back(ocean2);
+
     //Creating TileSet and TileMap
     GameObject *tile_object = new GameObject();
     std::weak_ptr<GameObject> weak_tile = AddObject(tile_object);
@@ -49,14 +80,16 @@ StageState::StageState()
 
     //Creating player
     GameObject* player = new GameObject();
-    std::shared_ptr<Character> playerBehaviour(new Character(*player, PLAYER_INITIAL_HP, char_type::PLAYER));
-    player->AddComponent(playerBehaviour);
+    std::shared_ptr<Character> playerCharacter(new Character(*player, PLAYER_INITIAL_HP, char_type::PLAYER));
+    player->AddComponent(playerCharacter);
     std::shared_ptr<Collider> playerCollider(new Collider(*player));
     player->AddComponent(playerCollider);
 
     Vec2 initPos = Vec2(PLAYER_INIT_POS);
-    player->box.x = initPos.x;
-    player->box.y = initPos.y;
+    // player->box.x = initPos.x;
+    // player->box.y = initPos.y;
+    player->box.x = 5000;
+    player->box.y = 3050;
 
     AddObject(player);
 
@@ -71,8 +104,8 @@ StageState::StageState()
 
     //Creating enemy
     GameObject *enemy = new GameObject();
-    std::shared_ptr<Character> enemyBehaviour(new Character(*enemy, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
-    enemy->AddComponent(enemyBehaviour);
+    std::shared_ptr<Character> enemyCharacter(new Character(*enemy, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
+    enemy->AddComponent(enemyCharacter);
     std::shared_ptr<Collider> enemyCollider(new Collider(*enemy));
     enemy->AddComponent(enemyCollider);
 
@@ -82,11 +115,11 @@ StageState::StageState()
 
     AddObject(enemy);
 
-    /*
+    
     //Creating boss
     GameObject *boss = new GameObject();
-    std::shared_ptr<Character> BOSSBehaviour(new Character(*boss, PLAYER_LVL0_MASS, char_type::BOSS));
-    boss->AddComponent(BOSSBehaviour);
+    std::shared_ptr<Character> bossCharacter(new Character(*boss, 100, char_type::BOSS));
+    boss->AddComponent(bossCharacter);
     std::shared_ptr<Collider> BOSSCollider(new Collider(*boss));
     boss->AddComponent(BOSSCollider);
 
@@ -95,11 +128,27 @@ StageState::StageState()
     boss->box.y = initPos.y;
 
     AddObject(boss);
-    */
+    
 }
 
-void StageState::LoadAssets()
+void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carregar ele no load
 {
+    Resources::AddImage(PLAYER_LVL0_SPRITE_PATH);
+    Resources::AddImage(PLAYER_LVL1_SPRITE_PATH);
+    Resources::AddImage(ENTOKRATON_1_SPRITE_PATH);
+    Resources::AddImage(STARS_BACKGROUND_PATH);
+    Resources::AddImage(TILESET_PATH);
+    Resources::AddImage(PLANET_BACKGROUND_PATH);
+    Resources::AddImage(GUI_LIFE_PATH);
+    Resources::AddImage(GUI_INFLUENCE_PATH);
+    Resources::AddImage(GUI_BONE_DUST_PATH);
+    Resources::AddImage(ACID_SPRITE_PATH);
+    Resources::AddImage(BOSS_CORE_SPRITE_PATH);
+    ////////////////////////////////////////////
+    Resources::AddSound(ENTOKRATON_1_IDLE1_SOUND);
+    Resources::AddSound(ENTOKRATON_1_IDLE2_SOUND);
+    Resources::AddSound(ENTOKRATON_1_WALK1_SOUND);
+    Resources::AddSound(ENTOKRATON_1_ATTACK_SOUND);
 }
 
 void StageState::Update(float dt)
@@ -108,6 +157,7 @@ void StageState::Update(float dt)
 
     // Verify collisions
     std::vector<std::shared_ptr<GameObject>> objWithCollider;
+    Vec2 distanceToBox;
     for (int i = (int)objectArray.size() - 1; i >= 0; i--)
     {
         std::shared_ptr<Collider> colliderComponent = std::dynamic_pointer_cast<Collider>(objectArray[i]->GetComponent("Collider"));
@@ -115,24 +165,34 @@ void StageState::Update(float dt)
         if (colliderComponent != nullptr)
         {
             objWithCollider.push_back(objectArray[i]);
+            // Verify collision with other GameObjects
             for (int j = 0; j < (int)objWithCollider.size(); j++)
             {
-                std::shared_ptr<Collider> ObjWithcolliderComponent = std::dynamic_pointer_cast<Collider>(objWithCollider[j]->GetComponent("Collider"));
-                if (objectArray[i] != objWithCollider[j])
+                distanceToBox = objectArray[i]->box.GetCenter() - objWithCollider[j]->box.GetCenter();
+                if (distanceToBox.Absolute() <= SCENARIO_COLLISION_RADIUS)
                 {
-                    if (Collision::IsColliding(colliderComponent->box, ObjWithcolliderComponent->box, objectArray[i]->GetAngleRad(), objWithCollider[j]->GetAngleRad()))
+                    std::shared_ptr<Collider> ObjWithcolliderComponent = std::dynamic_pointer_cast<Collider>(objWithCollider[j]->GetComponent("Collider"));
+                    if (objectArray[i] != objWithCollider[j])
                     {
-                        objectArray[i]->NotifyCollision(*objWithCollider[j].get());
-                        objWithCollider[j]->NotifyCollision(*objectArray[i].get());
+                        if (Collision::IsColliding(colliderComponent->box, ObjWithcolliderComponent->box, objectArray[i]->GetAngleRad(), objWithCollider[j]->GetAngleRad()))
+                        {
+                            objectArray[i]->NotifyCollision(*objWithCollider[j].get());
+                            objWithCollider[j]->NotifyCollision(*objectArray[i].get());
+                        }
                     }
                 }
             }
+            // Verify collision with SCENARIO collision objects
             for (int j = 0; j < (int)collisionObjectsArray.size(); j++)
-            {
-                std::shared_ptr<Collider> collisionObjectComponent = std::dynamic_pointer_cast<Collider>(collisionObjectsArray[j]->GetComponent("Collider"));
-                if (Collision::IsColliding(colliderComponent->box, collisionObjectComponent->box, objectArray[i]->GetAngleRad(), collisionObjectsArray[j]->GetAngleRad()))
+            {   
+                distanceToBox = objectArray[i]->box.GetCenter() - collisionObjectsArray[j]->box.GetCenter();
+                if (distanceToBox.Absolute() <= SCENARIO_COLLISION_RADIUS)
                 {
-                    objectArray[i]->NotifyCollision(*collisionObjectsArray[j].get());
+                    std::shared_ptr<Collider> collisionObjectComponent = std::dynamic_pointer_cast<Collider>(collisionObjectsArray[j]->GetComponent("Collider"));
+                    if (Collision::IsColliding(colliderComponent->box, collisionObjectComponent->box, objectArray[i]->GetAngleRad(), collisionObjectsArray[j]->GetAngleRad()))
+                    {
+                        objectArray[i]->NotifyCollision(*collisionObjectsArray[j].get());
+                    }
                 }
             }
         }
@@ -158,7 +218,7 @@ void StageState::Update(float dt)
             objectArray.erase(objectArray.begin() + i);
         }
     }
-    std::cout << "objectArray.size():" << objectArray.size() << std::endl;
+    // std::cout << "objectArray.size():" << objectArray.size() << std::endl;
 }
 
 void StageState::Render()
@@ -179,7 +239,9 @@ StageState::~StageState()
 
 void StageState::Start()
 {
-    // backgroundMusic.Play(-1);
+    LoadAssets();
+    backgroundMusic.Play(-1);
+    StartArray();
 }
 
 void StageState::Pause()

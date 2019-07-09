@@ -81,6 +81,15 @@ void Alien_1::VerifyState()
         sprite->SetAnimationTime(PLAYER_LVL1_JUMP_TIME);
         break;
     }
+    case FALLING:
+    {
+        // std::cout << "JUMPING" << std::endl;
+        sprite->RunSpecificAnimation();
+        sprite->SetStartFrame(PLAYER_LVL1_JUMP_START);
+        sprite->SetEndFrame(PLAYER_LVL1_JUMP_END);
+        sprite->SetAnimationTime(PLAYER_LVL1_JUMP_TIME);
+        break;
+    }
     case ATTACKING:
     {
         // std::cout << "ATTACKING" << std::endl;

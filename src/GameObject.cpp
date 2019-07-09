@@ -37,7 +37,6 @@ void GameObject::RequestDelete(){
 }
 
 void GameObject::AddComponent(std::shared_ptr<Component> cpt){
-  // std::cout << "added component " << cpt->Is("Sound") <<'\n';
   if (cpt != nullptr) {
     components.emplace_back(std::move(cpt));//Adiciona um componente ao
   }
@@ -63,7 +62,6 @@ std::shared_ptr<Component> GameObject::GetComponent(std::string type){
   for (unsigned int i = 0; i < components.size(); i++) {
     if (components[i]->Is(type) && components[i] != nullptr){
       return components[i];//components[i].get();
-      // std::cout << "return component" << '\n';
     }
   }
   return (nullptr);

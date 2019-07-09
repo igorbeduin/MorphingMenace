@@ -18,6 +18,7 @@ public:
     void limitSpeeds();
     void collisionSide(Rect boxA, Rect boxB);
     bool applyNormal;
+    bool applyWaterThrust;
     Vec2 GetLastPosition();
     Vec2 GetPosition();
     Vec2 GetSpeed();
@@ -32,10 +33,12 @@ public:
     char_type Type();
     int GetCurrentHP();
     int GetMaxHP();
+    bool IsAbsorbable();
+    void Die();
+    bool VerifyOcean();
 
     static Character* playerChar;
     Rect box;
-
 private:
     Vec2 speed;
     Vec2 lastPosition;

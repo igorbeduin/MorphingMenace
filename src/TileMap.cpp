@@ -73,12 +73,7 @@ void TileMap::RenderLayer(int layer, int cameraX = 0, int cameraY = 0){
         }
       }
       
-      // std::cout << cameraX + tileSet->GetTileWidth() * j * tileSet->scale.x << " : " << Camera::pos.x << std::endl;
-      // if ( cameraX + tileSet->GetTileWidth() * j * tileSet->scale.x < -Camera::pos.x + WINDOW_WIDTH &&
-          //  cameraY + tileSet->GetTileHeight()* i * tileSet->scale.y < -Camera::pos.y + WINDOW_HEIGHT)
-      // {
-        tileSet->RenderTile(At(j, i, layer), cameraX + tileSet->GetTileWidth() * j * tileSet->scale.x, cameraY + tileSet->GetTileHeight() * i * tileSet->scale.y);
-      // } 
+      tileSet->RenderTile(At(j, i, layer), cameraX + tileSet->GetTileWidth() * j * tileSet->scale.x, cameraY + tileSet->GetTileHeight() * i * tileSet->scale.y);
     }
   }
 }
