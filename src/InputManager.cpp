@@ -1,4 +1,5 @@
 #include "../include/InputManager.h"
+#include "../include/Camera.h"
 
 InputManager::InputManager(){//inicializando todas a as variáveis
 
@@ -24,6 +25,7 @@ void InputManager::Update(){
 
   updateCounter++;
   SDL_GetMouseState(&mouseX, &mouseY);
+  // std::cout << - Camera::pos.x + mouseX << ", " << - Camera::pos.y + mouseY << std::endl;
   quitRequested = false;//se um State já tratou e resolveu não fechar o jogo (ainda), ou não se interessou evento de quit não for tratado por State no frame em que ocorreu, é porque
 
   while (SDL_PollEvent(&event)) {

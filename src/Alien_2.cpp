@@ -11,6 +11,18 @@ Alien_2::Alien_2(GameObject &associated) : Component::Component(associated),
 }
 void Alien_2::Update(float dt)
 {   
+    // Character* characterPtr = (Character*)associated.GetComponent("Character").get();
+
+    // characterPtr->applyWaterThrust = false;
+    // if (characterPtr->VerifyOcean())
+    // {
+    //     characterPtr->applyWaterThrust = true;
+    // }
+    // else
+    // {
+    //     characterPtr->applyGravity = true;
+    // }
+    
     VerifyState();
     sprite->Update(dt);
 }
