@@ -73,6 +73,15 @@ void Alien_0::VerifyState()
             sprite->SetAnimationTime(PLAYER_LVL0_WALK_TIME);
             break;
         }
+        case JUMPING:
+        {
+            // std::cout << "WALKING" << std::endl;
+            sprite->RunSpecificAnimation();
+            sprite->SetStartFrame(PLAYER_LVL0_JUMP_START);
+            sprite->SetEndFrame(PLAYER_LVL0_JUMP_END);
+            sprite->SetAnimationTime(PLAYER_LVL0_JUMP_TIME);
+            break;
+        }
         default:
         {
             // std::cout << "DEFAULT" << std::endl;
