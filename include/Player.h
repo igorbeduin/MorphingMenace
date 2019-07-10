@@ -5,6 +5,7 @@
 #include "SDL_include.h"
 #include "Alien_0.h"
 #include "Alien_1.h"
+#include "Alien_2.h"
 #include "Transformation.h"
 
 #include <iostream>

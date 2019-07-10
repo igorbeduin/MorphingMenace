@@ -8,14 +8,14 @@
 #include "Transformation.h"
 #include "Sprite.h"
 #include "Timer.h"
-#include "macros/Alien_1_include.h"
+#include "macros/Alien_2_include.h"
 
 class Sprite;
 
-class Alien_1 : public Component, public Transformation
+class Alien_2 : public Component, public Transformation
 {
 public:
-    Alien_1(GameObject &associated);
+    Alien_2(GameObject &associated);
     void Update(float dt);
     void Render();
     bool Is(std::string type);
@@ -25,5 +25,4 @@ public:
 
 private:
     std::shared_ptr<Sprite> sprite;
-    Timer atkTimer;
 };
