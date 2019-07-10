@@ -23,7 +23,8 @@ void GameObject::Update(float dt){//chama a função Update de todos os componen
 }
 
 void GameObject::Render(){//chama a função Render de todos os componentes do objeto
-  for (unsigned int i = 0; i < components.size(); i++) {
+  for (int i = (int)components.size() - 1; i >= 0; i--)
+  {
     components[i]->Render();
   }
 }
