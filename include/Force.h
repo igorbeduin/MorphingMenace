@@ -18,7 +18,9 @@ public:
     Vec2 GetAcceleration();
     virtual bool Is(std::string type) = 0;
     virtual std::string Type() = 0;
+    static void Update(float dt);
 
 private:
     Vec2 acceleration;
+    static float deltaTime;
 };

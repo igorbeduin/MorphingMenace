@@ -2,6 +2,7 @@
 #include "../include/InputManager.h"
 #include "../include/Environment.h"
 #include "../include/Resources.h"
+#include "../include/Force.h"
 
 std::vector<std::shared_ptr<GameObject>> StageState::oceanArray;
 
@@ -162,6 +163,7 @@ void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carre
 void StageState::Update(float dt)
 {
     Camera::Update(dt);
+    Force::Update(dt);
 
     // Verify collisions
     std::vector<std::shared_ptr<GameObject>> objWithCollider;
