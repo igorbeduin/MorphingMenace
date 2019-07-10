@@ -160,6 +160,16 @@ void Player::Transform(char_type type)
         LvlUp();
         break;
     }
+    case ENTOKRATON_2:
+    {  
+        std::shared_ptr<Alien_2> alien_2(new Alien_2(associated));
+        alien_2->UpdateAssocBox();
+        transformStack.push(alien_2);
+        walkStep = PLAYER_LVL2_STEP;
+        jumpVelocity = PLAYER_LVL2_JUMP;
+        LvlUp();
+        break;
+    }
 
     default:
         break;
