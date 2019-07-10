@@ -82,12 +82,17 @@ void Boss::Start()
 {
 
     Vec2 InitialPos[2];
-    InitialPos[0].x = associated.box.x + CORE0_BOSS_OFFSET_X; 
-    InitialPos[0].y = associated.box.y + CORE0_BOSS_OFFSET_Y;
-    InitialPos[1].x = associated.box.x + CORE1_BOSS_OFFSET_X;
-    InitialPos[1].y = associated.box.y + CORE1_BOSS_OFFSET_Y;
+    float InitialAng[2];
 
-    for (int i = 0; i < 2; i++)
+    InitialPos[0] = Vec2(BOSS_CORE_INIT_POS_0); 
+    InitialPos[1] = Vec2(BOSS_CORE_INIT_POS_1); 
+    InitialPos[2] = Vec2(BOSS_CORE_INIT_POS_2); 
+
+    InitialAng[0] = BOSS_CORE_INIT_0_THETA;
+    InitialAng[1] = BOSS_CORE_INIT_1_THETA;
+    InitialAng[2] = BOSS_CORE_INIT_2_THETA;
+
+    for (int i = 0; i < 3; i++)
     {    
         GameObject *boss_core = new GameObject();
         std::weak_ptr<GameObject> weak_core = Game::GetInstance().GetCurrentState().AddObject(boss_core);
@@ -95,11 +100,13 @@ void Boss::Start()
 
         std::shared_ptr<Character> coreCharacter(new Character(*core, 100, char_type::BOSS_CORE));
         core->AddComponent(coreCharacter);
-        std::shared_ptr<Collider> CORECollider(new Collider(*core, {BOSS_CORE_SCALE,BOSS_CORE_SCALE}));
+        std::shared_ptr<Collider> CORECollider(new Collider(*core));
         core->AddComponent(CORECollider);
 
         core->box.x = InitialPos[i].x;
         core->box.y = InitialPos[i].y;
+
+        core->angleDeg = InitialAng[i];
 
         coreArray.emplace_back(weak_core);   
     }
