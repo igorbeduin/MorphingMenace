@@ -9,7 +9,8 @@ Player::Player(GameObject &associated) : Component::Component(associated),
                                          currentInfluence(INITIAL_INFLUENCE),
                                          maxInfluence(INITIAL_INFLUENCE),
                                          walkStep(PLAYER_LVL0_STEP),
-                                         jumpVelocity(PLAYER_LVL1_JUMP)
+                                         jumpVelocity(PLAYER_LVL1_JUMP),
+                                         currentForm(BABY)
 {
     std::shared_ptr<Alien_0> alien_0(new Alien_0(associated));
     transformStack.push(alien_0);
@@ -90,8 +91,9 @@ int Player::GetLvl()
     return lvl;
 }
 
-void Player::LvlUp()
+void Player::LvlUp(Transformations next_form)
 {
+    currentForm = next_form;
     lvl += 1;
 }
 
@@ -101,6 +103,7 @@ void Player::LvlDown()
     Alien_0 *currentTransf = (Alien_0 *)transformStack.top().get();
     currentTransf->UpdateAssocBox();
     lvl -= 1;
+    currentForm = BABY;
 }
 
 void Player::NotifyCollision(GameObject &other)
@@ -157,7 +160,7 @@ void Player::Transform(char_type type)
         transformStack.push(alien_1);
         walkStep = PLAYER_LVL1_STEP;
         jumpVelocity = PLAYER_LVL1_JUMP;
-        LvlUp();
+        LvlUp(Transformations::ENTOKRATON_1);
         break;
     }
     case ENTOKRATON_2:
@@ -167,7 +170,11 @@ void Player::Transform(char_type type)
         transformStack.push(alien_2);
         walkStep = PLAYER_LVL2_STEP;
         jumpVelocity = PLAYER_LVL2_JUMP;
-        LvlUp();
+        LvlUp(Transformations::ENTOKRATON_2);
+
+        Character *enemyCharPtr = (Character *)associated.GetComponent("Character").get();
+        enemyCharPtr->applyGravity = false;
+
         break;
     }
 
