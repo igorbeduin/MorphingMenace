@@ -110,7 +110,7 @@ enum character_state
     #define TILE_HEIGHT 32
     #define TILE_WIDTH 32
     #define STAGE_BG_MUSIC_PATH "assets/audio/background_demo1.ogg"
-    #define SCENARIO_COLLISION_RADIUS 200
+    #define SCENARIO_COLLISION_RADIUS 500
     
 
 #endif
