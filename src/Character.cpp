@@ -311,9 +311,9 @@ bool Character::VerifyOcean()
                 }
             }
         }
-        applyWaterThrust = false;
-        return false;
     }
+    applyWaterThrust = false;
+    return false;
 }
 
 void Character::EnableScenarioCollision()
