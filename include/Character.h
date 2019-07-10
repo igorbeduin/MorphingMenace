@@ -19,6 +19,7 @@ public:
     void collisionSide(Rect boxA, Rect boxB);
     bool applyNormal;
     bool applyWaterThrust;
+    bool applyGravity;
     Vec2 GetLastPosition();
     Vec2 GetPosition();
     Vec2 GetSpeed();

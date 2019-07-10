@@ -11,8 +11,16 @@ public:
     Gravity() : Force::Force(Vec2(GRAVITY_ACCELERATION))
     {}
     bool Applicable(Character* character)
-    {
-        return true;
+    {   
+        if (character->applyGravity && !character->applyNormal)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
     }
 
     bool Is(std::string type)
