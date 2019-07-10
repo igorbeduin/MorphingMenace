@@ -28,3 +28,8 @@
 
 #define WALK_RANGE 200
 #define STOP_RANGE 5
+
+#define EASING_AMPLITUDE 10
+#define EASING_LIMIT 2
+#define EASING_VARIATION 0.05
+#define MAX_COS 1

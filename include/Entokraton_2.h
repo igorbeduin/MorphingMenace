@@ -22,6 +22,7 @@ private:
     std::vector< std::shared_ptr<Sound> > sounds;
     bool firstTime = false;
     float EasingCounter;
+    float DCEasing;
     void Easing();
 
 public:

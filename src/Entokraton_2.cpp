@@ -116,10 +116,10 @@ bool Entokraton_2::Is(std::string type)
 }
 void Entokraton_2::Easing()
 {
-    associated.box.y = Vec2(ENTOKRATON_2_INIT_POS).y + 10 * (1 - cos(EasingCounter * M_PI));  
-    if (EasingCounter >= 2)
+    associated.box.y = Vec2(ENTOKRATON_2_INIT_POS).y + EASING_AMPLITUDE * (MAX_COS - cos(EasingCounter * PI));  
+    if (EasingCounter >= EASING_LIMIT)
     {
         EasingCounter = 0;
     }
-    EasingCounter += 0.05;
+    EasingCounter += EASING_VARIATION;
 }
