@@ -43,7 +43,7 @@ character_state Player::GetCharacterState()
 
 void Player::Render()
 {
-    Alien_0 *currentTransf = (Alien_0 *)transformStack.top().get();
+    Transformation *currentTransf = (Transformation *)transformStack.top().get();
     currentTransf->Render();
 }
 

@@ -6,10 +6,14 @@ GUI::GUI(GameObject &associated, GameObject& other) : Component::Component(assoc
                                    other(other),
                                    lifeSprite(new Sprite(associated, GUI_LIFE_PATH, GUI_LIFE_FRAMES_NUMBER, GUI_LIFE_FRAME_TIME)),
                                    influenceSprite(new Sprite(associated, GUI_INFLUENCE_PATH, GUI_INFLUENCE_FRAMES_NUMBER, GUI_INFLUENCE_FRAME_TIME))
+
 {
     lifeSprite->SetScale(GUI_SCALE, GUI_SCALE);
+    // lifeSprite->SetBlendMode(SDL_BLENDMODE_BLEND);
     influenceSprite->SetScale(GUI_SCALE, GUI_SCALE);
-    stored_HP = 100;
+    // influenceSprite->SetBlendMode(SDL_BLENDMODE_BLEND);
+    Character* otherChar = (Character*)other.GetComponent("Character").get();
+    stored_HP = otherChar->GetCurrentHP();
 }
 
 void GUI::Update(float dt)
