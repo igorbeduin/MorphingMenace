@@ -11,11 +11,7 @@ StageState::StageState()
     std::shared_ptr<Gravity> gravity(new Gravity());
     Environment::AddForce(gravity);
 
-    // Creating normal force
-    std::shared_ptr<Normal> normal(new Normal());
-    Environment::AddForce(normal);
-
-    // Creating normal force
+    // Creating WaterThrust force
     std::shared_ptr<WaterThrust> waterThrust(new WaterThrust());
     Environment::AddForce(waterThrust);
 
