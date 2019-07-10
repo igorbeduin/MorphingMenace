@@ -4,12 +4,6 @@ std::vector<std::shared_ptr<Force>> Environment::forcesArray;
 
 Environment::Environment()
 {
-    /*
-        TODO:
-        Construir forças de início de jogo
-            - Força normal
-            - Empuxo
-    */
 }
 
 Environment::~Environment()

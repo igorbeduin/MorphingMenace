@@ -171,7 +171,7 @@ void Player::Transform(char_type type)
 
 void Player::EnteringState()
 {
-    if (characterPtr->GetSpeed().y >= FALLING_SPEED /*&& characterState != JUMPING*/)
+    if (characterPtr->GetSpeed().y >= FALLING_SPEED)
     {
         characterState = character_state::FALLING;
     }
