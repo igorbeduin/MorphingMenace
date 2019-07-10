@@ -168,7 +168,7 @@ void Player::Transform(char_type type)
 
 void Player::EnteringState()
 {
-    if (characterPtr->GetSpeed().y >= FALLING_SPEED && characterState != JUMPING)
+    if (characterPtr->GetSpeed().y >= FALLING_SPEED /*&& characterState != JUMPING*/)
     {
         characterState = character_state::FALLING;
     }
@@ -234,7 +234,7 @@ void Player::Joystick()
         characterPtr = (Character *)sharedChar.get();
         // It's only possible to do stuff if player is not ABSORBING
         // Joystick
-        if (InputManager::GetInstance().KeyPress(SPACE_KEY) && characterState != JUMPING)
+        if (InputManager::GetInstance().KeyPress(SPACE_KEY) && (characterState == IDLE || characterState == WALKING))
         {
             if (characterPtr->VerifyOcean())
             {
