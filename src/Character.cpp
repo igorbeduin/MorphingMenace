@@ -9,6 +9,7 @@
 Character* Character::playerChar = nullptr;
 Character::Character(GameObject &associated, int maxHP, char_type charType) : Component::Component(associated),
                                                                               maxHP(maxHP),
+                                                                              applyGravity(true),
                                                                               applyNormal(false),
                                                                               applyWaterThrust(false),
                                                                               flip(false),
@@ -36,6 +37,7 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
     {
         std::shared_ptr<Entokraton_2> enemyBehav(new Entokraton_2(associated));
         associated.AddComponent(enemyBehav);
+        applyGravity = false;
         break;
     }
     case BOSS:
@@ -43,12 +45,14 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
         std::shared_ptr<Boss> bossBehav(new Boss(associated));
         associated.AddComponent(bossBehav);
         DisableScenarioCollision();
+        applyGravity = false;
         break;
     }
     case BOSS_CORE:
     {
         std::shared_ptr<BossCore> coreBehav(new BossCore(associated));
         associated.AddComponent(coreBehav);
+        applyGravity = false;
         break;
     }
 
@@ -59,12 +63,9 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
 }
 
 void Character::Update(float dt)
-{
+{   
     VerifyOcean();
-    if (charType != char_type::BOSS && charType != char_type::BOSS_CORE && charType != char_type::ENTOKRATON_2)
-    {
-        Environment::ApplyForces(this);
-    }
+    Environment::ApplyForces(this);
     
     lastPosition.x = associated.box.x;
     lastPosition.y = associated.box.y;
@@ -81,6 +82,10 @@ void Character::Update(float dt)
         Die();
     }
     limitSpeeds();
+    if (applyNormal)
+    {
+        applyNormal = false;
+    }
 }
 
 void Character::Accelerate(Vec2 acceleration)
@@ -116,7 +121,7 @@ void Character::NotifyCollision(GameObject &other)
             {
                 if (!applyNormal)
                 {
-                    associated.box.y -= (associatedCollider->box.y + associatedCollider->box.h) - otherCollider->box.y;
+                    associated.box.y = otherCollider->box.y - associated.box.h;
                     speed.y = 0;
                     speed.x = 0;
                     applyNormal = true;
@@ -125,19 +130,19 @@ void Character::NotifyCollision(GameObject &other)
             // Down-To-Up Collision
             if (verticalCollision == collision_side::DOWN)
             {
-                associated.box.y += (otherCollider->box.y + otherCollider->box.h) - associatedCollider->box.y;
+                associated.box.y = (otherCollider->box.y + otherCollider->box.h);
                 speed.y = 0;
             }
             // Left-To-Right Collision
             if (horizontalCollision == collision_side::LEFT)
             {
-                associated.box.x -= (associatedCollider->box.x + associatedCollider->box.w) - otherCollider->box.x;
+                associated.box.x = otherCollider->box.x - associated.box.w;
                 speed.x = 0;
             }
             // Right-To-Left Collision
             if (horizontalCollision == collision_side::RIGHT)
             {
-                associated.box.x += (otherCollider->box.x + otherCollider->box.w) - associatedCollider->box.x;
+                associated.box.x = (otherCollider->box.x + otherCollider->box.w);
                 speed.x = 0;
             }
             verticalCollision = collision_side::NONE_SIDE;
@@ -170,7 +175,7 @@ void Character::collisionSide(Rect boxA, Rect boxB)
     // This function returns the side colliding of B in relation of A, e.g, A->B returns "Left"
 
     // Horizontal verification
-    if ((boxA.x + boxA.w > boxB.x /*- SAFETY_COLLISION_RANGE*/) &&
+    if ((boxA.x + boxA.w >= boxB.x) &&
         (boxA.x + boxA.w <= boxB.x + DEPTH_COLLISION_RANGE) &&
         (boxA.y + boxA.h > boxB.y + DEPTH_COLLISION_RANGE))
     {
@@ -178,8 +183,8 @@ void Character::collisionSide(Rect boxA, Rect boxB)
     }
     else
     {
-        if ((boxA.x >= boxB.x + boxB.w - DEPTH_COLLISION_RANGE) &&
-            (boxA.x < boxB.x + boxB.w /*+ SAFETY_COLLISION_RANGE*/) &&
+        if ((boxA.x <= boxB.x + boxB.w) &&
+            (boxA.x >= boxB.x + boxB.w - DEPTH_COLLISION_RANGE) &&
             (boxA.y + boxA.h > boxB.y + DEPTH_COLLISION_RANGE))
         {
             horizontalCollision = collision_side::RIGHT;
@@ -187,7 +192,7 @@ void Character::collisionSide(Rect boxA, Rect boxB)
     }
 
     // Vertical verification
-    if ((boxA.y + boxA.h > boxB.y /*- SAFETY_COLLISION_RANGE*/) &&
+    if ((boxA.y + boxA.h > boxB.y) &&
         (boxA.y + boxA.h <= boxB.y + DEPTH_COLLISION_RANGE) &&
         (boxA.x + boxA.w > boxB.x + DEPTH_COLLISION_RANGE) &&
         (boxA.x < boxB.x + boxB.w - DEPTH_COLLISION_RANGE))
@@ -196,7 +201,7 @@ void Character::collisionSide(Rect boxA, Rect boxB)
     }
     else
     {
-        if ((boxA.y < boxB.y + boxB.h /*- DEPTH_COLLISION_RANGE*/) &&
+        if ((boxA.y < boxB.y + boxB.h) &&
             (boxA.y >= boxB.y + boxB.h - DEPTH_COLLISION_RANGE) &&
             (boxA.x + boxA.w > boxB.x + DEPTH_COLLISION_RANGE) &&
             (boxA.x < boxB.x + boxB.w - DEPTH_COLLISION_RANGE))
@@ -301,19 +306,22 @@ void Character::Die()
 
 bool Character::VerifyOcean()
 {
-    for (int i = 0; i < (int)StageState::oceanArray.size(); i++)
+    if (charType != ENTOKRATON_2)
     {
-        if (StageState::oceanArray[i].get() != nullptr)
+        for (int i = 0; i < (int)StageState::oceanArray.size(); i++)
         {
-            if (StageState::oceanArray[i]->box.Contains(associated.box.GetCenter().x, associated.box.GetCenter().y))
+            if (StageState::oceanArray[i].get() != nullptr)
             {
-                applyWaterThrust = true;
-                return applyWaterThrust;
+                if (StageState::oceanArray[i]->box.Contains(associated.box.GetCenter().x, associated.box.GetCenter().y))
+                {
+                    applyWaterThrust = true;
+                    return applyWaterThrust;
+                }
             }
         }
+        applyWaterThrust = false;
+        return false;
     }
-    applyWaterThrust = false;
-    return false;
 }
 
 void Character::EnableScenarioCollision()
