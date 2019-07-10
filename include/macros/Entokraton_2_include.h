@@ -5,7 +5,7 @@
 #define ENTOKRATON_2_COLLISION_SCALE 0.6
 #define ENTOKRATON_2_INIT_POS \
     {                         \
-        3000, 2000             \
+        2860, 1305             \
     }
 
 #define ENTOKRATON_2_IDLE_START 3
