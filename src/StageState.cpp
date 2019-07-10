@@ -2,6 +2,7 @@
 #include "../include/InputManager.h"
 #include "../include/Environment.h"
 #include "../include/Resources.h"
+#include "../include/Force.h"
 
 std::vector<std::shared_ptr<GameObject>> StageState::oceanArray;
 
@@ -11,11 +12,7 @@ StageState::StageState()
     std::shared_ptr<Gravity> gravity(new Gravity());
     Environment::AddForce(gravity);
 
-    // Creating normal force
-    std::shared_ptr<Normal> normal(new Normal());
-    Environment::AddForce(normal);
-
-    // Creating normal force
+    // Creating WaterThrust force
     std::shared_ptr<WaterThrust> waterThrust(new WaterThrust());
     Environment::AddForce(waterThrust);
 
@@ -166,6 +163,7 @@ void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carre
 void StageState::Update(float dt)
 {
     Camera::Update(dt);
+    Force::Update(dt);
 
     // Verify collisions
     std::vector<std::shared_ptr<GameObject>> objWithCollider;

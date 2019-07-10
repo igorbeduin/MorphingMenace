@@ -75,8 +75,11 @@ void Player::Idle()
 void Player::Attack()
 {
     Transformation *currentTransf = (Transformation *)transformStack.top().get();
-    characterState = ATTACKING;
-    currentTransf->Attack();
+    if (lvl != 0)
+    {
+        characterState = ATTACKING;
+        currentTransf->Attack();
+    }
 }
 
 void Player::Absorb()
@@ -178,7 +181,7 @@ void Player::Transform(char_type type)
 
 void Player::EnteringState()
 {
-    if (characterPtr->GetSpeed().y >= FALLING_SPEED /*&& characterState != JUMPING*/)
+    if (characterPtr->GetSpeed().y >= FALLING_SPEED)
     {
         characterState = character_state::FALLING;
     }

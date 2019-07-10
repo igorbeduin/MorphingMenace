@@ -39,9 +39,10 @@ void Acid::Render()
 
 bool Acid::Is(std::string type)
 {
-      
+      return (type == "Acid");
 }
+
 int Acid::GetDamage()
 {
-      
+      return damage;
 }
