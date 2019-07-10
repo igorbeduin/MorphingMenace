@@ -36,10 +36,13 @@ public:
     bool IsAbsorbable();
     void Die();
     bool VerifyOcean();
+    void EnableScenarioCollision();
+    void DisableScenarioCollision();
 
     static Character* playerChar;
     Rect box;
 private:
+    bool scenarioCollision;
     Vec2 speed;
     Vec2 lastPosition;
     collision_side verticalCollision;

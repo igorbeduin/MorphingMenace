@@ -13,7 +13,8 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
                                                                               applyWaterThrust(false),
                                                                               flip(false),
                                                                               currentHP(maxHP),
-                                                                              charType(charType)
+                                                                              charType(charType),
+                                                                              scenarioCollision(true)
 {
     switch (charType)
     {
@@ -41,6 +42,7 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
     {
         std::shared_ptr<Boss> bossBehav(new Boss(associated));
         associated.AddComponent(bossBehav);
+        DisableScenarioCollision();
         break;
     }
     case BOSS_CORE:
@@ -100,48 +102,47 @@ void Character::Render()
 void Character::NotifyCollision(GameObject &other)
 {   
     // Collision with environment
-    if (other.GetComponent("CollisionBox").get() != nullptr)
-    {   
+    if (scenarioCollision == true)
+    {
+        if (other.GetComponent("CollisionBox").get() != nullptr)
+        {   
 
-        Collider *otherCollider = (Collider *)other.GetComponent("Collider").get();
-        Collider *associatedCollider = (Collider *)associated.GetComponent("Collider").get();
+            Collider *otherCollider = (Collider *)other.GetComponent("Collider").get();
+            Collider *associatedCollider = (Collider *)associated.GetComponent("Collider").get();
 
-        collisionSide(associatedCollider->box, otherCollider->box);
-        // Falling collision (Up-To-Down Collision)
-        if (verticalCollision == collision_side::UP)
-        {
-            if (!applyNormal)
+            collisionSide(associatedCollider->box, otherCollider->box);
+            // Falling collision (Up-To-Down Collision)
+            if (verticalCollision == collision_side::UP)
             {
-                associated.box.y -= (associatedCollider->box.y + associatedCollider->box.h) - otherCollider->box.y;
-                speed.y = 0;
-                speed.x = 0;
-                applyNormal = true;
+                if (!applyNormal)
+                {
+                    associated.box.y -= (associatedCollider->box.y + associatedCollider->box.h) - otherCollider->box.y;
+                    speed.y = 0;
+                    speed.x = 0;
+                    applyNormal = true;
+                }
             }
+            // Down-To-Up Collision
+            if (verticalCollision == collision_side::DOWN)
+            {
+                associated.box.y += (otherCollider->box.y + otherCollider->box.h) - associatedCollider->box.y;
+                speed.y = 0;
+            }
+            // Left-To-Right Collision
+            if (horizontalCollision == collision_side::LEFT)
+            {
+                associated.box.x -= (associatedCollider->box.x + associatedCollider->box.w) - otherCollider->box.x;
+                speed.x = 0;
+            }
+            // Right-To-Left Collision
+            if (horizontalCollision == collision_side::RIGHT)
+            {
+                associated.box.x += (otherCollider->box.x + otherCollider->box.w) - associatedCollider->box.x;
+                speed.x = 0;
+            }
+            verticalCollision = collision_side::NONE_SIDE;
+            horizontalCollision = collision_side::NONE_SIDE;
         }
-
-        // Down-To-Up Collision
-        if (verticalCollision == collision_side::DOWN)
-        {
-            associated.box.y += (otherCollider->box.y + otherCollider->box.h) - associatedCollider->box.y;
-            speed.y = 0;
-        }
-
-        // Left-To-Right Collision
-        if (horizontalCollision == collision_side::LEFT)
-        {
-            associated.box.x -= (associatedCollider->box.x + associatedCollider->box.w) - otherCollider->box.x;
-            speed.x = 0;
-        }
-
-        // Right-To-Left Collision
-        if (horizontalCollision == collision_side::RIGHT)
-        {
-            associated.box.x += (otherCollider->box.x + otherCollider->box.w) - associatedCollider->box.x;
-            speed.x = 0;
-        }
-        
-        verticalCollision = collision_side::NONE_SIDE;
-        horizontalCollision = collision_side::NONE_SIDE;
     }
 
     // Collision with damages
@@ -313,4 +314,13 @@ bool Character::VerifyOcean()
     }
     applyWaterThrust = false;
     return false;
+}
+
+void Character::EnableScenarioCollision()
+{
+    scenarioCollision = true;
+}
+void Character::DisableScenarioCollision()
+{
+    scenarioCollision = false;
 }
