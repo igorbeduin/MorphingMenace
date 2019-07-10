@@ -41,12 +41,12 @@ public:
     int GetCurrentInfluence();
     int GetMaxInfluence();
     void SetInfluence(int influence);
-    void Swim();
+    void Swim(int swimStep);
     void VerifiesInfluence();
     void Joystick();
     void FollowingCamera();
     void UpdateVariables(float dt);
-    
+
 private:
     character_state characterState;
     std::shared_ptr<Component> sharedChar;

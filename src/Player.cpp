@@ -103,7 +103,10 @@ void Player::LvlDown()
     Alien_0 *currentTransf = (Alien_0 *)transformStack.top().get();
     currentTransf->UpdateAssocBox();
     lvl -= 1;
+
     currentForm = BABY;
+    Character *enemyCharPtr = (Character *)associated.GetComponent("Character").get();
+    enemyCharPtr->applyGravity = true;
 }
 
 void Player::NotifyCollision(GameObject &other)
@@ -229,9 +232,19 @@ int Player::GetMaxInfluence()
     return maxInfluence;
 }
 
-void Player::Swim()
+void Player::Swim(int swimStep)
 {
-    characterPtr->SetSpeedY(SWIM_Y_SPEED);
+    if (swimStep != 0)
+    {
+        associated.box.y += swimStep * deltaTime;
+        if (characterState == IDLE)
+        {
+            characterState = character_state::WALKING;
+        }
+    } else
+    {
+        characterPtr->SetSpeedY(SWIM_Y_SPEED);
+    }    
 }
 
 void Player::VerifiesInfluence()
@@ -251,11 +264,11 @@ void Player::Joystick()
         characterPtr = (Character *)sharedChar.get();
         // It's only possible to do stuff if player is not ABSORBING
         // Joystick
-        if (InputManager::GetInstance().KeyPress(SPACE_KEY) && (characterState == IDLE || characterState == WALKING))
+        if (InputManager::GetInstance().KeyPress(SPACE_KEY) && (characterState == IDLE || characterState == WALKING) && currentForm != Transformations::ENTOKRATON_2)
         {
             if (characterPtr->VerifyOcean())
             {
-                Swim();
+                Swim(0);
             }
             else
             {
@@ -295,6 +308,20 @@ void Player::Joystick()
             #ifdef DEBUG
             characterPtr->ApplyDamage(50);
             #endif
+        }
+        if (InputManager::GetInstance().IsKeyDown(W_KEY) && currentForm == Transformations::ENTOKRATON_2)
+        {
+            if (characterPtr->VerifyOcean())
+            {
+                Swim((-1)*walkStep);
+            }            
+        }
+        if (InputManager::GetInstance().IsKeyDown(S_KEY) && currentForm == Transformations::ENTOKRATON_2)
+        {
+            if (characterPtr->VerifyOcean())
+            {
+                Swim(walkStep);
+            }
         }
     }
 }
