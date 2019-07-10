@@ -19,6 +19,10 @@ Player::Player(GameObject &associated) : Component::Component(associated),
 
 void Player::Update(float dt)
 {   
+    // Character *enemyCharPtr = (Character *)associated.GetComponent("Character").get();
+
+    // std::cout << "Transformação: " << currentForm << std::endl;
+    // std::cout << "Gravidade: " << enemyCharPtr->applyGravity << " Water: " << enemyCharPtr->applyWaterThrust << std::endl;
     UpdateVariables(dt);
     VerifiesInfluence();
     Transformation *currentTransf = (Transformation *)transformStack.top().get();
@@ -176,8 +180,6 @@ void Player::Transform(char_type type)
         LvlUp(Transformations::ENTOKRATON_2);
 
         Character *enemyCharPtr = (Character *)associated.GetComponent("Character").get();
-        enemyCharPtr->applyGravity = false;
-
         break;
     }
 
@@ -188,7 +190,7 @@ void Player::Transform(char_type type)
 
 void Player::EnteringState()
 {
-    if (characterPtr->GetSpeed().y >= FALLING_SPEED /*&& characterState != JUMPING*/)
+    if (characterPtr->GetSpeed().y >= FALLING_SPEED /*&& !characterPtr->VerifyOcean() && characterState != JUMPING*/)
     {
         characterState = character_state::FALLING;
     }
