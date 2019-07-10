@@ -82,10 +82,6 @@ void Character::Update(float dt)
         Die();
     }
     limitSpeeds();
-    if (applyNormal)
-    {
-        applyNormal = false;
-    }
 }
 
 void Character::Accelerate(Vec2 acceleration)
@@ -119,13 +115,9 @@ void Character::NotifyCollision(GameObject &other)
             // Falling collision (Up-To-Down Collision)
             if (verticalCollision == collision_side::UP)
             {
-                if (!applyNormal)
-                {
-                    associated.box.y = otherCollider->box.y - associated.box.h;
-                    speed.y = 0;
-                    speed.x = 0;
-                    applyNormal = true;
-                }
+                associated.box.y = otherCollider->box.y - associated.box.h;
+                speed.y = 0;
+                speed.x = 0;
             }
             // Down-To-Up Collision
             if (verticalCollision == collision_side::DOWN)

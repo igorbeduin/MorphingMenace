@@ -12,7 +12,7 @@ public:
     {}
     bool Applicable(Character* character)
     {   
-        if (character->applyGravity && !character->applyNormal)
+        if (character->applyGravity)
         {
             return true;
         }
