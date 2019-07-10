@@ -5,6 +5,7 @@
 #include "../include/Camera.h"
 #include "../include/Game.h"
 #include "../include/StageState.h"
+#include "../include/Player.h"
 
 Character* Character::playerChar = nullptr;
 Character::Character(GameObject &associated, int maxHP, char_type charType) : Component::Component(associated),
@@ -37,7 +38,6 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
     {
         std::shared_ptr<Entokraton_2> enemyBehav(new Entokraton_2(associated));
         associated.AddComponent(enemyBehav);
-        applyGravity = false;
         break;
     }
     case BOSS:
@@ -306,7 +306,39 @@ void Character::Die()
 
 bool Character::VerifyOcean()
 {
-    if (charType != ENTOKRATON_2)
+    
+    if (charType == PLAYER)
+    {
+        Player *playerPtr = (Player *)associated.GetComponent("Player").get();
+        
+        for (int i = 0; i < (int)StageState::oceanArray.size(); i++)
+        {
+            if (StageState::oceanArray[i].get() != nullptr)
+            {
+                if (StageState::oceanArray[i]->box.Contains(associated.box.GetCenter().x, associated.box.GetCenter().y))
+                {
+                    if (playerPtr != nullptr  && playerPtr->currentForm == playerPtr->Transformations::ENTOKRATON_2)
+                    {
+                        applyWaterThrust = false;
+                        applyGravity = false;
+                        return true;
+                    }
+                    else if (playerPtr != nullptr  && playerPtr->currentForm != playerPtr->Transformations::ENTOKRATON_2)
+                    {
+                        applyWaterThrust = true;
+                        return true;
+                    }
+                }
+                else
+                {
+                    applyWaterThrust = false;
+                    applyGravity = true;
+                    return false;
+                }
+            }
+        }
+    } 
+    else if (charType != ENTOKRATON_2)
     {
         for (int i = 0; i < (int)StageState::oceanArray.size(); i++)
         {
