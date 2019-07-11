@@ -46,6 +46,7 @@ enum character_state
     FALLING,
     ABSORBING,
     ATTACKING,
+    DAMAGED,
     NONE_STATE
 };
 
