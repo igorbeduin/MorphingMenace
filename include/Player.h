@@ -27,6 +27,7 @@ public:
     void Jump();
     void Idle();
     void Attack();
+    void IsDamaged();
     void Absorb();
     void SetCharacterState(character_state state);
     character_state GetCharacterState();
