@@ -32,6 +32,13 @@ void Entokraton_1::Update(float dt)
     {
         state = DYING;
     }
+    if (enemyCharacter->GetLastHP() > enemyCharacter->GetCurrentHP())
+    {   
+        enemyCharacter->SetLastHP(enemyCharacter->GetCurrentHP());
+        state = DAMAGED;
+  
+    }
+
     switch (state)
     {
 
@@ -218,6 +225,22 @@ void Entokraton_1::Update(float dt)
         {
             state = RESTING;
         }
+        break;
+
+    case DAMAGED:
+
+
+            enemySprite->SetFrame(ENTOKRATON_1_DAMAGED_END);
+            enemySprite->RunSpecificAnimation();
+            enemySprite->SetStartFrame(ENTOKRATON_1_DAMAGED_START);
+            enemySprite->SetEndFrame(ENTOKRATON_1_DAMAGED_END);
+            enemySprite->SetAnimationTime(ENTOKRATON_1_DAMAGED_TIME);
+
+            if (enemySprite->GetCurrentFrame() == ENTOKRATON_1_DAMAGED_END)
+            {
+                state = RESTING;
+            }
+            
         break;
 
     case DYING:
