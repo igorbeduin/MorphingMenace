@@ -98,6 +98,31 @@ void Alien_0::VerifyState()
             sprite->SetAnimationTime(PLAYER_LVL0_FALL_TIME);
             break;
         }
+        case DAMAGED:
+        {
+            sprite->RunSpecificAnimation();
+            sprite->SetStartFrame(PLAYER_LVL0_DAMAGED_START);
+            sprite->SetEndFrame(PLAYER_LVL0_DAMAGED_END);
+            sprite->SetAnimationTime(PLAYER_LVL0_DAMAGED_TIME);
+
+            if (sprite->GetCurrentFrame() == PLAYER_LVL0_DAMAGED_END)
+            {
+                Player::player->SetCharacterState(character_state::IDLE);
+            }
+            else if (sprite->GetCurrentFrame() == PLAYER_LVL0_DAMAGED_MIDDLE)//trocar lógica do empurro pra notify collision do inimigo?
+            {
+                if (Character::playerChar->IsFlipped())
+                {
+                    associated.box.x += SPACE_PUSHED;
+                }
+                else
+                {
+                    associated.box.x -= SPACE_PUSHED;
+                }
+            }
+            
+            break;
+        }
         
         default:
         {
