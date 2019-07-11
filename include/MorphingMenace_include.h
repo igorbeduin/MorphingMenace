@@ -73,6 +73,7 @@ enum character_state
     #include "Sprite.h"
     #include "TileMap.h"
 
+    //stage
     #define PLANET_BACKGROUND_PATH "assets/img/BG01.png"
     #define PLANET_BACKGROUND_SCALE SCENARIO_SCALE
 
@@ -93,8 +94,15 @@ enum character_state
     #define STAGE_BG_MUSIC_PATH "assets/audio/background_demo1.ogg"
     #define SCENARIO_COLLISION_RADIUS 500
 
+    //title
     #define TITLE_PATH "assets/img/temporary_title.jpg"   
-    #define LOADING_PATH "assets/img/temporary_loading.png"   
+    #define LOADING_PATH "assets/img/temporary_loading.png"
+
+    //end
+    #define DEFEAT_PATH "assets/img/temporary_lose.jpg"
+    #define VICTORY_PATH "assets/img/temporary_win.jpg"
+
+
 
 #endif
 
