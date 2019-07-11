@@ -110,6 +110,19 @@ StageState::StageState()
 
     AddObject(enemy1);
 
+    //Creating Dead enemy 1
+    GameObject *dead_enemy1 = new GameObject();
+    std::shared_ptr<Character> dead_enemy1Character(new Character(*dead_enemy1, DEAD_HP, char_type::ENTOKRATON_1));
+    dead_enemy1->AddComponent(dead_enemy1Character);
+    std::shared_ptr<Collider> dead_enemy1Collider(new Collider(*dead_enemy1));
+    dead_enemy1->AddComponent(dead_enemy1Collider);
+
+    initPos = Vec2(DEAD_ENTOKRATON_1_INIT_POS);
+    dead_enemy1->box.x = initPos.x;
+    dead_enemy1->box.y = initPos.y;
+
+    AddObject(dead_enemy1);
+
     //Creating enemy 2
     GameObject *enemy2 = new GameObject();
     std::shared_ptr<Character> enemy2Character(new Character(*enemy2, ENTOKRATON_2_HP, char_type::ENTOKRATON_2));
