@@ -15,6 +15,7 @@
 #define SCENARIO_SCALE 1.1
 #define CHARACTER_GLOW_PATH "assets/img/efx/char_glow.png"
 #define SPACE_PUSHED 25
+#define ENEMY_SPACE_PUSHED 45
 
 /************************************************
 *					Character					*
