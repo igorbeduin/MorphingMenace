@@ -5,12 +5,11 @@ int main(int argc, char *argv[]) {
 
   Game& game = Game::GetInstance();//cria o game
 
-  StageState* stageState = new StageState();
-  game.Push(stageState);
-  // TitleState* Start = new TitleState();
-  // game.Push(Start);
+  // StageState* stageState = new StageState();
+  // game.Push(stageState);
+  TitleState* Start = new TitleState();
+  game.Push(Start);
   game.Run();//executa o game até a janela ser fechada
-  // game.~Game();//desaloca a memória, destrói as janelas, etc
   return 0;
 
 }
