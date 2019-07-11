@@ -14,6 +14,12 @@ void Entokraton_2::Update(float dt)
     Sprite *enemySprite = (Sprite *)associated.GetComponent("Sprite").get();
 
     Easing();
+    if (enemyCharacter->GetLastHP() > enemyCharacter->GetCurrentHP())
+    {   
+        enemyCharacter->SetLastHP(enemyCharacter->GetCurrentHP());
+        state = DAMAGED;
+  
+    }
 
     if (enemyCharacter->GetCurrentHP() <= 0)
     {
@@ -71,10 +77,32 @@ void Entokraton_2::Update(float dt)
             state = RESTING;
             direction = -direction;
         }
-        
-      
+        break;
 
+    case DAMAGED:
 
+            enemySprite->SetFrame(ENTOKRATON_2_DAMAGED_END);
+            enemySprite->RunSpecificAnimation();
+            enemySprite->SetStartFrame(ENTOKRATON_2_DAMAGED_START);
+            enemySprite->SetEndFrame(ENTOKRATON_2_DAMAGED_END);
+            enemySprite->SetAnimationTime(ENTOKRATON_2_DAMAGED_TIME);
+
+            if (Character::playerChar->GetPosition().x > associated.box.GetCenter().x && enemySprite->GetCurrentFrame() == ENTOKRATON_2_DAMAGED_END)
+            {
+                associated.box.x -= ENEMY_SPACE_PUSHED;
+                std::cout << "ai porra" << std::endl;
+            }
+            else if (Character::playerChar->GetPosition().x < associated.box.GetCenter().x && enemySprite->GetCurrentFrame() == ENTOKRATON_2_DAMAGED_END)
+            {
+                associated.box.x += ENEMY_SPACE_PUSHED;
+                std::cout << "ai porra" << std::endl;
+            }            
+
+            if (enemySprite->GetCurrentFrame() == ENTOKRATON_2_DAMAGED_END)
+            {
+                state = RESTING;
+            }
+            
         break;
 
     case DYING:
