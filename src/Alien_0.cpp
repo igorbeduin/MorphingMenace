@@ -109,17 +109,17 @@ void Alien_0::VerifyState()
             {
                 Player::player->SetCharacterState(character_state::IDLE);
             }
-            else if (sprite->GetCurrentFrame() == PLAYER_LVL0_DAMAGED_MIDDLE)//trocar lógica do empurro pra notify collision do inimigo?
-            {
-                if (Character::playerChar->IsFlipped())
-                {
-                    associated.box.x += SPACE_PUSHED;
-                }
-                else
-                {
-                    associated.box.x -= SPACE_PUSHED;
-                }
-            }
+            // else if (sprite->GetCurrentFrame() == PLAYER_LVL0_DAMAGED_MIDDLE)//trocar lógica do empurro pra notify collision do inimigo?
+            // {
+            //     if (Character::playerChar->IsFlipped())
+            //     {
+            //         associated.box.x += SPACE_PUSHED;
+            //     }
+            //     else
+            //     {
+            //         associated.box.x -= SPACE_PUSHED;
+            //     }
+            // }
             
             break;
         }
