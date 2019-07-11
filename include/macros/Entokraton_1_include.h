@@ -25,7 +25,7 @@
 
 #define ENTOKRATON_1_DAMAGED_START 8
 #define ENTOKRATON_1_DAMAGED_END 9
-#define ENTOKRATON_1_DAMAGED_TIME 0.5
+#define ENTOKRATON_1_DAMAGED_TIME 0.8
 
 #define ENTOKRATON_1_HP 100
 #define ENTOKRATON_1_IDLE1_SOUND "assets/audio/alien1/alien 1 - idle 1.ogg"
