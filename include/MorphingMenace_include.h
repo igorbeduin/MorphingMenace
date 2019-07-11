@@ -92,7 +92,9 @@ enum character_state
     #define TILE_WIDTH 32
     #define STAGE_BG_MUSIC_PATH "assets/audio/background_demo1.ogg"
     #define SCENARIO_COLLISION_RADIUS 500
-    
+
+    #define TITLE_PATH "assets/img/temporary_title.jpg"   
+    #define LOADING_PATH "assets/img/temporary_loading.png"   
 
 #endif
 
