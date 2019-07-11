@@ -1,5 +1,6 @@
 #include "../include/Entokraton_1.h"
 #include "../include/Game.h"
+#include "../include/Player.h"
 
 Entokraton_1::Entokraton_1(GameObject &associated) : Component::Component(associated), state(RESTING)
 {
@@ -235,6 +236,17 @@ void Entokraton_1::Update(float dt)
             enemySprite->SetStartFrame(ENTOKRATON_1_DAMAGED_START);
             enemySprite->SetEndFrame(ENTOKRATON_1_DAMAGED_END);
             enemySprite->SetAnimationTime(ENTOKRATON_1_DAMAGED_TIME);
+
+            if (Character::playerChar->GetPosition().x > associated.box.GetCenter().x && enemySprite->GetCurrentFrame() == ENTOKRATON_1_DAMAGED_END)
+            {
+                associated.box.x -= ENEMY_SPACE_PUSHED;
+                std::cout << "ai porra" << std::endl;
+            }
+            else if (Character::playerChar->GetPosition().x < associated.box.GetCenter().x && enemySprite->GetCurrentFrame() == ENTOKRATON_1_DAMAGED_END)
+            {
+                associated.box.x += ENEMY_SPACE_PUSHED;
+                std::cout << "ai porra" << std::endl;
+            }            
 
             if (enemySprite->GetCurrentFrame() == ENTOKRATON_1_DAMAGED_END)
             {
