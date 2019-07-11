@@ -33,6 +33,8 @@ public:
     void ApplyDamage(int damage);
     char_type Type();
     int GetCurrentHP();
+    int GetLastHP();
+    void SetLastHP(int HP);
     int GetMaxHP();
     bool IsAbsorbable();
     void Die();
@@ -50,6 +52,7 @@ private:
     collision_side horizontalCollision;
     bool flip;
     int maxHP;
+    int lastHP;
     int currentHP;
     char_type charType;
 };

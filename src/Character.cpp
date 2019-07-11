@@ -10,6 +10,7 @@
 Character* Character::playerChar = nullptr;
 Character::Character(GameObject &associated, int maxHP, char_type charType) : Component::Component(associated),
                                                                               maxHP(maxHP),
+                                                                              lastHP(maxHP),
                                                                               applyGravity(true),
                                                                               applyNormal(false),
                                                                               applyWaterThrust(false),
@@ -268,7 +269,7 @@ void Character::DisableFlip()
 void Character::ApplyDamage(int damage)
 {
     currentHP -= damage;
-    std::cout << "currentHP:" << currentHP << std::endl;
+    std::cout << "currentHP:" << currentHP <<  " lastHP:" << lastHP << std::endl;
 }
 
 char_type Character::Type()
@@ -284,6 +285,16 @@ int Character::GetCurrentHP()
 int Character::GetMaxHP()
 {
     return maxHP;
+}
+
+int Character::GetLastHP()
+{
+    return lastHP;
+}
+
+void Character::SetLastHP(int HP)
+{
+    lastHP = HP;
 }
 
 bool Character::IsAbsorbable()
