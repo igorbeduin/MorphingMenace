@@ -109,6 +109,21 @@ void Alien_1::VerifyState()
         sprite->SetAnimationTime(PLAYER_LVL1_IDLE_TIME);
         break;
     }
+
+    case DAMAGED:
+        {
+            sprite->RunSpecificAnimation();
+            sprite->SetStartFrame(PLAYER_LVL1_DAMAGED_START);
+            sprite->SetEndFrame(PLAYER_LVL1_DAMAGED_END);
+            sprite->SetAnimationTime(PLAYER_LVL1_DAMAGED_TIME);
+
+            if (sprite->GetCurrentFrame() == PLAYER_LVL1_DAMAGED_END)
+            {
+                Player::player->SetCharacterState(character_state::IDLE);
+            }
+
+            break;
+        }
     default:
     {
         break;
