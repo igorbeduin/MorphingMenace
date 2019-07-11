@@ -53,6 +53,7 @@ enum character_state
     #include "Character.h"
     #include "Player.h"
     #include "Entokraton_1.h"
+    #include "Entokraton_1_Dead.h"
     #include "Entokraton_2.h"
     #include "Boss.h"
     #include "Boss_Core.h"
