@@ -30,9 +30,20 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
     }
     case ENTOKRATON_1:
     {
-        std::shared_ptr<Entokraton_1> enemyBehav(new Entokraton_1(associated));
-        associated.AddComponent(enemyBehav);
-        break;
+        if (maxHP > 2)
+        {
+            std::shared_ptr<Entokraton_1> enemyBehav(new Entokraton_1(associated));
+            associated.AddComponent(enemyBehav);
+            break;
+        }
+        else
+        {
+            std::shared_ptr<Entokraton_1_Dead> enemyBehav(new Entokraton_1_Dead(associated));
+            associated.AddComponent(enemyBehav);
+            break;
+        }
+        
+        
     }
     case ENTOKRATON_2:
     {
