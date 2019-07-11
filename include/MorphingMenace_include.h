@@ -84,8 +84,8 @@ enum character_state
     #define TILESET_PATH "assets/img/tileset.png"
     #define TILEMAP_PATH "assets/map/tileMap.txt"
     #define TILE_SCALE SCENARIO_SCALE
-    #define TILE_HEIGHT 32
-    #define TILE_WIDTH 32
+    #define TILE_HEIGHT 64
+    #define TILE_WIDTH 64
     #define STAGE_BG_MUSIC_PATH "assets/audio/background_demo1.ogg"
     #define SCENARIO_COLLISION_RADIUS 500
     
@@ -95,7 +95,7 @@ enum character_state
 /************************************************
 *					Environment					*
 *************************************************/
-#define GRAVITY_ACCELERATION_Y 15
+#define GRAVITY_ACCELERATION_Y 3
 #define GRAVITY_ACCELERATION_X 0
 #define GRAVITY_ACCELERATION {GRAVITY_ACCELERATION_X, GRAVITY_ACCELERATION_Y}
 #define NORMAL_ACCELERATION_Y -1 * GRAVITY_ACCELERATION_Y
