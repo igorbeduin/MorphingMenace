@@ -30,13 +30,22 @@ int Damage::GetDamage()
 
 void Damage::NotifyCollision(GameObject &other)
 {
-    // Character* associatedCharacter = (Character *)associated.GetComponent("Character").get();
-    // Character* otherCharacter = (Character *)other.GetComponent("Character").get();
+    // Collider* associatedCollider = (Collider *)associated.GetComponent("Collider").get();
+    Character* otherCharacter = (Character *)other.GetComponent("Character").get();
 
-    // if (otherCharacter->Type() != shooter)
-    // {
-    //     associated.RequestDelete();
-    // }
+    if (other.GetComponent("Player").get() && otherCharacter->Type() != shooter)
+    {
+        // associated.RequestDelete();
+        if (associated.box.GetCenter().x > other.box.GetCenter().x)
+        {
+            other.box.x -= SPACE_PUSHED /* * (1 + (int)otherCharacter->Type()) */ ;
+        }
+        else
+        {
+            other.box.x += SPACE_PUSHED;
+        }
+    }
+    
 }
 
 char_type Damage::Shooter()

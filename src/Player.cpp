@@ -23,6 +23,7 @@ void Player::Update(float dt)
 
     // std::cout << "Transformação: " << currentForm << std::endl;
     // std::cout << "Gravidade: " << enemyCharPtr->applyGravity << " Water: " << enemyCharPtr->applyWaterThrust << std::endl;
+    IsDamaged();
     UpdateVariables(dt);
     VerifiesInfluence();
     Transformation *currentTransf = (Transformation *)transformStack.top().get();
@@ -86,7 +87,19 @@ void Player::Attack()
         currentTransf->Attack();
     }
 }
+void Player::IsDamaged()
+{
+    Character *CharPtr = (Character *)associated.GetComponent("Character").get();
+    if (CharPtr->GetLastHP() > CharPtr->GetCurrentHP())
+    {   
+        CharPtr->SetLastHP(CharPtr->GetCurrentHP());
+        // std::cout << "ai fdp isso dói" << std::endl;
+        characterState = DAMAGED;
+  
+    }
+    
 
+}
 void Player::Absorb()
 {
     Transformation *currentTransf = (Transformation *)transformStack.top().get();

@@ -10,6 +10,7 @@
 Character* Character::playerChar = nullptr;
 Character::Character(GameObject &associated, int maxHP, char_type charType) : Component::Component(associated),
                                                                               maxHP(maxHP),
+                                                                              lastHP(maxHP),
                                                                               applyGravity(true),
                                                                               applyNormal(false),
                                                                               applyWaterThrust(false),
@@ -30,9 +31,20 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
     }
     case ENTOKRATON_1:
     {
-        std::shared_ptr<Entokraton_1> enemyBehav(new Entokraton_1(associated));
-        associated.AddComponent(enemyBehav);
-        break;
+        if (maxHP > 2)
+        {
+            std::shared_ptr<Entokraton_1> enemyBehav(new Entokraton_1(associated));
+            associated.AddComponent(enemyBehav);
+            break;
+        }
+        else
+        {
+            std::shared_ptr<Entokraton_1_Dead> enemyBehav(new Entokraton_1_Dead(associated));
+            associated.AddComponent(enemyBehav);
+            break;
+        }
+        
+        
     }
     case ENTOKRATON_2:
     {
@@ -257,7 +269,7 @@ void Character::DisableFlip()
 void Character::ApplyDamage(int damage)
 {
     currentHP -= damage;
-    std::cout << "currentHP:" << currentHP << std::endl;
+    std::cout << "currentHP:" << currentHP <<  " lastHP:" << lastHP << std::endl;
 }
 
 char_type Character::Type()
@@ -273,6 +285,16 @@ int Character::GetCurrentHP()
 int Character::GetMaxHP()
 {
     return maxHP;
+}
+
+int Character::GetLastHP()
+{
+    return lastHP;
+}
+
+void Character::SetLastHP(int HP)
+{
+    lastHP = HP;
 }
 
 bool Character::IsAbsorbable()

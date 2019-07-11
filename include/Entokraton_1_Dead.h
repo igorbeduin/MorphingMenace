@@ -6,11 +6,11 @@
 #include "Sound.h"
 #include "macros/Entokraton_1_include.h"
 
-class Entokraton_1 : public Component
+class Entokraton_1_Dead : public Component
 {
 private:
 
-    enum EntoState{RESTING, MOVING, ATTACKING, CHASING, DAMAGED, DYING};
+    enum EntoState{RESTING, MOVING, ATTACKING, CHASING, DYING};
     EntoState state;
     Timer restTimer;
 
@@ -23,9 +23,10 @@ private:
     bool firstTime = false;
 
 public:
-    Entokraton_1(GameObject &associated);
+    Entokraton_1_Dead(GameObject &associated);
     void Update(float dt);
     void Render();
     bool Is(std::string type);
     void Attack();
+    void Start();
 };
