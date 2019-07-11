@@ -23,7 +23,8 @@ void GameObject::Update(float dt){//chama a função Update de todos os componen
 }
 
 void GameObject::Render(){//chama a função Render de todos os componentes do objeto
-  for (unsigned int i = 0; i < components.size(); i++) {
+  for (int i = (int)components.size() - 1; i >= 0; i--)
+  {
     components[i]->Render();
   }
 }
@@ -37,7 +38,6 @@ void GameObject::RequestDelete(){
 }
 
 void GameObject::AddComponent(std::shared_ptr<Component> cpt){
-  // std::cout << "added component " << cpt->Is("Sound") <<'\n';
   if (cpt != nullptr) {
     components.emplace_back(std::move(cpt));//Adiciona um componente ao
   }
@@ -63,7 +63,6 @@ std::shared_ptr<Component> GameObject::GetComponent(std::string type){
   for (unsigned int i = 0; i < components.size(); i++) {
     if (components[i]->Is(type) && components[i] != nullptr){
       return components[i];//components[i].get();
-      // std::cout << "return component" << '\n';
     }
   }
   return (nullptr);

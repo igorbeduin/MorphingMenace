@@ -8,6 +8,7 @@
 #include "Transformation.h"
 #include "Sprite.h"
 #include "Timer.h"
+#include "macros/Alien_1_include.h"
 
 class Sprite;
 

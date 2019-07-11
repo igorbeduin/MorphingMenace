@@ -31,6 +31,7 @@ class Sprite: public Component{//implementar update, is e render da classe mãe 
     int StartFrame;
     int EndFrame;
     float AnimationTime;
+    SDL_BlendMode blendMode;
 
   public:
     Sprite(GameObject& associated);
@@ -58,4 +59,5 @@ class Sprite: public Component{//implementar update, is e render da classe mãe 
     void SetEndFrame(int endFrame);
     void SetAnimationTime(float animationTime);
     void RunSpecificAnimation();
+    void SetBlendMode(SDL_BlendMode blendMode);
 };

@@ -27,10 +27,6 @@ void Entokraton_1::Update(float dt)
 {
     Character *enemyCharacter = (Character *)associated.GetComponent("Character").get();
     Sprite *enemySprite = (Sprite *)associated.GetComponent("Sprite").get();
-    // std::cout << enemySprite->GetCurrentFrame() << std::endl;
-    // Sound *idle1Sound = (Sound *)associated.GetComponent("Sound").get();
-    // Sound *walkSound = (Sound *)associated.GetComponent("Sound").get();
-    // std::cout << Character::playerChar << std::endl ;
 
     if (enemyCharacter->GetCurrentHP() <= 0)
     {
@@ -40,11 +36,7 @@ void Entokraton_1::Update(float dt)
     {
 
     case RESTING:
-    // std::cout << "idle" << std::endl;
-        // if (enemyCharacter->GetCurrentHP() <= 0)
-        // {
-        //     state = DYING;
-        // }
+
         enemySprite->RunSpecificAnimation();
         enemySprite->SetStartFrame(ENTOKRATON_1_IDLE_START);
         enemySprite->SetEndFrame(ENTOKRATON_1_IDLE_END);
@@ -64,7 +56,7 @@ void Entokraton_1::Update(float dt)
                 // std::cout << "right" << std::endl;
                 destination.x = associated.box.GetCenter().x - ENTOKRATON_1_WALK_RANGE;
                 destination.y = associated.box.GetCenter().y;
-                distance = destination - associated.box.GetVec2();
+                distance = destination - associated.box.GetCenter();
                 enemyCharacter->EnableFlip();
             }
             if (direction == 1 )
@@ -72,7 +64,7 @@ void Entokraton_1::Update(float dt)
                 // std::cout << "left" << std::endl;
                 destination.x = associated.box.GetCenter().x + ENTOKRATON_1_WALK_RANGE;
                 destination.y = associated.box.GetCenter().y;
-                distance = destination - associated.box.GetVec2();
+                distance = destination - associated.box.GetCenter();
                 enemyCharacter->DisableFlip();
             }
             sounds[1]->Play(1);
@@ -89,11 +81,6 @@ void Entokraton_1::Update(float dt)
 
     case MOVING://flipar sprite
     // std::cout << "moving" << std::endl;
-
-        // if (enemyCharacter->GetCurrentHP() <= 0)
-        // {
-        //     state = DYING;
-        // }
 
         enemySprite->RunSpecificAnimation();
         enemySprite->SetStartFrame(ENTOKRATON_1_WALK_START);
@@ -130,7 +117,8 @@ void Entokraton_1::Update(float dt)
             if (abs(distance.x) >= abs(movement))
             {
                 associated.box.x += movement; 
-                distance.x = destination.x - associated.box.GetCenter().x;
+                distance.x -= movement; 
+                // distance.x = destination.x - associated.box.GetCenter().x;
                 // distance.y = destination.y - associated.box.y;
             }
 
@@ -151,11 +139,6 @@ void Entokraton_1::Update(float dt)
     case CHASING:
         // std::cout << "CHASING" << std::endl;
         //se aproxima do jogador, muda o estado para attacking
-
-        // if (enemyCharacter->GetCurrentHP() <= 0)
-        // {
-        //     state = DYING;
-        // }
 
         enemySprite->RunSpecificAnimation();
         enemySprite->SetStartFrame(ENTOKRATON_1_WALK_START);
@@ -193,7 +176,6 @@ void Entokraton_1::Update(float dt)
             enemyCharacter->DisableFlip();
 
         }
-        // std::cout << "x: "<< (  abs(distance.x) > ENTOKRATON_1_PERCEPTION  ) << ", y: " << (abs(distance.y) > ENTOKRATON_1_PERCEPTION/5) << std::endl;
         if ( abs(distance.x) > ENTOKRATON_1_PERCEPTION || abs(distance.y) > ENTOKRATON_1_PERCEPTION/2.5)
         {
             // std::cout << "ROBSON FUGIU" << std::endl;
@@ -221,11 +203,6 @@ void Entokraton_1::Update(float dt)
         break;
 
     case ATTACKING:        
-
-        // if (enemyCharacter->GetCurrentHP() <= 0)
-        // {
-        //     state = DYING;
-        // }
 
         // std::cout << "Entokraton used CUT" << std::endl;
         enemySprite->RunSpecificAnimation();
@@ -262,11 +239,6 @@ void Entokraton_1::Update(float dt)
             death_animation_sprite->SetEndFrame(ENTOKRATON_1_DIE_END);
             death_animation_sprite->SetAnimationTime(ENTOKRATON_1_DIE_TIME);
         }
-        
-        // if (enemySprite->GetCurrentFrame() == 12)
-        // {
-        // }
-
 
         break;
     
@@ -289,15 +261,15 @@ void Entokraton_1::Attack()//verificar friendly fire
 
     //Creating attack
     GameObject *attack = new GameObject();
-    attack->box.w = ENTOKRATON_1_ATTACK_WIDTH;
-    attack->box.h = ENTOKRATON_1_ATTACK_HEIGHT;
+    attack->box.w = associated.box.w/2;
+    attack->box.h = associated.box.h;
     if (associatedCharacter->IsFlipped())
     {
-        attack->box.x = associatedCollider->box.x - attack->box.w;
+        attack->box.x = associatedCollider->box.x - attack->box.w/2;
     }
     else
     {
-        attack->box.x = associatedCollider->box.x + associatedCollider->box.w;
+        attack->box.x = associatedCollider->box.x + associatedCollider->box.w/2;
     }
     attack->box.y = associatedCollider->box.GetVec2().y ;
 

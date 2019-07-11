@@ -9,7 +9,8 @@ Player::Player(GameObject &associated) : Component::Component(associated),
                                          currentInfluence(INITIAL_INFLUENCE),
                                          maxInfluence(INITIAL_INFLUENCE),
                                          walkStep(PLAYER_LVL0_STEP),
-                                         jumpVelocity(PLAYER_LVL1_JUMP)
+                                         jumpVelocity(PLAYER_LVL1_JUMP),
+                                         currentForm(BABY)
 {
     std::shared_ptr<Alien_0> alien_0(new Alien_0(associated));
     transformStack.push(alien_0);
@@ -18,6 +19,10 @@ Player::Player(GameObject &associated) : Component::Component(associated),
 
 void Player::Update(float dt)
 {   
+    // Character *enemyCharPtr = (Character *)associated.GetComponent("Character").get();
+
+    // std::cout << "Transformação: " << currentForm << std::endl;
+    // std::cout << "Gravidade: " << enemyCharPtr->applyGravity << " Water: " << enemyCharPtr->applyWaterThrust << std::endl;
     UpdateVariables(dt);
     VerifiesInfluence();
     Transformation *currentTransf = (Transformation *)transformStack.top().get();
@@ -43,7 +48,7 @@ character_state Player::GetCharacterState()
 
 void Player::Render()
 {
-    Alien_0 *currentTransf = (Alien_0 *)transformStack.top().get();
+    Transformation *currentTransf = (Transformation *)transformStack.top().get();
     currentTransf->Render();
 }
 
@@ -75,8 +80,11 @@ void Player::Idle()
 void Player::Attack()
 {
     Transformation *currentTransf = (Transformation *)transformStack.top().get();
-    characterState = ATTACKING;
-    currentTransf->Attack();
+    if (lvl != 0)
+    {
+        characterState = ATTACKING;
+        currentTransf->Attack();
+    }
 }
 
 void Player::Absorb()
@@ -90,8 +98,9 @@ int Player::GetLvl()
     return lvl;
 }
 
-void Player::LvlUp()
+void Player::LvlUp(Transformations next_form)
 {
+    currentForm = next_form;
     lvl += 1;
 }
 
@@ -101,6 +110,10 @@ void Player::LvlDown()
     Alien_0 *currentTransf = (Alien_0 *)transformStack.top().get();
     currentTransf->UpdateAssocBox();
     lvl -= 1;
+
+    currentForm = BABY;
+    Character *enemyCharPtr = (Character *)associated.GetComponent("Character").get();
+    enemyCharPtr->applyGravity = true;
 }
 
 void Player::NotifyCollision(GameObject &other)
@@ -157,7 +170,19 @@ void Player::Transform(char_type type)
         transformStack.push(alien_1);
         walkStep = PLAYER_LVL1_STEP;
         jumpVelocity = PLAYER_LVL1_JUMP;
-        LvlUp();
+        LvlUp(Transformations::ENTOKRATON_1);
+        break;
+    }
+    case ENTOKRATON_2:
+    {  
+        std::shared_ptr<Alien_2> alien_2(new Alien_2(associated));
+        alien_2->UpdateAssocBox();
+        transformStack.push(alien_2);
+        walkStep = PLAYER_LVL2_STEP;
+        jumpVelocity = PLAYER_LVL2_JUMP;
+        LvlUp(Transformations::ENTOKRATON_2);
+
+        Character *enemyCharPtr = (Character *)associated.GetComponent("Character").get();
         break;
     }
 
@@ -168,7 +193,7 @@ void Player::Transform(char_type type)
 
 void Player::EnteringState()
 {
-    if (characterPtr->GetSpeed().y >= FALLING_SPEED && characterState != JUMPING)
+    if (characterPtr->GetSpeed().y >= FALLING_SPEED /*&& !characterPtr->VerifyOcean() && characterState != JUMPING*/)
     {
         characterState = character_state::FALLING;
     }
@@ -212,9 +237,19 @@ int Player::GetMaxInfluence()
     return maxInfluence;
 }
 
-void Player::Swim()
+void Player::Swim(int swimStep)
 {
-    characterPtr->SetSpeedY(SWIM_Y_SPEED);
+    if (swimStep != 0)
+    {
+        associated.box.y += swimStep * deltaTime;
+        if (characterState == IDLE)
+        {
+            characterState = character_state::WALKING;
+        }
+    } else
+    {
+        characterPtr->SetSpeedY(SWIM_Y_SPEED);
+    }    
 }
 
 void Player::VerifiesInfluence()
@@ -234,11 +269,11 @@ void Player::Joystick()
         characterPtr = (Character *)sharedChar.get();
         // It's only possible to do stuff if player is not ABSORBING
         // Joystick
-        if (InputManager::GetInstance().KeyPress(SPACE_KEY) && characterState != JUMPING)
+        if (InputManager::GetInstance().KeyPress(SPACE_KEY) && (characterState == IDLE || characterState == WALKING) && currentForm != Transformations::ENTOKRATON_2)
         {
             if (characterPtr->VerifyOcean())
             {
-                Swim();
+                Swim(0);
             }
             else
             {
@@ -278,6 +313,20 @@ void Player::Joystick()
             #ifdef DEBUG
             characterPtr->ApplyDamage(50);
             #endif
+        }
+        if (InputManager::GetInstance().IsKeyDown(W_KEY) && currentForm == Transformations::ENTOKRATON_2)
+        {
+            if (characterPtr->VerifyOcean())
+            {
+                Swim((-1)*walkStep);
+            }            
+        }
+        if (InputManager::GetInstance().IsKeyDown(S_KEY) && currentForm == Transformations::ENTOKRATON_2)
+        {
+            if (characterPtr->VerifyOcean())
+            {
+                Swim(walkStep);
+            }
         }
     }
 }

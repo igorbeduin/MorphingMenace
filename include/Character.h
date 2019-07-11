@@ -19,6 +19,7 @@ public:
     void collisionSide(Rect boxA, Rect boxB);
     bool applyNormal;
     bool applyWaterThrust;
+    bool applyGravity;
     Vec2 GetLastPosition();
     Vec2 GetPosition();
     Vec2 GetSpeed();
@@ -36,11 +37,13 @@ public:
     bool IsAbsorbable();
     void Die();
     bool VerifyOcean();
+    void EnableScenarioCollision();
+    void DisableScenarioCollision();
 
     static Character* playerChar;
     Rect box;
-
 private:
+    bool scenarioCollision;
     Vec2 speed;
     Vec2 lastPosition;
     collision_side verticalCollision;

@@ -5,6 +5,7 @@
 #include "SDL_include.h"
 #include "Alien_0.h"
 #include "Alien_1.h"
+#include "Alien_2.h"
 #include "Transformation.h"
 
 #include <iostream>
@@ -15,6 +16,9 @@ class Character;
 class Player : public Component
 {
 public:
+    enum Transformations {BABY, ENTOKRATON_1, ENTOKRATON_2};
+    Transformations currentForm;
+    
     Player(GameObject &associated);
     void Update(float dt);
     void Render();
@@ -27,7 +31,7 @@ public:
     void SetCharacterState(character_state state);
     character_state GetCharacterState();
     int GetLvl();
-    void LvlUp();
+    void LvlUp(Transformations next_form);
     void LvlDown();
     static Player* player;
     void NotifyCollision(GameObject &other);
@@ -37,7 +41,7 @@ public:
     int GetCurrentInfluence();
     int GetMaxInfluence();
     void SetInfluence(int influence);
-    void Swim();
+    void Swim(int swimStep);
     void VerifiesInfluence();
     void Joystick();
     void FollowingCamera();
