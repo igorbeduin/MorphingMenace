@@ -3,6 +3,8 @@
 #include "../include/Environment.h"
 #include "../include/Resources.h"
 #include "../include/Force.h"
+#include "../include/GameData.h"
+#include "../include/Game.h"
 
 std::vector<std::shared_ptr<GameObject>> StageState::oceanArray;
 
@@ -177,7 +179,16 @@ void StageState::Update(float dt)
 {
     Camera::Update(dt);
     Force::Update(dt);
-
+    Game& game = Game::GetInstance();
+    //END_GAME CONDITIONS
+    if (!Character::playerChar)
+    {
+        popRequested = true;
+        GameData::playerVictory = false;
+        EndState* endState = new EndState();
+        game.Push(endState);
+    } 
+    
     // Verify collisions
     std::vector<std::shared_ptr<GameObject>> objWithCollider;
     Vec2 distanceToBox;
@@ -242,6 +253,7 @@ void StageState::Update(float dt)
         }
     }
     // std::cout << "objectArray.size():" << objectArray.size() << std::endl;
+
 }
 
 void StageState::Render()
