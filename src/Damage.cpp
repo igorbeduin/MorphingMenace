@@ -33,7 +33,7 @@ void Damage::NotifyCollision(GameObject &other)
     // Collider* associatedCollider = (Collider *)associated.GetComponent("Collider").get();
     Character* otherCharacter = (Character *)other.GetComponent("Character").get();
 
-    if (other.GetComponent("Character").get() && otherCharacter->Type() != shooter)
+    if (other.GetComponent("Player").get() && otherCharacter->Type() != shooter)
     {
         // associated.RequestDelete();
         if (associated.box.GetCenter().x > other.box.GetCenter().x)
