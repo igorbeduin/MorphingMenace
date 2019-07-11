@@ -141,7 +141,7 @@ StageState::StageState()
     GameObject *boss = new GameObject();
     std::shared_ptr<Character> bossCharacter(new Character(*boss, 100, char_type::BOSS));
     boss->AddComponent(bossCharacter);
-    std::shared_ptr<Collider> BOSSCollider(new Collider(*boss));
+    std::shared_ptr<Collider> BOSSCollider(new Collider(*boss, BOSS_COLLIDER_SCALE, BOSS_COLLIDER_OFFSET ));
     boss->AddComponent(BOSSCollider);
 
     initPos = Vec2(BOSS_INIT_POS);
