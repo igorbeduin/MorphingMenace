@@ -191,6 +191,14 @@ void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carre
     Resources::AddImage(ACID_SPRITE_PATH);
     Resources::AddImage(BOSS_CORE_SPRITE_PATH);
     Resources::AddImage(TRANSFORMATION_PATH);
+    Resources::AddImage(CHARACTER_GLOW_PATH);
+    Resources::AddImage(GROUND_BACKGROUND_PATH);
+    Resources::AddImage(OCEAN1_BACKGROUND_PATH);
+    Resources::AddImage(OCEAN2_BACKGROUND_PATH);
+    Resources::AddImage(MINIMAP_SPRITE_PATH);
+    Resources::AddImage(MINIMAP_DOT_PATH);
+    Resources::AddImage(MINIMAP_BORDER_PATH);
+    // Resources::AddImage();
     ///////////////////////////////////////////////
     Resources::AddSound(ENTOKRATON_1_IDLE1_SOUND);
     Resources::AddSound(ENTOKRATON_1_IDLE2_SOUND);
@@ -208,7 +216,7 @@ void StageState::Update(float dt)
 {
     Camera::Update(dt);
     Window::UpdateWindow();
-    std::cout << InputManager::GetInstance().GetMouseX() - Camera::pos.x << "," << InputManager::GetInstance().GetMouseY() - Camera::pos.y << std::endl;
+    // std::cout << InputManager::GetInstance().GetMouseX() - Camera::pos.x << "," << InputManager::GetInstance().GetMouseY() - Camera::pos.y << std::endl;
     Force::Update(dt);
     Game& game = Game::GetInstance();
     //END_GAME CONDITIONS

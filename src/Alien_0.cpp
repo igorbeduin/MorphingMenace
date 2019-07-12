@@ -146,3 +146,10 @@ void Alien_0::UpdateAssocBox()
     associated.box.h = sprite->GetHeight();
     
 }
+
+void Alien_0::Start()
+{
+    Vec2 initialPosition = PLAYER_INIT_POS;
+    associated.box.x = initialPosition.x;
+    associated.box.y = initialPosition.y;
+}

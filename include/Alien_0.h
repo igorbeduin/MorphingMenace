@@ -22,6 +22,7 @@ public:
     void Absorb();
     void VerifyState();
     void UpdateAssocBox();
+    void Start();
 
 private:
     std::shared_ptr<Sprite> sprite;

@@ -15,7 +15,7 @@ void Force::Update(float dt)
 }
 void Force::Apply(Character* character)
 {
-    character->Accelerate(acceleration /* * deltaTime*/);
+    character->Accelerate(acceleration * deltaTime);
 }
 
 void Force::SetAcceleration(Vec2 acceleration)

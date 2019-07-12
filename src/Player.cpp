@@ -10,7 +10,7 @@ Player::Player(GameObject &associated) : Component::Component(associated),
                                          currentInfluence(INITIAL_INFLUENCE),
                                          maxInfluence(INITIAL_INFLUENCE),
                                          walkStep(PLAYER_LVL0_STEP),
-                                         jumpVelocity(PLAYER_LVL1_JUMP),
+                                         jumpVelocity(PLAYER_LVL0_JUMP),
                                          currentForm(BABY),
                                          applyWaterDamage(true)
 {
@@ -23,7 +23,8 @@ Player::Player(GameObject &associated) : Component::Component(associated),
 
 void Player::Update(float dt)
 {   
-    // Character *enemyCharPtr = (Character *)associated.GetComponent("Character").get();
+    Character *charPtr = (Character *)associated.GetComponent("Character").get();
+    std::cout << "charPtr->GetSpeed().y: " << charPtr->GetSpeed().y << std::endl;
     FlipPlayer();
     // std::cout << "Transformação: " << currentForm << std::endl;
     // std::cout << "Gravidade: " << enemyCharPtr->applyGravity << " Water: " << enemyCharPtr->applyWaterThrust << std::endl;

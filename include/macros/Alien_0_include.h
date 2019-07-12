@@ -5,7 +5,7 @@
 #define PLAYER_LVL0_SPRITES_TIME 0.16
 #define PLAYER_LVL0_SCALE SCENARIO_SCALE / 14
 #define PLAYER_LVL0_STEP 200
-#define PLAYER_LVL0_JUMP -800
+#define PLAYER_LVL0_JUMP -100
 #define PLAYER_INIT_POS \
     {                   \
         400, 300        \
