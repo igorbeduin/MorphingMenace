@@ -112,14 +112,14 @@ StageState::StageState()
 
     AddObject(gui);
 
-    //Creating minimap
-    // GameObject *minimap = new GameObject();
-    // std::shared_ptr<CameraFollower> minimapCamFollow(new CameraFollower(*minimap));
-    // minimap->AddComponent(minimapCamFollow);
-    // std::shared_ptr<Minimap> playerMINIMAP(new Minimap(*minimap));
-    // minimap->AddComponent(playerMINIMAP);
+    // Creating minimap
+    GameObject *minimap = new GameObject();
+    std::shared_ptr<CameraFollower> minimapCamFollow(new CameraFollower(*minimap));
+    minimap->AddComponent(minimapCamFollow);
+    std::shared_ptr<Minimap> playerMINIMAP(new Minimap(*minimap));
+    minimap->AddComponent(playerMINIMAP);
 
-    // AddObject(minimap);
+    AddObject(minimap);
 
     //Creating enemy 1
     Vec2 InitialPos[ENTO1_NUMB];
