@@ -35,6 +35,13 @@ void SoundTrack::Start()
     Water2.y = WATER2_Y;
     Water2.h = WATER2_H;
     Water2.w = WATER2_W;
+
+    BossLair.x = BOSS_LAIR_X;
+    BossLair.y = BOSS_LAIR_Y;
+    BossLair.h = BOSS_LAIR_H;
+    BossLair.w = BOSS_LAIR_W;
+
+    
 }
 
 void SoundTrack::Update(float dt)
@@ -73,6 +80,13 @@ void SoundTrack::Update(float dt)
         currentOpen = WATER2_LVL_0;
         Play(LVL0_WATER1_PATH);
     }
+    else if (BossLair.Contains(associated.box.GetCenter().x, associated.box.GetCenter().y) &&
+        currentOpen != BOSS_LAIR)
+    {
+        currentOpen = BOSS_LAIR;
+        Play(BOSS_LAIR_PATH);
+    }
+    
     
 }
 

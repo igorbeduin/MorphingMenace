@@ -105,8 +105,8 @@ enum character_state
     #define LAODING1_PATH "assets/img/tela.png"   
 
     //end
-    #define DEFEAT_PATH "assets/img/tela.png"
-    #define VICTORY_PATH "assets/img/tela.png"
+    #define DEFEAT_PATH "assets/img/derrota1.png"
+    #define VICTORY_PATH "assets/img/vitoria.png"
 
 
 
