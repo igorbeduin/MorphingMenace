@@ -94,7 +94,7 @@ StageState::StageState()
     player->AddComponent(playerCharacter);
     std::shared_ptr<SoundTrack>  playerSoundTrack(new SoundTrack(*player));
     player->AddComponent(playerSoundTrack);
-    std::shared_ptr<Collider> playerCollider(new Collider(*player));
+    std::shared_ptr<Collider> playerCollider(new Collider(*player, {0.8, 1}));
     player->AddComponent(playerCollider);
 
     Vec2 initPos = Vec2(PLAYER_INIT_POS);
@@ -125,7 +125,7 @@ StageState::StageState()
     GameObject *enemy1 = new GameObject();
     std::shared_ptr<Character> enemy1Character(new Character(*enemy1, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
     enemy1->AddComponent(enemy1Character);
-    std::shared_ptr<Collider> enemy1Collider(new Collider(*enemy1));
+    std::shared_ptr<Collider> enemy1Collider(new Collider(*enemy1, {ENTOKRATON_1_COLLIDER_SCALE_X, ENTOKRATON_1_COLLIDER_SCALE_Y}, {ENTOKRATON_1_COLLIDER_OFFSET_X, ENTOKRATON_1_COLLIDER_OFFSET_Y}));
     enemy1->AddComponent(enemy1Collider);
 
     initPos = Vec2(ENTOKRATON_1_INIT_POS);
@@ -138,7 +138,7 @@ StageState::StageState()
     GameObject *dead_enemy1 = new GameObject();
     std::shared_ptr<Character> dead_enemy1Character(new Character(*dead_enemy1, DEAD_HP, char_type::ENTOKRATON_1));
     dead_enemy1->AddComponent(dead_enemy1Character);
-    std::shared_ptr<Collider> dead_enemy1Collider(new Collider(*dead_enemy1));
+    std::shared_ptr<Collider> dead_enemy1Collider(new Collider(*dead_enemy1, {1, DEAD_1_COLLIDER_SCALE_Y}, {0, 60}));
     dead_enemy1->AddComponent(dead_enemy1Collider);
 
     initPos = Vec2(DEAD_ENTOKRATON_1_INIT_POS);
@@ -151,7 +151,7 @@ StageState::StageState()
     GameObject *enemy2 = new GameObject();
     std::shared_ptr<Character> enemy2Character(new Character(*enemy2, ENTOKRATON_2_HP, char_type::ENTOKRATON_2));
     enemy2->AddComponent(enemy2Character);
-    std::shared_ptr<Collider> enemy2Collider(new Collider(*enemy2, {ENTOKRATON_2_COLLISION_SCALE, ENTOKRATON_2_COLLISION_SCALE}));
+    std::shared_ptr<Collider> enemy2Collider(new Collider(*enemy2, {ENTOKRATON_2_COLLISION_SCALE -0.2, ENTOKRATON_2_COLLISION_SCALE -0.3}));
     enemy2->AddComponent(enemy2Collider);
 
     initPos = Vec2(ENTOKRATON_2_INIT_POS);
