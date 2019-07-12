@@ -111,6 +111,15 @@ StageState::StageState()
 
     AddObject(gui);
 
+    //Creating minimap
+    GameObject *minimap = new GameObject();
+    std::shared_ptr<CameraFollower> minimapCamFollow(new CameraFollower(*minimap));
+    minimap->AddComponent(minimapCamFollow);
+    std::shared_ptr<Minimap> playerMINIMAP(new Minimap(*minimap));
+    minimap->AddComponent(playerMINIMAP);
+
+    AddObject(minimap);
+
     //Creating enemy 1
     GameObject *enemy1 = new GameObject();
     std::shared_ptr<Character> enemy1Character(new Character(*enemy1, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
