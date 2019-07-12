@@ -62,6 +62,7 @@ enum character_state
     #include "Boss_Core.h"
     #include "Damage.h"
     #include "Window.h"
+    #include "WaterDamage.h"
 
 #endif
 

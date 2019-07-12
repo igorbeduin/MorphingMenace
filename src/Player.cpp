@@ -11,11 +11,14 @@ Player::Player(GameObject &associated) : Component::Component(associated),
                                          maxInfluence(INITIAL_INFLUENCE),
                                          walkStep(PLAYER_LVL0_STEP),
                                          jumpVelocity(PLAYER_LVL1_JUMP),
-                                         currentForm(BABY)
+                                         currentForm(BABY),
+                                         applyWaterDamage(true)
 {
     std::shared_ptr<Alien_0> alien_0(new Alien_0(associated));
     transformStack.push(alien_0);
     player = this;
+    std::shared_ptr<WaterDamage> waterDmgComponent(new WaterDamage(associated));
+    associated.AddComponent(waterDmgComponent);
 }
 
 void Player::Update(float dt)
@@ -135,6 +138,10 @@ void Player::LvlDown()
     currentForm = BABY;
     Character *enemyCharPtr = (Character *)associated.GetComponent("Character").get();
     enemyCharPtr->applyGravity = true;
+    if (applyWaterDamage != true)
+    {
+        applyWaterDamage = true;
+    }
 }
 
 void Player::NotifyCollision(GameObject &other)
@@ -206,6 +213,7 @@ void Player::Transform(char_type type, Vec2 enemy_position)
         walkStep = PLAYER_LVL2_STEP;
         jumpVelocity = PLAYER_LVL2_JUMP;
         LvlUp(Transformations::ENTOKRATON_2);
+        applyWaterDamage = false;
 
         break;
     }

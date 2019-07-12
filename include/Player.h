@@ -18,7 +18,7 @@ class Player : public Component
 public:
     enum Transformations {BABY, ENTOKRATON_1, ENTOKRATON_2};
     Transformations currentForm;
-    
+    bool applyWaterDamage;
     Player(GameObject &associated);
     void Update(float dt);
     void Render();
