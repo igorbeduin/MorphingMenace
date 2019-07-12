@@ -10,7 +10,7 @@
 
 #define BOSS_LAIR_X 3835
 #define BOSS_LAIR_Y 2685
-#define BOSS_LAIR_W 1275
+#define BOSS_LAIR_W 1000
 #define BOSS_LAIR_H 655
 
 #define WATER1_X 1370
