@@ -258,12 +258,22 @@ bool Character::IsFlipped()
 
 void Character::EnableFlip()
 {
-    flip = true;
+    Sprite *sprite = (Sprite *)associated.GetComponent("Sprite").get();
+    if (associated.GetComponent("Sprite").get()!= nullptr)
+    {
+        sprite->SetFlipH();
+    }    
+        flip = true;
 }
 
 void Character::DisableFlip()
 {
-    flip = false;
+    Sprite *sprite = (Sprite *)associated.GetComponent("Sprite").get();
+    if (associated.GetComponent("Sprite").get()!= nullptr)
+    {
+        sprite->UnSetFlipH();
+    }
+        flip = false;
 }
 
 void Character::ApplyDamage(int damage)

@@ -73,13 +73,19 @@ void Sprite::Render(int x, int y){// wrapper para a SDL_RenderCopy que possui qu
   dstrect.w = clipRect.w*scale.x;
   dstrect.h = clipRect.h*scale.y;
   int RenderError;
+    // SDL_RendererFlip flip = SDL_FLIP_NONE;
 
-  if (associated.GetComponent("Character").get() != nullptr)
+  // if (associated.GetComponent("Character").get() != nullptr)
+  if (associated.GetComponent("Player").get() != nullptr)
   {
     Character* temp = (Character*)associated.GetComponent("Character").get();
     if (temp->IsFlipped())
     {
       flip = SDL_FLIP_HORIZONTAL;
+    }
+    else
+    {
+      flip = SDL_FLIP_NONE;
     }
   }
   SDL_SetTextureBlendMode(texture.get(), blendMode);
@@ -251,4 +257,8 @@ void Sprite::SetBlendMode(SDL_BlendMode blendMode)
 void Sprite::SetFlipH()
 {
   flip = SDL_FLIP_HORIZONTAL;
+}
+void Sprite::UnSetFlipH()
+{
+  flip = SDL_FLIP_NONE;
 }
