@@ -184,7 +184,7 @@ void Alien_1::VerifyState()
 void Alien_1::UpdateAssocBox()
 {
     Collider* colliderPtr = (Collider*)associated.GetComponent("Collider").get();
-    colliderPtr->box.w = sprite->GetWidth();
+    colliderPtr->box.w = sprite->GetWidth()*0.7;
     colliderPtr->box.h = sprite->GetHeight();
 }
 void Alien_1::Play(std::string file)

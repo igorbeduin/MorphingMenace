@@ -156,7 +156,7 @@ void Alien_0::VerifyState()
 void Alien_0::UpdateAssocBox()
 {
     Collider* colliderPtr = (Collider*)associated.GetComponent("Collider").get();
-    colliderPtr->box.w = sprite->GetWidth();
+    colliderPtr->box.w = sprite->GetWidth()*BABY_COLLIDER_SCALE_X;
     colliderPtr->box.h = sprite->GetHeight();
     
     associated.box.w = sprite->GetWidth();
