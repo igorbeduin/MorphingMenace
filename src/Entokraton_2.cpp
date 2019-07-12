@@ -1,11 +1,14 @@
 #include "../include/Entokraton_2.h"
 #include "../include/Game.h"
+#include "../include/Window.h"
 
 Entokraton_2::Entokraton_2(GameObject &associated) : Component::Component(associated), state(RESTING)
 {
     std::shared_ptr<Sprite> charSprite(new Sprite(associated, ENTOKRATON_2_SPRITE_PATH, ENTOKRATON_2_SPRITES_NUMB, ENTOKRATON_2_SPRITES_TIME));
     charSprite->SetScale(ENTOKRATON_2_SCALE, ENTOKRATON_2_SCALE);
     associated.AddComponent(charSprite);
+    std::shared_ptr<Sound> sound(new Sound(associated));
+    associated.AddComponent(sound);
 
 }
 void Entokraton_2::Update(float dt)
@@ -77,6 +80,20 @@ void Entokraton_2::Update(float dt)
             state = RESTING;
             direction = -direction;
         }
+        if (enemySprite->GetCurrentFrame() == 0)
+        {
+            if (firstTime == false)
+            {
+                firstTime = true;
+                Play(ENTOKRATON_2_SWIM_SOUND);
+            }            
+        }
+        if (enemySprite->GetCurrentFrame() == 3)
+        {
+            firstTime = false;
+        }
+            
+        
         break;
 
     case DAMAGED:
@@ -148,4 +165,14 @@ void Entokraton_2::Easing()
         EasingCounter = 0;
     }
     EasingCounter += EASING_VARIATION;
+}
+void Entokraton_2::Play(std::string file)
+{
+    if (Window::window.Contains(associated.box.x, associated.box.y))
+    {
+        Sound* SoundEffect = (Sound *)associated.GetComponent("Sound").get();
+        SoundEffect->Open(file);
+        SoundEffect->Play();
+    }
+
 }

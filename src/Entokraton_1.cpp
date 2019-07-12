@@ -8,21 +8,25 @@ Entokraton_1::Entokraton_1(GameObject &associated) : Component::Component(associ
     charSprite->SetScale(ENTOKRATON_1_SCALE, ENTOKRATON_1_SCALE);
     associated.AddComponent(charSprite);
 
-    std::shared_ptr<Sound> idle1(new Sound(associated,ENTOKRATON_1_IDLE1_SOUND));
-    associated.AddComponent(idle1);
-    sounds.emplace_back(idle1);
+    // std::shared_ptr<Sound> idle1(new Sound(associated,ENTOKRATON_1_IDLE1_SOUND));
+    // associated.AddComponent(idle1);
+    // sounds.emplace_back(idle1);
 
-    std::shared_ptr<Sound> idle2(new Sound(associated, ENTOKRATON_1_IDLE2_SOUND));
-    associated.AddComponent(idle2);
-    sounds.emplace_back(idle2);
+    // std::shared_ptr<Sound> idle2(new Sound(associated, ENTOKRATON_1_IDLE2_SOUND));
+    // associated.AddComponent(idle2);
+    // sounds.emplace_back(idle2);
 
-    std::shared_ptr<Sound> walk1(new Sound(associated, ENTOKRATON_1_WALK1_SOUND));
-    associated.AddComponent(walk1);
-    sounds.emplace_back(walk1);
+    // std::shared_ptr<Sound> walk1(new Sound(associated, ENTOKRATON_1_WALK1_SOUND));
+    // associated.AddComponent(walk1);
+    // sounds.emplace_back(walk1);
 
-    std::shared_ptr<Sound> attack(new Sound(associated, ENTOKRATON_1_ATTACK_SOUND));
-    associated.AddComponent(attack);
-    sounds.emplace_back(attack);
+    // std::shared_ptr<Sound> attack(new Sound(associated, ENTOKRATON_1_ATTACK_SOUND));
+    // associated.AddComponent(attack);
+    // sounds.emplace_back(attack);
+
+    std::shared_ptr<Sound> sound(new Sound(associated));
+    associated.AddComponent(sound);
+    // sounds.emplace_back(attack);
 }
 void Entokraton_1::Update(float dt)
 {
@@ -32,8 +36,9 @@ void Entokraton_1::Update(float dt)
     if (enemyCharacter->GetCurrentHP() <= 0)
     {
         state = DYING;
+        std::cout << "aaaaaaaaa" << std::endl;
     }
-    if (enemyCharacter->GetLastHP() > enemyCharacter->GetCurrentHP())
+    if (enemyCharacter->GetLastHP() > enemyCharacter->GetCurrentHP() && state != DYING)
     {   
         enemyCharacter->SetLastHP(enemyCharacter->GetCurrentHP());
         state = DAMAGED;
@@ -53,7 +58,8 @@ void Entokraton_1::Update(float dt)
         if  (Character::playerChar != nullptr && 
                 ( abs( associated.box.GetCenter().x - Character::playerChar->GetPosition().x ) < ENTOKRATON_1_PERCEPTION )  && abs( associated.box.GetCenter().y - Character::playerChar->GetPosition().y) <  ENTOKRATON_1_PERCEPTION/2.5 )
         {   
-            sounds[0]->Play(1);                
+            // sounds[0]->Play(1);  
+            Play(ENTOKRATON_1_IDLE1_SOUND);              
             state = CHASING;
         }
         if (restTimer.Get() >= ENTOKRATON_1_COOLDOWN)
@@ -75,7 +81,8 @@ void Entokraton_1::Update(float dt)
                 distance = destination - associated.box.GetCenter();
                 enemyCharacter->DisableFlip();
             }
-            sounds[1]->Play(1);
+            // sounds[1]->Play(1);
+            Play(ENTOKRATON_1_IDLE2_SOUND);
             state = MOVING;
             
         }
@@ -97,12 +104,14 @@ void Entokraton_1::Update(float dt)
         
         if (enemySprite->GetCurrentFrame() == 13 && firstTime == false)
         {
-            sounds[2]->Play(1);
+            // sounds[2]->Play(1);
+            Play(ENTOKRATON_1_WALK1_SOUND);
             firstTime = true;
         }
         else if (enemySprite->GetCurrentFrame() == 15 && firstTime == false)
         {
-            sounds[2]->Play(1);
+            // sounds[2]->Play(1);
+            Play(ENTOKRATON_1_WALK1_SOUND);
             firstTime = true;
         }
          
@@ -115,7 +124,8 @@ void Entokraton_1::Update(float dt)
         if  (Character::playerChar != nullptr && 
                 ( abs( associated.box.GetCenter().x - Character::playerChar->GetPosition().x ) < ENTOKRATON_1_PERCEPTION )  && abs( associated.box.GetCenter().y - Character::playerChar->GetPosition().y) <  ENTOKRATON_1_PERCEPTION/2.5 )
         {                
-            sounds[0]->Play(1);
+            // sounds[0]->Play(1);
+            Play(ENTOKRATON_1_IDLE1_SOUND);              
             state = CHASING;
         }
         else if ( abs(distance.x) >= ENTOKRATON_1_STOP_RANGE  )
@@ -135,7 +145,8 @@ void Entokraton_1::Update(float dt)
         {
             restTimer.Restart();
             state = RESTING;
-            sounds[0]->Play(1);
+            // sounds[0]->Play(1);
+            Play(ENTOKRATON_1_IDLE1_SOUND);              
             direction = -direction;
         }
         
@@ -155,12 +166,14 @@ void Entokraton_1::Update(float dt)
 
         if (enemySprite->GetCurrentFrame() == 13 && firstTime == false)
         {
-            sounds[2]->Play(1);
+            // sounds[2]->Play(1);
+            Play(ENTOKRATON_1_WALK1_SOUND);
             firstTime = true;
         }
         else if (enemySprite->GetCurrentFrame() == 15 && firstTime == false)
         {
-            sounds[2]->Play(1);
+            Play(ENTOKRATON_1_WALK1_SOUND);
+            // sounds[2]->Play(1);
             firstTime = true;
         }
          
@@ -188,7 +201,8 @@ void Entokraton_1::Update(float dt)
         {
             // std::cout << "ROBSON FUGIU" << std::endl;
             state = RESTING;
-            sounds[1]->Play(1);
+            Play(ENTOKRATON_1_IDLE2_SOUND);
+            // sounds[1]->Play(1);
             direction = -direction;
         }
          else if ( abs(Character::playerChar->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/2 > ENTOKRATON_1_ATTACK_RANGE && (abs(distance.x) <= ENTOKRATON_1_PERCEPTION && abs(distance.y) <= ENTOKRATON_1_PERCEPTION/2.5) )
@@ -205,7 +219,7 @@ void Entokraton_1::Update(float dt)
         } else if (abs(Character::playerChar->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/2 <= ENTOKRATON_1_ATTACK_RANGE)
         {
             state = ATTACKING;
-            sounds[3]->Play(1);
+            // sounds[3]->Play(1);
         }
 
         break;
@@ -221,10 +235,16 @@ void Entokraton_1::Update(float dt)
         if (enemySprite->GetCurrentFrame() == 4)
         {
             Attack();
+            if (firstTime2 == false)
+            {
+                Play(ENTOKRATON_1_ATTACK_SOUND);
+                firstTime2 = true;
+            }
         }
         if (enemySprite->GetCurrentFrame() == 6)
         {
             state = RESTING;
+            firstTime2 = false;
         }
         break;
 
@@ -244,6 +264,7 @@ void Entokraton_1::Update(float dt)
             else if (Character::playerChar->GetPosition().x < associated.box.GetCenter().x && enemySprite->GetCurrentFrame() == ENTOKRATON_1_DAMAGED_END)
             {
                 associated.box.x += ENEMY_SPACE_PUSHED;
+                Play(ENTOKRATON_1_DAMAGED_SOUND);
             }            
 
             if (enemySprite->GetCurrentFrame() == ENTOKRATON_1_DAMAGED_END)
@@ -266,11 +287,12 @@ void Entokraton_1::Update(float dt)
             std::shared_ptr<Sprite> death_animation_sprite(new Sprite(*enemy_death, ENTOKRATON_1_SPRITE_PATH, ENTOKRATON_1_SPRITES_NUMB, ENTOKRATON_1_DIE_TIME, ENTOKRATON_1_DIE_TIME));
             death_animation_sprite->SetScale(ENTOKRATON_1_SCALE, ENTOKRATON_1_SCALE);
             enemy_death->AddComponent(death_animation_sprite);
-
+            std::cout << "cade animação de morte" << std::endl;
             death_animation_sprite->RunSpecificAnimation();
             death_animation_sprite->SetStartFrame(ENTOKRATON_1_DIE_START);
             death_animation_sprite->SetEndFrame(ENTOKRATON_1_DIE_END);
             death_animation_sprite->SetAnimationTime(ENTOKRATON_1_DIE_TIME);
+            Play(ENTOKRATON_1_DAMAGED_SOUND);
         }
 
         break;
@@ -312,4 +334,13 @@ void Entokraton_1::Attack()//verificar friendly fire
     attack->AddComponent(attackCollider);
     Game::GetInstance().GetCurrentState().AddObject(attack);
     // std::cout << "ATTACK" << std::endl;
+}
+void Entokraton_1::Play(std::string file)
+{
+    if (Window::window.Contains(associated.box.x, associated.box.y))
+    {
+        Sound* SoundEffect = (Sound *)associated.GetComponent("Sound").get();
+        SoundEffect->Open(file);
+        SoundEffect->Play();
+    }
 }

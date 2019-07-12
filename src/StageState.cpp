@@ -6,6 +6,7 @@
 #include "../include/GameData.h"
 #include "../include/Game.h"
 #include "../include/SoundTrack.h"
+#include "../include/Window.h"
 
 StageState::StageState()
 {   
@@ -195,6 +196,8 @@ void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carre
     Resources::AddSound(ENTOKRATON_1_IDLE2_SOUND);
     Resources::AddSound(ENTOKRATON_1_WALK1_SOUND);
     Resources::AddSound(ENTOKRATON_1_ATTACK_SOUND);
+    Resources::AddSound(ENTOKRATON_1_DAMAGED_SOUND);
+    Resources::AddSound(ENTOKRATON_2_SWIM_SOUND);
     ///////////////////////////////////////////////
     Resources::AddMusic(LVL0_OPEN_AREA_PATH);
     Resources::AddMusic(LVL1_OPEN_AREA_PATH);
@@ -204,6 +207,7 @@ void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carre
 void StageState::Update(float dt)
 {
     Camera::Update(dt);
+    Window::UpdateWindow();
     std::cout << InputManager::GetInstance().GetMouseX() - Camera::pos.x << "," << InputManager::GetInstance().GetMouseY() - Camera::pos.y << std::endl;
     Force::Update(dt);
     Game& game = Game::GetInstance();
@@ -313,6 +317,7 @@ void StageState::Start()
     GameData::playerVictory = false;
     Boss::defeated = false;
     StartArray();
+    Window::SetWindow();
 }
 
 void StageState::Pause()

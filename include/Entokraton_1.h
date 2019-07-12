@@ -19,8 +19,8 @@ private:
     Vec2 lastPosition;
     int direction = 1;// -1 = left, 1 = right 
 
-    std::vector< std::shared_ptr<Sound> > sounds;
     bool firstTime = false;
+    bool firstTime2 = false;
 
 public:
     Entokraton_1(GameObject &associated);
@@ -28,4 +28,5 @@ public:
     void Render();
     bool Is(std::string type);
     void Attack();
+    void Play(std::string file);
 };
