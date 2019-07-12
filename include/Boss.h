@@ -17,6 +17,7 @@ public:
     void Start();
     void Attack();
     std::vector< std::weak_ptr<GameObject> > coreArray;
+    static bool defeated;
 
     enum BossState{RESTING, ATTACKING};
     BossState state;

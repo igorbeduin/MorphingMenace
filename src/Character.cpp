@@ -301,7 +301,14 @@ bool Character::IsAbsorbable()
 {
     if (currentHP <= ABSORBABLE_PERC * maxHP)
     {
-        return true;
+        if (charType == BOSS)
+        {
+            return Boss::defeated ;
+        }
+        else
+        {
+            return true;
+        }
     }
     else
     {

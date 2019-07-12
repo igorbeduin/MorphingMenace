@@ -144,7 +144,7 @@ StageState::StageState()
     
     //Creating boss
     GameObject *boss = new GameObject();
-    std::shared_ptr<Character> bossCharacter(new Character(*boss, 100, char_type::BOSS));
+    std::shared_ptr<Character> bossCharacter(new Character(*boss, BOSS_HP, char_type::BOSS));
     boss->AddComponent(bossCharacter);
     std::shared_ptr<Collider> BOSSCollider(new Collider(*boss, BOSS_COLLIDER_SCALE, BOSS_COLLIDER_OFFSET ));
     boss->AddComponent(BOSSCollider);
@@ -194,7 +194,14 @@ void StageState::Update(float dt)
         GameData::playerVictory = false;
         EndState* endState = new EndState();
         game.Push(endState);
-    } 
+    }
+    if (Boss::defeated && GameData::playerVictory)
+    {
+        popRequested = true;
+        EndState* endState = new EndState();
+        game.Push(endState);
+    }
+    
     
     // Verify collisions
     std::vector<std::shared_ptr<GameObject>> objWithCollider;
@@ -283,6 +290,8 @@ void StageState::Start()
 {
     LoadAssets();
     // backgroundMusic.Play(-1);
+    GameData::playerVictory = false;
+    Boss::defeated = false;
     StartArray();
 }
 
