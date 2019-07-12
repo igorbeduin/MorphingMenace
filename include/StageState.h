@@ -11,6 +11,7 @@
 #include "State.h"
 #include "Music.h"
 #include "TileSet.h"
+#include "EndState.h"
 
 class StageState : public State {
 
