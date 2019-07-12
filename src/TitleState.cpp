@@ -18,7 +18,7 @@ TitleState::TitleState()
 
     std::shared_ptr<Sprite> title_sprite(new Sprite(*title, TITLE_PATH));
     std::shared_ptr<CameraFollower> CamFollow(new CameraFollower(*title));
-    title_sprite->SetScale(0.8,0.8);
+    title_sprite->SetScale(0.13,0.13);
     title->AddComponent(title_sprite);
     title->AddComponent(CamFollow);
 
@@ -70,12 +70,16 @@ void TitleState::Update(float dt)
         std::weak_ptr<GameObject> weak_loading = AddObject(loading_object);
         std::shared_ptr<GameObject> loading = weak_loading.lock();
 
-        loading->box.x = 500;
-        loading->box.y = 100;
+        loading->box.x = 0;
+        loading->box.y = -100;
 
-        std::shared_ptr<Sprite> loading_sprite(new Sprite(*loading, LOADING_PATH));
-        loading_sprite->SetScale(0.5, 0.5);
-        loading->AddComponent(loading_sprite);
+        std::shared_ptr<Sprite> loading_sprite1(new Sprite(*loading, LAODING1_PATH));
+        loading_sprite1->SetScale(1, 1);
+        loading->AddComponent(loading_sprite1);
+
+        // std::shared_ptr<Sprite> loading_sprite(new Sprite(*loading, LAODING1_PATH));
+        // loading_sprite->SetScale(0.8, 0.8);
+        // loading->AddComponent(loading_sprite);
         started = true;
     }
 
