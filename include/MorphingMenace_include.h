@@ -61,6 +61,7 @@ enum character_state
     #include "Boss.h"
     #include "Boss_Core.h"
     #include "Damage.h"
+    #include "Window.h"
 
 #endif
 
