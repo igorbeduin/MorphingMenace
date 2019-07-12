@@ -200,7 +200,6 @@ void Player::Transform(char_type type)
         jumpVelocity = PLAYER_LVL2_JUMP;
         LvlUp(Transformations::ENTOKRATON_2);
 
-        Character *enemyCharPtr = (Character *)associated.GetComponent("Character").get();
         break;
     }
     case BOSS:
@@ -217,6 +216,10 @@ void Player::Transform(char_type type)
     default:
         break;
     }
+
+    Character *playerCharPtr = (Character *)associated.GetComponent("Character").get();
+    playerCharPtr->SetSpeed(0,0);
+
 }
 
 void Player::EnteringState()
