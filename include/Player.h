@@ -47,7 +47,9 @@ public:
     void Joystick();
     void FollowingCamera();
     void UpdateVariables(float dt);
+    void FlipPlayer();
     Timer HatchTime;
+    bool hatching = false;
 
 private:
     character_state characterState;
