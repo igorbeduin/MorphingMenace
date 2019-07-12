@@ -1,6 +1,7 @@
 #define LVL0_OPEN_AREA_PATH "assets/audio/Tema A forma bebê testar loop.ogg"
 #define LVL1_OPEN_AREA_PATH "assets/audio/Tema A2 - Forma adulta 1° inimigo teste loop.ogg"
 #define LVL0_WATER1_PATH "assets/audio/tema caverna água A ( forma bebê) 30s.ogg"
+#define BOSS_LAIR_PATH "assets/audio/tema chefão.ogg"
 
 #define OPEN_AREA_X 0
 #define OPEN_AREA_Y 0
@@ -9,7 +10,7 @@
 
 #define BOSS_LAIR_X 3835
 #define BOSS_LAIR_Y 2685
-#define BOSS_LAIR_W 1275
+#define BOSS_LAIR_W 1000
 #define BOSS_LAIR_H 655
 
 #define WATER1_X 1370
@@ -22,7 +23,7 @@
 #define WATER2_W 2420
 #define WATER2_H 698
 
-#define UNDERDARK_X 
-#define UNDERDARK_Y 
-#define UNDERDARK_W 
-#define UNDERDARK_H 
+#define UNDERDARK_X 4664
+#define UNDERDARK_Y 2056
+#define UNDERDARK_W 964
+#define UNDERDARK_H 949
