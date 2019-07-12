@@ -5,6 +5,7 @@
 #include "../include/Force.h"
 #include "../include/GameData.h"
 #include "../include/Game.h"
+#include "../include/SoundTrack.h"
 
 std::vector<std::shared_ptr<GameObject>> StageState::oceanArray;
 
@@ -19,7 +20,7 @@ StageState::StageState()
     Environment::AddForce(waterThrust);
 
     // Opening background music
-    backgroundMusic.Open(STAGE_BG_MUSIC_PATH);
+    // backgroundMusic.Open(STAGE_BG_MUSIC_PATH);
 
 
     //Creating Stars background
@@ -81,6 +82,8 @@ StageState::StageState()
     GameObject* player = new GameObject();
     std::shared_ptr<Character> playerCharacter(new Character(*player, PLAYER_INITIAL_HP, char_type::PLAYER));
     player->AddComponent(playerCharacter);
+    std::shared_ptr<SoundTrack>  playerSoundTrack(new SoundTrack(*player));
+    player->AddComponent(playerSoundTrack);
     std::shared_ptr<Collider> playerCollider(new Collider(*player));
     player->AddComponent(playerCollider);
 
@@ -168,11 +171,15 @@ void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carre
     Resources::AddImage(GUI_BONE_DUST_PATH);
     Resources::AddImage(ACID_SPRITE_PATH);
     Resources::AddImage(BOSS_CORE_SPRITE_PATH);
-    ////////////////////////////////////////////
+    ///////////////////////////////////////////////
     Resources::AddSound(ENTOKRATON_1_IDLE1_SOUND);
     Resources::AddSound(ENTOKRATON_1_IDLE2_SOUND);
     Resources::AddSound(ENTOKRATON_1_WALK1_SOUND);
     Resources::AddSound(ENTOKRATON_1_ATTACK_SOUND);
+    ///////////////////////////////////////////////
+    Resources::AddMusic(LVL0_OPEN_AREA_PATH);
+    Resources::AddMusic(LVL1_OPEN_AREA_PATH);
+
 }
 
 void StageState::Update(float dt)
