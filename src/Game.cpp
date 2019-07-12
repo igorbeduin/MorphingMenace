@@ -168,11 +168,14 @@ void Game::Run(){//loop principal do jogo, será implementado em 4 etapas, poré
     }
     // std::cout << stateStack.size() << '\n';
     CalculateDeltaTime();
+    if (dt < (1.0 / FRAME_RATE))
+    {
+      SDL_Delay((1.0 / FRAME_RATE) - dt);
+    }
     input.Update();
     stateStack.top()->Update(dt);
     stateStack.top()->Render();
     SDL_RenderPresent(Game::GetInstance().GetRenderer());
-    //SDL_Delay(33);//impõe-se um limite de framerate, com um delay de 33ms, nos dará aproximadamente 30 FPS, (usado para não usar 100% di cpu já que é desnecessário)
   }
 
   while (!stateStack.empty()) {//se a pilha não estava vazia, pausa o estado do topo para inciar o novo (que estava guardado)
