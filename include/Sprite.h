@@ -55,6 +55,7 @@ class Sprite: public Component{//implementar update, is e render da classe mãe 
     void SetFrameCount(int frameCount);
     void SetFrameTime(float frameTime);
     void SetFlipH();
+    void UnSetFlipH();
     int GetCurrentFrame();
 
     void SetStartFrame(int startFrame);

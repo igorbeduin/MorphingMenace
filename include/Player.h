@@ -47,6 +47,7 @@ public:
     void Joystick();
     void FollowingCamera();
     void UpdateVariables(float dt);
+    void FlipPlayer();
     Timer HatchTime;
 
 private:

@@ -21,7 +21,7 @@ Player::Player(GameObject &associated) : Component::Component(associated),
 void Player::Update(float dt)
 {   
     // Character *enemyCharPtr = (Character *)associated.GetComponent("Character").get();
-
+    FlipPlayer();
     // std::cout << "Transformação: " << currentForm << std::endl;
     // std::cout << "Gravidade: " << enemyCharPtr->applyGravity << " Water: " << enemyCharPtr->applyWaterThrust << std::endl;
     IsDamaged();
@@ -242,6 +242,11 @@ void Player::Transform(char_type type, Vec2 enemy_position)
                 {
                     transf_sprite->SetFlipH();    
                 }
+                else
+                {
+                    transf_sprite->UnSetFlipH();
+                }
+                
                 HatchTime.Restart();                
                 transf->AddComponent(transf_sprite);
                 // transf->AddComponent(transf_sound);
@@ -407,4 +412,22 @@ void Player::FollowingCamera()
 void Player::UpdateVariables(float dt)
 {
     deltaTime = dt;
+}
+void Player::FlipPlayer()
+{
+    Character *playerCharPtr = (Character *)associated.GetComponent("Character").get();
+
+    std::cout << playerCharPtr->IsFlipped() << std::endl;
+    if (playerCharPtr->IsFlipped())
+    {
+        playerCharPtr->EnableFlip();
+    }
+    else
+    {
+        playerCharPtr->DisableFlip();
+    }
+    
+    
+
+
 }
