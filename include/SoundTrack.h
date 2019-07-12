@@ -21,9 +21,10 @@ private:
     Rect OpenArea;
     Rect UnderDark;
     Rect Water1;
+    Rect Water2;
     Rect BossLair;
 
-    enum Tracks {OPEN_AREA_LVL_0, OPEN_AREA_LVL_1, WATER1_LVL_0, NONE};
+    enum Tracks {OPEN_AREA_LVL_0, OPEN_AREA_LVL_1, WATER1_LVL_0, WATER2_LVL_0, NONE};
     Tracks currentOpen;
 public:
 

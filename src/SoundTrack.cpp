@@ -30,6 +30,11 @@ void SoundTrack::Start()
     Water1.y = WATER1_Y;
     Water1.h = WATER1_H;
     Water1.w = WATER1_W;
+
+    Water2.x = WATER2_X;
+    Water2.y = WATER2_Y;
+    Water2.h = WATER2_H;
+    Water2.w = WATER2_W;
 }
 
 void SoundTrack::Update(float dt)
@@ -58,6 +63,14 @@ void SoundTrack::Update(float dt)
     {
         // Stop();
         currentOpen = WATER1_LVL_0;
+        Play(LVL0_WATER1_PATH);
+    }
+    else if (Water2.Contains(associated.box.GetCenter().x, associated.box.GetCenter().y) &&
+        playerPtr->currentForm == Player::Transformations::BABY &&
+        currentOpen != WATER2_LVL_0)
+    {
+        // Stop();
+        currentOpen = WATER2_LVL_0;
         Play(LVL0_WATER1_PATH);
     }
     
