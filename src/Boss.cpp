@@ -1,7 +1,7 @@
 #include "../include/Boss.h"
 #include "../include/Player.h"
 #include "../include/Character.h"
-
+bool Boss::defeated = false;
 Boss::Boss(GameObject &associated) : Component::Component(associated),
                                      influenceReference((Character::playerChar->GetPosition() - associated.box.GetCenter()).Absolute()),
                                      state(RESTING)
@@ -65,11 +65,17 @@ void Boss::Update(float dt)
     {
         if (coreArray[i].expired())
         {
+            Character *bossCharPtr = (Character *)associated.GetComponent("Character").get();
+            bossCharPtr->ApplyDamage( (CORE_NUMBERS - (int)coreArray.size())/1.5 + 30);
             coreArray.erase(coreArray.begin() + i);
         }
-        
-
     }
+    if (coreArray.empty())
+    {
+        Boss::defeated = true;
+        std::cout << Boss::defeated << std::endl;
+    }
+    
     
 }
 void Boss::Render()
@@ -92,7 +98,7 @@ void Boss::Start()
     InitialAng[1] = BOSS_CORE_INIT_1_THETA;
     InitialAng[2] = BOSS_CORE_INIT_2_THETA;
 
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < CORE_NUMBERS; i++)
     {    
         GameObject *boss_core = new GameObject();
         std::weak_ptr<GameObject> weak_core = Game::GetInstance().GetCurrentState().AddObject(boss_core);
