@@ -100,8 +100,9 @@ enum character_state
     #define SCENARIO_COLLISION_RADIUS 500
 
     //title
-    #define TITLE_PATH "assets/img/tela.png"   
+    #define TITLE_PATH "assets/img/MENU INICIAL pt.png"   
     #define LOADING_PATH "assets/img/loading.png"
+    #define LAODING1_PATH "assets/img/tela.png"   
 
     //end
     #define DEFEAT_PATH "assets/img/tela.png"
