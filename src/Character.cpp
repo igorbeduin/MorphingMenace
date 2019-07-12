@@ -331,46 +331,33 @@ bool Character::VerifyOcean()
     if (charType == PLAYER)
     {
         Player *playerPtr = (Player *)associated.GetComponent("Player").get();
-        
-        for (int i = 0; i < (int)StageState::oceanArray.size(); i++)
+        if (Ocean::Contains(associated.box.GetCenter()))
         {
-            if (StageState::oceanArray[i].get() != nullptr)
+            if (playerPtr != nullptr  && playerPtr->currentForm == playerPtr->Transformations::ENTOKRATON_2)
             {
-                if (StageState::oceanArray[i]->box.Contains(associated.box.GetCenter().x, associated.box.GetCenter().y))
-                {
-                    if (playerPtr != nullptr  && playerPtr->currentForm == playerPtr->Transformations::ENTOKRATON_2)
-                    {
-                        applyWaterThrust = false;
-                        applyGravity = false;
-                        return true;
-                    }
-                    else if (playerPtr != nullptr  && playerPtr->currentForm != playerPtr->Transformations::ENTOKRATON_2)
-                    {
-                        applyWaterThrust = true;
-                        return true;
-                    }
-                }
-                else
-                {
-                    applyWaterThrust = false;
-                    applyGravity = true;
-                    return false;
-                }
+                applyWaterThrust = false;
+                applyGravity = false;
+                return true;
             }
+            else if (playerPtr != nullptr  && playerPtr->currentForm != playerPtr->Transformations::ENTOKRATON_2)
+            {
+                applyWaterThrust = true;
+                return true;
+            }
+        }
+        else
+        {
+            applyWaterThrust = false;
+            applyGravity = true;
+            return false;
         }
     } 
     else if (charType != ENTOKRATON_2)
     {
-        for (int i = 0; i < (int)StageState::oceanArray.size(); i++)
+        if (Ocean::Contains(associated.box.GetCenter()))
         {
-            if (StageState::oceanArray[i].get() != nullptr)
-            {
-                if (StageState::oceanArray[i]->box.Contains(associated.box.GetCenter().x, associated.box.GetCenter().y))
-                {
-                    applyWaterThrust = true;
-                    return applyWaterThrust;
-                }
-            }
+            applyWaterThrust = true;
+            return applyWaterThrust;
         }
     }
     applyWaterThrust = false;

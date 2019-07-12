@@ -128,4 +128,6 @@ enum character_state
     #include "Normal.h"
     #include "Character.h"
     #include "WaterThrust.h"
+    #include "Ocean.h"
+
 #endif
