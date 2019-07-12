@@ -22,6 +22,9 @@ public:
     void Attack();
     void VerifyState();
     void UpdateAssocBox();
+    void Play(std::string file);
+    bool firstTime1;
+    bool firstTime2;
 
 private:
     std::shared_ptr<Sprite> sprite;

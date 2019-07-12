@@ -30,3 +30,9 @@
 #define PLAYER_LVL1_DAMAGED_START 10
 #define PLAYER_LVL1_DAMAGED_END 11
 #define PLAYER_LVL1_DAMAGED_TIME 0.07
+
+#define LVL1_DAMAGE_SOUND "assets/audio/adulto/adulto - gafanhoto - dano.ogg"
+#define LVL1_WALK1_SOUND "assets/audio/adulto/adulto - gafanhoto - walk.ogg"
+#define LVL1_JUMP_SOUND "assets/audio/adulto/adulto - gafanhoto - jump.ogg"
+#define LVL1_ATTACK2_SOUND "assets/audio/adulto/adulto - gafanhoto - attack 2.ogg"
+#define LVL1_ATTACK1_SOUND "assets/audio/adulto/adulto - gafanhoto - attack 1.ogg"

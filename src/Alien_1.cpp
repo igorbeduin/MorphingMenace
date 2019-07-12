@@ -8,20 +8,70 @@ Alien_1::Alien_1(GameObject &associated) : Component::Component(associated),
 {
 
     sprite->SetScale(PLAYER_LVL1_SCALE, PLAYER_LVL1_SCALE);
+    std::shared_ptr<Sound> sound(new Sound(associated));
+    associated.AddComponent(sound);
+    
 }
 void Alien_1::Update(float dt)
 {   
-    VerifyState();
-    if (Player::player->GetCharacterState() == character_state::ATTACKING)
+    if (Player::player != nullptr)
     {
-        atkTimer.Update(dt);
-        if (atkTimer.Get() >= (PLAYER_LVL1_ATTACK_END - PLAYER_LVL1_ATTACK_START + 1) * PLAYER_LVL1_ATTACK_TIME)
+    /* code */
+
+        VerifyState();
+        if (Player::player->GetCharacterState() == character_state::ATTACKING)
         {
-            Player::player->SetCharacterState(character_state::IDLE);
-            atkTimer.Restart();
+            atkTimer.Update(dt);
+            if (atkTimer.Get() >= (PLAYER_LVL1_ATTACK_END - PLAYER_LVL1_ATTACK_START + 1) * PLAYER_LVL1_ATTACK_TIME)
+            {
+                Player::player->SetCharacterState(character_state::IDLE);
+                atkTimer.Restart();
+            }
         }
+        sprite->Update(dt);
+
+        if (sprite->GetCurrentFrame() == 3 && Player::player->GetCharacterState() == WALKING)
+        {
+            if(firstTime1 == false)
+            {
+                Play(LVL1_WALK1_SOUND);
+                firstTime1 = true;
+                firstTime2 = false;
+            }
+        }
+        if (sprite->GetCurrentFrame() == 5 && Player::player->GetCharacterState() == WALKING)
+        {
+            if (firstTime2 == false)
+            {
+                Play(LVL1_WALK1_SOUND);
+                firstTime2 = true;
+                firstTime1 = false;
+            }
+        }
+        if (sprite->GetCurrentFrame() == 6 && Player::player->GetCharacterState() == ATTACKING)
+        {
+            if(firstTime1 == false)
+            {
+                Play(LVL1_ATTACK1_SOUND);
+                firstTime1 = true;
+                firstTime2 = false;
+            }
+        }
+        if (sprite->GetCurrentFrame() == 8 && Player::player->GetCharacterState() == ATTACKING)
+        {
+            if (firstTime2 == false)
+            {
+                Play(LVL1_ATTACK1_SOUND);
+                firstTime2 = true;
+                firstTime1 = false;
+            }
+        }
+        if (sprite->GetCurrentFrame() == 11)
+        {
+            Play(LVL1_DAMAGE_SOUND);
+        }
+
     }
-    sprite->Update(dt);
 }
 void Alien_1::Render()
 {
@@ -136,4 +186,10 @@ void Alien_1::UpdateAssocBox()
     Collider* colliderPtr = (Collider*)associated.GetComponent("Collider").get();
     colliderPtr->box.w = sprite->GetWidth();
     colliderPtr->box.h = sprite->GetHeight();
+}
+void Alien_1::Play(std::string file)
+{
+    Sound* SoundEffect = (Sound *)associated.GetComponent("Sound").get();
+    SoundEffect->Open(file);
+    SoundEffect->Play();
 }
