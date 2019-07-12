@@ -1,9 +1,10 @@
 #include "../include/Player.h"
 #include "../include/InputManager.h"
 #include "../include/Camera.h"
+#include "../include/GameData.h"
+#include "../include/Boss.h"
 
 Player *Player::player = nullptr;
-
 Player::Player(GameObject &associated) : Component::Component(associated),
                                          lvl(0),
                                          currentInfluence(INITIAL_INFLUENCE),
@@ -144,9 +145,13 @@ void Player::NotifyCollision(GameObject &other)
             if (enemyCharPtr->IsAbsorbable())
             {
                 Transform(enemyCharPtr->Type());
-                associated.box.x = other.box.x;
-                associated.box.y = other.box.y;
+                if (enemyCharPtr->Type() != char_type::BOSS)
+                {
+                    associated.box.x = other.box.x;
+                    associated.box.y = other.box.y;
+                }
                 enemyCharPtr->Die();
+                std::cout << "absorveu" << std::endl;
             }
         }
     }
@@ -196,6 +201,16 @@ void Player::Transform(char_type type)
         LvlUp(Transformations::ENTOKRATON_2);
 
         Character *enemyCharPtr = (Character *)associated.GetComponent("Character").get();
+        break;
+    }
+    case BOSS:
+    {
+        if (Boss::defeated)
+        {
+            std::cout << "pode fazer a tela de vitória" << std::endl;
+            GameData::playerVictory = true;
+        }
+        
         break;
     }
 
