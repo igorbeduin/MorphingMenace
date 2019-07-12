@@ -5,6 +5,7 @@
 #include "Sprite.h"
 #include "Sound.h"
 #include "macros/Boss_include.h"
+#include "Game.h"
 
 class Boss : public Component
 {

@@ -383,3 +383,8 @@ void Character::DisableScenarioCollision()
 {
     scenarioCollision = false;
 }
+
+void Character::RecoverLife()
+{
+    currentHP = maxHP;
+}

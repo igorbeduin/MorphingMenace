@@ -8,7 +8,7 @@
     }
 #define ENTO1_NUMB 2
 #define ENTO1_INIT_POS_0 {1150, 900}
-#define ENTO1_INIT_POS_1 {1707, 987}
+#define ENTO1_INIT_POS_1 {1707, 900}
 
 #define DEAD1_NUMB 6
 #define DEAD1_INIT_POS_0 {500, 850}

@@ -41,6 +41,8 @@ public:
     bool VerifyOcean();
     void EnableScenarioCollision();
     void DisableScenarioCollision();
+    void RecoverLife();
+    void RecoverMana();
 
     static Character* playerChar;
     Rect box;

@@ -394,6 +394,10 @@ void Player::Joystick()
                 Swim((-1)*walkStep);
             }            
         }
+        if (InputManager::GetInstance().IsKeyDown(Z_KEY))
+        {
+            characterPtr->RecoverLife();
+        }
         if (InputManager::GetInstance().IsKeyDown(S_KEY) && currentForm == Transformations::ENTOKRATON_2)
         {
             if (characterPtr->VerifyOcean())

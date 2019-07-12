@@ -1,7 +1,6 @@
 #include "../include/Boss.h"
 #include "../include/Player.h"
 #include "../include/Character.h"
-#include "../include/Game.h"
 bool Boss::defeated = false;
 Boss::Boss(GameObject &associated) : Component::Component(associated),
                                      influenceReference((Character::playerChar->GetPosition() - associated.box.GetCenter()).Absolute()),
@@ -93,11 +92,9 @@ void Boss::Start()
 
     InitialPos[0] = Vec2(BOSS_CORE_INIT_POS_0); 
     InitialPos[1] = Vec2(BOSS_CORE_INIT_POS_1); 
-    InitialPos[2] = Vec2(BOSS_CORE_INIT_POS_2); 
 
     InitialAng[0] = BOSS_CORE_INIT_0_THETA;
     InitialAng[1] = BOSS_CORE_INIT_1_THETA;
-    InitialAng[2] = BOSS_CORE_INIT_2_THETA;
 
     for (int i = 0; i < CORE_NUMBERS; i++)
     {    

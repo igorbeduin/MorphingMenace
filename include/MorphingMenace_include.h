@@ -10,7 +10,7 @@
 #define MAXIMUM_Y_SPEED_WATER 100
 #define FALLING_SPEED 5
 #define PLAYER_INITIAL_HP 100
-#define INITIAL_INFLUENCE 10000
+#define INITIAL_INFLUENCE 1000000
 #define ABSORBABLE_PERC 0.8
 #define SCENARIO_SCALE 1.0
 #define CHARACTER_GLOW_PATH "assets/img/efx/char_glow.png"
@@ -115,7 +115,7 @@ enum character_state
 /************************************************
 *					Environment					*
 *************************************************/
-#define GRAVITY_ACCELERATION_Y 10
+#define GRAVITY_ACCELERATION_Y 5
 #define GRAVITY_ACCELERATION_X 0
 #define GRAVITY_ACCELERATION {GRAVITY_ACCELERATION_X, GRAVITY_ACCELERATION_Y}
 #define NORMAL_ACCELERATION_Y -1 * GRAVITY_ACCELERATION_Y

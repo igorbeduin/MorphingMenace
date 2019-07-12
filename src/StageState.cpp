@@ -66,6 +66,7 @@ StageState::StageState()
     ocean1_sprite->SetScale(OCEAN1_BACKGROUND_SCALE, OCEAN1_BACKGROUND_SCALE);
     ocean.AddOcean(ocean1);
 
+    /*
     //Creating ocean2
     GameObject *ocean2_object = new GameObject();
     std::weak_ptr<GameObject> weak_ocean2 = AddObject(ocean2_object);
@@ -77,6 +78,7 @@ StageState::StageState()
     ocean2->AddComponent(ocean2_sprite);
     ocean2_sprite->SetScale(OCEAN2_BACKGROUND_SCALE, OCEAN2_BACKGROUND_SCALE);
     ocean.AddOcean(ocean2);
+     */
 
 
     //Creating TileSet and TileMap
