@@ -36,7 +36,7 @@ public:
     void LvlDown();
     static Player* player;
     void NotifyCollision(GameObject &other);
-    void Transform(char_type type);
+    void Transform(char_type type, Vec2 enemy_position);
     void EnteringState();
     void ExitingState();
     int GetCurrentInfluence();
@@ -47,6 +47,7 @@ public:
     void Joystick();
     void FollowingCamera();
     void UpdateVariables(float dt);
+    Timer HatchTime;
 
 private:
     character_state characterState;

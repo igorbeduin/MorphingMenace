@@ -90,12 +90,10 @@ void Entokraton_2::Update(float dt)
             if (Character::playerChar->GetPosition().x > associated.box.GetCenter().x && enemySprite->GetCurrentFrame() == ENTOKRATON_2_DAMAGED_END)
             {
                 associated.box.x -= ENEMY_SPACE_PUSHED;
-                std::cout << "ai porra" << std::endl;
             }
             else if (Character::playerChar->GetPosition().x < associated.box.GetCenter().x && enemySprite->GetCurrentFrame() == ENTOKRATON_2_DAMAGED_END)
             {
                 associated.box.x += ENEMY_SPACE_PUSHED;
-                std::cout << "ai porra" << std::endl;
             }            
 
             if (enemySprite->GetCurrentFrame() == ENTOKRATON_2_DAMAGED_END)

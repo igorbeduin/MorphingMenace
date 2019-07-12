@@ -74,8 +74,6 @@ void Sprite::Render(int x, int y){// wrapper para a SDL_RenderCopy que possui qu
   dstrect.h = clipRect.h*scale.y;
   int RenderError;
 
-  SDL_RendererFlip flip = SDL_FLIP_NONE;
-
   if (associated.GetComponent("Character").get() != nullptr)
   {
     Character* temp = (Character*)associated.GetComponent("Character").get();
@@ -249,4 +247,8 @@ void Sprite::RunSpecificAnimation()
 void Sprite::SetBlendMode(SDL_BlendMode blendMode)
 {
   this->blendMode = blendMode;
+}
+void Sprite::SetFlipH()
+{
+  flip = SDL_FLIP_HORIZONTAL;
 }

@@ -169,6 +169,7 @@ void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carre
     Resources::AddImage(GUI_BONE_DUST_PATH);
     Resources::AddImage(ACID_SPRITE_PATH);
     Resources::AddImage(BOSS_CORE_SPRITE_PATH);
+    Resources::AddImage(TRANSFORMATION_PATH);
     ///////////////////////////////////////////////
     Resources::AddSound(ENTOKRATON_1_IDLE1_SOUND);
     Resources::AddSound(ENTOKRATON_1_IDLE2_SOUND);

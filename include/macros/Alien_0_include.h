@@ -40,3 +40,8 @@
 #define PLAYER_LVL0_DAMAGED_END 18
 #define PLAYER_LVL0_DAMAGED_TIME 0.08
 // #define SPACE_PUSHED 15
+
+#define TRANSFORMATION_PATH "assets/img/char/transformation_animation.png"
+#define TRANSFORMATION_NUMB 6
+#define TRANSFORMATION_TIME 0.2
+#define TRANSFORMATION_SCALE 0.18
