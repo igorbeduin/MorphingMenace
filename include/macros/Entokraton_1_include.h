@@ -6,6 +6,17 @@
     {                         \
         600, 300              \
     }
+#define ENTO1_NUMB 2
+#define ENTO1_INIT_POS_0 {1150, 900}
+#define ENTO1_INIT_POS_1 {1707, 987}
+
+#define DEAD1_NUMB 2
+#define DEAD1_INIT_POS_0 {500, 850}
+#define DEAD1_INIT_POS_1 {2225, 762}
+// #define BOSS_CORE_INIT_POS_2 {4350, 3180}
+// #define BOSS_CORE_INIT_POS_3 {4350, 3180}
+
+
 
 #define ENTOKRATON_1_IDLE_START 7
 #define ENTOKRATON_1_IDLE_END 8
@@ -27,7 +38,7 @@
 #define ENTOKRATON_1_DAMAGED_END 9
 #define ENTOKRATON_1_DAMAGED_TIME 0.8
 
-#define ENTOKRATON_1_HP 100
+#define ENTOKRATON_1_HP 30
 #define ENTOKRATON_1_IDLE1_SOUND "assets/audio/alien1/alien 1 - idle 1.ogg"
 #define ENTOKRATON_1_IDLE2_SOUND "assets/audio/alien1/alien 1 - idle 2.ogg"
 #define ENTOKRATON_1_WALK1_SOUND "assets/audio/alien1/alien 1 - andar.ogg"
@@ -42,7 +53,7 @@
 #define ENTOKRATON_1_ATTACK_WIDTH 30
 #define ENTOKRATON_1_ATTACK_HEIGHT 80
 #define ENTOKRATON_1_ATTACK_TIME 0.05
-#define ENTOKRATON_1_ATTACK_DAMAGE 5
+#define ENTOKRATON_1_ATTACK_DAMAGE 2.5
 #define WALK_RANGE 200
 #define STOP_RANGE 5
 

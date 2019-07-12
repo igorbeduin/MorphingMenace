@@ -122,30 +122,50 @@ StageState::StageState()
     // AddObject(minimap);
 
     //Creating enemy 1
-    GameObject *enemy1 = new GameObject();
-    std::shared_ptr<Character> enemy1Character(new Character(*enemy1, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
-    enemy1->AddComponent(enemy1Character);
-    std::shared_ptr<Collider> enemy1Collider(new Collider(*enemy1, {ENTOKRATON_1_COLLIDER_SCALE_X, ENTOKRATON_1_COLLIDER_SCALE_Y}, {ENTOKRATON_1_COLLIDER_OFFSET_X, ENTOKRATON_1_COLLIDER_OFFSET_Y}));
-    enemy1->AddComponent(enemy1Collider);
+    Vec2 InitialPos[ENTO1_NUMB];
 
-    initPos = Vec2(ENTOKRATON_1_INIT_POS);
-    enemy1->box.x = initPos.x;
-    enemy1->box.y = initPos.y;
+    InitialPos[0] = Vec2(ENTO1_INIT_POS_0); 
+    InitialPos[1] = Vec2(ENTO1_INIT_POS_1); 
+    // InitialPos[2] = Vec2(ENTO1_INIT_POS_2);     
+    // initPos = Vec2(ENTOKRATON_1_INIT_POS);
+    for (int i = 0; i < ENTO1_NUMB; i++)
+    {
+        /* code */
+    
+        GameObject *enemy1 = new GameObject();
+        std::shared_ptr<Character> enemy1Character(new Character(*enemy1, ENTOKRATON_1_HP, char_type::ENTOKRATON_1));
+        enemy1->AddComponent(enemy1Character);
+        std::shared_ptr<Collider> enemy1Collider(new Collider(*enemy1, {ENTOKRATON_1_COLLIDER_SCALE_X, ENTOKRATON_1_COLLIDER_SCALE_Y}, {ENTOKRATON_1_COLLIDER_OFFSET_X, ENTOKRATON_1_COLLIDER_OFFSET_Y}));
+        enemy1->AddComponent(enemy1Collider);
 
-    AddObject(enemy1);
+        enemy1->box.x = InitialPos[i].x;
+        enemy1->box.y = InitialPos[i].y;
+
+        AddObject(enemy1);
+    }
 
     //Creating Dead enemy 1
-    GameObject *dead_enemy1 = new GameObject();
-    std::shared_ptr<Character> dead_enemy1Character(new Character(*dead_enemy1, DEAD_HP, char_type::ENTOKRATON_1));
-    dead_enemy1->AddComponent(dead_enemy1Character);
-    std::shared_ptr<Collider> dead_enemy1Collider(new Collider(*dead_enemy1, {1, DEAD_1_COLLIDER_SCALE_Y}, {0, 60}));
-    dead_enemy1->AddComponent(dead_enemy1Collider);
+    Vec2 InitialPos_dead[DEAD1_NUMB];
 
-    initPos = Vec2(DEAD_ENTOKRATON_1_INIT_POS);
-    dead_enemy1->box.x = initPos.x;
-    dead_enemy1->box.y = initPos.y;
+    InitialPos_dead[0] = Vec2(DEAD1_INIT_POS_0); 
+    InitialPos_dead[1] = Vec2(DEAD1_INIT_POS_1); 
+    // InitialPos[2] = Vec2(DEAD1_INIT_POS_2);     
+    // initPos = Vec2(ENTOKRATON_1_INIT_POS);
+    for (int i = 0; i < DEAD1_NUMB; i++)
+    {
 
-    AddObject(dead_enemy1);
+        GameObject *dead_enemy1 = new GameObject();
+        std::shared_ptr<Character> dead_enemy1Character(new Character(*dead_enemy1, DEAD_HP, char_type::ENTOKRATON_1));
+        dead_enemy1->AddComponent(dead_enemy1Character);
+        std::shared_ptr<Collider> dead_enemy1Collider(new Collider(*dead_enemy1, {1, DEAD_1_COLLIDER_SCALE_Y}, {0, 60}));
+        dead_enemy1->AddComponent(dead_enemy1Collider);
+
+        // initPos = Vec2(DEAD_ENTOKRATON_1_INIT_POS);
+        dead_enemy1->box.x = InitialPos_dead[i].x;
+        dead_enemy1->box.y = InitialPos_dead[i].y;
+
+        AddObject(dead_enemy1);
+    }
 
     //Creating enemy 2
     GameObject *enemy2 = new GameObject();
@@ -216,7 +236,8 @@ void StageState::Update(float dt)
 {
     Camera::Update(dt);
     Window::UpdateWindow();
-    std::cout << InputManager::GetInstance().GetMouseX() - Camera::pos.x << "," << InputManager::GetInstance().GetMouseY() - Camera::pos.y << std::endl;
+    // std::cout << InputManager::GetInstance().GetMouseX() - Camera::pos.x << "," << InputManager::GetInstance().GetMouseY() - Camera::pos.y << std::endl;
+    std::cout << dt << std::endl;
     Force::Update(dt);
     Game& game = Game::GetInstance();
     //END_GAME CONDITIONS
