@@ -35,5 +35,7 @@
 
 #define EASING_AMPLITUDE 10
 #define EASING_LIMIT 2
-#define EASING_VARIATION 0.05
+#define EASING_VARIATION 0.01
 #define MAX_COS 1
+
+#define ENTOKRATON_2_SWIM_SOUND "assets/audio/alien2/alien 2 - nadar.ogg"

@@ -19,7 +19,6 @@ private:
     Vec2 lastPosition;
     int direction = 1;// -1 = left, 1 = right 
 
-    std::vector< std::shared_ptr<Sound> > sounds;
     bool firstTime = false;
     float EasingCounter;
     float DCEasing;
@@ -30,4 +29,5 @@ public:
     void Update(float dt);
     void Render();
     bool Is(std::string type);
+    void Play(std::string file);
 };
