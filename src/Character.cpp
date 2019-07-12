@@ -50,6 +50,7 @@ Character::Character(GameObject &associated, int maxHP, char_type charType) : Co
     {
         std::shared_ptr<Entokraton_2> enemyBehav(new Entokraton_2(associated));
         associated.AddComponent(enemyBehav);
+        currentHP = 1;
         break;
     }
     case BOSS:
