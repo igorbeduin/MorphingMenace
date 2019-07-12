@@ -36,6 +36,8 @@ void Player::Update(float dt)
     EnteringState();
     ExitingState();
     FollowingCamera();
+    if (HatchTime.Get() < TRANSFORMATION_NUMB*TRANSFORMATION_TIME)
+        HatchTime.Update(dt);
 }
 
 void Player::SetCharacterState(character_state state)
@@ -50,8 +52,12 @@ character_state Player::GetCharacterState()
 
 void Player::Render()
 {
-    Transformation *currentTransf = (Transformation *)transformStack.top().get();
-    currentTransf->Render();
+    if (HatchTime.Get() >= TRANSFORMATION_TIME*(TRANSFORMATION_NUMB-1) - 0.1)
+    {
+        Transformation *currentTransf = (Transformation *)transformStack.top().get();
+        currentTransf->Render();
+    }
+    
 }
 
 bool Player::Is(std::string type)
@@ -144,14 +150,14 @@ void Player::NotifyCollision(GameObject &other)
         {
             if (enemyCharPtr->IsAbsorbable())
             {
-                Transform(enemyCharPtr->Type());
+                Transform(enemyCharPtr->Type(), {other.box.x, other.box.y});
                 if (enemyCharPtr->Type() != char_type::BOSS)
                 {
                     associated.box.x = other.box.x;
                     associated.box.y = other.box.y;
                 }
                 enemyCharPtr->Die();
-                std::cout << "absorveu" << std::endl;
+
             }
         }
     }
@@ -177,7 +183,7 @@ void Player::NotifyCollision(GameObject &other)
     }
 }
 
-void Player::Transform(char_type type)
+void Player::Transform(char_type type, Vec2 enemy_position)
 {
     switch (type)
     {
@@ -200,14 +206,13 @@ void Player::Transform(char_type type)
         jumpVelocity = PLAYER_LVL2_JUMP;
         LvlUp(Transformations::ENTOKRATON_2);
 
-        Character *enemyCharPtr = (Character *)associated.GetComponent("Character").get();
         break;
     }
     case BOSS:
     {
         if (Boss::defeated)
         {
-            std::cout << "pode fazer a tela de vitória" << std::endl;
+            // std::cout << "pode fazer a tela de vitória" << std::endl;
             GameData::playerVictory = true;
         }
         
@@ -217,6 +222,31 @@ void Player::Transform(char_type type)
     default:
         break;
     }
+
+                    // std::cout << "absorveu" << std::endl;
+                Character *playerCharPtr = (Character *)associated.GetComponent("Character").get();
+                playerCharPtr->SetSpeed(0,0);
+
+                GameObject *transf_object = new GameObject();
+                std::weak_ptr<GameObject> weak_transf =  Game::GetInstance().GetCurrentState().AddObject(transf_object);//
+                std::shared_ptr<GameObject> transf = weak_transf.lock();
+
+                std::shared_ptr<Sprite> transf_sprite(new Sprite(*transf, TRANSFORMATION_PATH, TRANSFORMATION_NUMB, TRANSFORMATION_TIME, TRANSFORMATION_NUMB*TRANSFORMATION_TIME));
+                // std::shared_ptr<Sound> transf_sound(new Sound(*transf, PENGUIN_DEATH_SOUND));
+
+                transf->box.x  = enemy_position.x;
+                transf->box.y  = enemy_position.y;
+                transf_sprite->SetScale(TRANSFORMATION_SCALE, TRANSFORMATION_SCALE);
+
+                if (playerCharPtr->IsFlipped())
+                {
+                    transf_sprite->SetFlipH();    
+                }
+                HatchTime.Restart();                
+                transf->AddComponent(transf_sprite);
+                // transf->AddComponent(transf_sound);
+                // transf_sound->Play(1);
+
 }
 
 void Player::EnteringState()
