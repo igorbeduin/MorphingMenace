@@ -121,7 +121,7 @@ void Boss::Attack()
 {
     if (Character::playerChar != nullptr)
     {
-        if (coreArray.size() > 1) 
+        if (coreArray.size() >= 1) 
         {
             BossCore *core = (BossCore *)coreArray[0].lock()->GetComponent("BossCore").get();           
             core->Shoot(Character::playerChar->GetPosition());
