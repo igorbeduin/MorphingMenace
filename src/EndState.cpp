@@ -1,6 +1,7 @@
 #include "../include/EndState.h"
 #include "../include/GameData.h"
 #include "../include/InputManager.h"
+#include "../include/Game.h"
 
 EndState::EndState()
 {

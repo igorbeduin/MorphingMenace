@@ -1,5 +1,6 @@
 #include "../include/Transformation.h"
 #include "../include/Player.h"
+#include "../include/Game.h"
 
 void Transformation::Downgrade()
 {}

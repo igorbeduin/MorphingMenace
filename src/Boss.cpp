@@ -1,6 +1,7 @@
 #include "../include/Boss.h"
 #include "../include/Player.h"
 #include "../include/Character.h"
+#include "../include/Game.h"
 bool Boss::defeated = false;
 Boss::Boss(GameObject &associated) : Component::Component(associated),
                                      influenceReference((Character::playerChar->GetPosition() - associated.box.GetCenter()).Absolute()),

@@ -3,6 +3,7 @@
 #include "../include/Camera.h"
 #include "../include/GameData.h"
 #include "../include/Boss.h"
+#include "../include/Game.h"
 
 Player *Player::player = nullptr;
 Player::Player(GameObject &associated) : Component::Component(associated),

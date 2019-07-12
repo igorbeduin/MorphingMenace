@@ -1,4 +1,5 @@
 #include "../include/Boss_Core.h"
+#include "../include/Game.h"
 
 BossCore::BossCore(GameObject &associated):Component(associated)
 {
