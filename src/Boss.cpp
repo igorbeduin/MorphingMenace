@@ -66,7 +66,7 @@ void Boss::Update(float dt)
         if (coreArray[i].expired())
         {
             Character *bossCharPtr = (Character *)associated.GetComponent("Character").get();
-            bossCharPtr->ApplyDamage( (CORE_NUMBERS - (int)coreArray.size())/1.5 + 30);
+            bossCharPtr->ApplyDamage( (CORE_NUMBERS - (int)coreArray.size())/1.5);
             coreArray.erase(coreArray.begin() + i);
         }
     }
