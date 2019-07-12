@@ -113,13 +113,13 @@ StageState::StageState()
     AddObject(gui);
 
     //Creating minimap
-    GameObject *minimap = new GameObject();
-    std::shared_ptr<CameraFollower> minimapCamFollow(new CameraFollower(*minimap));
-    minimap->AddComponent(minimapCamFollow);
-    std::shared_ptr<Minimap> playerMINIMAP(new Minimap(*minimap));
-    minimap->AddComponent(playerMINIMAP);
+    // GameObject *minimap = new GameObject();
+    // std::shared_ptr<CameraFollower> minimapCamFollow(new CameraFollower(*minimap));
+    // minimap->AddComponent(minimapCamFollow);
+    // std::shared_ptr<Minimap> playerMINIMAP(new Minimap(*minimap));
+    // minimap->AddComponent(playerMINIMAP);
 
-    AddObject(minimap);
+    // AddObject(minimap);
 
     //Creating enemy 1
     GameObject *enemy1 = new GameObject();
@@ -198,6 +198,14 @@ void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carre
     Resources::AddSound(ENTOKRATON_1_ATTACK_SOUND);
     Resources::AddSound(ENTOKRATON_1_DAMAGED_SOUND);
     Resources::AddSound(ENTOKRATON_2_SWIM_SOUND);
+    Resources::AddSound(BABY_DAMAGE_SOUND);
+    Resources::AddSound(BABY_WALK1_SOUND);
+    Resources::AddSound(BABY_WALK2_SOUND);
+    Resources::AddSound(LVL1_WALK1_SOUND);
+    Resources::AddSound(LVL1_ATTACK1_SOUND);
+    Resources::AddSound(LVL1_ATTACK2_SOUND);
+    Resources::AddSound(LVL1_DAMAGE_SOUND);
+    Resources::AddSound(LVL1_JUMP_SOUND);
     ///////////////////////////////////////////////
     Resources::AddMusic(LVL0_OPEN_AREA_PATH);
     Resources::AddMusic(LVL1_OPEN_AREA_PATH);

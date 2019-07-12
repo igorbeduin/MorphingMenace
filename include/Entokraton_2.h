@@ -30,4 +30,5 @@ public:
     void Render();
     bool Is(std::string type);
     void Play(std::string file);
+    void Start();
 };

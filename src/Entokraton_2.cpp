@@ -176,3 +176,12 @@ void Entokraton_2::Play(std::string file)
     }
 
 }
+void Entokraton_2::Start()
+{
+    Character *enemyCharacter = (Character *)associated.GetComponent("Character").get();
+    if (associated.GetComponent("Character").get() != nullptr)
+    {
+        enemyCharacter->ApplyDamage(20);
+    }
+    
+}
