@@ -114,7 +114,7 @@ enum character_state
 /************************************************
 *					Environment					*
 *************************************************/
-#define GRAVITY_ACCELERATION_Y 3
+#define GRAVITY_ACCELERATION_Y 10
 #define GRAVITY_ACCELERATION_X 0
 #define GRAVITY_ACCELERATION {GRAVITY_ACCELERATION_X, GRAVITY_ACCELERATION_Y}
 #define NORMAL_ACCELERATION_Y -1 * GRAVITY_ACCELERATION_Y
