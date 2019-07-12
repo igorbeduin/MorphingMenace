@@ -7,6 +7,7 @@
 #include "Engine_include.h"
 
 #include "GUI.h"
+#include "Minimap.h"
 #include "Collider.h"
 #include "State.h"
 #include "Music.h"
