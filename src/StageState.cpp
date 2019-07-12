@@ -7,8 +7,6 @@
 #include "../include/Game.h"
 #include "../include/SoundTrack.h"
 
-std::vector<std::shared_ptr<GameObject>> StageState::oceanArray;
-
 StageState::StageState()
 {   
     // Creating gravity
@@ -54,7 +52,7 @@ StageState::StageState()
     std::shared_ptr<Sprite> ocean1_sprite(new Sprite(*ocean1, OCEAN1_BACKGROUND_PATH));
     ocean1->AddComponent(ocean1_sprite);
     ocean1_sprite->SetScale(OCEAN1_BACKGROUND_SCALE, OCEAN1_BACKGROUND_SCALE);
-    oceanArray.push_back(ocean1);
+    ocean.AddOcean(ocean1);
 
     //Creating ocean2
     GameObject *ocean2_object = new GameObject();
@@ -66,7 +64,7 @@ StageState::StageState()
     std::shared_ptr<Sprite> ocean2_sprite(new Sprite(*ocean2, OCEAN2_BACKGROUND_PATH));
     ocean2->AddComponent(ocean2_sprite);
     ocean2_sprite->SetScale(OCEAN2_BACKGROUND_SCALE, OCEAN2_BACKGROUND_SCALE);
-    oceanArray.push_back(ocean2);
+    ocean.AddOcean(ocean2);
 
     //Creating TileSet and TileMap
     GameObject *tile_object = new GameObject();
