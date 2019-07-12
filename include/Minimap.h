@@ -14,6 +14,6 @@ public:
     bool Is(std::string type);
 private:
     std::shared_ptr<Sprite> map;
-    std::shared_ptr<Sprite> dot;
+    // std::shared_ptr<Sprite> dot;
     std::shared_ptr<Sprite> border;
 };

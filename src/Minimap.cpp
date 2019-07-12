@@ -4,13 +4,13 @@
 
 Minimap::Minimap(GameObject &associated) : Component::Component(associated),
                                            map(new Sprite(associated, MINIMAP_SPRITE_PATH)),
-                                           dot(new Sprite(associated, MINIMAP_DOT_PATH)),
                                            border(new Sprite(associated, MINIMAP_BORDER_PATH))
+                                           // dot(new Sprite(associated, MINIMAP_DOT_PATH)),
 {
     map->SetScale(MINIMAP_SCALE, MINIMAP_SCALE);
     map->SetBlendMode(SDL_BLENDMODE_MOD);
-    dot->SetScale(MINIMAP_DOT_SCALE, MINIMAP_DOT_SCALE);
-    dot->SetBlendMode(SDL_BLENDMODE_BLEND);
+    // dot->SetScale(MINIMAP_DOT_SCALE, MINIMAP_DOT_SCALE);
+    // dot->SetBlendMode(SDL_BLENDMODE_BLEND);
     border->SetScale(MINIMAP_SCALE, MINIMAP_SCALE);
 }
 
@@ -43,8 +43,8 @@ void Minimap::Update(float dt)
 void Minimap::Render()
 {
     map->Render();
-    dot->Render((Character::playerChar->GetPosition().x + Camera::pos.x) * MINIMAP_SCALE + DOT_OFFSET_X,
-                (Character::playerChar->GetPosition().y + Camera::pos.y) * MINIMAP_SCALE + DOT_OFFSET_Y);
+    // dot->Render((Character::playerChar->GetPosition().x + Camera::pos.x) * MINIMAP_SCALE + DOT_OFFSET_X,
+    //             (Character::playerChar->GetPosition().y + Camera::pos.y) * MINIMAP_SCALE + DOT_OFFSET_Y);
     border->Render();
 }
 
