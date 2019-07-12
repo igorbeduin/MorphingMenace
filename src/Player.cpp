@@ -10,7 +10,7 @@ Player::Player(GameObject &associated) : Component::Component(associated),
                                          currentInfluence(INITIAL_INFLUENCE),
                                          maxInfluence(INITIAL_INFLUENCE),
                                          walkStep(PLAYER_LVL0_STEP),
-                                         jumpVelocity(PLAYER_LVL1_JUMP),
+                                         jumpVelocity(PLAYER_LVL0_JUMP),
                                          currentForm(BABY),
                                          applyWaterDamage(true)
 {
