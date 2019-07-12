@@ -1,4 +1,4 @@
-#define LVL0_OPEN_AREA_PATH "assets/audio/Tema A forma bebê testar loop.ogg"
+#define LVL0_OPEN_AREA_PATH "assets/audio/Tema A forma bebê testar loop.ogg"
 #define LVL1_OPEN_AREA_PATH "assets/audio/Tema A2 - Forma adulta 1° inimigo teste loop.ogg"
 #define LVL0_WATER1_PATH "assets/audio/background_demo1.ogg"
 
