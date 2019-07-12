@@ -8,7 +8,7 @@
 #define PLAYER_LVL0_JUMP -800
 #define PLAYER_INIT_POS \
     {                   \
-        400, 300        \
+        300, 1000        \
     }
 #define PLAYER_LVL0_ATTACK_WIDTH 100
 #define PLAYER_LVL0_ATTACK_HEIGHT 20
