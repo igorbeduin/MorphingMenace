@@ -12,7 +12,7 @@
 #define PLAYER_INITIAL_HP 100
 #define INITIAL_INFLUENCE 10000
 #define ABSORBABLE_PERC 0.8
-#define SCENARIO_SCALE 1
+#define SCENARIO_SCALE 1.0
 #define CHARACTER_GLOW_PATH "assets/img/efx/char_glow.png"
 #define SPACE_PUSHED 25
 #define ENEMY_SPACE_PUSHED 65

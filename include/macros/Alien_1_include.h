@@ -1,4 +1,4 @@
-#define SCENARIO_SCALE 1.1
+#define SCENARIO_SCALE 1.0
 
 #define PLAYER_LVL1_SPRITE_PATH "assets/img/char/adulto.png"
 #define PLAYER_LVL1_SPRITES_NUMB 17

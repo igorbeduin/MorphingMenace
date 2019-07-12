@@ -1,4 +1,4 @@
-#define SCENARIO_SCALE 1.1
+#define SCENARIO_SCALE 1.0
 
 #define PLAYER_LVL2_SPRITE_PATH "assets/img/char/aquatico.png"
 #define PLAYER_LVL2_SPRITES_NUMB 6

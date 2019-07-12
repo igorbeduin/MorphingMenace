@@ -1,4 +1,4 @@
-#define SCENARIO_SCALE 1.1
+#define SCENARIO_SCALE 1.0
 
 #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/baby.png"
 #define PLAYER_LVL0_SPRITES_NUMB 22
