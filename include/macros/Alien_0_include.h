@@ -50,3 +50,8 @@
 #define BABY_DAMAGE_SOUND "assets/audio/baby/baby - dano.ogg"
 #define BABY_WALK1_SOUND "assets/audio/baby/baby - walk subindo.ogg"
 #define BABY_WALK2_SOUND "assets/audio/baby/baby - walk descendo.ogg"
+
+#define BABY_COLLIDER_SCALE_X 0.7
+#define BABY_COLLIDER_SCALE_Y 1
+#define BABY_COLLIDER_OFFSET_X 0
+#define BABY_COLLIDER_OFFSET_Y 0
