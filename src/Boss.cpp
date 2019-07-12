@@ -73,7 +73,7 @@ void Boss::Update(float dt)
     if (coreArray.empty())
     {
         Boss::defeated = true;
-        std::cout << Boss::defeated << std::endl;
+        // std::cout << Boss::defeated << std::endl;
     }
     
     
