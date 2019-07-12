@@ -45,3 +45,8 @@
 #define TRANSFORMATION_NUMB 6
 #define TRANSFORMATION_TIME 0.2
 #define TRANSFORMATION_SCALE 0.18
+
+#define BABY_DEATH_SOUND "assets/audio/baby/baby - death.ogg"
+#define BABY_DAMAGE_SOUND "assets/audio/baby/baby - dano.ogg"
+#define BABY_WALK1_SOUND "assets/audio/baby/baby - walk subindo.ogg"
+#define BABY_WALK2_SOUND "assets/audio/baby/baby - walk descendo.ogg"

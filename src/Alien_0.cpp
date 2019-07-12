@@ -7,11 +7,23 @@ Alien_0::Alien_0(GameObject &associated) : Component::Component(associated),
                                            sprite(new Sprite(associated, PLAYER_LVL0_SPRITE_PATH, PLAYER_LVL0_SPRITES_NUMB, PLAYER_LVL0_SPRITES_TIME))
 {   
     sprite->SetScale(PLAYER_LVL0_SCALE, PLAYER_LVL0_SCALE);
+    std::shared_ptr<Sound> sound(new Sound(associated));
+    associated.AddComponent(sound);
 }
 void Alien_0::Update(float dt)
 {
     VerifyState();
     sprite->Update(dt);
+
+
+    if (sprite->GetCurrentFrame() == 6 && Player::player->GetCharacterState() == WALKING)
+    {
+        Play(BABY_WALK1_SOUND);
+    }
+    if (sprite->GetCurrentFrame() == 11 && Player::player->GetCharacterState() == WALKING)
+    {
+        Play(BABY_WALK2_SOUND);
+    }
 }
 void Alien_0::Render()
 {
@@ -104,22 +116,16 @@ void Alien_0::VerifyState()
             sprite->SetStartFrame(PLAYER_LVL0_DAMAGED_START);
             sprite->SetEndFrame(PLAYER_LVL0_DAMAGED_END);
             sprite->SetAnimationTime(PLAYER_LVL0_DAMAGED_TIME);
+            
+            if (sprite->GetCurrentFrame() == PLAYER_LVL0_DAMAGED_START)
+            {
+                Play(BABY_DAMAGE_SOUND);
+            }
 
             if (sprite->GetCurrentFrame() == PLAYER_LVL0_DAMAGED_END)
             {
                 Player::player->SetCharacterState(character_state::IDLE);
             }
-            // else if (sprite->GetCurrentFrame() == PLAYER_LVL0_DAMAGED_MIDDLE)//trocar lógica do empurro pra notify collision do inimigo?
-            // {
-            //     if (Character::playerChar->IsFlipped())
-            //     {
-            //         associated.box.x += SPACE_PUSHED;
-            //     }
-            //     else
-            //     {
-            //         associated.box.x -= SPACE_PUSHED;
-            //     }
-            // }
             
             break;
         }
@@ -145,4 +151,14 @@ void Alien_0::UpdateAssocBox()
     associated.box.w = sprite->GetWidth();
     associated.box.h = sprite->GetHeight();
     
+}
+
+void Alien_0::Play(std::string file)
+{
+    if (Window::window.Contains(associated.box.x, associated.box.y))
+    {
+        Sound* SoundEffect = (Sound *)associated.GetComponent("Sound").get();
+        SoundEffect->Open(file);
+        SoundEffect->Play();
+    }
 }
