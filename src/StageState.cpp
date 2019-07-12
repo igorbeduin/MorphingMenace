@@ -44,6 +44,16 @@ StageState::StageState()
     planet_sprite->SetScale(PLANET_BACKGROUND_SCALE, PLANET_BACKGROUND_SCALE);
 
 
+    //Creating ground
+    GameObject *ground_object = new GameObject();
+    std::weak_ptr<GameObject> weak_ground = AddObject(ground_object);
+    std::shared_ptr<GameObject> ground = weak_ground.lock();
+    ground->box.x = -385;
+    ground->box.y = 318;
+    std::shared_ptr<Sprite> ground_sprite(new Sprite(*ground, GROUND_BACKGROUND_PATH));
+    ground->AddComponent(ground_sprite);
+    ground_sprite->SetScale(GROUND_BACKGROUND_SCALE, GROUND_BACKGROUND_SCALE);
+    
     //Creating ocean1
     GameObject *ocean1_object = new GameObject();
     std::weak_ptr<GameObject> weak_ocean1 = AddObject(ocean1_object);
@@ -68,15 +78,6 @@ StageState::StageState()
     ocean2_sprite->SetScale(OCEAN2_BACKGROUND_SCALE, OCEAN2_BACKGROUND_SCALE);
     ocean.AddOcean(ocean2);
 
-    //Creating ground
-    GameObject *ground_object = new GameObject();
-    std::weak_ptr<GameObject> weak_ground = AddObject(ground_object);
-    std::shared_ptr<GameObject> ground = weak_ground.lock();
-    ground->box.x = -385;
-    ground->box.y = 318;
-    std::shared_ptr<Sprite> ground_sprite(new Sprite(*ground, GROUND_BACKGROUND_PATH));
-    ground->AddComponent(ground_sprite);
-    ground_sprite->SetScale(GROUND_BACKGROUND_SCALE, GROUND_BACKGROUND_SCALE);
 
     //Creating TileSet and TileMap
     GameObject *tile_object = new GameObject();
