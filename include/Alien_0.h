@@ -7,6 +7,7 @@
 #include "Component.h"
 #include "Transformation.h"
 #include "Sprite.h"
+#include "Sound.h"
 #include "macros/Alien_0_include.h"
 
 class Sprite;
@@ -22,6 +23,10 @@ public:
     void Absorb();
     void VerifyState();
     void UpdateAssocBox();
+    void Play(std::string file);
+    bool firstTime;
+    bool firstTime1;
+    bool firstTime2;
 
 private:
     std::shared_ptr<Sprite> sprite;
