@@ -19,7 +19,7 @@ public:
   Music(std::string file);
   ~Music();
 
-  void Play(int times = -1);
+  void Play(int times = -1, float ms = 2000);
   void Stop(int msToStop = 1500);
   void Open(std::string file);
   bool IsOpen();
