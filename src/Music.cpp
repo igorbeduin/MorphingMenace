@@ -10,9 +10,9 @@ Music::Music(std::string file){//seta music como nullptr e em seguida chama Open
   Open(file);
 }
 
-void Music::Play(int times){//executa a música (times) vezes, times = -1 indica para tocar a música infinitamente
+void Music::Play(int times, float ms){//executa a música (times) vezes, times = -1 indica para tocar a música infinitamente
   if (music != nullptr){
-    if (Mix_PlayMusic(music.get(), times) == -1) {//exxecuta a música, mas se o retorno for -1, há um erro
+    if (Mix_FadeInMusic(music.get(), times, ms) == -1) {//exxecuta a música, mas se o retorno for -1, há um erro
       std::cout << "Can't play music file: " << SDL_GetError()  << std::endl;
     }
   }
