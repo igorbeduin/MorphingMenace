@@ -31,11 +31,13 @@ TileSet::TileSet(GameObject& associated, int tileWidth, int tileHeight, std::str
 }/////////////////////////lista de inicialização?
 
 void TileSet::RenderTile(unsigned index, float x, float y){
-
+  /*
   if(  (index < (unsigned)(columns*rows)) ){
     tileSet.SetClip((index%columns)*GetTileWidth(), (index/(columns))*GetTileHeight(), GetTileWidth(), GetTileHeight());//verificar conta
     tileSet.Render(x, y);
   }
+   */
+   
 
   if (createMapColliders == true)
   {

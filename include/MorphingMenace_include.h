@@ -12,7 +12,7 @@
 #define PLAYER_INITIAL_HP 100
 #define INITIAL_INFLUENCE 10000
 #define ABSORBABLE_PERC 0.8
-#define SCENARIO_SCALE 1.1
+#define SCENARIO_SCALE 1
 #define CHARACTER_GLOW_PATH "assets/img/efx/char_glow.png"
 #define SPACE_PUSHED 25
 #define ENEMY_SPACE_PUSHED 65
@@ -76,6 +76,9 @@ enum character_state
     //stage
     #define PLANET_BACKGROUND_PATH "assets/img/BG01.png"
     #define PLANET_BACKGROUND_SCALE SCENARIO_SCALE
+
+     #define GROUND_BACKGROUND_PATH "assets/img/ground.png"
+    #define GROUND_BACKGROUND_SCALE SCENARIO_SCALE
 
     #define STARS_BACKGROUND_PATH "assets/img/StarsBackground.jpg"
 

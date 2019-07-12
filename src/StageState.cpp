@@ -25,8 +25,8 @@ StageState::StageState()
     GameObject *stars_object = new GameObject();
     std::weak_ptr<GameObject> weak_stars =  AddObject(stars_object);
     std::shared_ptr<GameObject> stars = weak_stars.lock();
-    stars->box.y = 0;
     stars->box.x = 0;
+    stars->box.y = 0;
     std::shared_ptr<Sprite> stars_sprite(new Sprite(*stars, STARS_BACKGROUND_PATH));
     std::shared_ptr<CameraFollower> CamFollow(new CameraFollower(*stars));
     stars->AddComponent(stars_sprite);
@@ -36,11 +36,12 @@ StageState::StageState()
     GameObject *planet_object = new GameObject();
     std::weak_ptr<GameObject> weak_planet =  AddObject(planet_object);
     std::shared_ptr<GameObject> planet = weak_planet.lock();
-    planet->box.y = 0;
     planet->box.x = 0;
+    planet->box.y = 0;
     std::shared_ptr<Sprite> planet_sprite(new Sprite(*planet, PLANET_BACKGROUND_PATH));
     planet->AddComponent(planet_sprite);
     planet_sprite->SetScale(PLANET_BACKGROUND_SCALE, PLANET_BACKGROUND_SCALE);
+
 
     //Creating ocean1
     GameObject *ocean1_object = new GameObject();
@@ -65,6 +66,16 @@ StageState::StageState()
     ocean2->AddComponent(ocean2_sprite);
     ocean2_sprite->SetScale(OCEAN2_BACKGROUND_SCALE, OCEAN2_BACKGROUND_SCALE);
     ocean.AddOcean(ocean2);
+
+    //Creating ground
+    GameObject *ground_object = new GameObject();
+    std::weak_ptr<GameObject> weak_ground = AddObject(ground_object);
+    std::shared_ptr<GameObject> ground = weak_ground.lock();
+    ground->box.x = -423;
+    ground->box.y = 351;
+    std::shared_ptr<Sprite> ground_sprite(new Sprite(*ground, GROUND_BACKGROUND_PATH));
+    ground->AddComponent(ground_sprite);
+    ground_sprite->SetScale(GROUND_BACKGROUND_SCALE, GROUND_BACKGROUND_SCALE);
 
     //Creating TileSet and TileMap
     GameObject *tile_object = new GameObject();
@@ -183,6 +194,7 @@ void StageState::LoadAssets()//sempre que tiver uma imagem/som/texto novo, carre
 void StageState::Update(float dt)
 {
     Camera::Update(dt);
+    std::cout << InputManager::GetInstance().GetMouseX() - Camera::pos.x << "," << InputManager::GetInstance().GetMouseY() - Camera::pos.y << std::endl;
     Force::Update(dt);
     Game& game = Game::GetInstance();
     //END_GAME CONDITIONS
