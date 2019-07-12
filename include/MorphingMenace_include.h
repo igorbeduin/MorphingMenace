@@ -100,12 +100,12 @@ enum character_state
     #define SCENARIO_COLLISION_RADIUS 500
 
     //title
-    #define TITLE_PATH "assets/img/temporary_title.jpg"   
-    #define LOADING_PATH "assets/img/temporary_loading.png"
+    #define TITLE_PATH "assets/img/tela.png"   
+    #define LOADING_PATH "assets/img/loading.png"
 
     //end
-    #define DEFEAT_PATH "assets/img/temporary_lose.jpg"
-    #define VICTORY_PATH "assets/img/temporary_win.jpg"
+    #define DEFEAT_PATH "assets/img/tela.png"
+    #define VICTORY_PATH "assets/img/tela.png"
 
 
 
