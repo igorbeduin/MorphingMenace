@@ -18,11 +18,22 @@ void Alien_0::Update(float dt)
 
     if (sprite->GetCurrentFrame() == 6 && Player::player->GetCharacterState() == WALKING)
     {
-        Play(BABY_WALK1_SOUND);
+        if (firstTime1 == false)
+        {
+            Play(BABY_WALK1_SOUND);
+            firstTime1 = true;
+            firstTime2 = false;
+        }
+        
     }
     if (sprite->GetCurrentFrame() == 11 && Player::player->GetCharacterState() == WALKING)
     {
-        Play(BABY_WALK2_SOUND);
+        if (firstTime2 == false)
+        {
+            Play(BABY_WALK2_SOUND);
+            firstTime2 = true;
+            firstTime1 = false;
+        }
     }
 }
 void Alien_0::Render()
