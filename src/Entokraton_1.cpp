@@ -205,7 +205,7 @@ void Entokraton_1::Update(float dt)
             // sounds[1]->Play(1);
             direction = -direction;
         }
-         else if ( abs(Character::playerChar->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/2 > ENTOKRATON_1_ATTACK_RANGE && (abs(distance.x) <= ENTOKRATON_1_PERCEPTION && abs(distance.y) <= ENTOKRATON_1_PERCEPTION/2.5) )
+         else if ( abs(Character::playerChar->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/4 > ENTOKRATON_1_ATTACK_RANGE && (abs(distance.x) <= ENTOKRATON_1_PERCEPTION && abs(distance.y) <= ENTOKRATON_1_PERCEPTION/2.5) )
         {
             // std::cout << "volta aqui" << std::endl;
             float movement = direction * ENTOKRATON_1_STEP * dt;
@@ -216,7 +216,7 @@ void Entokraton_1::Update(float dt)
                 distance.x = destination.x - associated.box.x;
             }
 
-        } else if (abs(Character::playerChar->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/2 <= ENTOKRATON_1_ATTACK_RANGE)
+        } else if (abs(Character::playerChar->GetPosition().x - associated.box.GetCenter().x ) - associated.box.w/4 <= ENTOKRATON_1_ATTACK_RANGE)
         {
             state = ATTACKING;
             // sounds[3]->Play(1);
