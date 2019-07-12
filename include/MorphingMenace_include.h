@@ -85,11 +85,11 @@ enum character_state
     #define STARS_BACKGROUND_PATH "assets/img/StarsBackground.jpg"
 
     #define OCEAN1_BACKGROUND_PATH "assets/img/agua1.png"
-    #define OCEAN1_BACKGROUND_SCALE SCENARIO_SCALE
-    #define OCEAN1_INITIAL_POS {1370, 1300}
+    #define OCEAN1_BACKGROUND_SCALE SCENARIO_SCALE 
+    #define OCEAN1_INITIAL_POS {1110, 1165}
     #define OCEAN2_BACKGROUND_PATH "assets/img/agua2.png"
     #define OCEAN2_BACKGROUND_SCALE SCENARIO_SCALE * 2
-    #define OCEAN2_INITIAL_POS {3900, 1332}
+    #define OCEAN2_INITIAL_POS {3700, 1280}
 
     #define TILESET_PATH "assets/img/tileset.png"
     #define TILEMAP_PATH "assets/map/tileMap.txt"
@@ -114,7 +114,7 @@ enum character_state
 /************************************************
 *					Environment					*
 *************************************************/
-#define GRAVITY_ACCELERATION_Y 3
+#define GRAVITY_ACCELERATION_Y 10
 #define GRAVITY_ACCELERATION_X 0
 #define GRAVITY_ACCELERATION {GRAVITY_ACCELERATION_X, GRAVITY_ACCELERATION_Y}
 #define NORMAL_ACCELERATION_Y -1 * GRAVITY_ACCELERATION_Y
