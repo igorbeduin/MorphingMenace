@@ -168,17 +168,27 @@ StageState::StageState()
     }
 
     //Creating enemy 2
-    GameObject *enemy2 = new GameObject();
-    std::shared_ptr<Character> enemy2Character(new Character(*enemy2, ENTOKRATON_2_HP, char_type::ENTOKRATON_2));
-    enemy2->AddComponent(enemy2Character);
-    std::shared_ptr<Collider> enemy2Collider(new Collider(*enemy2, {ENTOKRATON_2_COLLISION_SCALE -0.2, ENTOKRATON_2_COLLISION_SCALE -0.3}));
-    enemy2->AddComponent(enemy2Collider);
 
-    initPos = Vec2(ENTOKRATON_2_INIT_POS);
-    enemy2->box.x = initPos.x;
-    enemy2->box.y = initPos.y;
+    Vec2 InitialPos_ento2[ENTO2_NUMB];
 
-    AddObject(enemy2);
+    InitialPos_ento2[0] = Vec2(ENTO2_INIT_POS_0); 
+    InitialPos_ento2[1] = Vec2(ENTO2_INIT_POS_1); 
+    InitialPos_ento2[2] = Vec2(ENTO2_INIT_POS_2); 
+
+    for (int i = 0; i < ENTO2_NUMB; i++)
+    {
+        GameObject *enemy2 = new GameObject();
+        std::shared_ptr<Character> enemy2Character(new Character(*enemy2, ENTOKRATON_2_HP, char_type::ENTOKRATON_2));
+        enemy2->AddComponent(enemy2Character);
+        std::shared_ptr<Collider> enemy2Collider(new Collider(*enemy2, {ENTOKRATON_2_COLLISION_SCALE -0.2, ENTOKRATON_2_COLLISION_SCALE -0.3}));
+        enemy2->AddComponent(enemy2Collider);
+
+        // initPos = Vec2(ENTOKRATON_2_INIT_POS);
+        enemy2->box.x = InitialPos_ento2[i].x;
+        enemy2->box.y = InitialPos_ento2[i].y;
+
+        AddObject(enemy2);
+    }
 
     
     //Creating boss
@@ -236,8 +246,8 @@ void StageState::Update(float dt)
 {
     Camera::Update(dt);
     Window::UpdateWindow();
-    // std::cout << InputManager::GetInstance().GetMouseX() - Camera::pos.x << "," << InputManager::GetInstance().GetMouseY() - Camera::pos.y << std::endl;
-    std::cout << dt << std::endl;
+    std::cout << InputManager::GetInstance().GetMouseX() - Camera::pos.x << "," << InputManager::GetInstance().GetMouseY() - Camera::pos.y << std::endl;
+    // std::cout << dt << std::endl;
     Force::Update(dt);
     Game& game = Game::GetInstance();
     //END_GAME CONDITIONS

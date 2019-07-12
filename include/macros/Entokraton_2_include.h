@@ -8,6 +8,14 @@
         2860, 1305             \
     }
 
+
+#define ENTO2_NUMB 3
+#define ENTO2_INIT_POS_0 {2662, 1338}
+#define ENTO2_INIT_POS_1 {1789, 1544}
+#define ENTO2_INIT_POS_2 {4899, 1338}
+// # define ENTO2_INIT_POS_0 {2860. 1350}
+// # define ENTO2_INIT_POS_0 {2860. 1350}
+
 #define ENTOKRATON_2_IDLE_START 3
 #define ENTOKRATON_2_IDLE_END 3
 #define ENTOKRATON_2_IDLE_TIME 0.1

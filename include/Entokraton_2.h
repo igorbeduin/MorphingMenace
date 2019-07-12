@@ -21,7 +21,6 @@ private:
 
     bool firstTime = false;
     float EasingCounter;
-    float DCEasing;
     void Easing();
 
 public:
@@ -31,4 +30,5 @@ public:
     bool Is(std::string type);
     void Play(std::string file);
     void Start();
+    float DCEasing;
 };

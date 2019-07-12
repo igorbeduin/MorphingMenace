@@ -9,6 +9,7 @@ Entokraton_2::Entokraton_2(GameObject &associated) : Component::Component(associ
     associated.AddComponent(charSprite);
     std::shared_ptr<Sound> sound(new Sound(associated));
     associated.AddComponent(sound);
+    DCEasing = associated.box.y;
 
 }
 void Entokraton_2::Update(float dt)
