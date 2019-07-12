@@ -148,9 +148,12 @@ StageState::StageState()
     Vec2 InitialPos_dead[DEAD1_NUMB];
 
     InitialPos_dead[0] = Vec2(DEAD1_INIT_POS_0); 
-    InitialPos_dead[1] = Vec2(DEAD1_INIT_POS_1); 
-    // InitialPos[2] = Vec2(DEAD1_INIT_POS_2);     
-    // initPos = Vec2(ENTOKRATON_1_INIT_POS);
+    InitialPos_dead[1] = Vec2(DEAD1_INIT_POS_1);
+    InitialPos_dead[2] = Vec2(DEAD1_INIT_POS_2);
+    InitialPos_dead[3] = Vec2(DEAD1_INIT_POS_3);
+    InitialPos_dead[4] = Vec2(DEAD1_INIT_POS_4);
+    InitialPos_dead[5] = Vec2(DEAD1_INIT_POS_5);
+
     for (int i = 0; i < DEAD1_NUMB; i++)
     {
 
