@@ -46,6 +46,9 @@ std::weak_ptr<GameObject> State::AddObject(GameObject* object){
     return weak;
 }
 
+std::weak_ptr<GameObject> State::AddCollisionObject(GameObject *object)
+{}
+
 std::weak_ptr<GameObject> State::GetObjectPtr(GameObject* object){
 
   std::weak_ptr<GameObject> weak;

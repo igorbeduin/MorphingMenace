@@ -28,6 +28,7 @@ public:
   virtual void Pause() = 0;
   virtual void Resume() = 0;
 
+  virtual std::weak_ptr<GameObject> AddCollisionObject(GameObject *object);
   virtual std::weak_ptr<GameObject> AddObject(GameObject* object);
   virtual std::weak_ptr<GameObject> GetObjectPtr(GameObject* object);
 

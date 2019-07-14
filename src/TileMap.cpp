@@ -30,7 +30,7 @@ void TileMap::Load(std::string file){
 //Nesse laço, percorre-se o resto do arquivo salvando todos os tiles no tilemap em um único vector
   for (int i = 0; i < (mapWidth*mapHeight*mapDepth); i++){
     map >> tile;
-    tileMatrix.push_back(tile-1);
+    tileMatrix.push_back(tile);
     map.seekg (1, map.cur);
   }
   map.close();
@@ -72,8 +72,8 @@ void TileMap::RenderLayer(int layer, int cameraX = 0, int cameraY = 0){
           tileSet->createMapColliders = true;
         }
       }
-
-        tileSet->RenderTile(At(j, i, layer), cameraX + tileSet->GetTileWidth() * j * tileSet->scale.x, cameraY + tileSet->GetTileHeight() * i * tileSet->scale.y);
+      
+      tileSet->RenderTile(At(j, i, layer), cameraX + tileSet->GetTileWidth() * j * tileSet->scale.x, cameraY + tileSet->GetTileHeight() * i * tileSet->scale.y);
     }
   }
 }

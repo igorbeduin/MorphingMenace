@@ -10,15 +10,18 @@
 *************************************************/
 #define WINDOW_WIDTH 1024
 #define WINDOW_HEIGHT 600
+#define FRAME_RATE 65
 
 /************************************************
 *				 Camera					*
 *************************************************/
 #define CAMERA_SPEED 100
-#define MAX_CAM_SPEED_X 300
-#define MAX_CAM_SPEED_Y 300
-#define LEFT_FOCUS_LIMIT 342
-#define RIGHT_FOCUS_LIMIT 482 
+#define MAX_CAM_SPEED_X 1000
+#define MAX_CAM_SPEED_Y 1000
+#define LEFT_FOCUS_LIMIT 410
+#define RIGHT_FOCUS_LIMIT 564
+#define UP_FOCUS_LIMIT 300
+#define DOWN_FOCUS_LIMIT 350
 
 /************************************************
 *				 Audio					*
@@ -44,6 +47,8 @@
 #define D_KEY SDLK_d
 #define P_KEY SDLK_p
 #define O_KEY SDLK_o
+#define Z_KEY SDLK_z
+#define T_KEY SDLK_t
 #define ENTER_KEY SDLK_KP_ENTER
 #define TAB_KEY SDLK_TAB
 

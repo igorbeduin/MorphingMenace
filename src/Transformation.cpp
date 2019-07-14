@@ -1,13 +1,20 @@
 #include "../include/Transformation.h"
+#include "../include/Player.h"
+#include "../include/Game.h"
 
 void Transformation::Downgrade()
 {}
-
-void Transformation::Attack()
-{
-
-}
 void Transformation::Absorb()
 {
-    std::cout << "ABSORB" << std::endl;
+    Player::player->LvlDown();
+    Player::player->Absorb();
+}
+
+float Transformation::GetWidth()
+{
+    return sprite->GetWidth();
+}
+float Transformation::GetHeight()
+{
+    return sprite->GetHeight();
 }

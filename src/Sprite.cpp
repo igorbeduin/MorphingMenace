@@ -3,7 +3,9 @@
 #include "../include/Camera.h"
 #include "../include/Sprite.h"
 
-Sprite::Sprite(GameObject& associated) : Component(associated){//seta texture como nullptr (imagem não carregada)
+Sprite::Sprite(GameObject &associated) : Component(associated),
+                                         blendMode(SDL_BLENDMODE_NONE)
+{//seta texture como nullptr (imagem não carregada)
   texture = nullptr;
   currentFrame = 0;
   timeElapsed = 0;
@@ -49,6 +51,7 @@ void Sprite::Open(std::string file){//carrega a imagem indicada pelo caminho fil
   SetClip(0, 0, width/frameCount, height);//seta o clip com as dimensões da imagem
   associated.box.w = width/frameCount;//seta o tamanho e a largura do goameobject associado com aqueles setados pelas funções anteriores
   associated.box.h = height;
+  SDL_GetTextureBlendMode(texture.get(), &blendMode);
 }
 
 void Sprite::SetClip(int x, int y, int w, int h){// seta o clip com os parâmetros sasos
@@ -70,18 +73,22 @@ void Sprite::Render(int x, int y){// wrapper para a SDL_RenderCopy que possui qu
   dstrect.w = clipRect.w*scale.x;
   dstrect.h = clipRect.h*scale.y;
   int RenderError;
+    // SDL_RendererFlip flip = SDL_FLIP_NONE;
 
-  SDL_RendererFlip flip = SDL_FLIP_NONE;
-
-  if (associated.GetComponent("Character").get() != nullptr)
+  // if (associated.GetComponent("Character").get() != nullptr)
+  if (associated.GetComponent("Player").get() != nullptr)
   {
     Character* temp = (Character*)associated.GetComponent("Character").get();
     if (temp->IsFlipped())
     {
       flip = SDL_FLIP_HORIZONTAL;
     }
+    else
+    {
+      flip = SDL_FLIP_NONE;
+    }
   }
-
+  SDL_SetTextureBlendMode(texture.get(), blendMode);
   RenderError = SDL_RenderCopyEx(Game::GetInstance().GetRenderer(), texture.get(), &clipRect, &dstrect, associated.angleDeg, nullptr, flip);
   if (RenderError != 0) {
     std::cout << "Failed to Render Texture, error code: " << SDL_GetError() <<", texture = " << texture << std::endl;
@@ -207,12 +214,19 @@ int Sprite::GetCurrentFrame()
 
 void Sprite::SetStartFrame(int startFrame)
 {
-  this->StartFrame = startFrame;
+  if (this->StartFrame != startFrame)
+  {
+    this->StartFrame = startFrame;
+    currentFrame = startFrame;
+  }
 }
 
 void Sprite::SetEndFrame(int endFrame)
 {
-  this->EndFrame = endFrame;
+  if (this->EndFrame != endFrame)
+  {
+    this->EndFrame = endFrame;
+  }
 }
 
 void Sprite::SetAnimationTime(float animationTime)
@@ -227,7 +241,6 @@ void Sprite::RunSpecificAnimation()
     currentFrame = StartFrame;
     timeElapsed = 0;
   }
-  
   this->ChangeAnimation = true;
 }
         // PARA CHAMAR A ANIMAÇÂO 
@@ -236,3 +249,16 @@ void Sprite::RunSpecificAnimation()
         //     enemySprite->SetStartFrame(ENTOKRATON_1_IDLE_START);
         //     enemySprite->SetEndFrame(ENTOKRATON_1_IDLE_END);
         //     enemySprite->SetAnimationTime(ENTOKRATON_1_IDLE_TIME);
+
+void Sprite::SetBlendMode(SDL_BlendMode blendMode)
+{
+  this->blendMode = blendMode;
+}
+void Sprite::SetFlipH()
+{
+  flip = SDL_FLIP_HORIZONTAL;
+}
+void Sprite::UnSetFlipH()
+{
+  flip = SDL_FLIP_NONE;
+}

@@ -18,9 +18,12 @@ public:
     void limitSpeeds();
     void collisionSide(Rect boxA, Rect boxB);
     bool applyNormal;
+    bool applyWaterThrust;
+    bool applyGravity;
     Vec2 GetLastPosition();
     Vec2 GetPosition();
     Vec2 GetSpeed();
+    void SetSpeed(Vec2 speed);
     void SetSpeed(int speedX, int speedY);
     void SetSpeedX(int speedX);
     void SetSpeedY(int speedY);
@@ -28,15 +31,30 @@ public:
     void EnableFlip();
     void DisableFlip();
     void ApplyDamage(int damage);
+    char_type Type();
+    int GetCurrentHP();
+    int GetLastHP();
+    void SetLastHP(int HP);
+    int GetMaxHP();
+    bool IsAbsorbable();
+    void Die();
+    bool VerifyOcean();
+    void EnableScenarioCollision();
+    void DisableScenarioCollision();
+    void RecoverLife();
+    void RecoverMana();
 
-    static Character* player;
+    static Character* playerChar;
     Rect box;
 private:
+    bool scenarioCollision;
     Vec2 speed;
     Vec2 lastPosition;
     collision_side verticalCollision;
     collision_side horizontalCollision;
     bool flip;
     int maxHP;
+    int lastHP;
     int currentHP;
+    char_type charType;
 };

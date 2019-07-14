@@ -31,6 +31,8 @@ class Sprite: public Component{//implementar update, is e render da classe mãe 
     int StartFrame;
     int EndFrame;
     float AnimationTime;
+    SDL_BlendMode blendMode;
+    SDL_RendererFlip flip = SDL_FLIP_NONE;
 
   public:
     Sprite(GameObject& associated);
@@ -52,10 +54,13 @@ class Sprite: public Component{//implementar update, is e render da classe mãe 
     void SetFrame(int frame);
     void SetFrameCount(int frameCount);
     void SetFrameTime(float frameTime);
+    void SetFlipH();
+    void UnSetFlipH();
     int GetCurrentFrame();
 
     void SetStartFrame(int startFrame);
     void SetEndFrame(int endFrame);
     void SetAnimationTime(float animationTime);
     void RunSpecificAnimation();
+    void SetBlendMode(SDL_BlendMode blendMode);
 };

@@ -3,6 +3,19 @@
 *					General						*
 *************************************************/
 #define GAME_NAME "The Morphing Menace!"
+#define ABSORB_X_SPEED 100
+#define ABSORB_Y_SPEED -300
+#define SWIM_Y_SPEED -800
+#define MAXIMUM_Y_SPEED 600
+#define MAXIMUM_Y_SPEED_WATER 100
+#define FALLING_SPEED 5
+#define PLAYER_INITIAL_HP 100
+#define INITIAL_INFLUENCE 1000000
+#define ABSORBABLE_PERC 0.8
+#define SCENARIO_SCALE 1.0
+#define CHARACTER_GLOW_PATH "assets/img/efx/char_glow.png"
+#define SPACE_PUSHED 25
+#define ENEMY_SPACE_PUSHED 65
 
 /************************************************
 *					Character					*
@@ -12,7 +25,10 @@ enum char_type
     // Different types of characters that the game might have
     PLAYER,
     ENTOKRATON_1,
-    BOSS
+    ENTOKRATON_2,
+    BOSS,
+    BOSS_CORE,
+    NONE_TYPE
 };
 
 enum collision_side
@@ -31,6 +47,8 @@ enum character_state
     JUMPING,
     FALLING,
     ABSORBING,
+    ATTACKING,
+    DAMAGED,
     NONE_STATE
 };
 
@@ -38,55 +56,14 @@ enum character_state
     #include "Character.h"
     #include "Player.h"
     #include "Entokraton_1.h"
+    #include "Entokraton_1_Dead.h"
+    #include "Entokraton_2.h"
+    #include "Boss.h"
+    #include "Boss_Core.h"
     #include "Damage.h"
-    
-    #define MAXIMUM_Y_SPEED 800
-    #define PLAYER_LVL0_SPRITE_PATH "assets/img/char/adulto_andando.png"
-    #define PLAYER_LVL0_SPRITES_NUMB 4
-    #define PLAYER_LVL0_SPRITES_TIME 0.16
-    #define PLAYER_LVL0_SCALE 0.15
-    #define PLAYER_LVL0_STEP 200
-    #define PLAYER_LVL0_JUMP -800
-    #define PLAYER_INIT_POS {400, 300}
-    #define PLAYER_INITIAL_HP 50
-    #define PLAYER_LVL0_ATTACK_WIDTH 100
-    #define PLAYER_LVL0_ATTACK_HEIGHT 20
-    #define PLAYER_LVL0_ATTACK_TIME 0.05
-    #define PLAYER_LVL0_ATTACK_DAMAGE 10
+    #include "Window.h"
+    #include "WaterDamage.h"
 
-    #define ENTOKRATON_1_SPRITE_PATH "assets/img/char/alien1_complete_movement.png"
-    #define ENTOKRATON_1_SPRITES_NUMB 7
-    #define ENTOKRATON_1_SPRITES_TIME 0.1
-    #define ENTOKRATON_1_SCALE 0.15
-    #define ENTOKRATON_1_INIT_POS {600, 300}
-    #define ENTOKRATON_1_IDLE_START 0
-    #define ENTOKRATON_1_IDLE_END 2
-    #define ENTOKRATON_1_IDLE_TIME 0.1    
-    #define ENTOKRATON_1_WALK_START 3
-    #define ENTOKRATON_1_WALK_END 6
-    #define ENTOKRATON_1_WALK_TIME 0.1
-    #define ENTOKRATON_1_HP 50
-    #define ENEMY_1_IDLE_START 0
-    #define ENEMY_1_IDLE_END 2
-    #define ENEMY_1_IDLE_TIME 0.1
-    #define ENEMY_1_WALK_START 3
-    #define ENEMY_1_WALK_END 6
-    #define ENEMY_1_WALK_TIME 0.1
-    #define ENEMY_1_COOLDOWN 2
-    #define ENEMY_1_STEP 150
-    #define ENEMY_1_PERCEPTION 250
-    #define ENEMY_1_ATTACK_RANGE 30
-    #define WALK_RANGE 200
-    #define STOP_RANGE 5
-
-#define BOSS_SPRITE_PATH "assets/img/char/boss_temporario.png"
-#define BOSS_SPRITES_NUMB 1
-#define BOSS_SPRITES_TIME 1
-#define BOSS_SCALE 0.3
-#define BOSS_INIT_POS \
-    {                 \
-        2000, 0       \
-    }
 #endif
 
 /************************************************
@@ -98,30 +75,65 @@ enum character_state
     #include "Sprite.h"
     #include "TileMap.h"
 
-    #define PLANET_BACKGROUND_PATH "assets/img/PlanetBackground.png"
+    //stage
+    #define PLANET_BACKGROUND_PATH "assets/img/BG01.png"
+    #define PLANET_BACKGROUND_SCALE SCENARIO_SCALE
+
+     #define GROUND_BACKGROUND_PATH "assets/img/ground.png"
+    #define GROUND_BACKGROUND_SCALE SCENARIO_SCALE
+
     #define STARS_BACKGROUND_PATH "assets/img/StarsBackground.jpg"
-    #define PLANET_BACKGROUND_SCALE 0.3
-    #define TILESET_PATH "assets/img/Chao4x2.png"
+
+    #define OCEAN1_BACKGROUND_PATH "assets/img/agua1.png"
+    #define OCEAN1_BACKGROUND_SCALE SCENARIO_SCALE 
+    #define OCEAN1_INITIAL_POS {1110, 1165}
+    #define OCEAN2_BACKGROUND_PATH "assets/img/agua2.png"
+    #define OCEAN2_BACKGROUND_SCALE SCENARIO_SCALE * 2
+    #define OCEAN2_INITIAL_POS {3700, 1280}
+
+    #define TILESET_PATH "assets/img/tileset.png"
     #define TILEMAP_PATH "assets/map/tileMap.txt"
-    #define TILE_SCALE 0.0625
-    #define TILE_HEIGHT 1024
-    #define TILE_WIDTH 1024
+    #define TILE_SCALE SCENARIO_SCALE
+    #define TILE_HEIGHT 64
+    #define TILE_WIDTH 64
     #define STAGE_BG_MUSIC_PATH "assets/audio/background_demo1.ogg"
+    #define SCENARIO_COLLISION_RADIUS 500
+
+    //title
+    #define TITLE_PATH "assets/img/MENU INICIAL pt.png"   
+    #define LOADING_PATH "assets/img/loading.png"
+    #define LAODING1_PATH "assets/img/tela.png"   
+
+    //end
+    #define DEFEAT_PATH "assets/img/derrota1.png"
+    #define VICTORY_PATH "assets/img/vitoria.png"
+
+
 
 #endif
 
 /************************************************
 *					Environment					*
 *************************************************/
-#define GRAVITY_ACCELERATION {0, 20}
-#define NORMAL_ACCELERATION {0, -20}
-#define SAFETY_COLLISION_RANGE 20
-#define DEPTH_COLLISION_RANGE 20
-#define COLLISION_COMPENSATION 5
+#define GRAVITY_ACCELERATION_Y 5
+#define GRAVITY_ACCELERATION_X 0
+#define GRAVITY_ACCELERATION {GRAVITY_ACCELERATION_X, GRAVITY_ACCELERATION_Y}
+#define NORMAL_ACCELERATION_Y -1 * GRAVITY_ACCELERATION_Y
+#define NORMAL_ACCELERATION_X 0
+#define NORMAL_ACCELERATION {NORMAL_ACCELERATION_X, GRAVITY_ACCELERATION_Y}
+#define WATERTHRUST_ACCELERATION_Y  -1 * GRAVITY_ACCELERATION_Y / 1.33
+#define WATERTHRUST_ACCELERATION_X 0
+#define WATERTHRUST_ACCELERATION {WATERTHRUST_ACCELERATION_X, WATERTHRUST_ACCELERATION_Y}
+#define SAFETY_COLLISION_RANGE 5
+#define DEPTH_COLLISION_RANGE 10
+#define COLLISION_COMPENSATION 10
 
 #ifdef ENVIRONMENT
     #include "Force.h"
     #include "Gravity.h"
     #include "Normal.h"
     #include "Character.h"
+    #include "WaterThrust.h"
+    #include "Ocean.h"
+
 #endif

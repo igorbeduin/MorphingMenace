@@ -1,0 +1,77 @@
+#define ENTOKRATON_1_SPRITE_PATH "assets/img/char/alien1_complete_movement.png"
+#define ENTOKRATON_1_SPRITES_NUMB 17
+#define ENTOKRATON_1_SPRITES_TIME 0.1
+#define ENTOKRATON_1_SCALE 0.18
+#define ENTOKRATON_1_INIT_POS \
+    {                         \
+        600, 300              \
+    }
+#define ENTO1_NUMB 2
+#define ENTO1_INIT_POS_0 {1150, 900}
+#define ENTO1_INIT_POS_1 {1707, 900}
+
+#define DEAD1_NUMB 6
+#define DEAD1_INIT_POS_0 {500, 850}
+#define DEAD1_INIT_POS_1 {2225, 762}
+#define DEAD1_INIT_POS_2 {5111, 2710}
+#define DEAD1_INIT_POS_3 {5211, 2710}
+#define DEAD1_INIT_POS_4 {5311, 2810}
+#define DEAD1_INIT_POS_5 {5411, 2810}
+// #define BOSS_CORE_INIT_POS_2 {4350, 3180}
+// #define BOSS_CORE_INIT_POS_3 {4350, 3180}
+
+
+
+#define ENTOKRATON_1_IDLE_START 7
+#define ENTOKRATON_1_IDLE_END 8
+#define ENTOKRATON_1_IDLE_TIME 0.1
+
+#define ENTOKRATON_1_WALK_START 13
+#define ENTOKRATON_1_WALK_END 16
+#define ENTOKRATON_1_WALK_TIME 0.2
+
+#define ENTOKRATON_1_ATTACK_START 0
+#define ENTOKRATON_1_ATTACK_END 6
+#define ENTOKRATON_1_ATTACK_ANIMATION_TIME 0.1
+
+#define ENTOKRATON_1_DIE_START 9
+#define ENTOKRATON_1_DIE_END 12
+#define ENTOKRATON_1_DIE_TIME 0.12
+
+#define ENTOKRATON_1_DAMAGED_START 8
+#define ENTOKRATON_1_DAMAGED_END 9
+#define ENTOKRATON_1_DAMAGED_TIME 0.8
+
+#define ENTOKRATON_1_HP 30
+#define ENTOKRATON_1_IDLE1_SOUND "assets/audio/alien1/alien 1 - idle 1.ogg"
+#define ENTOKRATON_1_IDLE2_SOUND "assets/audio/alien1/alien 1 - idle 2.ogg"
+#define ENTOKRATON_1_WALK1_SOUND "assets/audio/alien1/alien 1 - andar.ogg"
+#define ENTOKRATON_1_ATTACK_SOUND "assets/audio/alien1/alien 1 - ataque 1.ogg"
+#define ENTOKRATON_1_DAMAGED_SOUND "assets/audio/alien1/alien 1 - dano.ogg"
+#define ENTOKRATON_1_STEP 200
+#define ENTOKRATON_1_COOLDOWN 2
+#define ENTOKRATON_1_PERCEPTION 300
+#define ENTOKRATON_1_ATTACK_RANGE 15
+#define ENTOKRATON_1_WALK_RANGE 250
+#define ENTOKRATON_1_STOP_RANGE 5
+#define ENTOKRATON_1_ATTACK_WIDTH 15
+#define ENTOKRATON_1_ATTACK_HEIGHT 80
+#define ENTOKRATON_1_ATTACK_TIME 0.05
+#define ENTOKRATON_1_ATTACK_DAMAGE 5
+#define WALK_RANGE 200
+#define STOP_RANGE 5
+
+
+#define DEAD_ENTOKRATON_1_INIT_POS \
+    {                         \
+        1340, 926              \
+    }
+#define DEAD_ENTOKRATON_1_FRAME 12
+#define DEAD_1_COLLIDER_SCALE_Y 0.3
+#define DEAD_HP 2
+#define MAKE_DEAD_ABSORBABLE 1
+
+#define ENTOKRATON_1_COLLIDER_SCALE_X 0.5
+#define ENTOKRATON_1_COLLIDER_SCALE_Y 0.7
+#define ENTOKRATON_1_COLLIDER_OFFSET_X 0
+#define ENTOKRATON_1_COLLIDER_OFFSET_Y 23
