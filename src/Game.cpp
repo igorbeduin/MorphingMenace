@@ -168,6 +168,10 @@ void Game::Run(){//loop principal do jogo, será implementado em 4 etapas, poré
     }
     // std::cout << stateStack.size() << '\n';
     CalculateDeltaTime();
+    if (dt < (1.0 / FRAME_RATE))
+    {
+      SDL_Delay((1.0 / FRAME_RATE) - dt);
+    }
     input.Update();
     stateStack.top()->Update(dt);
     stateStack.top()->Render();
