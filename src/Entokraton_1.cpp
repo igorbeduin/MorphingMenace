@@ -36,7 +36,7 @@ void Entokraton_1::Update(float dt)
     if (enemyCharacter->GetCurrentHP() <= 0)
     {
         state = DYING;
-        std::cout << "aaaaaaaaa" << std::endl;
+        // std::cout << "aaaaaaaaa" << std::endl;
     }
     if (enemyCharacter->GetLastHP() > enemyCharacter->GetCurrentHP() && state != DYING)
     {   
@@ -287,7 +287,7 @@ void Entokraton_1::Update(float dt)
             std::shared_ptr<Sprite> death_animation_sprite(new Sprite(*enemy_death, ENTOKRATON_1_SPRITE_PATH, ENTOKRATON_1_SPRITES_NUMB, ENTOKRATON_1_DIE_TIME, ENTOKRATON_1_DIE_TIME));
             death_animation_sprite->SetScale(ENTOKRATON_1_SCALE, ENTOKRATON_1_SCALE);
             enemy_death->AddComponent(death_animation_sprite);
-            std::cout << "cade animação de morte" << std::endl;
+            // std::cout << "cade animação de morte" << std::endl;
             death_animation_sprite->RunSpecificAnimation();
             death_animation_sprite->SetStartFrame(ENTOKRATON_1_DIE_START);
             death_animation_sprite->SetEndFrame(ENTOKRATON_1_DIE_END);

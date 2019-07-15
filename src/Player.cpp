@@ -105,7 +105,6 @@ void Player::IsDamaged()
     if (CharPtr->GetLastHP() > CharPtr->GetCurrentHP())
     {   
         CharPtr->SetLastHP(CharPtr->GetCurrentHP());
-        // std::cout << "ai fdp isso dói" << std::endl;
         characterState = DAMAGED;
   
     }
