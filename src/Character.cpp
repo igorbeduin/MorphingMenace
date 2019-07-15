@@ -280,7 +280,7 @@ void Character::DisableFlip()
 void Character::ApplyDamage(int damage)
 {
     currentHP -= damage;
-    std::cout << "currentHP:" << currentHP <<  " lastHP:" << lastHP << std::endl;
+    // std::cout << "currentHP:" << currentHP <<  " lastHP:" << lastHP << std::endl;
 }
 
 char_type Character::Type()
