@@ -41,6 +41,6 @@ void BossCore::Shoot(Vec2 target)
     acid->AddComponent(acid_s);
 
 
-    std::shared_ptr<Damage> acidBehaviour(new Damage(*acid, 0, ACID_DAMAGE_TIME, associatedCharacter->Type()));
+    std::shared_ptr<Damage> acidBehaviour(new Damage(*acid, ACID_DAMAGE, ACID_DAMAGE_TIME, associatedCharacter->Type()));
     acid->AddComponent(acidBehaviour);
 }

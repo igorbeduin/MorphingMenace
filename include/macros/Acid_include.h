@@ -5,7 +5,7 @@
 #define ACID_DAMAGE_TIME 10
 
 
-#define ACID_DAMAGE 20
+#define ACID_DAMAGE 5
 #define ACID_SPEED 200
 
 

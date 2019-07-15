@@ -280,7 +280,7 @@ void Character::DisableFlip()
 void Character::ApplyDamage(int damage)
 {
     currentHP -= damage;
-    std::cout << "currentHP:" << currentHP <<  " lastHP:" << lastHP << std::endl;
+    // std::cout << "currentHP:" << currentHP <<  " lastHP:" << lastHP << std::endl;
 }
 
 char_type Character::Type()
@@ -310,21 +310,22 @@ void Character::SetLastHP(int HP)
 
 bool Character::IsAbsorbable()
 {
-    if (currentHP <= ABSORBABLE_PERC * maxHP)
+    if (charType == BOSS)
     {
-        if (charType == BOSS)
-        {
-            return Boss::defeated ;
-        }
-        else
-        {
-            return true;
-        }
+        return Boss::defeated;
     }
     else
     {
-        return false;
+        if (currentHP <= ABSORBABLE_PERC * maxHP)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
+    
 }
 
 void Character::Die()

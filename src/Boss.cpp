@@ -13,6 +13,9 @@ Boss::Boss(GameObject &associated) : Component::Component(associated),
 
 void Boss::Update(float dt)
 {
+    Character *bossCharPtr = (Character *)associated.GetComponent("Character").get();
+    // std::cout << "Current HP:" << bossCharPtr->GetCurrentHP() << std::endl;
+    // std::cout << "IsAbsorbable:" << (bool)bossCharPtr->IsAbsorbable() << std::endl;
     if (Character::playerChar != nullptr)
     {
         float currentDistance = (Character::playerChar->GetPosition() - associated.box.GetCenter()).Absolute();
