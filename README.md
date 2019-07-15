@@ -70,6 +70,7 @@ A velocidade com que nosso personagem principal sofre influência é proporciona
 * Personagem "entrando" no chão
 * Forma aquática perdendo sprite a tentar sair da água
 * Pulo dos personagens pode sofrer diminuição de altura em um segundo loop de jogo, após a morte do personagem.
+* Renderização incompleta dos cenários e/ou fundos
 
 
 ### Link para este repositório: https://github.com/igorbeduin/MorphingMenace
