@@ -106,7 +106,7 @@ enum character_state
 
     //end
     #define DEFEAT_PATH "assets/img/derrota1.png"
-    #define VICTORY_PATH "assets/img/vitoria.png"
+    #define VICTORY_PATH "assets/img/vitoria_fixed.png"
 
 
 
