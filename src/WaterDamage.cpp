@@ -23,7 +23,7 @@ void WaterDamage::Update(float dt)
                     if (clock.Get() >= WATER_CD)
                     {
                         charPtr->ApplyDamage(WATER_DAMAGE);
-                        std::cout << "Applied water damage" << std::endl;
+                        // std::cout << "Applied water damage" << std::endl;
                         clock.Restart();
                     }
                 }
