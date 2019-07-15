@@ -27,9 +27,10 @@ A velocidade com que nosso personagem principal sofre influência é proporciona
 
 #### Dicas:
 * Você pode regredir para a forma inicial a qualquer momento apertando "P" a partir de uma forma transformada.
-* A barra de influência é FINITA, não gaste toda ela de uma vez. Tente explorar o mapa na forma inicial.
+* A barra de influência é FINITA, não gaste ela toda de uma vez. Tente explorar o mapa na forma inicial.
 * Formas não aquáticas levam DANO na água.
 * A influência diminui mais rapidamente conforme a proximidade do jogador com o Boss. Tente vencê-lo rapidamente.
+* Existe uma passagem secreta no fundo do mar que leva a caverna da *hivemind* mais rapidamente.
 
 ### Instalação 
 #### Dependências:
