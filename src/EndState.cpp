@@ -13,10 +13,9 @@ EndState::EndState()
         std::weak_ptr<GameObject> weak_victory =  AddObject(victory_object);
         std::shared_ptr<GameObject> victory = weak_victory.lock();
 
-        victory->box.x = 100;
+        victory->box.x = 0;
         victory->box.y = 0;
         std::shared_ptr<Sprite> victory_sprite(new Sprite(*victory, VICTORY_PATH));
-        victory_sprite->SetScale(0.8, 0.8);
         std::shared_ptr<CameraFollower> CamFollow(new CameraFollower(*victory));
         victory->AddComponent(victory_sprite);
         // victory->AddComponent(CamFollow);
